@@ -1,0 +1,31 @@
+name: BUG 反馈
+description: 报告声核使用中遇到的问题
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 从打开声核到出现问题，依次做了什么？
+      placeholder: "1. 打开声核\n2. ……"
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 预期与实际结果
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 声核版本
+      placeholder: v0.0.313
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 使用环境
+      description: Windows 版本、声卡、ASIO 驱动和相关效果器；附日志或截图前请移除个人信息。

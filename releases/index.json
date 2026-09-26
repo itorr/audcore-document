@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "latest": "v0.0.313",
+  "releases": [
+    {
+      "version": "v0.0.313",
+      "date": "2026-09-26",
+      "publishedAt": "2026-09-26T10:19:35Z",
+      "url": "/releases/v0.0.313/audcore-setup-v0.0.313.exe",
+      "size": 3506892,
+      "sha256": "5ef89a06bc9e4b2e7388f7dcc6ef942255ac059a9179e4affcf07ac3bb260f5d",
+      "portable": {
+        "url": "/releases/v0.0.313/audcore-portable.exe",
+        "size": 4252160,
+        "sha256": "0deba340d6d8feeb11cdcc68229ae37ac7813b61294cef08a6b8fb1ecfaa84a9"
+      },
+      "changes": [
+        "官网介绍调整为“免费、轻巧的实时调音台”。",
+        "软件与安装包描述统一为“声核 - 高性能实时音频调音台”。"
+      ],
+      "notes": "官网介绍调整为“免费、轻巧的实时调音台”。；软件与安装包描述统一为“声核 - 高性能实时音频调音台”。"
+    }
+  ]
+}

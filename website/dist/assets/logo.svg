@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="声核">
+  <rect width="512" height="512" rx="96" fill="#101b24"/>
+  <rect x="107" y="95" width="33" height="323" rx="16.5" fill="#286781"/>
+  <rect x="240" y="95" width="33" height="323" rx="16.5" fill="#8a663b"/>
+  <rect x="372" y="95" width="33" height="323" rx="16.5" fill="#843e3c"/>
+  <circle cx="123.5" cy="254" r="48.5" fill="#38b9ec"/>
+  <circle cx="256" cy="341.5" r="48.5" fill="#f3ad50"/>
+  <circle cx="388.5" cy="190" r="48.5" fill="#ff635b"/>
+</svg>

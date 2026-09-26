@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 370" role="img" aria-labelledby="title">
+  <title id="title">麦克风与伴奏经过各自效果链，送往监听与回环的路由示意</title>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 8 5 1 9" fill="none" stroke="#9aacc5" stroke-width="1.5"/></marker></defs>
+  <g fill="none" stroke="#9aacc5" stroke-width="2" marker-end="url(#arrow)"><path d="M248 114H373"/><path d="M248 258H373"/><path d="M627 114H752"/><path d="M627 258H752"/><path d="M627 114C694 114 683 258 752 258"/></g>
+  <g font-family="'Segoe UI','Microsoft YaHei',sans-serif" text-anchor="middle">
+    <rect x="30" y="62" width="218" height="104" rx="22" fill="#f0f3f7"/><text x="139" y="121" font-size="26" fill="#394556">麦克风</text>
+    <rect x="30" y="206" width="218" height="104" rx="22" fill="#f0f3f7"/><text x="139" y="265" font-size="26" fill="#394556">伴奏</text>
+    <rect x="377" y="24" width="246" height="324" rx="28" fill="#e9f1fd"/><text x="500" y="63" font-size="14" letter-spacing="3" fill="#4774ad">AUDCORE</text>
+    <rect x="399" y="82" width="202" height="67" rx="15" fill="#d6e5fc"/><text x="500" y="123" font-size="24" fill="#2d5f9f">人声效果链</text>
+    <rect x="399" y="225" width="202" height="67" rx="15" fill="#d6e5fc"/><text x="500" y="266" font-size="24" fill="#2d5f9f">伴奏效果链</text>
+    <text x="500" y="192" font-size="14" fill="#788da8">独立调节 · 灵活发送</text>
+    <rect x="756" y="62" width="218" height="104" rx="22" fill="#eff4f8"/><text x="865" y="108" font-size="25" fill="#394556">耳机监听</text><text x="865" y="137" font-size="14" fill="#6f7f93">听见处理后的声音</text>
+    <rect x="756" y="206" width="218" height="104" rx="22" fill="#eff4f8"/><text x="865" y="252" font-size="25" fill="#394556">声卡回环</text><text x="865" y="281" font-size="14" fill="#6f7f93">供直播软件接收</text>
+  </g>
+</svg>

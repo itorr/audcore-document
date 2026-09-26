@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="声核是免费的 Windows 实时 VST3 音频宿主。连接设备，组合效果器，为直播、唱歌与实时监听调好每一路声音。">
+	<meta name="theme-color" content="#fafbfc">
+	<title>声核 audcore - 小体积，高性能！</title>
+	<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="/assets/site.css">
+</head>
+
+<body>
+	<a class="skip-link" href="#main">跳到正文</a>
+	<header class="site-header wrap">
+		<a class="brand" href="/" aria-label="声核首页">
+			<img src="/assets/logo.svg" width="60" height="60" alt="声核">
+			<span class="brand-name"><strong>声核</strong><span>audcore</span></span>
+		</a>
+		<nav aria-label="主导航">
+			<a href="#features">功能</a>
+			<a href="/guide/" aria-label="指北">
+				<span class="nav-full">指北</span>
+				<span class="nav-short" aria-hidden="true">指北</span>
+			</a>
+			<a href="/gallery/" aria-label="效果链" hidden>
+				<span class="nav-full">效果链</span>
+				<span class="nav-short" aria-hidden="true">效果链</span>
+			</a>
+		</nav>
+	</header>
+	<main id="main">
+		<section class="hero hero-product wrap">
+			<div class="hero-copy">
+				<h1>
+					小体积，高性能！<br>
+					声音，自由掌控。
+				</h1>
+				<p class="hero-description">
+					免费、轻巧的实时调音台。<br>
+					支持 ASIO 与 VST3，每条通道，自由连接。
+				</p>
+				<div class="actions">
+					<a class="pill" href="/download/">
+						获取 Windows 版
+						<svg class="action-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+							focusable="false">
+							<path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4" />
+						</svg>
+					</a>
+					<a class="text-link" href="/guide/">
+						从这里开始 </a>
+				</div>
+				<div class="hero-release-note">
+					<strong id="home-latest-version">查看最新版本</strong>
+				</div>
+			</div>
+			<figure class="hero-product-image">
+				<div class="mixer-shot">
+					<img src="/assets/hero-window.png" width="504" height="600"
+						alt="用户提供的声核软件窗口截图，包含伴奏、混响、麦克风、监听和输出通道。">
+				</div>
+				<figcaption class="visually-hidden">用户提供的软件窗口截图</figcaption>
+			</figure>
+		</section>
+		<div class="feature-stories" id="features">
+			<section class="feature-story story-resources" aria-labelledby="resources-title">
+				<div class="wrap">
+					<div class="story-copy">
+						<h2 id="resources-title"><span>小体积，</span>高性能！</h2>
+						<p>专注实时音频处理，轻装常驻。</p>
+					</div>
+					<table class="resource-table">
+						<tbody>
+							<tr>
+								<th scope="row">启动速度</th>
+								<td>
+									<i>~</i>
+									87
+									<span>毫秒</span>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">平均 CPU 占用</th>
+								<td>
+									<i>~</i>
+									0.5
+									<span>%</span>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">核心内存占用</th>
+								<td>
+									<i>&lt;</i>
+									16
+									<span>MB</span>
+								</td>
+							</tr>
+							<!-- <tr>
+								<th scope="row">打开控制台</th>
+								<td>
+									<i>~</i>
+									120
+									<span>MB</span>
+								</td>
+							</tr> -->
+						</tbody>
+					</table>
+					<p class="resource-note">
+						五条通道，十二个效果器
+						·
+						Intel Core i7-14690HX
+						平台下实测均值
+						<br>
+						具体占用随设备、插件与参数而变化
+					</p>
+					<aside class="plugin-memory-note" aria-labelledby="plugin-memory-title">
+						<p>
+							在多个通道使用单麦克风和伴奏输入、搭配常用效果器链，且未打开过插件配置界面时测得的稳定内存用量。可作为常见效果器组合的保守参考值。
+						</p>
+						<p>
+							<span>启动插件自带配置界面后，图形运行时会带来约
+								<strong>100 MB</strong>
+								的固定内存开销。
+							</span>
+							<span>
+								非每插件累加，关闭插件配置界面也可能继续保留。
+							</span>
+							<span>重启声核可兜底销毁。</span>
+						</p>
+						<p>
+							目前控制台界面通过
+							<strong>WebView2</strong>
+							构建，打开控制台时等同于打开一张全新 Edge 浏览器窗口的开销。
+							视不同版本有约
+							<strong>60 MB</strong>
+							~
+							<strong>120 MB</strong>
+							内存开销，关闭控制台时立即销毁。
+						</p>
+					</aside>
+				</div>
+			</section>
+			<section class="feature-story story-routing" aria-labelledby="routing-title">
+				<div class="wrap">
+					<div class="story-copy">
+						<h2 id="routing-title">
+							声音，<span>自由掌控。</span>
+						</h2>
+						<p>更简单的通道，独立输入，自由安排发送、侧链与输出。</p>
+					</div>
+					<figure class="story-visual routing-visual">
+						<picture>
+							<source media="(max-width:600px)" srcset="/assets/routing-mobile.svg"><img
+								src="/assets/routing.svg" width="1000" height="370" loading="lazy"
+								alt="路由示意：麦克风和伴奏分别进入效果链，送往耳机监听或声卡回环。回环可供直播软件接收。">
+						</picture>
+						<figcaption>信号路径示意 · 直播接入取决于声卡回环或实际音频传输方案</figcaption>
+					</figure>
+				</div>
+			</section>
+			<section class="feature-story story-monitor" aria-labelledby="monitor-title">
+				<div class="wrap">
+					<div class="story-copy">
+						<h2 id="monitor-title">实时监听、<br><span>声音就在当下。</span></h2>
+						<p class="auto-line-wrapper">
+							<span class="auto-line-item">配合 ASIO 驱动，实现超低延迟监听。</span>
+							<span class="auto-line-item">设备和效果器延迟明确显示，可选并行延迟对齐，每条通道延迟可控。</span>
+							<span class="auto-line-item">收起控制台，声核在托盘处理声音，专注眼前的现场。</span>
+						</p>
+					</div>
+				</div>
+			</section>
+		</div>
+		<section hidden class="feature-story story-sharing" aria-labelledby="sharing-heading">
+			<div class="wrap story-copy">
+				<h2 id="sharing-heading">效果链分享</h2>
+				<p>浏览效果链，在声核中下载并导入。</p>
+				<div class="sharing-links"><a class="text-link" href="/gallery/">浏览效果链 <svg class="action-icon"
+							viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+							<path d="M5 12h14m-6-6 6 6-6 6" />
+						</svg></a></div>
+			</div>
+		</section>
+
+	</main>
+	<footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/guide/#sponsor">打赏</a>
+    <a href="/guide/#agreement">协议</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核</small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+
+<script type="module" src="/assets/updates.mjs"></script>
+</body>
+
+</html>
