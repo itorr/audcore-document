@@ -1081,13 +1081,13 @@ p {
 }
 .hero-product .hero-copy { align-self:center; padding-block:48px 70px; }
 .hero-product h1 { margin-top:0; }
-.hero-product-image { justify-self:end; align-self:end; width:min(100%,360px); max-width:none; position:relative; }
+.hero-product-image { justify-self:end; align-self:end; width:min(100%,438px); max-width:none; position:relative; }
 .hero-product-image .mixer-shot { border-radius:12px 0 0 0; box-shadow:none; }
 .story-copy h2 { margin-top:0; }
 .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 @media(max-width:1000px) {
   .hero.hero-product { padding-left:24px; grid-template-columns:minmax(0,1fr) minmax(260px,.85fr); }
-  .hero-product-image { width:295px; }
+  .hero-product-image { width:min(100%,438px); }
 }
 @media(max-width:700px) {
   .hero.hero-product { padding:35px 0 0; grid-template-columns:1fr; gap:32px; }
@@ -1100,23 +1100,12 @@ p {
 .story-sharing .sharing-links { justify-content:center; flex-wrap:wrap; margin-top:30px; }
 @media(max-width:700px) { .story-monitor { padding-bottom:65px; } }
 
-/* User-provided full window, retaining its original proportions. */
-.hero-product-image .mixer-shot { aspect-ratio:504 / 600; border-radius:8px; box-shadow:0 18px 55px rgba(10,25,38,.24),0 4px 14px rgba(10,25,38,.15); }
-.hero-product-image .mixer-shot img { object-fit:contain; object-position:center; }
+/* Show the screenshot at its native 438 × 528 size when space allows. */
+.hero-product-image .mixer-shot { aspect-ratio:438 / 528; border-radius:8px; box-shadow:0 18px 55px rgba(10,25,38,.24),0 4px 14px rgba(10,25,38,.15); }
+.hero-product-image .mixer-shot img { display:block; width:100%; height:auto; object-fit:contain; object-position:center; }
 
 /* Contain the window shadow within the first-screen module. */
 .hero.hero-product { overflow:hidden; }
-
-/* Crop one source-image pixel from each side without resampling the asset. */
-.hero-product-image .mixer-shot { position:relative; aspect-ratio:502 / 598; }
-.hero-product-image .mixer-shot img {
-  position:absolute;
-  max-width:none;
-  width:calc(100% * 504 / 502);
-  height:calc(100% * 600 / 598);
-  left:calc(-100% / 502);
-  top:calc(-100% / 598);
-}
 
 .hero-product-image .mixer-shot { border-radius:0; }
 
