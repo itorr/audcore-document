@@ -1,4 +1,4 @@
 {
-  "payload": "{\"version\":\"v0.0.352\",\"url\":\"https://audcore.utae.cn/releases/v0.0.352/audcore-setup-v0.0.352.exe\",\"size\":3510013,\"sha256\":\"a782a418647dfc6e73583eda71c994a56b70776d724bce1f38cb6f1c8f83be3b\",\"notes\":\"音频设备被占用时自动重试，恢复后继续启用原有通道和效果链。；效果器槽位新增旁通开关，点击即可切换，双击名称仍可打开界面。；调整较矮窗口中的控制条布局与通道高度，为上方混音区留出更多空间。；修复主窗口右侧和底部内容被裁切的问题。；统一客户端启动占位背景与新版界面的颜色。\"}",
-  "signature": "yG5Tyufz7xxY5d7IHmSm5gOa1LZ1bOGr1Iq191nknAXPQHMRTV68v6DjzXiXQ3cQaayuzbQoGf0CO26GGMa2CA=="
+  "payload": "{\"version\":\"v0.0.368\",\"url\":\"https://audcore.utae.cn/releases/v0.0.368/audcore-setup-v0.0.368.exe\",\"size\":3519839,\"sha256\":\"0dc3827f9015c1d576689cfe023e3abc2052a9704c11f81b814eb2c0c5e1c4f1\",\"notes\":\"托盘图标可显示或隐藏控制台；再次打开时窗口显示在最前方。；设置中可分别隐藏通道输入与发送，音频设备下拉直接显示当前默认设备。；控制台可缩至页头加三条通道的宽度及 250px 高度；较矮窗口自动切换迷你界面。；修复控制台在不同显示缩放比例的屏幕之间移动时尺寸和位置异常。；在多个控制台间即时同步通道静音、音量、发送电平和配置变动。；显示音频设备与效果器路径的整体延迟，并集中展示采样率、缓冲和延迟。；使用 Ctrl+T 新建通道、Ctrl+P 播放或暂停；保存预设后提示配置名称。；恢复拖动通道中线，改进页头提示和启动动画。\"}",
+  "signature": "HI+OwOROhBkv3S/WBRjRhF23L/J1477JVNmVk+FlwpDUuJ1Aoy+EFoG71KCvbbqjeBwVWoifYKd7qL37w3mhBA=="
 }
