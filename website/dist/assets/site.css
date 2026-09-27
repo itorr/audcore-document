@@ -1155,13 +1155,7 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 
 @media(max-width:700px) {
   .hero-product h1 { font-size:clamp(32px,7.7vw,52px); }
-  .resource-table { margin-top:32px; border-radius:24px; }
-  .resource-table th, .resource-table td { padding:24px; }
-  .resource-table thead th { padding-top:28px; }
-  .resource-table tbody tr:last-child > * { padding-bottom:32px; }
-  .resource-table tbody th { font-size:16px; }
-  .resource-table td { font-size:clamp(36px,10vw,48px); }
-  .resource-table td span { font-size:20px; }
+
   .plugin-memory-note { padding:24px; }
 }
 /* Match action icon strokes to semibold labels without font-glyph variation. */
@@ -1193,12 +1187,19 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 
 .hero-release-note { display:flex; align-items:center; flex-wrap:wrap; gap:12px 20px; margin-top:16px; font-size:13px; line-height:1.5; }
 .hero-release-note strong { 
-  font-weight:700; 
+  padding:0 9px; 
+  font-weight:400; 
+  opacity: .5;
 }
 
-.hero-release-note a { display:inline-flex; align-items:center; gap:6px; font-weight:600; color:#59616e; }
+.hero-release-note a { 
+  display:inline-flex; 
+  align-items:center; gap:6px; font-weight:600; color:#59616e; }
 
-.resource-table td { text-align:right; }
+.resource-table th { 
+  text-align:right; 
+  width:45%;
+}
 .resource-table td i{
   font-style: normal;
   opacity: .4;
