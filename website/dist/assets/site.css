@@ -1071,11 +1071,9 @@ p {
   .feature-stories + .sharing-strip { margin-top:32px; }
 }
 
-/* Let the product touch the hero's right and bottom edges. */
+/* Align the product with the centered page content. */
 .hero.hero-product {
-  width:100%;
-  margin:0;
-  padding:42px 0 0 max(40px, calc((100% - 1200px) / 2));
+  padding:42px 0 0;
   align-items:end;
   grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);
 }
