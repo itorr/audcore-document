@@ -1,4 +1,4 @@
 {
-  "payload": "{\"version\":\"v0.0.313\",\"url\":\"https://audcore.utae.cn/releases/v0.0.313/audcore-setup-v0.0.313.exe\",\"size\":3506892,\"sha256\":\"5ef89a06bc9e4b2e7388f7dcc6ef942255ac059a9179e4affcf07ac3bb260f5d\",\"notes\":\"官网介绍调整为“免费、轻巧的实时调音台”。；软件与安装包描述统一为“声核 - 高性能实时音频调音台”。\"}",
-  "signature": "6BRQe7Ue3/bEbeSQOs6OYgyFdl2Xrku6IrqRYz5eDfoBv+2BzHPvt9v/oJ/jtHZoOK+Ihq1XEgdgby/uqAxTCw=="
+  "payload": "{\"version\":\"v0.0.352\",\"url\":\"https://audcore.utae.cn/releases/v0.0.352/audcore-setup-v0.0.352.exe\",\"size\":3510013,\"sha256\":\"a782a418647dfc6e73583eda71c994a56b70776d724bce1f38cb6f1c8f83be3b\",\"notes\":\"音频设备被占用时自动重试，恢复后继续启用原有通道和效果链。；效果器槽位新增旁通开关，点击即可切换，双击名称仍可打开界面。；调整较矮窗口中的控制条布局与通道高度，为上方混音区留出更多空间。；修复主窗口右侧和底部内容被裁切的问题。；统一客户端启动占位背景与新版界面的颜色。\"}",
+  "signature": "yG5Tyufz7xxY5d7IHmSm5gOa1LZ1bOGr1Iq191nknAXPQHMRTV68v6DjzXiXQ3cQaayuzbQoGf0CO26GGMa2CA=="
 }
