@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="声核">
-  <rect width="512" height="512" rx="96" fill="#101b24"/>
+  <rect width="512" height="512" rx="96" fill="#1a1a1a"/>
   <rect x="107" y="95" width="33" height="323" rx="16.5" fill="#286781"/>
   <rect x="240" y="95" width="33" height="323" rx="16.5" fill="#8a663b"/>
   <rect x="372" y="95" width="33" height="323" rx="16.5" fill="#843e3c"/>
