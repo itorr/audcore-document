@@ -1,4 +1,4 @@
 {
-  "payload": "{\"version\":\"v0.0.368\",\"url\":\"https://audcore.utae.cn/releases/v0.0.368/audcore-setup-v0.0.368.exe\",\"size\":3519839,\"sha256\":\"0dc3827f9015c1d576689cfe023e3abc2052a9704c11f81b814eb2c0c5e1c4f1\",\"notes\":\"托盘图标可显示或隐藏控制台；再次打开时窗口显示在最前方。；设置中可分别隐藏通道输入与发送，音频设备下拉直接显示当前默认设备。；控制台可缩至页头加三条通道的宽度及 250px 高度；较矮窗口自动切换迷你界面。；修复控制台在不同显示缩放比例的屏幕之间移动时尺寸和位置异常。；在多个控制台间即时同步通道静音、音量、发送电平和配置变动。；显示音频设备与效果器路径的整体延迟，并集中展示采样率、缓冲和延迟。；使用 Ctrl+T 新建通道、Ctrl+P 播放或暂停；保存预设后提示配置名称。；恢复拖动通道中线，改进页头提示和启动动画。\"}",
-  "signature": "HI+OwOROhBkv3S/WBRjRhF23L/J1477JVNmVk+FlwpDUuJ1Aoy+EFoG71KCvbbqjeBwVWoifYKd7qL37w3mhBA=="
+  "payload": "{\"version\":\"v0.0.374\",\"url\":\"https://audcore.utae.cn/releases/v0.0.374/audcore-setup-v0.0.374.exe\",\"size\":3517833,\"sha256\":\"1044b791af5c5225f570bdaa9d62ee9c3f57739060152eb108884c390e280320\",\"notes\":\"双击任务栏图标时只切换一次控制台，避免刚打开又关闭。；设置页顶部显示图标和标题，关闭按钮始终位于右上角。；更新程序、托盘和窗口图标为新版声核图案。\"}",
+  "signature": "EqifHJK7K5OszGsWXORDThNe0NCG+ib2JquxH/aaY4wrNOhxxMDE+HKS3ZBOo+RFJOVxysIHKqhbtVYbUkuxDQ=="
 }
