@@ -1100,8 +1100,8 @@ p {
 .story-sharing .sharing-links { justify-content:center; flex-wrap:wrap; margin-top:30px; }
 @media(max-width:700px) { .story-monitor { padding-bottom:65px; } }
 
-/* Show the screenshot at its native 438 × 528 size when space allows. */
-.hero-product-image .mixer-shot { aspect-ratio:438 / 528; border-radius:8px; box-shadow:0 18px 55px rgba(10,25,38,.24),0 4px 14px rgba(10,25,38,.15); }
+/* Show the screenshot at its native 438 × 520 size when space allows. */
+.hero-product-image .mixer-shot { aspect-ratio:438 / 520; border-radius:8px; box-shadow:0 18px 55px rgba(10,25,38,.24),0 4px 14px rgba(10,25,38,.15); }
 .hero-product-image .mixer-shot img { display:block; width:100%; height:auto; object-fit:contain; object-position:center; }
 
 /* Contain the window shadow within the first-screen module. */
