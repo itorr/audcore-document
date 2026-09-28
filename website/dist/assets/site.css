@@ -1367,16 +1367,20 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 .download-version { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 20px; margin-bottom:20px; }
 .download-version h2 { font-size:26px; }
 .download-version p { font-size:14px; }
-.download-choices { display:grid; gap:16px; }
-.download-choice { background:#f3f5f7; border-radius:20px; padding:30px 34px; }
-.download-choice-primary { background:#eaf1fb; }
-.download-choice h3 { font-size:25px; }
-.download-choice>p { margin-top:10px; max-width:650px; }
-.download-action { margin-top:22px; }
-.download-file-details { display:grid; gap:8px; margin:22px 0 0; font-size:13px; }
-.download-file-details>div { display:grid; grid-template-columns:80px minmax(0,1fr); gap:12px; }
-.download-file-details dt { color:#606a77; }
-.download-file-details dd { margin:0; overflow-wrap:anywhere; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; }
+.download-history { margin-bottom:38px; }
+.download-history h2 { margin-bottom:18px; font-size:26px; }
+.download-history-links,.download-choices { display:grid; grid-template-columns:repeat(2,minmax(0,220px)); gap:16px; }
+.download-history-link[data-emphasis="secondary"] { background:var(--surface); color:var(--ink); }
+.download-history-link[data-emphasis="secondary"]:hover { background:#e4ecfa; }
+.download-option { position:relative; }
+.download-action { width:100%; background:var(--surface); color:var(--ink); }
+.download-action:hover { background:#e4ecfa; }
+.download-action-label { white-space:nowrap; }
+.download-file-meta { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:8px; color:var(--muted); }
+.download-file-size { opacity:.65; font-size:13px; line-height:24px; font-variant-numeric:tabular-nums; }
+.download-sha { width:66px; height:24px; padding:0 3px; border:0; border-radius:5px; color:inherit; background:transparent; opacity:.65; font-size:12px; line-height:24px; }
+.download-sha:hover,.download-sha:focus-visible,.download-sha[data-copy-state] { opacity:1; color:var(--blue); background:#326bce0c; }
+.download-copy-feedback { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 .download-signature-note { margin:26px 0 10px; color:var(--muted); }
 .download-signature-note a { color:var(--blue); font-weight:600; }
 .download-prep { margin:0 0 48px; color:var(--muted); }
@@ -1390,9 +1394,11 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 @media(max-width:700px) {
   .download-page { padding:42px 0 72px; }
   .download-intro { margin-bottom:32px; }
-  .download-choice,.download-changes { padding:24px; }
+  .download-changes { padding:24px; }
   .download-version { display:block; }
   .download-version p { margin-top:6px; }
-  .download-file-details>div { display:block; }
-  .download-file-details dd { margin-top:2px; }
+  .download-history-links,.download-choices { gap:12px; }
+}
+@media (max-width:400px) {
+  .download-history-link,.download-action { padding-inline:12px; font-size:13px; }
 }

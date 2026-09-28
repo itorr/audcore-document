@@ -23,17 +23,44 @@ function validRelease(item) {
   } catch { return false; }
 }
 function sizeOf(bytes) { return (bytes / 1048576).toFixed(2) + ' MB'; }
-function fileCard(label, description, file, primary) {
-  const card = el('section', null, primary ? 'download-choice download-choice-primary' : 'download-choice');
-  card.append(el('h3', label), el('p', description));
-  const link = el('a', primary ? '下载安装包' : '下载单文件绿化版', primary ? 'pill download-action' : 'pill pill-light download-action');
+function fileButton(label, description, file, primary) {
+  const card = el('div', null, 'download-option');
+  card.dataset.variant = primary ? 'primary' : 'secondary';
+  const link = el('a', null, 'pill download-action');
   link.href = file.url;
+  link.title = description;
+  link.append(el('span', label, 'download-action-label'));
   card.append(link);
-  const details = el('dl', null, 'download-file-details');
-  for (const [name, value] of [['体积', sizeOf(file.size)], ['SHA-256', file.sha256]]) {
-    const row = el('div'); row.append(el('dt', name), el('dd', value)); details.append(row);
-  }
-  card.append(details);
+  const copy = el('button', 'SHA', 'download-sha');
+  copy.type = 'button';
+  copy.title = '点击复制 SHA-256';
+  copy.setAttribute('aria-label', `复制${primary ? '安装包' : '单文件绿色版'} SHA-256`);
+  const feedback = el('span', '', 'download-copy-feedback');
+  feedback.setAttribute('role', 'status');
+  let reset;
+  copy.addEventListener('click', async () => {
+    clearTimeout(reset);
+    try {
+      await navigator.clipboard.writeText(file.sha256);
+      copy.dataset.copyState = 'copied';
+      copy.textContent = '已复制';
+      feedback.textContent = 'SHA-256 已复制';
+    } catch {
+      copy.dataset.copyState = 'failed';
+      copy.textContent = '复制失败';
+      copy.title = `复制失败，SHA-256：${file.sha256}`;
+      feedback.textContent = `复制失败，SHA-256：${file.sha256}`;
+    }
+    reset = setTimeout(() => {
+      delete copy.dataset.copyState;
+      copy.textContent = 'SHA';
+      copy.title = '点击复制 SHA-256';
+      feedback.textContent = '';
+    }, 2500);
+  });
+  const metadata = el('div', null, 'download-file-meta');
+  metadata.append(el('span', sizeOf(file.size), 'download-file-size'), copy);
+  card.append(metadata, feedback);
   return card;
 }
 function renderDownload(item) {
@@ -43,11 +70,11 @@ function renderDownload(item) {
   const choices = el('div', null, 'download-choices');
   if (item.portable) {
     choices.append(
-      fileCard('安装包', '推荐使用。安装到当前用户目录，提供快捷方式和卸载入口。', item, true),
-      fileCard('单文件绿化版', '下载后可直接运行；设置与工作状态仍保存在当前用户目录。', item.portable, false),
+      fileButton('下载安装包', '推荐使用。安装到当前用户目录，提供快捷方式和卸载入口。', item, true),
+      fileButton('下载单文件绿色版', '下载后可直接运行；设置与工作状态仍保存在当前用户目录。', item.portable, false),
     );
   } else {
-    choices.append(fileCard('单文件版', '此历史版本仅提供单文件下载。', item, false));
+    choices.append(fileButton('下载单文件版', '此历史版本仅提供单文件下载。', item, false));
   }
   releaseTarget.append(choices);
   const changes = el('section', null, 'download-changes');
