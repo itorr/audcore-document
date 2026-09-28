@@ -23,60 +23,30 @@ function validRelease(item) {
   } catch { return false; }
 }
 function sizeOf(bytes) { return (bytes / 1048576).toFixed(2) + ' MB'; }
-function fileButton(label, description, file, primary) {
-  const card = el('div', null, 'download-option');
-  card.dataset.variant = primary ? 'primary' : 'secondary';
-  const link = el('a', null, 'pill download-action');
-  link.href = file.url;
-  link.title = description;
-  link.append(el('span', label, 'download-action-label'));
-  card.append(link);
-  const copy = el('button', 'SHA', 'download-sha');
-  copy.type = 'button';
-  copy.title = '点击复制 SHA-256';
-  copy.setAttribute('aria-label', `复制${primary ? '安装包' : '单文件绿色版'} SHA-256`);
-  const feedback = el('span', '', 'download-copy-feedback');
-  feedback.setAttribute('role', 'status');
-  let reset;
-  copy.addEventListener('click', async () => {
-    clearTimeout(reset);
-    try {
-      await navigator.clipboard.writeText(file.sha256);
-      copy.dataset.copyState = 'copied';
-      copy.textContent = '已复制';
-      feedback.textContent = 'SHA-256 已复制';
-    } catch {
-      copy.dataset.copyState = 'failed';
-      copy.textContent = '复制失败';
-      copy.title = `复制失败，SHA-256：${file.sha256}`;
-      feedback.textContent = `复制失败，SHA-256：${file.sha256}`;
-    }
-    reset = setTimeout(() => {
-      delete copy.dataset.copyState;
-      copy.textContent = 'SHA';
-      copy.title = '点击复制 SHA-256';
-      feedback.textContent = '';
-    }, 2500);
-  });
-  const metadata = el('div', null, 'download-file-meta');
-  metadata.append(el('span', sizeOf(file.size), 'download-file-size'), copy);
-  card.append(metadata, feedback);
-  return card;
-}
 function renderDownload(item) {
   const intro = el('div', null, 'download-version');
-  intro.append(el('h2', `声核 ${item.version}`), el('p', `${item.date} 发布 · Windows 64 位`));
-  releaseTarget.append(intro);
-  const choices = el('div', null, 'download-choices');
+  const line = el('p');
+  const parts = [el('span', item.version), el('span', `${item.date} 发布`), el('span', 'Windows 64 位')];
+  const installer = el('a', item.portable ? '安装包' : '单文件绿色版');
+  installer.href = item.url;
+  installer.title = item.portable ? '推荐使用。安装到当前用户目录，提供快捷方式和卸载入口。' : '下载后可直接运行。';
+  parts.push(installer);
   if (item.portable) {
-    choices.append(
-      fileButton('下载安装包', '推荐使用。安装到当前用户目录，提供快捷方式和卸载入口。', item, true),
-      fileButton('下载单文件绿色版', '下载后可直接运行；设置与工作状态仍保存在当前用户目录。', item.portable, false),
-    );
-  } else {
-    choices.append(fileButton('下载单文件版', '此历史版本仅提供单文件下载。', item, false));
+    const portable = el('a', '单文件绿色版');
+    portable.href = item.portable.url;
+    portable.title = '下载后可直接运行；设置与工作状态仍保存在当前用户目录。';
+    parts.push(portable);
   }
-  releaseTarget.append(choices);
+  parts.forEach((part, index) => {
+    if (index) {
+      const separator = el('span', '·', 'download-separator');
+      separator.setAttribute('aria-hidden', 'true');
+      line.append(separator);
+    }
+    line.append(part);
+  });
+  intro.append(line);
+  releaseTarget.append(intro);
   const changes = el('section', null, 'download-changes');
   const heading = el('div', null, 'download-changes-heading');
   const history = el('a', '更新记录', 'text-link'); history.href = '/changelog/';
