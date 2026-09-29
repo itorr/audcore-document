@@ -75,18 +75,15 @@
   <h3>耳返与检查</h3>
   <p>耳返继续使用声卡耳机输出，关闭直播软件对该音频输入的监听，避免双重耳返。不要将直播回放重新送回 Ultra PLAY 01/02。播放音乐并说话，确认声核伴奏电平和直播试录都正常。</p>
   <h3>安装支持</h3>
-  <p>虚拟声道由第三方免费工具 WDM2VST Ultra 提供。设备尚未可用时，先完成安装；安装后能直接使用就继续，只有提示需要重启时才重启电脑。</p>
+  <p>虚拟声道由 GeekAudio 的第三方免费工具 WDM2VST Ultra v1.2.0 提供。</p>
   <ol>
-    <li>
-      从
-      <a href="https://github.com/GeekAudio/WDM2VST-Ultra/releases">作者发布页</a>
-      下载安装器。
-    </li>
-    <li>按安装器提示安装驱动与 VST3；如果明确提示需要重启，请重启后继续。</li>
-    <li>回到声核扫描效果器，运行设置中的“配置伴奏与直播输出”。虚拟声道可用后，按上面的用途选择外部软件设备。</li>
+    <li>打开声核「设置 → 设备配置与分享 → 安装虚拟音频设备」。已安装且设备可用时会直接显示就绪。</li>
+    <li>尚未安装时，点击“安装 WDM2VST v1.2.0”。声核下载固定官方版本并校验文件；安装会添加第三方驱动、桥接插件及其证书，确认一次 Windows 管理员授权后自动完成。</li>
+    <li>声核会检查驱动是否加载、虚拟声道是否可用以及插件是否完整。可以直接使用就继续配置；明确提示需要重启时，重启 Windows 后重新检测。</li>
+    <li>点击“继续配置”，确认伴奏与直播通道连接，再按上面的用途选择外部软件设备。</li>
   </ol>
-  <p>如果安装完成后仍没有虚拟声道，可能是驱动未被系统加载；这不等于一定需要重启。请核对作者发布说明中的兼容性提示。</p>
-  <a href="https://github.com/GeekAudio/WDM2VST-Ultra">作者安装与使用说明</a>
+  <p>安装后被 Windows 拒绝加载时，会显示实际失败提示；请使用声卡回环或其他可用桥接设备。</p>
+  <a href="/third-party/">第三方来源与固定版本说明</a>
 </section>
 <section id="community" class="guide-panel"><h2>互助交流群</h2><p>QQ 群</p><p class="group-number">574062344</p><p>交流使用经验，互相解答问题。</p></section>
 <section id="sponsor" class="guide-panel"><h2>谢谢你的支持。</h2><p>如果声核让你的调音、监听或直播方便了一点，欢迎打赏，支持后续开发与维护。</p><p>从每一处界面调整，到设备适配和问题修复，都需要时间打磨。你的支持，让这些工作更有动力。</p><p>声核免费使用，打赏完全自愿。无论是否打赏，都感谢你使用声核、分享体验和反馈问题。</p><img class="sponsor-image" width="240" height="276" src="https://lab.magiconch.com/sponsor.png" alt="支付宝打赏收款码，扫码支持作者" referrerpolicy="no-referrer"><p class="sponsor-caption">支付宝扫码打赏 · 金额随意</p><p class="sponsor-caption"><a href="https://lab.magiconch.com/sponsor.png">打开收款原图</a></p></section>
