@@ -9,7 +9,7 @@
 <div class="wrap reading"><section class="guide-panel">
 <h2>WDM2VST Ultra v1.2.0</h2>
 <p>作者 GeekAudio，第三方免费虚拟音频工具。用于接收播放器伴奏，并向直播软件提供 Mix 与人声输入。声核使用作者发布包中的原始驱动和桥接插件。</p>
-<p>在声核「设置 → 设备配置与分享 → 安装并接入虚拟设备」中安装。安装会添加第三方虚拟声卡及其证书，确认一次 Windows 管理员授权后，声核自动完成并检测结果。已安装且可用时直接复用；需要重启时明确提示。设备就绪后点击“接入当前通道”，无需逐个配置桥接插件。</p>
+<p>在声核「设置 → 虚拟跳线」中安装。安装会添加第三方虚拟声卡及其证书，确认一次 Windows 管理员授权后，声核自动完成并检测结果。已安装且可用时直接复用；需要重启时明确提示。设备就绪后点击“接入当前通道”，无需逐个配置桥接插件。</p>
 <p>声核安装的版本可从程序界面或 Windows「已安装的应用」卸载；通过作者安装器安装的版本使用原安装器的卸载条目。卸载会保留可能被其他软件共用的证书。</p>
 <p>固定下载入口转向作者的原始 v1.2.0 发布附件，安装前校验固定 SHA-256。下载文件有变化时停止安装。</p>
 <p>作者正在筹集 EV 证书与微软驱动签名认证费用；是否支持完全自愿。</p>
@@ -28,7 +28,13 @@
 <p>
 <a href="/guide/#loopback">播放器与直播软件设置说明</a>
 </p>
-</section></div></main>
+</section><section class="guide-panel"><h2>FlexASIO 1.10b</h2><p>作者 Etienne Dechamps，第三方通用 ASIO 驱动。用于接入没有原生 ASIO 驱动的普通声卡和 USB 麦克风。声核官网保存固定官方安装包，客户端安装前校验 SHA-256；保留原始授权与发行内容。</p><p>
+<a href="/flexasio/">声核中的 FlexASIO 使用指南</a>
+·
+<a href="/third-party/flexasio-1.10b.exe">下载固定官方版本</a>
+·
+<a href="https://github.com/dechamps/FlexASIO/releases/tag/flexasio-1.10b" target="_blank" rel="noopener noreferrer">官方发行页</a>
+</p></section></div></main>
 <footer class="site-footer wrap">
   <div class="footer-brand">
     <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>

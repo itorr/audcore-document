@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "packages": [
+    {
+      "name": "FlexASIO",
+      "version": "1.10b",
+      "url": "/third-party/flexasio-1.10b.exe",
+      "official_url": "https://github.com/dechamps/FlexASIO/releases/download/flexasio-1.10b/FlexASIO-1.10b.exe",
+      "size": 13749698,
+      "sha256": "fe496bcc08d6c421c6244c8a60ac7b538560bda138000fd1a54ab8ebce031209"
+    }
+  ]
+}

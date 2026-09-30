@@ -32,7 +32,9 @@
 </ol><p>相关说明：<a href="https://learn.microsoft.com/windows/apps/package-and-deploy/smartscreen-reputation" target="_blank" rel="noopener noreferrer">Microsoft SmartScreen 与应用信誉</a>。</p></section>
 <section id="faq" class="guide-panel"><h2>常见问题</h2>
 <div class="guide-answer"><h3>声核免费吗？</h3><p>声核免费使用。第三方效果器需自行安装和授权。</p></div>
-<div class="guide-answer"><h3>支持集成声卡吗？</h3><p>目前仅支持 ASIO，不直接支持集成声卡。可尝试 <a href="#asio">ASIO4ALL</a>，兼容性与延迟取决于设备。</p></div>
+<div class="guide-answer"><h3>支持集成声卡吗？</h3><p>声核通过 ASIO 连接音频设备。没有厂商 ASIO 驱动时，优先使用
+<a href="/flexasio/">FlexASIO</a>
+接入集成声卡或 USB 麦克风；ASIO4ALL 可作为备选，兼容性与延迟取决于设备。</p></div>
 <div class="guide-answer"><h3>有电平，没声音？</h3><p>检查通道静音、输出通道和声卡音量。</p></div>
 <div class="guide-answer"><h3>监听延迟明显？</h3><p>检查 ASIO 缓冲和插件延迟；爆音时适当增大缓冲。</p></div>
 <div class="guide-answer" id="listen"><h3>关闭窗口会停止处理吗？</h3><p>不会，声核仍在托盘运行。结束使用请选择“退出声核”。</p></div>
@@ -44,19 +46,25 @@
 </section>
 <section id="asio" class="guide-panel">
   <h2>不支持 ASIO 时</h2>
-  <p>可以尝试 ASIO4ALL。有厂商 ASIO 驱动时，优先使用厂商驱动。</p>
+  <p>有厂商 ASIO 驱动时优先使用厂商驱动。USB 麦克风、集成声卡或普通音频设备没有 ASIO 驱动时，主要推荐 FlexASIO；不兼容时再尝试 ASIO4ALL。</p>
+  <h3>优先使用 FlexASIO</h3>
   <ol>
-    <li>
-      从
-      <a href="https://asio4all.org/">ASIO4ALL 官网</a>
-      下载安装。
-    </li>
-    <li>重新打开声核，选择 ASIO4ALL v2。</li>
-    <li>打开 ASIO4ALL 面板，启用需要的输入和输出。</li>
-    <li>回到通道选择通道，低音量试音。</li>
+    <li>打开声核设置，点击“安装 FlexASIO”，按提示完成 Windows 管理员授权。没有 ASIO 设备时也会直接提供安装引导。</li>
+    <li>在“音频设备”中选择 FlexASIO。</li>
+    <li>回到通道，在输入菜单直接选择麦克风，在硬件输出菜单选择耳返设备。</li>
+    <li>保持低音量试音，再按设备支持情况调整采样率和缓冲。</li>
   </ol>
-  <p>设备不可用时，先关闭占用它的其他音频软件。并非所有设备都能稳定使用。</p>
-  <a href="https://asio4all.org/getting-started/">官方设置说明</a>
+  <p>
+  <a href="/flexasio/">FlexASIO 安装、设备选择与延迟设置详解</a>
+  </p>
+  <h3>备选：ASIO4ALL</h3>
+  <p>FlexASIO 无法稳定连接你的设备时，可以尝试 ASIO4ALL。安装后在声核选择 ASIO4ALL v2，在其控制面板启用需要的输入输出，再回到通道选择对应声道。</p>
+  <p>
+  <a href="https://asio4all.org/" target="_blank" rel="noopener noreferrer">ASIO4ALL 官网</a>
+  ·
+  <a href="https://asio4all.org/getting-started/" target="_blank" rel="noopener noreferrer">官方设置说明</a>
+  </p>
+  <p>设备被占用时，关闭正在使用它的其他音频软件后重试。不同设备的可用缓冲与监听延迟会有差异。</p>
 </section>
 <section id="loopback" class="guide-panel">
   <h2>声卡不支持回环时</h2>
@@ -78,12 +86,12 @@
   <h3>安装支持</h3>
   <p>虚拟声道由 GeekAudio 的第三方免费工具 WDM2VST Ultra v1.2.0 提供。</p>
   <ol>
-    <li>打开声核「设置 → 设备配置与分享 → 安装并接入虚拟设备」。已安装且设备可用时会直接显示就绪。</li>
-    <li>尚未安装时，点击“安装 WDM2VST v1.2.0”。声核下载固定官方版本并校验文件；安装会添加第三方驱动、桥接插件及其证书，确认一次 Windows 管理员授权后自动完成。</li>
+    <li>打开声核「设置 → 虚拟跳线」。已安装且设备可用时会直接显示就绪。</li>
+    <li>尚未安装时，点击“安装虚拟跳线”。声核下载固定官方版本并校验文件；安装会添加第三方驱动、桥接插件及其证书，确认一次 Windows 管理员授权后自动完成。</li>
     <li>声核会检查驱动、虚拟声道和插件。需要重启时按提示重启 Windows，再重新检测。</li>
     <li>点击“接入当前通道”。声核沿用当前麦克风、效果器和监听连线，自动绑定伴奏、Mix 和单独人声端点；然后在播放器和直播软件中按上面的用途选择设备。</li>
   </ol>
-  <p>声核安装的版本可在此界面点击“卸载虚拟设备”，也会出现在 Windows「已安装的应用」中。若此前通过作者安装器安装，则在 Windows「已安装的应用」中卸载 WDM2VST Ultra。</p>
+  <p>声核安装的版本可在此界面点击“卸载”，也会出现在 Windows「已安装的应用」中。若此前通过作者安装器安装，则在 Windows「已安装的应用」中卸载 WDM2VST Ultra。</p>
   <p>安装后被 Windows 拒绝加载时，会显示实际失败提示；请使用声卡回环或其他可用桥接设备。</p>
   <a href="/third-party/">第三方来源与固定版本说明</a>
 </section>
