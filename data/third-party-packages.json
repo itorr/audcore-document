@@ -8,6 +8,14 @@
       "official_url": "https://github.com/dechamps/FlexASIO/releases/download/flexasio-1.10b/FlexASIO-1.10b.exe",
       "size": 13749698,
       "sha256": "fe496bcc08d6c421c6244c8a60ac7b538560bda138000fd1a54ab8ebce031209"
+    },
+    {
+      "name": "WDM2VST Ultra",
+      "version": "1.2.0",
+      "url": "/third-party/wdm2vst-ultra-1.2.0.exe",
+      "official_url": "https://github.com/GeekAudio/WDM2VST-Ultra/releases/download/v1.2.0/WDM2VST_Ultra_v1.2.0_Setup.exe",
+      "size": 10875904,
+      "sha256": "edbfb9a1804861bf86368113791051196fb1f59edbdd9f74e5cb38344afa875a"
     }
   ]
 }
