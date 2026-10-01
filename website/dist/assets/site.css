@@ -1281,6 +1281,7 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 }
 .site-footer .footer-meta small { grid-column:auto; grid-row:auto; font-size:inherit; }
 .site-footer .footer-meta a { color:inherit; }
+.site-footer .footer-separator { opacity:.5; }
 @media(max-width:960px) {
   .site-footer { grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px; }
   .site-footer .footer-brand { grid-column:1/-1; }
