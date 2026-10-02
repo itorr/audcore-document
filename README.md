@@ -26,6 +26,7 @@
 
 - [下载最新版](https://audcore.utae.cn/download/)：提供安装包和单文件版，页面附有文件 SHA-256。
 - [阅读使用指北](docs/指北.md)：连接设备、添加效果器及排查常见问题。
+- [选择录制格式](docs/通道录制格式说明.md)：比较 CAF 与 WAV / RF64 的精度、容量和中断恢复方式。
 - [查看更新记录](docs/更新记录.md)：了解各版本的用户可见变化。
 - [提交 BUG 与建议](https://github.com/itorr/audcore-document/issues)：公开反馈统一在这里处理。
 
