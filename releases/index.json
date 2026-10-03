@@ -1,26 +1,25 @@
 {
-    "schema":  1,
-    "latest":  "v0.0.736",
-    "releases":  [
-                     {
-                         "version":  "v0.0.736",
-                         "date":  "2026-10-03",
-                         "publishedAt":  "2026-10-03T19:05:42Z",
-                         "url":  "/releases/v0.0.736/audcore-setup-v0.0.736.exe",
-                         "size":  6013596,
-                         "sha256":  "1f953aec408724842e63b4da85c476951dd58e6d34e95bea431bf33227d25af3",
-                         "portable":  {
-                                          "url":  "/releases/v0.0.736/audcore-portable.exe",
-                                          "size":  11490816,
-                                          "sha256":  "9ddf8083e5ad18bf33b08e513127eae36a466d1be11b1a340b11d25694bc5041"
-                                      },
-                         "changes":  [
-                                         "修复部分 ASIO 声卡启动无电平，以及音频中断或时钟变化后无法正常恢复的问题。",
-                                         "支持从设置直接打开 ASIO 驱动配置，音频停止时也可使用。",
-                                         "修复驱动更改采样率后仍显示旧值的问题，并同步更新通道音频处理。",
-                                         "改善 FlexASIO 安装引导，首次启动缺少 ASIO 时提供联合安装，设置中仅安装 FlexASIO。"
-                                     ],
-                         "notes":  "修复部分 ASIO 声卡启动无电平，以及音频中断或时钟变化后无法正常恢复的问题。；支持从设置直接打开 ASIO 驱动配置，音频停止时也可使用。；修复驱动更改采样率后仍显示旧值的问题，并同步更新通道音频处理。；改善 FlexASIO 安装引导，首次启动缺少 ASIO 时提供联合安装，设置中仅安装 FlexASIO。"
-                     }
-                 ]
+  "schema": 1,
+  "latest": "v0.0.728",
+  "releases": [
+    {
+      "version": "v0.0.728",
+      "date": "2026-10-03",
+      "publishedAt": "2026-10-03T14:21:10Z",
+      "url": "/releases/v0.0.728/audcore-setup-v0.0.728.exe",
+      "size": 6002001,
+      "sha256": "74fb5b3a8c85df7562fb5044cbaa8aa4c5e5885f09ab724ebd329642da608db1",
+      "portable": {
+        "url": "/releases/v0.0.728/audcore-portable.exe",
+        "size": 11457536,
+        "sha256": "c326dd7ff8dfd477645fec37cb9f6c39b41bb7145706566ed4fc11e36f7d3cbd"
+      },
+      "changes": [
+        "修复重启后 FlexASIO 小缓冲档位和自定义选项消失的问题，只需选中 FlexASIO 即可调整缓冲，无需先新建通道或选择输入输出。",
+        "新建 FlexASIO 智能跳线预设时优先沿用已选设备，未选择时自动接入可确认的默认麦克风和监听设备，减少手动补选。",
+        "修正声核输出 1/2、3/4 的发送位置，让总输出和人声独立输出分别跟随各自通道推子。"
+      ],
+      "notes": "修复重启后 FlexASIO 小缓冲档位和自定义选项消失的问题，只需选中 FlexASIO 即可调整缓冲，无需先新建通道或选择输入输出。；新建 FlexASIO 智能跳线预设时优先沿用已选设备，未选择时自动接入可确认的默认麦克风和监听设备，减少手动补选。；修正声核输出 1/2、3/4 的发送位置，让总输出和人声独立输出分别跟随各自通道推子。"
+    }
+  ]
 }
