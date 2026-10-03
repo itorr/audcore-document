@@ -16,3 +16,7 @@
 /sdk/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=31536000, immutable
+
+/sdk/1.0.0/audcore.d.ts
+  Content-Type: text/plain; charset=utf-8
+
