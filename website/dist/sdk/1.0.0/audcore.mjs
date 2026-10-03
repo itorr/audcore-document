@@ -28,6 +28,7 @@ export class AudcoreClient {
     if(this.state==='connected')return this;
     if(this.connecting)return this.connecting;
     this.closed=false;
+    this.connectedOnce=false;
     this.connecting=(async()=>{
       this.token=await this.storage.get(this.key).catch(()=>null);
       if(this.closed)throw new Error('连接已取消');
@@ -39,14 +40,14 @@ export class AudcoreClient {
     if(this.closed)return;
     this._state('connecting');this.early.clear();
     const socket=this.socket=new this.WebSocket(this.url);
-    let helloId;
+    let helloId,retryCredential=false;
     const handshakeTimer=setTimeout(()=>{this._emit('error',new Error('声核连接或授权超时'));socket.close();},135000);
     socket.addEventListener('open',()=>{helloId=String(++this.sequence);socket.send(JSON.stringify({id:helloId,method:'POST',path:'/connections',body:{app_name:this.appName,...(this.token?{token:this.token}:{})}}));});
     socket.addEventListener('message',async({data})=>{
       if(socket!==this.socket)return;
       let m;try{m=JSON.parse(data);}catch{return;}
       if(m.id===helloId){
-        if(m.status===401){this.token=null;await this.storage.delete(this.key).catch(()=>{});socket.close();return;}
+        if(m.status===401){this.token=null;retryCredential=true;await this.storage.delete(this.key).catch(()=>{});socket.close();return;}
         if(m.status===202){this._state('authorization-pending');this._emit('authorization-pending',m.data);return;}
         if(m.status===200){clearTimeout(handshakeTimer);this.instanceId=m.data.instance_id;this._authorized();return;}
         this.closed=true;this.rejectConnect?.(new AudcoreError(m.status,m.data));socket.close();return;
@@ -59,10 +60,11 @@ export class AudcoreClient {
     socket.addEventListener('error',()=>this._emit('error',new Error('无法连接声核，请检查本地 API 开关、地址及浏览器的本地网络权限')));
     socket.addEventListener('close',()=>{
       clearTimeout(handshakeTimer);if(socket!==this.socket)return;this._state('disconnected');for(const p of this.pending.values()){clearTimeout(p.timer);p.reject(new Error('连接已断开'));}this.pending.clear();for(const s of this.subscriptions)s.id=null;
-      if(!this.closed&&this.reconnect){this.timer=setTimeout(()=>this._open(),800);}else{this.rejectConnect?.(new Error('连接已断开'));this.resolveConnect=null;this.rejectConnect=null;}
+      if(!this.closed&&this.reconnect&&(this.connectedOnce||retryCredential)){this.timer=setTimeout(()=>this._open(),800);}else{this.closed=true;this.rejectConnect?.(new Error('无法连接声核或授权等待已结束，请检查本地 API 开关和地址后重试'));this.resolveConnect=null;this.rejectConnect=null;}
     });
   }
   async _authorized(){
+    this.connectedOnce=true;
     this._state('connected');this.resolveConnect?.(this);this.resolveConnect=null;this.rejectConnect=null;
     for(const s of [...this.subscriptions])if(!s.cancelled&&!s.id&&!s.loading){try{await this._subscribe(s);}catch(error){this._emit('error',error);}}
   }
