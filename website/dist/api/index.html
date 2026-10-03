@@ -5,7 +5,7 @@
 <main id="main"><section class="page-header wrap"><h1>本地 API 与 SDK</h1><p>让自己的网页和工具连接声核，读取通道、调整参数，并实时接收变化。</p></section>
 <div class="wrap api-layout"><nav class="toc" aria-label="API 文档目录"><a href="#demo">连接演示</a><a href="#start">开始使用</a><a href="#protocol">通信协议</a><a href="#resources">资源接口</a><a href="#subscriptions">实时订阅</a><a href="#sdk">SDK 与版本</a></nav>
 <section id="demo" class="api-section"><h2>试着控制通道</h2><p>在运行声核的这台电脑上打开本页，先在声核设置的「API 连接管理」中开启本地 API。点击连接后，在声核中允许「声核官网演示」。</p>
-<form id="demo-form" class="share-form"><label for="demo-url">本地连接地址<input id="demo-url" type="text" value="ws://127.0.0.1:38533/api/v1" autocomplete="off" spellcheck="false"></label><button id="demo-connect" class="pill" type="submit">连接声核</button><button id="demo-disconnect" class="pill pill-light" type="button" disabled>断开</button></form>
+<form id="demo-form" class="share-form"><label for="demo-url">本地连接地址<input id="demo-url" type="text" value="ws://127.0.0.1:38533/api/v1" autocomplete="off" spellcheck="false"></label><button id="demo-connect" class="pill" type="submit">连接声核</button></form>
 <p id="demo-status" class="feedback" role="status" aria-live="polite">尚未连接</p><div id="demo-channels" class="demo-channels"><p class="subtle">连接并允许后，通道会显示在这里。</p></div>
 <p class="subtle">开关选中表示通道未静音。声核中的修改会同步到这里。浏览器询问本地网络访问权限时，请允许；断开或关闭页面会取消本次订阅。</p></section>
 <section id="start" class="api-section"><h2>开始使用</h2><p>公开接口是本机 JSON WebSocket，协议版本为 v1。主实例默认地址为 <code>ws://127.0.0.1:38533/api/v1</code>；多开实例请复制各自设置中显示的地址。服务仅供运行声核的本机使用。</p><p>直接从官网引入固定版本 SDK：</p>

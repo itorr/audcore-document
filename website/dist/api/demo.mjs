@@ -1,6 +1,11 @@
 import { AudcoreClient } from '/sdk/1.0.0/audcore.mjs';
-const form=document.getElementById('demo-form'),status=document.getElementById('demo-status'),list=document.getElementById('demo-channels'),address=document.getElementById('demo-url'),connect=document.getElementById('demo-connect'),disconnect=document.getElementById('demo-disconnect');
+const form=document.getElementById('demo-form'),status=document.getElementById('demo-status'),list=document.getElementById('demo-channels'),address=document.getElementById('demo-url'),connect=document.getElementById('demo-connect');
 const channels=new Map(),rows=new Map();let client=null;
+function connectionState(state){
+  const busy=state==='connecting'||state==='authorization-pending';
+  connect.disabled=busy;address.disabled=busy||state==='connected';
+  connect.textContent=busy?'连接中…':state==='connected'?'断开连接':'连接声核';
+}
 function render(){
   const live=client?.state==='connected';
   for(const[id,row]of rows)if(!channels.has(id)){row.element.remove();rows.delete(id);}
@@ -15,21 +20,20 @@ function render(){
   if(!channels.size){let empty=list.querySelector('p');if(!empty){empty=document.createElement('p');empty.className='subtle';list.append(empty);}empty.textContent=live?'当前没有通道':'连接并允许后，通道会显示在这里。';}
 }
 form.addEventListener('submit',async e=>{
-  e.preventDefault();connect.disabled=true;address.disabled=true;
+  e.preventDefault();if(connect.disabled)return;if(client?.state==='connected'){await client.disconnect();render();return;}connectionState('connecting');
   try{
     await client?.disconnect();
     client=new AudcoreClient({url:address.value.trim(),appName:'声核官网演示'});
-    client.on('state',state=>{disconnect.disabled=state==='disconnected';status.textContent=({connecting:'正在连接声核…','authorization-pending':'请在声核客户端的 API 连接管理中允许「声核官网演示」。',connected:'已连接，通道状态实时同步。',disconnected:'连接已断开。'})[state];render();});
+    client.on('state',state=>{connectionState(state);status.textContent=({connecting:'正在连接声核…','authorization-pending':'请在声核客户端的全局确认中允许「声核官网演示」。',connected:'已连接，通道状态实时同步。',disconnected:'连接已断开。'})[state];render();});
     client.on('error',error=>{status.textContent=error.message;});
-    client.on('revoked',()=>{status.textContent='授权已撤销。再次连接需要在声核中允许。';connect.disabled=false;address.disabled=false;});
-    client.on('rejected',()=>{status.textContent='声核拒绝了连接。';connect.disabled=false;address.disabled=false;});
+    client.on('revoked',()=>{status.textContent='授权已撤销。再次连接需要在声核中允许。';connectionState('disconnected');});
+    client.on('rejected',()=>{status.textContent='声核拒绝了连接。';connectionState('disconnected');});
     await client.connect();
     await client.subscribe('/channels',{frequencyHz:10},(data,event)=>{
       if(event.event==='snapshot'){channels.clear();for(const channel of data)channels.set(channel.id,channel);}
       else if(/^\/channels\/[^/]+$/.test(event.resource)){const id=event.resource.split('/')[2];if(event.event==='removed')channels.delete(id);else channels.set(data.id,data);}
       render();
     });
-  }catch(error){status.textContent=error.message;await client?.disconnect();connect.disabled=false;address.disabled=false;}
+  }catch(error){await client?.disconnect();connectionState('disconnected');status.textContent=error.message;}
 });
-disconnect.addEventListener('click',async()=>{await client?.disconnect();connect.disabled=false;address.disabled=false;disconnect.disabled=true;render();});
 window.addEventListener('pagehide',()=>{void client?.disconnect();});

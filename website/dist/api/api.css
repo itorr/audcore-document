@@ -25,3 +25,6 @@
 .setting-switch:disabled { opacity:.5; cursor:default; }
 .api-section #demo-status { min-height:52px; }
 .api-section .share-form label { min-width:0; flex:1 1 100%; }
+
+#demo-connect { min-width: 132px; }
+#demo-connect:disabled { opacity: .55; cursor: wait; }
