@@ -1,0 +1,27 @@
+.api-layout { padding-bottom:70px; max-width:1000px; }
+.api-section { margin-top:54px; scroll-margin-top:24px; }
+.api-section h2 { font-size:clamp(26px,4vw,36px); margin-bottom:18px; }
+.api-section p { margin:16px 0; }
+.api-section pre { padding:20px; border-radius:14px; background:var(--surface); overflow:auto; font-size:13px; line-height:1.8; }
+.api-section code { font-family:Consolas,monospace; overflow-wrap:anywhere; }
+.api-section .toc { margin:18px 0; }
+.api-table { overflow:auto; }
+.api-table table { width:100%; border-spacing:0; font-size:14px; }
+.api-table th,.api-table td { padding:12px; text-align:left; vertical-align:top; }
+.api-table th { background:var(--surface); }
+.api-table tr:nth-child(even) { background:#f8f9fa; }
+.api-table td:nth-child(2) { font-family:Consolas,monospace; white-space:nowrap; }
+.demo-channels { display:grid; gap:8px; margin:18px 0; }
+.demo-channel { display:flex; gap:12px; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--surface); border-radius:12px; min-height:58px; }
+.demo-channel-name { min-width:0; overflow-wrap:anywhere; }
+.demo-channel label { display:flex; align-items:center; gap:10px; cursor:pointer; font-size:14px; flex:0 0 auto; }
+.demo-channel-state { min-width:42px; }
+.demo-channels { --line:#c8ced7; --accent:var(--blue); }
+.setting-switch { appearance:none; position:relative; flex:0 0 26px; width:26px; height:15px; margin:0; padding:0; border:0; border-radius:999px; background:var(--line); cursor:pointer; }
+.setting-switch::before { content:''; position:absolute; left:2px; top:2px; width:11px; height:11px; border-radius:50%; background:#fff; transition:transform .14s; }
+.setting-switch:checked { background:var(--accent); }
+.setting-switch:checked::before { transform:translateX(11px); }
+.setting-switch:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+.setting-switch:disabled { opacity:.5; cursor:default; }
+.api-section #demo-status { min-height:52px; }
+.api-section .share-form label { min-width:0; flex:1 1 100%; }

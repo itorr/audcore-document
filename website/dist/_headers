@@ -2,7 +2,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   X-Frame-Options: DENY
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://lab.magiconch.com; connect-src 'self' https://aud-api.utae.cn; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://lab.magiconch.com; connect-src 'self' https://aud-api.utae.cn ws://127.0.0.1:*; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
 
 /releases/*
   Cache-Control: no-cache
@@ -12,3 +12,7 @@
 
 /gallery/*.json
   Cache-Control: no-cache
+
+/sdk/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable

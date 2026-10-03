@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="声核公开本地 API、JavaScript SDK 与通道控制演示。"><title>本地 API 与 SDK - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/api/api.css"></head><body>
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site-header wrap"><a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a><nav aria-label="主导航"><a href="/">首页</a><a href="/guide/">指北</a><a href="/api/" aria-current="page">API</a></nav></header>
+<main id="main"><section class="page-header wrap"><h1>本地 API 与 SDK</h1><p>让自己的网页和工具连接声核，读取通道、调整参数，并实时接收变化。</p></section>
+<div class="wrap api-layout"><nav class="toc" aria-label="API 文档目录"><a href="#demo">连接演示</a><a href="#start">开始使用</a><a href="#protocol">通信协议</a><a href="#resources">资源接口</a><a href="#subscriptions">实时订阅</a><a href="#sdk">SDK 与版本</a></nav>
+<section id="demo" class="api-section"><h2>试着控制通道</h2><p>在运行声核的这台电脑上打开本页，先在声核设置的「API 连接管理」中开启本地 API。点击连接后，在声核中允许「声核官网演示」。</p>
+<form id="demo-form" class="share-form"><label for="demo-url">本地连接地址<input id="demo-url" type="text" value="ws://127.0.0.1:38533/api/v1" autocomplete="off" spellcheck="false"></label><button id="demo-connect" class="pill" type="submit">连接声核</button><button id="demo-disconnect" class="pill pill-light" type="button" disabled>断开</button></form>
+<p id="demo-status" class="feedback" role="status" aria-live="polite">尚未连接</p><div id="demo-channels" class="demo-channels"><p class="subtle">连接并允许后，通道会显示在这里。</p></div>
+<p class="subtle">开关选中表示通道未静音。声核中的修改会同步到这里。浏览器询问本地网络访问权限时，请允许；断开或关闭页面会取消本次订阅。</p></section>
+<section id="start" class="api-section"><h2>开始使用</h2><p>公开接口是本机 JSON WebSocket，协议版本为 v1。主实例默认地址为 <code>ws://127.0.0.1:38533/api/v1</code>；多开实例请复制各自设置中显示的地址。服务仅供运行声核的本机使用。</p><p>直接从官网引入固定版本 SDK：</p>
+<pre><code>import { AudcoreClient } from
+  'https://audcore.utae.cn/sdk/1.0.0/audcore.mjs';
+
+const audcore = new AudcoreClient({ appName: '我的控制面板' });
+audcore.on('authorization-pending', () =&gt; {
+  console.log('请在声核客户端允许连接');
+});
+await audcore.connect();
+const channels = await audcore.getChannels();
+console.log(channels);
+await audcore.updateChannel(channels[0].id, { mute: false });</code></pre>
+<p>首次连接必须由声核用户允许，允许后 SDK 在当前网页来源保存应用凭证。重新连接无须重复允许；声核用户可以随时撤销。网页凭证绑定实际来源，包括协议、域名和端口；应用名称只是展示名称。</p></section>
+<section id="protocol" class="api-section"><h2>通信协议</h2><p>资源路径和方法沿用 REST 风格，通过 WebSocket JSON 文本帧传输。请求使用唯一字符串 <code>id</code> 配对响应；状态码是 JSON 字段，不是 HTTP 响应码。</p>
+<pre><code>{"id":"1","method":"POST","path":"/connections","body":{"app_name":"我的工具"}}
+{"id":"1","status":202,"data":{"connection_id":"1","instance_id":"…","authorized":false}}</code></pre>
+<p>首条消息必须申请连接。等待期间禁止查询和控制；用户允许后，当前连接收到私有授权事件：</p>
+<pre><code>{"event":"authorized","data":{"token":"应用凭证","instance_id":"…"}}</code></pre>
+<p>以后将凭证放入申请消息的 <code>body.token</code>，验证成功返回 200。凭证不要放 URL，不要发布在网页源码或共享给其他来源。等待允许最多 120 秒。</p>
+<pre><code>{"id":"2","method":"GET","path":"/channels"}
+{"id":"2","status":200,"data":[{"id":"通道标识","index":0,"name":"麦克风","gain_db":0,"mute":false,"color":null}]}
+
+{"id":"3","method":"PATCH","path":"/channels/通道标识","body":{"mute":true}}
+{"id":"3","status":200,"data":{"id":"通道标识","index":0,"name":"麦克风","gain_db":0,"mute":true,"color":null}}</code></pre>
+<p>资源 ID 都是字符串。通道使用稳定标识，效果器使用实例标识，参数使用效果器暴露的参数 ID；不要用名称或列表位置识别资源。设备查询不触发声卡切换，尚未确认的能力保持未知。</p>
+<pre><code>{"id":"4","status":403,"data":{"error":{"code":"authorization_pending","message":"请在声核客户端允许连接"}}}</code></pre>
+<p>200 表示成功，201 表示订阅已创建，202 表示等待允许；400 表示请求或值无效，401 表示凭证失效，403 表示未授权，404 表示资源不存在，409 表示资源暂不可用，429 表示请求或订阅数量超过限制。第一版不开放设备切换、音频启停、通道增删、效果器装卸或文件操作。</p></section>
+<section id="resources" class="api-section"><h2>资源接口</h2><div class="api-table"><table><thead><tr><th>方法</th><th>路径</th><th>作用</th></tr></thead><tbody>
+<tr><td>GET</td><td>/info</td><td>运行版本、API 版本与实例标识</td></tr><tr><td>GET</td><td>/devices</td><td>输入输出设备、声道及当前选择</td></tr><tr><td>GET</td><td>/status</td><td>运行状态、采样率、缓冲、延迟与欠载次数</td></tr><tr><td>GET</td><td>/channels</td><td>用户通道列表，包含隐藏于界面显示选项的用户通道；不含内部辅助通道</td></tr><tr><td>GET / PATCH</td><td>/channels/{id}</td><td>读取通道；修改 gain_db（-90 至 12 dB）、mute</td></tr><tr><td>GET</td><td>/channels/{id}/effects</td><td>通道中的效果器列表</td></tr><tr><td>GET / PATCH</td><td>/effects/{id}</td><td>读取实例；修改 bypass</td></tr><tr><td>GET</td><td>/effects/{id}/parameters</td><td>参数列表、名称、单位、默认值、步数、是否可写及当前值</td></tr><tr><td>GET / PATCH</td><td>/effects/{id}/parameters/{parameterId}</td><td>读取参数；修改 normalized（0–1）</td></tr><tr><td>GET</td><td>/meters</td><td>通道电平；id 为通道的 index，peak_l、peak_r、rms 为线性幅度</td></tr><tr><td>POST</td><td>/subscriptions</td><td>订阅资源，设置 frequency_hz</td></tr><tr><td>DELETE</td><td>/subscriptions/{id}</td><td>取消订阅</td></tr><tr><td>DELETE</td><td>/connections/current</td><td>关闭当前连接及全部订阅，保留应用授权</td></tr>
+</tbody></table></div><p>参数实际值 <code>plain</code> 和显示文字 <code>display</code> 由插件提供；不保证每个参数都有。写入使用归一化值，离散参数按插件步数取整，响应返回实际接受的值。只读参数不可写，离线或未加载效果器不能读取参数。</p></section>
+<section id="subscriptions" class="api-section"><h2>实时订阅</h2><pre><code>{"id":"5","method":"POST","path":"/subscriptions","body":{"resource":"/channels","frequency_hz":10}}
+{"id":"5","status":201,"data":{"subscription_id":"sub-1","frequency_hz":10}}
+{"event":"snapshot","subscription_id":"sub-1","resource":"/channels","sequence":0,"data":[…]}
+{"event":"update","subscription_id":"sub-1","resource":"/channels/通道标识","sequence":1,"data":{"id":"通道标识","name":"麦克风","index":0,"gain_db":0,"mute":true,"color":null}}
+{"event":"removed","subscription_id":"sub-1","resource":"/channels/通道标识","sequence":2,"data":null}</code></pre>
+<p>订阅先收到一次 <code>snapshot</code>，随后收到子资源的 <code>update</code> 或 <code>removed</code>。例如订阅通道列表后，单个通道变化只推送该通道；只处理与自己功能相关的资源路径。初始快照可能先于创建响应到达，SDK 已处理这一顺序。</p><p>频率默认 10 Hz，范围为 1–30 Hz，表示连续变化的最大发送频率，同一资源期间合并为最新值。资源删除立即发送。原生效果器编辑器、声核界面和其他客户端的操作都会同步；仅能同步插件主动报告给宿主的参数变化。</p>
+<pre><code>const subscription = await audcore.subscribe(
+  '/channels', { frequencyHz: 10 },
+  (data, event) =&gt; console.log(event.event, event.resource, data)
+);
+await subscription.unsubscribe();
+await audcore.disconnect();</code></pre>
+<p>连接断开自动取消全部订阅；SDK 默认自动重连并重新订阅，每次重新接收快照。撤销授权或拒绝连接后停止重连。服务端通过 WebSocket 心跳识别失联连接，最长约 45 秒清理；正常关闭立即清理。每连接最多 32 个订阅，消息上限 64 KiB，每秒最多 120 条请求；过慢的接收端会断开并通过重连恢复快照。</p></section>
+<section id="sdk" class="api-section"><h2>SDK 与版本</h2><p>JavaScript SDK 当前版本为 <strong>1.0.0</strong>，独立于声核客户端版本和 API 协议版本。无运行依赖，可在浏览器直接使用，附带 TypeScript 类型声明。</p><p>使用时必须固定完整版本号。已发布版本的内容保持不变，修复或新增功能发布新版本，不提供自动切换版本的 latest 入口。</p><div class="toc"><a href="/sdk/1.0.0/audcore.mjs" download>下载 JavaScript SDK 1.0.0</a><a href="/sdk/1.0.0/audcore.d.ts" download>下载 TypeScript 声明</a><a href="/api/demo.mjs">查看演示源码</a></div><p>SDK 提供 <code>getDevices()</code>、<code>getChannels()</code>、<code>updateChannel()</code>、<code>getEffects()</code>、<code>getParameters()</code>、<code>setParameter()</code> 和 <code>subscribe()</code>；也可用 <code>request(method, path, body)</code> 访问协议资源。</p><p>使用本机脚本时传入 WebSocket 实现和自己的凭证存储适配器。网页可使用 <code>on('state', callback)</code>、<code>on('authorization-pending', callback)</code> 和 <code>on('error', callback)</code> 显示状态；<code>forgetAuthorization()</code> 清除本网页保存的凭证并断开，彻底撤销应用授权应在声核设置中操作。</p></section>
+</div></main><footer class="site-footer wrap"><p>声核 · Audcore</p><nav><a href="/guide/">指北</a><a href="/api/">本地 API</a><a href="https://github.com/itorr/audcore-document/issues">问题反馈</a></nav><small>© 2026 声核</small></footer><script type="module" src="/api/demo.mjs"></script></body></html>
+
