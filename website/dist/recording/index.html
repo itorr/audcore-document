@@ -17,15 +17,15 @@
 <section class="guide-panel"><h2>为什么这样设计</h2><p>声核专注实时通道处理与路由，录制直接跟随通道，便于随时保存人声、伴奏或混音。录完的文件可交给音频工作站做剪辑与时间轴编排。</p><p>写入磁盘和压缩编码放在音频处理之外，尽量减少对实时监听的影响。未压缩格式省去压缩编码，压缩格式节省磁盘空间；同时录制的通道越多，对磁盘与处理能力的要求也越高。</p><p>默认使用 WAV / RF64 24 位，便于后续编辑和交换。想保留内部浮点数据可选择 CAF 32 位浮点，想减小文件可选择 FLAC 或 Opus。</p></section>
 <section class="guide-panel"><h2>格式怎么选</h2>
 <div class="recording-table-wrap" tabindex="0" role="region" aria-label="录制格式比较，可左右滚动"><table class="recording-table"><caption>48kHz、立体声，每分钟体积估算。窄屏可左右滑动比较。</caption>
-<thead><tr><th scope="col">格式</th><th scope="col">WAV / RF64</th><th scope="col">CAF</th><th scope="col">CAF</th><th scope="col">CAF</th><th scope="col">FLAC</th><th scope="col">Opus</th></tr></thead><tbody>
-<tr><th scope="row">位数</th><td>24 位整数</td><td>32 位浮点</td><td>24 位整数</td><td>16 位整数</td><td>24 位整数</td><td>有损编码，不按 PCM 位数保存</td></tr>
-<tr><th scope="row">无损</th><td>无损</td><td>无损</td><td>无损</td><td>无损</td><td>无损</td><td>有损</td></tr>
-<tr><th scope="row">性能</th><td>极好</td><td>极好</td><td>极好</td><td>极好</td><td>差</td><td>差</td></tr>
-<tr><th scope="row">长时录制</th><td>适合</td><td>适合</td><td>适合</td><td>适合</td><td>适合</td><td>适合</td></tr>
-<tr><th scope="row">每分钟体积</th><td>16.5 MiB</td><td>22 MiB</td><td>16.5 MiB</td><td>11 MiB</td><td>随内容变化</td><td>0.92 MiB</td></tr>
-<tr><th scope="row">适合用途</th><td>默认选择，编辑与交换</td><td>保留内部浮点范围</td><td>用 CAF 保存整数音频</td><td>减少未压缩文件体积</td><td>无损保存，节省空间</td><td>长时间留存与快速分享</td></tr>
+<thead><tr><th scope="col">格式</th><th scope="col">位数</th><th scope="col">无损</th><th scope="col">性能</th><th scope="col">长时录制</th><th scope="col">每分钟体积</th><th scope="col">适合用途</th></tr></thead><tbody>
+<tr><th scope="row">WAV / RF64</th><td>24 位整数</td><td>无损</td><td>还行</td><td>适合</td><td>16.5 MiB</td><td>编辑与交换</td></tr>
+<tr><th scope="row">CAF</th><td>32 位浮点</td><td>无损</td><td>极好</td><td>适合</td><td>22 MiB</td><td>爆音也能救</td></tr>
+<tr><th scope="row">CAF</th><td>24 位整数</td><td>无损</td><td>还行</td><td>适合</td><td>16.5 MiB</td><td>编辑与交换</td></tr>
+<tr><th scope="row">CAF</th><td>16 位整数</td><td>无损</td><td>还行</td><td>适合</td><td>11 MiB</td><td>低占用听个响</td></tr>
+<tr><th scope="row">FLAC</th><td>24 位整数</td><td>无损</td><td>一般</td><td>适合</td><td>随内容变化</td><td>高压缩分发</td></tr>
+<tr><th scope="row">Opus</th><td>—</td><td>有损</td><td>差</td><td>适合</td><td>0.92 MiB</td><td>快速分享</td></tr>
 </tbody></table></div>
-<p>“性能”比较的是录制编码开销：极好表示不需要压缩编码，差表示需要额外编码，实际能录多少通道仍取决于电脑与磁盘。“长时录制”按文件长度支持判断，六种格式都支持；空间有限时可选压缩格式，重视异常中断后的恢复可选 CAF。</p><p>单声道的体积约为表中一半；Opus 单声道使用 64 kbps。未压缩格式的体积与采样率成正比，Opus 的体积主要取决于码率。声核的 Opus 录制编码为 48kHz，其他采样率会先重采样。</p><p>表中“无损”指文件保存过程中不进行有损压缩。整数格式仍会把内部浮点声音转换到相应位数，不能保留超出整数范围的数据；FLAC 会无损保存转换后的 24 位整数音频。浮点录制也无法修复声卡输入或效果器内部已经产生的失真。</p></section>
+<p>“性能”按转换与压缩开销粗略分为极好、还行、一般、差，实际表现取决于电脑、采样率、通道数与磁盘。“长时录制”按文件长度支持判断，六种格式都支持；空间有限时可选压缩格式，重视异常中断后的恢复可选 CAF。</p><p>单声道的体积约为表中一半；Opus 单声道使用 64 kbps。未压缩格式的体积与采样率成正比，Opus 的体积主要取决于码率。声核的 Opus 录制编码为 48kHz，其他采样率会先重采样。</p><p>表中“无损”指文件保存过程中不进行有损压缩。整数格式仍会把内部浮点声音转换到相应位数，不能保留超出整数范围的数据；FLAC 会无损保存转换后的 24 位整数音频。CAF 32 位浮点的“爆音也能救”指声音超过 0dB 但数据尚未被截断时，可以在后期降低音量恢复；声卡输入或效果器内部已经产生的削波失真无法恢复。Opus 不按 PCM 位数保存，因此位数标为“—”。</p></section>
 <section class="guide-panel"><h2>长时间录制与异常中断</h2><p>WAV 使用 RF64 保存长录音，避免传统 WAV 的 4 GiB 长度限制。CAF 可以保存已写入的有效音频前缀，适合需要考虑异常中断恢复的录制。</p><p>尽量通过 REC 正常停止录制，让文件完整收尾。磁盘写入失败或录制缓冲耗尽时，声核会停止录制并提示原因；保留已有文件，检查剩余空间与保存目录后再开始。</p></section>
 <section class="guide-panel"><h2>进一步了解格式</h2><p>
 <a href="https://xiph.org/flac/features.html" target="_blank" rel="noopener noreferrer">FLAC 官方格式说明</a>
