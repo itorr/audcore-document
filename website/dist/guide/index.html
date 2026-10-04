@@ -39,7 +39,11 @@
 <div class="guide-answer"><h3>监听延迟明显？</h3><p>检查 ASIO 缓冲和插件延迟；爆音时适当增大缓冲。</p></div>
 <div class="guide-answer" id="listen"><h3>关闭窗口会停止处理吗？</h3><p>不会，声核仍在托盘运行。结束使用请选择“退出声核”。</p></div>
 <div class="guide-answer"><h3>怎么混音？</h3><p>声核不支持基于时间轴的混音，已移除相关功能，专注实时通道处理与路由。多轨编辑和混音请使用其他音频工作站。</p></div>
-<div class="guide-answer"><h3>怎么录音？</h3><p>声核目前不提供录音功能。需要录制时，可使用 Windows 自带的录音机或其他录音工具。</p></div>
+<div class="guide-answer" id="recording-formats"><h3>怎么录音？</h3>
+<p>点击通道录制图标开始，再次点击停止。在设置的“通道录制”中选择保存目录与格式；更改在下次录制时生效。</p>
+<p>CAF 32 位浮点保留内部音频，适合低 CPU 占用与长时间录制。CAF 16/24 位保存整数音频；WAV / RF64 24 位便于其他音频软件读取。FLAC 24 位使用无损压缩；Opus 使用有损压缩，适合减少磁盘占用，单声道 64 kbps、立体声 128 kbps。</p>
+<p>以 48kHz 采样率为例，单声道未压缩录音每分钟约占 5.5 MiB（16 位）、8.2 MiB（24 位）或 11 MiB（32 位），立体声约翻倍。FLAC 的体积取决于声音内容；Opus 单声道每分钟约 0.46 MiB，立体声约 0.92 MiB。</p>
+<p>CAF 适合异常中断后的恢复；其他格式请正常停止录制，以便写入完整文件信息。</p></div>
 <div class="guide-answer"><h3>怎么反馈 BUG？</h3><p>到
 <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
 说明从打开声核到出现问题的操作步骤、预期结果和实际结果，并附上声核版本、Windows 版本、声卡与 ASIO 驱动、相关效果器等环境信息。有截图或日志也可以附上，提交前请检查并移除个人信息。</p></div>
