@@ -7,17 +7,24 @@
   </header>
 <main id="main"><section class="page-header wrap"><h1>怎么录音？</h1><p>按通道录下正在处理的声音，选择适合用途的文件格式。</p></section>
 <div class="wrap reading">
-<section class="guide-panel"><h2>开始与停止</h2><ol><li>先接通音频，确认要录制的通道有声音。</li><li>点击通道的 REC 图标开始录制，再次点击停止。每个通道可以独立录制。</li><li>在设置的“通道录制”中选择保存目录与格式，点击“打开目录”查看文件。目录与格式的更改在下次录制时生效。</li></ol><p>录制的是通道经过效果器和推子后的声音。要保存混音，就录制汇集声音的混音通道；要保存不同声音，就分别录制对应通道。发送量只调整送往目标的声音，不调整本通道录音。</p></section>
+<section class="guide-panel"><h2>开始与停止</h2><ol><li>先接通音频，确认要录制的通道有声音。</li><li>点击通道的 REC 图标开始录制，再次点击停止。每个通道可以独立录制。</li><li>在设置的“通道录制”中选择保存目录与格式，点击“打开目录”查看文件。目录与格式的更改在下次录制时生效。</li></ol><p>REC 保存当前通道经过效果器和推子后的声音。录制哪一种声音，取决于这个通道怎样连接。</p></section>
+<section class="guide-panel"><h2>干音、湿音、混音分别怎么录</h2>
+<div class="guide-answer"><h3>干音：保留未经效果器处理的声音</h3><p>例如麦克风的原始人声，留给后续重新调音。</p><ol><li>新建一个直接接入麦克风的通道，不添加效果器，推子保持 0dB。</li><li>在这个通道点击 REC。录音中不会包含其他通道的效果器。</li></ol></div>
+<div class="guide-answer"><h3>湿音：保存已经调好的声音</h3><p>例如经过均衡、压缩和混响的人声。</p><ol><li>在另一个人声通道接入同一麦克风，添加需要的效果器并调整推子。</li><li>在这个通道点击 REC，保存处理后的声音。</li></ol><p>要同时录干音和湿音，就分别开启两个通道的 REC。干音通道不必发送到耳机或扬声器，避免听到两份人声。</p></div>
+<div class="guide-answer"><h3>混音：把多路声音录成一份文件</h3><p>例如处理后的人声加伴奏，保存最终听到的组合。</p><ol><li>新建一个混音通道，把人声和伴奏发送到这个通道。</li><li>调整各路发送量与混音通道的推子，确认混音电平正常。</li><li>只在混音通道点击 REC，就得到合在一起的录音文件。</li></ol></div>
+<p>发送量决定进入目标通道的音量，不改变来源通道自身的录音；来源通道的效果器和推子仍会影响自身录音。</p></section>
 <section class="guide-panel"><h2>为什么这样设计</h2><p>声核专注实时通道处理与路由，录制直接跟随通道，便于随时保存人声、伴奏或混音。录完的文件可交给音频工作站做剪辑与时间轴编排。</p><p>写入磁盘和压缩编码放在音频处理之外，尽量减少对实时监听的影响。未压缩格式省去压缩编码，压缩格式节省磁盘空间；同时录制的通道越多，对磁盘与处理能力的要求也越高。</p><p>默认使用 WAV / RF64 24 位，便于后续编辑和交换。想保留内部浮点数据可选择 CAF 32 位浮点，想减小文件可选择 FLAC 或 Opus。</p></section>
 <section class="guide-panel"><h2>格式怎么选</h2>
-<div class="recording-table-wrap"><table class="recording-table"><caption>以 48kHz、立体声录制一分钟为例；体积不含少量文件头。</caption><thead><tr><th scope="col">格式</th><th scope="col">声音保存方式</th><th scope="col">约占空间</th><th scope="col">适合用途</th></tr></thead><tbody>
-<tr><th scope="row">WAV / RF64 24 位</th><td>未压缩的 24 位整数</td><td>16.5 MiB</td><td>默认选择，后续编辑与交换；较旧软件可能不支持 RF64</td></tr>
-<tr><th scope="row">CAF 32 位浮点</th><td>未压缩的内部浮点数据</td><td>22 MiB</td><td>保留内部浮点范围，长时间录制</td></tr>
-<tr><th scope="row">CAF 24 位</th><td>未压缩的 24 位整数</td><td>16.5 MiB</td><td>使用 CAF 保存整数音频</td></tr>
-<tr><th scope="row">CAF 16 位</th><td>未压缩的 16 位整数</td><td>11 MiB</td><td>减少未压缩文件体积</td></tr>
-<tr><th scope="row">FLAC 24 位</th><td>无损压缩的 24 位整数</td><td>随声音内容变化</td><td>保存整数音频且节省磁盘，需要额外编码</td></tr>
-<tr><th scope="row">Opus</th><td>有损压缩，立体声 128 kbps</td><td>0.92 MiB</td><td>长时间留存与快速分享，不适合作为无损母带</td></tr>
-</tbody></table></div><p>单声道的体积约为表中一半；Opus 单声道使用 64 kbps。未压缩格式的体积与采样率成正比，Opus 的体积主要取决于码率。声核的 Opus 录制编码为 48kHz，其他采样率会先重采样。</p><p>FLAC 的“无损”是相对于编码前的 24 位整数音频，不能保留超出整数范围的浮点数据。浮点录制也无法修复声卡输入或效果器内部已经产生的失真。</p></section>
+<div class="recording-table-wrap" tabindex="0" role="region" aria-label="录制格式比较，可左右滚动"><table class="recording-table"><caption>48kHz、立体声，每分钟体积估算。窄屏可左右滑动比较。</caption>
+<thead><tr><th scope="col">格式</th><th scope="col">WAV / RF64</th><th scope="col">CAF</th><th scope="col">CAF</th><th scope="col">CAF</th><th scope="col">FLAC</th><th scope="col">Opus</th></tr></thead><tbody>
+<tr><th scope="row">位数</th><td>24 位整数</td><td>32 位浮点</td><td>24 位整数</td><td>16 位整数</td><td>24 位整数</td><td>有损编码，不按 PCM 位数保存</td></tr>
+<tr><th scope="row">无损</th><td>无损</td><td>无损</td><td>无损</td><td>无损</td><td>无损</td><td>有损</td></tr>
+<tr><th scope="row">性能</th><td>极好</td><td>极好</td><td>极好</td><td>极好</td><td>差</td><td>差</td></tr>
+<tr><th scope="row">长时录制</th><td>适合</td><td>适合</td><td>适合</td><td>适合</td><td>适合</td><td>适合</td></tr>
+<tr><th scope="row">每分钟体积</th><td>16.5 MiB</td><td>22 MiB</td><td>16.5 MiB</td><td>11 MiB</td><td>随内容变化</td><td>0.92 MiB</td></tr>
+<tr><th scope="row">适合用途</th><td>默认选择，编辑与交换</td><td>保留内部浮点范围</td><td>用 CAF 保存整数音频</td><td>减少未压缩文件体积</td><td>无损保存，节省空间</td><td>长时间留存与快速分享</td></tr>
+</tbody></table></div>
+<p>“性能”比较的是录制编码开销：极好表示不需要压缩编码，差表示需要额外编码，实际能录多少通道仍取决于电脑与磁盘。“长时录制”按文件长度支持判断，六种格式都支持；空间有限时可选压缩格式，重视异常中断后的恢复可选 CAF。</p><p>单声道的体积约为表中一半；Opus 单声道使用 64 kbps。未压缩格式的体积与采样率成正比，Opus 的体积主要取决于码率。声核的 Opus 录制编码为 48kHz，其他采样率会先重采样。</p><p>表中“无损”指文件保存过程中不进行有损压缩。整数格式仍会把内部浮点声音转换到相应位数，不能保留超出整数范围的数据；FLAC 会无损保存转换后的 24 位整数音频。浮点录制也无法修复声卡输入或效果器内部已经产生的失真。</p></section>
 <section class="guide-panel"><h2>长时间录制与异常中断</h2><p>WAV 使用 RF64 保存长录音，避免传统 WAV 的 4 GiB 长度限制。CAF 可以保存已写入的有效音频前缀，适合需要考虑异常中断恢复的录制。</p><p>尽量通过 REC 正常停止录制，让文件完整收尾。磁盘写入失败或录制缓冲耗尽时，声核会停止录制并提示原因；保留已有文件，检查剩余空间与保存目录后再开始。</p></section>
 <section class="guide-panel"><h2>进一步了解格式</h2><p>
 <a href="https://xiph.org/flac/features.html" target="_blank" rel="noopener noreferrer">FLAC 官方格式说明</a>
