@@ -1393,3 +1393,11 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 @media (max-width:400px) {
   .download-history-link { padding-inline:12px; font-size:13px; }
 }
+
+.recording-table-wrap { overflow-x: auto; border-radius: 12px; }
+.recording-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14px; line-height: 1.6; }
+.recording-table caption { text-align: left; color: var(--muted); padding: 0 0 12px; }
+.recording-table th, .recording-table td { padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.recording-table thead, .recording-table tbody tr:nth-child(even) { background: rgba(128,128,128,.07); }
+.recording-table th:nth-child(3), .recording-table td:nth-child(3) { width: 17%; }
+@media (max-width: 480px) { .recording-table { font-size: 12px; } .recording-table th, .recording-table td { padding: 8px 5px; } }
