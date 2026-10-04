@@ -1395,7 +1395,7 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 }
 
 .recording-table-wrap { overflow-x: auto; border-radius: 12px; }
-.recording-table { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 780px; font-size: 14px; line-height: 1.6; }
+.recording-table { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 720px; font-size: 14px; line-height: 1.6; }
 .recording-table caption { text-align: left; color: var(--muted); padding: 0 0 12px; }
 .recording-table th, .recording-table td { padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
 .recording-table thead, .recording-table tbody tr:nth-child(even) { background: rgba(128,128,128,.07); }
