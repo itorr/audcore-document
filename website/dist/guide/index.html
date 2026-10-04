@@ -8,7 +8,7 @@
 <main id="main"><section class="page-header wrap"><h1>指北</h1><p>从出声到上手。</p></section>
 <div class="guide-layout wrap">
 <nav class="guide-menu" aria-label="指北目录">
-<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="#program-capture-echo">捕获声音有回音</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="#sponsor">打赏</a><a href="#agreement">协议</a>
+<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="#program-capture-echo">捕获声音有回音</a><a href="#system-output-latency">额外输出延迟</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="#sponsor">打赏</a><a href="#agreement">协议</a>
 </nav>
 <div class="guide-content reading">
 <section id="start" class="guide-panel"><h2>开始使用</h2>
@@ -55,6 +55,30 @@
     <li>想听声核处理后的声音：安装并开启“额外声音路由封装”，在通道输入中改用“添加程序路由”，把程序声音送入 AUR，再由声核输出到耳机。</li>
   </ul>
   <p>“捕获输出设备”也是复制设备正在播放的声音。不要把捕获后的声音再送回同一个设备，否则可能反复捕获，形成回授。</p>
+</section>
+<section id="system-output-latency" class="guide-panel">
+  <h2>输出到系统设备：延迟好大！</h2>
+  <p>“额外输出”适合在保留当前 ASIO 声卡的同时，把声音再送到另一台扬声器或耳机。它使用 Windows 共享播放通路，方便与其他软件一起播放，但不是优先推荐的人声耳返方式。</p>
+  <h3>为什么比声卡直接输出更慢？</h3>
+  <p>声音先经过输入、效果器和声核的处理缓冲，再排入系统设备的播放缓冲。主声卡与系统输出设备的播放节奏可能不同，需要额外预留声音，避免断续和撕裂；采样率不同时还需要转换。Windows 播放通路、设备驱动和蓝牙连接也可能增加延迟。</p>
+  <p>因此，设置页显示的主 ASIO 延迟不能代表“额外输出”的完整延迟。把主声卡缓冲调小，也不能消除系统输出这条路线的全部等待时间。</p>
+  <h3>更推荐通过 FlexASIO 选择输出设备</h3>
+  <p>如果普通扬声器、集成声卡或 USB 耳机是你的主要监听输出，优先尝试用 FlexASIO 直接连接输入与输出，减少“主 ASIO 处理后再转送系统设备”的额外缓冲。</p>
+  <ol>
+    <li>在声核设置中安装 FlexASIO，并在“音频设备”中选择 FlexASIO。</li>
+    <li>回到通道，在输入菜单选择实际麦克风，在输出菜单选择需要的扬声器或耳机，使用硬件输出路线。</li>
+    <li>确认声音正常后，关闭不再需要的“额外输出”路线，避免同一设备同时播放两份声音。</li>
+    <li>按设备支持情况调整缓冲；出现爆音或断续时适当增大。可尝试设备支持的 KS 或 WASAPI 独占方式；独占方式会影响其他软件同时使用该设备。</li>
+  </ol>
+  <p>FlexASIO 的延迟仍取决于设备、播放方式和缓冲，默认配置也不保证最低延迟。如果声卡自带稳定的厂商 ASIO 驱动，并且耳机直接接在这台声卡上，仍优先使用厂商驱动。必须保留原 ASIO 声卡、同时向另一台系统设备输出时，再使用“额外输出”。</p>
+  <p>
+    <a href="/flexasio/">FlexASIO 安装、设备选择与延迟设置详解</a>
+  </p>
+  <p>参考：
+    <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/audio/low-latency-audio" target="_blank" rel="noopener noreferrer">微软 Windows 低延迟音频说明</a>
+    ·
+    <a href="https://github.com/dechamps/FlexASIO/blob/master/FAQ.md" target="_blank" rel="noopener noreferrer">FlexASIO 官方延迟说明</a>
+  </p>
 </section>
 <section id="asio" class="guide-panel">
   <h2>不支持 ASIO 时</h2>
