@@ -1,25 +1,23 @@
 {
-  "schema": 1,
-  "latest": "v0.0.929",
-  "releases": [
-    {
-      "version": "v0.0.929",
-      "date": "2026-10-06",
-      "publishedAt": "2026-10-06T14:57:43Z",
-      "url": "/releases/v0.0.929/audcore-setup-v0.0.929.exe",
-      "size": 5542852,
-      "sha256": "0c6ebfe46f4e3d4e9de807c5d001b1c2e874d05ed801abd7270dc89bfa1ce9a2",
-      "portable": {
-        "url": "/releases/v0.0.929/audcore-portable.exe",
-        "size": 9988608,
-        "sha256": "eb95048c8d8030327511508d5b8956318f5b9da424be5254004d139d6fe23128"
-      },
-      "changes": [
-        "支持在通道空白处右键打开通道菜单，声道选项按左声道、立体声、右声道排列。",
-        "新增试音键盘自带效果器，支持单声道与立体声声音直通，按住琴键即可试音。",
-        "修复重新打开控制台时重复出现旧录音保存提示的问题。"
-      ],
-      "notes": "支持在通道空白处右键打开通道菜单，声道选项按左声道、立体声、右声道排列。；新增试音键盘自带效果器，支持单声道与立体声声音直通，按住琴键即可试音。；修复重新打开控制台时重复出现旧录音保存提示的问题。"
-    }
-  ]
+    "schema":  1,
+    "latest":  "v0.0.932",
+    "releases":  [
+                     {
+                         "version":  "v0.0.932",
+                         "date":  "2026-10-06",
+                         "publishedAt":  "2026-10-06T15:21:09Z",
+                         "url":  "/releases/v0.0.932/audcore-setup-v0.0.932.exe",
+                         "size":  5545429,
+                         "sha256":  "f7e3216c657f0784488867f7f56a1168841a8ab9f1bdcfadf378eb12454a07da",
+                         "portable":  {
+                                          "url":  "/releases/v0.0.932/audcore-portable.exe",
+                                          "size":  9987072,
+                                          "sha256":  "c6d419a21d15b58edc89c0adb04b1ce0f28311b390d0bdccb958370b82437677"
+                                      },
+                         "changes":  [
+                                         "修复试音键盘在点击和重绘时黑键被白键遮挡的问题。"
+                                     ],
+                         "notes":  "修复试音键盘在点击和重绘时黑键被白键遮挡的问题。"
+                     }
+                 ]
 }
