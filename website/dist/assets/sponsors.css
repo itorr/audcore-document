@@ -5,6 +5,7 @@
 .sponsor-form input:focus-visible { outline-offset:2px; }
 .sponsor-amounts { border:0; padding:0; margin:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
 .sponsor-amounts legend { margin-bottom:12px; }
+.sponsor-amounts .sponsor-amount-limit { grid-column:1 / -1; font-size:13px; font-weight:400; color:var(--muted); margin:0 0 2px; }
 .sponsor-amounts label { position:relative; margin:0; font-weight:500; cursor:pointer; }
 .sponsor-amounts input { position:absolute; opacity:0; width:1px; height:1px; }
 .sponsor-amounts span { display:flex; align-items:center; justify-content:center; border-radius:12px; min-height:50px; background:var(--surface); padding:10px; }
@@ -29,8 +30,8 @@
 .sponsor-history h1 { margin-bottom:24px; }
 .sponsor-pagination { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
 .sponsor-pagination .text-link { border:0; background:transparent; padding:8px; font:inherit; }
-.guide-panel .sponsor-records { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.sponsor-payment .sponsor-records { grid-template-columns:repeat(2,minmax(0,1fr)); }
 .story-sponsors .sponsor-actions { margin-top:24px; }
 @media(max-width:600px) { .sponsor-records { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media(max-width:360px) { .sponsor-records, .guide-panel .sponsor-records { grid-template-columns:minmax(0,1fr); } .sponsor-amounts { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:360px) { .sponsor-records, .sponsor-payment .sponsor-records { grid-template-columns:minmax(0,1fr); } .sponsor-amounts { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 [hidden] { display:none !important; }

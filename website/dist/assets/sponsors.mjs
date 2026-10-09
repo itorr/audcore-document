@@ -6,7 +6,7 @@ const list = document.querySelector('#sponsor-list');
 const listStatus = document.querySelector('#sponsor-list-status');
 const fullRecords = document.body.hasAttribute('data-sponsor-records');
 const money = fen => `¥${(fen/100).toFixed(2)}`;
-let events, pending, ready = false, page = 1, total = 0;
+let events, pending, page = 1, total = 0;
 const storage = {
   get(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } },
   set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch {} },
@@ -45,15 +45,17 @@ function paymentStatus(status) {
   if (status === 'paid') {
     feedback.textContent = '赞助已到账，谢谢你的支持！';
     pending = undefined; storage.set('audcore-sponsor-pending', null);
-    if (form) form.querySelector('button[type="submit"]').disabled = !ready;
+    events?.close(); events = undefined;
     document.querySelector('#sponsor-check').hidden = true;
   } else if (status === 'closed') {
     feedback.textContent = '这笔支付已关闭，可以重新发起赞助。';
     pending = undefined; storage.set('audcore-sponsor-pending', null);
+    events?.close(); events = undefined;
     document.querySelector('#sponsor-check').hidden = true;
   }
 }
 function subscribe() {
+  if (!form || !pending?.id || document.hidden) return;
   events?.close();
   const url = new URL('/v1/sponsors/events', api);
   if (pending?.id) { url.searchParams.set('order', pending.id); url.searchParams.set('token', pending.token); }
@@ -61,22 +63,29 @@ function subscribe() {
   events.onmessage = event => {
     try {
       const result = JSON.parse(event.data);
-      render(result.items, result.total);
       if (result.order) paymentStatus(result.order.status);
     } catch { listStatus.textContent = '记录暂时无法显示，请刷新重试。'; }
   };
-  events.onerror = () => { listStatus.textContent = '记录连接暂时中断，正在重连…'; };
+  events.onerror = () => { feedback.textContent = '到账通知连接暂时中断，正在重连…'; };
 }
-async function loadPage() {
+let records;
+async function loadPage(preview = false) {
   try {
-    const result = await request(`/v1/sponsors/records?page=${page}`);
-    render(result.items, result.total);
+    records ??= fetch('/data/sponsors.json').then(async response => {
+      if (!response.ok) throw new Error('记录暂时无法显示，请稍后重试');
+      const result = await response.json();
+      if (!Array.isArray(result.items) || result.total !== result.items.length) throw new Error('记录格式不正确');
+      return result;
+    }).catch(error => { records = undefined; throw error; });
+    const result = await records;
+    const limit = preview ? 6 : 30;
+    render(result.items.slice((page-1)*limit, page*limit), result.total);
   } catch (error) { listStatus.textContent = error.message; }
 }
 if (fullRecords) {
   document.querySelector('#sponsor-prev').addEventListener('click', () => { if (page > 1) { page--; loadPage(); } });
   document.querySelector('#sponsor-next').addEventListener('click', () => { if (page*30 < total) { page++; loadPage(); } });
-  document.querySelector('#sponsor-refresh').addEventListener('click', loadPage);
+  document.querySelector('#sponsor-refresh').addEventListener('click', () => { records = undefined; loadPage(); });
   loadPage();
 } else if (form) {
   const submit = form.querySelector('button[type="submit"]');
@@ -92,14 +101,11 @@ if (fullRecords) {
     count.textContent = `${[...form.elements.message.value].length} / 60 字`;
   }
   form.addEventListener('input', update); update();
-  request('/v1/sponsors/config').then(result => {
-    if (JSON.stringify(result.tiers) !== JSON.stringify([233,666,1233,2333,6666]) || result.min_fen !== 233 || result.max_fen !== 200000) throw new Error('金额配置已更新，请刷新页面');
-    ready = true; submit.disabled = false;
-    if (feedback.textContent === '正在连接支付宝赞助…') feedback.textContent = '付款后，名字和留言会公开展示；留空名字则匿名。';
-  }).catch(error => { feedback.textContent = error.message; });
+  submit.disabled = !requestService.enabled;
+  feedback.textContent = '付款后，名字和留言会公开展示；留空名字则匿名。';
   form.addEventListener('submit', async event => {
     event.preventDefault(); update();
-    if (!ready || submit.disabled || !form.reportValidity()) return;
+    if (!requestService.enabled || submit.disabled || !form.reportValidity()) return;
     const amount = form.elements.amount.value === 'custom' ? custom.value : form.elements.amount.value;
     const input = {amount, name:form.elements.name.value.trim(), message:form.elements.message.value.trim()};
     if (!pending?.request || ['amount','name','message'].some(k => pending.request[k] !== input[k])) {
@@ -118,15 +124,17 @@ if (fullRecords) {
       pending.id = result.id;
       storage.set('audcore-sponsor-pending', pending); storage.set(`audcore-sponsor-${pending.id}`, pending);
       subscribe();
-      const payForm = document.createElement('form'); payForm.method = 'POST'; payForm.action = gateway.href; payForm.target = target; payForm.hidden = true;
+      gateway.searchParams.set('charset', 'utf-8');
+      const payForm = document.createElement('form'); payForm.method = 'POST'; payForm.acceptCharset = 'UTF-8'; payForm.action = gateway.href; payForm.target = target; payForm.hidden = true;
       for (const [name, value] of Object.entries(result.payment.fields)) {
+        if (name === 'charset') continue;
         const input = document.createElement('input'); input.type = 'hidden'; input.name = name; input.value = value; payForm.append(input);
       }
       document.body.append(payForm); payForm.submit(); payForm.remove();
       feedback.textContent = '请在支付宝窗口完成付款，到账后这里会自动更新。';
       document.querySelector('#sponsor-check').hidden = false;
     } catch (error) { popup.close(); feedback.textContent = error.message; }
-    finally { submit.disabled = !ready; }
+    finally { submit.disabled = !requestService.enabled; }
   });
   async function check() {
     if (!pending?.id) return;
@@ -140,15 +148,18 @@ if (fullRecords) {
   }
   document.querySelector('#sponsor-check').addEventListener('click', check);
   const start = () => {
-    if (location.hash === '#sponsor') { if (!events) subscribe(); }
+    if (!document.hidden) {
+      if (pending?.id && !events) subscribe();
+    }
     else { events?.close(); events = undefined; }
   };
-  addEventListener('hashchange', start); start();
+  loadPage(true); start();
+  document.addEventListener('visibilitychange', start);
+  addEventListener('pageshow', event => { if (event.persisted) start(); });
   if (pending?.id) document.querySelector('#sponsor-check').hidden = false;
   if (params.has('sponsor_return') && pending?.id) {
     check();
-    history.replaceState(null, '', '/guide/#sponsor');
+    history.replaceState(null, '', '/sponsor/');
   }
-} else if (list) subscribe();
-addEventListener('pagehide', () => events?.close());
-addEventListener('pageshow', event => { if (event.persisted && !fullRecords && (!form || location.hash === '#sponsor')) subscribe(); });
+} else if (list) loadPage(true);
+addEventListener('pagehide', () => { events?.close(); events = undefined; });
