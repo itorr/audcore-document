@@ -28,6 +28,14 @@
 .sponsor-records li p { font-size:14px; line-height:1.7; margin:12px 0 0; }
 .sponsor-history { padding-top:60px; padding-bottom:80px; }
 .sponsor-history h1 { margin-bottom:24px; }
+.sponsor-table-wrap { margin:24px 0; }
+.sponsor-table { min-width:560px; }
+.sponsor-table th:first-child { width:22%; }
+.sponsor-table thead th:nth-child(2) { width:100px; }
+.sponsor-table thead th:nth-child(3) { width:110px; }
+.sponsor-table tbody td:nth-child(2) { font-variant-numeric:tabular-nums; font-weight:600; }
+.sponsor-table tbody td:nth-child(2), .sponsor-table time { white-space:nowrap; }
+.sponsor-table time { color:var(--muted); }
 .sponsor-pagination { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
 .sponsor-pagination .text-link { border:0; background:transparent; padding:8px; font:inherit; }
 .sponsor-payment .sponsor-records { grid-template-columns:repeat(2,minmax(0,1fr)); }

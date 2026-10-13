@@ -17,12 +17,21 @@ pending = storage.get(returnId ? `audcore-sponsor-${returnId}` : 'audcore-sponso
 function render(items, count) {
   total = count;
   list.replaceChildren(...items.map(item => {
+    const time = document.createElement('time'); time.dateTime = item.paid_at;
+    time.textContent = new Intl.DateTimeFormat('zh-CN', {timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date(item.paid_at));
+    if (fullRecords) {
+      const row = document.createElement('tr');
+      const name = document.createElement('th'); name.scope = 'row'; name.textContent = item.name;
+      const amount = document.createElement('td'); amount.textContent = money(item.amount_fen);
+      const date = document.createElement('td'); date.append(time);
+      const message = document.createElement('td'); message.textContent = item.message || '—';
+      row.append(name, amount, date, message);
+      return row;
+    }
     const li = document.createElement('li');
     const head = document.createElement('div'); head.className = 'sponsor-record-head';
     const name = document.createElement('strong'); name.textContent = item.name;
     const amount = document.createElement('span'); amount.textContent = money(item.amount_fen);
-    const time = document.createElement('time'); time.dateTime = item.paid_at;
-    time.textContent = new Intl.DateTimeFormat('zh-CN', {year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date(item.paid_at));
     head.append(name, amount); li.append(head, time);
     if (item.message) { const p = document.createElement('p'); p.textContent = item.message; li.append(p); }
     return li;

@@ -5,7 +5,11 @@
 <p>谢谢每一位支持声核的朋友。名字与留言由赞助者填写，留空名字则匿名展示。</p>
 <p class="sponsor-ranking-note">赞助记录随官网发布更新，付款成功后可能暂未展示。按金额与时间综合排序：金额每过 30 天折半计分，相同评分优先展示较新的支持。</p>
 <p id="sponsor-list-status" class="sponsor-list-status" role="status">正在加载赞助记录…</p>
-<ol id="sponsor-list" class="sponsor-records"></ol>
+<div class="recording-table-wrap sponsor-table-wrap" tabindex="0" role="region" aria-label="完整赞助记录，窄屏可左右滚动">
+<table class="recording-table sponsor-table" aria-label="赞助记录">
+<thead><tr><th scope="col">名字</th><th scope="col">金额</th><th scope="col">日期</th><th scope="col">留言</th></tr></thead>
+<tbody id="sponsor-list"></tbody>
+</table></div>
 <nav class="sponsor-pagination" aria-label="赞助记录翻页"><button class="pill pill-secondary" id="sponsor-prev" disabled>上一页</button><span id="sponsor-page" role="status">第 1 / 1 页</span><button class="pill pill-secondary" id="sponsor-next" disabled>下一页</button><button class="text-link" id="sponsor-refresh">刷新记录</button></nav>
 </main><footer class="site-footer wrap">
   <div class="footer-brand">
@@ -23,7 +27,7 @@
     <h2>了解声核</h2>
     <a href="/guide/">指北</a>
     <a href="/guide/#roadmap">待办</a>
-    <a href="/sponsor/">打赏</a>
+    <a href="/sponsor/">赞助</a>
     <a href="/guide/#agreement">协议</a>
     <a href="/api/">本地 API 与 SDK</a>
   </nav>
