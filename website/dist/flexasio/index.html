@@ -8,14 +8,14 @@
 <main id="main"><section class="page-header wrap"><h1>FlexASIO 使用指南</h1><p>让普通声卡和 USB 麦克风接入声核。</p></section>
 <div class="wrap reading">
 <section class="guide-panel"><h2>直接在通道选择设备</h2>
-<p>有厂商 ASIO 驱动的声卡优先使用厂商驱动。普通声卡和 USB 麦克风可以直接在通道输入输出菜单的「WASAPI」中选择设备，无需安装 FlexASIO。</p>
-<p>通道菜单中「ASIO 声卡」与「WASAPI」为并列一级项。FlexASIO 和 AUR 作为普通 ASIO 驱动出现在「ASIO 声卡」中。</p></section>
+<p>有厂商 ASIO 驱动的声卡优先使用厂商驱动。普通声卡和 USB 麦克风可以直接在设置的音频设备中选择 WASAPI，再在通道选择输入输出设备，无需安装 FlexASIO。</p>
+<p>设置的音频设备列表直接并列各张 ASIO 声卡与 WASAPI。FlexASIO 和 AUR 作为普通 ASIO 驱动出现在该列表中。</p></section>
 <section class="guide-panel"><h2>FlexASIO 独立一键安装</h2>
 <p>仅在你需要这个通用 ASIO 驱动时安装。声核已移除内置安装、卸载和专用设备配置。</p>
 <p>
 <a href="/third-party/flexasio-oneclick-1.10b.zip" download>下载 FlexASIO 1.10b 一键安装 ZIP</a>
 </p>
-<ol><li>保存工作，正常退出声核及使用此驱动的其他音频软件。</li><li>完整解压到本机可写目录，双击「一键安装.cmd」，同意 Windows 管理员授权。</li><li>等待安装结果；需要重启时先保存工作，再重启 Windows。</li><li>打开声核，在通道输入输出菜单的「ASIO 声卡」中选择 FlexASIO。通道菜单显示该驱动的声道。</li></ol>
+<ol><li>保存工作，正常退出声核及使用此驱动的其他音频软件。</li><li>完整解压到本机可写目录，双击「一键安装.cmd」，同意 Windows 管理员授权。</li><li>等待安装结果；需要重启时先保存工作，再重启 Windows。</li><li>打开声核，在设置的音频设备列表中选择 FlexASIO。通道菜单显示该驱动的声道。</li></ol>
 <p>安装资源离线内置，安装前核对文件校验值。已有安装不会被覆盖；安装结束及失败退出时恢复并核对 Windows 默认播放、录音和通信设备。FlexASIO 可从 Windows「已安装的应用」卸载。</p></section>
 <section class="guide-panel"><h2>输入输出和缓冲配置</h2>
 <p>FlexASIO 的底层设备与缓冲由用户目录的 FlexASIO.toml 配置，声核不再代写这个文件。没有配置文件时沿用 FlexASIO 默认设置；配置也会影响其他使用该驱动的软件。</p>
