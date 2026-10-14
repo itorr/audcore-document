@@ -8,7 +8,7 @@
 <main id="main"><section class="page-header wrap"><h1>指北</h1><p>从出声到上手。</p></section>
 <div class="guide-layout wrap">
 <nav class="guide-menu" aria-label="指北目录">
-<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="#program-capture-echo">捕获声音有回音</a><a href="#system-output-latency">额外输出延迟</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="/sponsor/">赞助</a><a href="#agreement">协议</a>
+<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="#program-capture-echo">捕获声音有回音</a><a href="#system-output-latency">额外输出延迟</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="/virtual-routing/">虚拟跳线</a><a href="/flexasio/">FlexASIO</a><a href="/third-party/">第三方工具</a><a href="/recording/">怎么录音？</a><a href="/api/">本地 API 与 SDK</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="/sponsor/">赞助</a><a href="#agreement">协议</a>
 </nav>
 <div class="guide-content reading">
 <section id="start" class="guide-panel"><h2>开始使用</h2>
@@ -17,6 +17,27 @@
 <h3 id="plugins">添加效果</h3><ol><li>在设置中扫描效果器。</li><li>在通道添加 VST3，调顺序和参数。</li><li>用旁通对比，按 Ctrl+S 保存。</li></ol>
 <div hidden><h3 id="import">导入效果链</h3><p>在 <a href="/gallery/">效果链</a>选择效果链，在客户端查看、下载并导入，再设置输入输出。</p></div>
 </section>
+<section id="device-guides" class="guide-panel"><h2>设备与安装说明</h2>
+<ul>
+<li>
+<a href="/virtual-routing/">虚拟跳线：W2V 与 VB-CABLE 对比、下载和旧版卸载</a>
+</li>
+<li>
+<a href="/flexasio/">FlexASIO 使用指南</a>
+</li>
+<li>
+<a href="/third-party/#aur">AUR 独立安装与普通 ASIO 使用</a>
+</li>
+<li>
+<a href="/third-party/">第三方工具原始来源与固定版本</a>
+</li>
+<li>
+<a href="/recording/">怎么录音？录制位置、格式与保存目录</a>
+</li>
+<li>
+<a href="/api/">本地 API 与 SDK 对接说明</a>
+</li>
+</ul></section>
 <section id="windows-warning" class="guide-panel"><h2>Windows 下载与运行提示</h2>
 <p>声核目前没有签名证书，安装包和单文件版都未进行系统认可的发布者签名。浏览器可能提示文件“不常下载”，运行时 Windows 可能显示“未知发布者”或“Windows 已保护你的电脑”。这是下载信誉和发布者签名检查；出现提示本身不等于文件有害，也不能据此认定文件安全。官网显示的 SHA-256 和应用内更新清单签名用于校验文件，不能替代 Windows 代码签名。</p>
 <h3>如何处理</h3><ol>
@@ -103,33 +124,30 @@
   <p>Mix 已包含声核送出的人声与伴奏，不要再重复采集同一份麦克风或伴奏。只需要人声时，改选 歌映输入 3/4。</p>
   <h3>耳返与检查</h3>
   <p>耳返继续使用声卡耳机输出，关闭直播软件对该音频输入的监听，避免双重耳返。不要将直播回放重新送回 歌映输出 1/2。播放音乐并说话，确认声核伴奏电平和直播试录都正常。</p>
-  <h3>安装支持</h3>
-  <p>虚拟声道由 GeekAudio 的第三方免费工具 WDM2VST Ultra v1.2.0 提供。</p>
-  <ol>
-    <li>打开声核「设置 → 虚拟跳线」。已安装且设备可用时会直接显示就绪。</li>
-    <li>尚未安装时，点击“安装虚拟跳线”。声核下载固定官方版本并校验文件；安装会添加第三方驱动、桥接插件及其证书，确认一次 Windows 管理员授权后自动完成。</li>
-    <li>声核会检查驱动、虚拟声道和插件。需要重启时按提示重启 Windows，再重新检测。</li>
-    <li>点击“接入当前通道”。声核沿用当前麦克风、效果器和监听连线，自动绑定伴奏、Mix 和单独人声端点；然后在播放器和直播软件中按上面的用途选择设备。</li>
-  </ol>
-  <p>声核安装的版本可在此界面点击“卸载”，也会出现在 Windows「已安装的应用」中。若此前通过作者安装器安装，则在 Windows「已安装的应用」中卸载 WDM2VST Ultra。</p>
-  <p>安装后被 Windows 拒绝加载时，会显示实际失败提示；请使用声卡回环或其他可用桥接设备。</p>
-  <a href="/third-party/">第三方来源与固定版本说明</a>
+  <h3>独立安装与旧版卸载</h3>
+  <p>声核不再内置安装或卸载 W2V。已经可用的旧 W2V 及独立安装的固定版本继续在通道输入和发送中直接选择；VB-CABLE 使用普通 Windows 音频端点。</p>
+  <p>两种方案的对比、下载安装包、原始来源、旧版如何卸载以及使用界限，统一见</p>
+  <p>
+  <a href="/virtual-routing/">虚拟跳线说明页</a>
+  </p>
+  <p>现有跳线正常工作时无需重装。需要移除时先保存预设并正常退出音频程序；升级声核不会自动卸载现有虚拟跳线。</p>
 </section>
 <section id="community" class="guide-panel"><h2>互助交流群</h2><p>QQ 群</p><p class="group-number">574062344</p><p>交流使用经验，互相解答问题。</p></section>
 
 <section id="sponsor" class="guide-panel"><h2>谢谢你的支持。</h2><p>如果声核让你的调音、监听或直播方便了一点，欢迎赞助，支持后续开发与维护。</p><p>从每一处界面调整，到设备适配和问题修复，都需要时间打磨。你的支持，让这些工作更有动力。</p><p>声核免费使用，赞助完全自愿。无论是否赞助，都感谢你使用声核、分享体验和反馈问题。</p><img class="sponsor-image" width="240" height="276" src="https://lab.magiconch.com/sponsor.png" alt="支付宝赞助收款码，扫码支持作者" referrerpolicy="no-referrer"><p class="sponsor-caption">支付宝扫码赞助 · 金额随意</p><p class="sponsor-caption"><a href="https://lab.magiconch.com/sponsor.png">打开收款原图</a></p></section>
   <section class="guide-panel roadmap" id="roadmap" aria-labelledby="roadmap-title"><h2 id="roadmap-title">待办特性</h2><p>正在推进，也在探索。</p><ul class="roadmap-list">
-      <li><span>用 Slint 重做界面，移除 WebView2</span><strong>推进中</strong></li>
+      <li><span>用 Slint 重做界面，移除 WebView2</span><strong data-status="deprecated">废弃</strong></li>
+      <li><span>原生界面</span><strong data-status="released">已上线</strong></li>
       <li><span>360° 相位</span><strong class="status-evaluating">评估中</strong></li>
-      <li><span>支持 WASAPI</span><strong>推进中</strong></li>
+      <li><span>支持 WASAPI</span><strong data-status="released">已上线</strong></li>
       <li><span>支持 macOS</span><strong>推进中</strong></li>
-      <li><span>自带基础效果器</span><strong>推进中</strong></li>
+      <li><span>自带基础效果器</span><strong data-status="released">已上线</strong></li>
       <li><span>独立预设管理页面</span><strong>推进中</strong></li>
       <li hidden><span>分享效果链</span><strong>推进中</strong></li>
-      <li><span>新建预设时按设备自动设置基础跳线</span><strong>推进中</strong></li>
-      <li><span>导入 REAPER 工程</span><strong>推进中</strong></li>
-      <li><span>多语言支持</span><strong class="status-evaluating">评估中</strong></li>
-      <li><span>通道录音</span><strong class="status-evaluating">评估中</strong></li>
+      <li><span>新建预设时按设备自动设置基础跳线</span><strong data-status="released">已上线</strong></li>
+      <li><span>导入 REAPER 工程</span><strong data-status="released">已上线</strong></li>
+      <li><span>多语言支持</span><strong data-status="released">已上线</strong></li>
+      <li><span>通道录音</span><strong data-status="released">已上线</strong></li>
     </ul><form class="request-form" id="request-form"><label for="request-text">你还需要什么功能？</label><textarea id="request-text" name="text" rows="3" maxlength="1000" required placeholder="描述你的使用场景和需求"></textarea><button class="pill" type="submit" disabled>提交需求</button><p id="request-feedback" role="status"></p></form></section>
 <section id="agreement" class="guide-panel"><h2>声核使用协议</h2><p class="agreement-meta">适用于声核 v0.0.267 抢先体验版 · 更新于 2026 年 9 月 25 日</p>
 <h3>使用声核</h3><p>声核是免费的 Windows 实时音频处理软件，目前处于早期测试阶段。声核不是开源项目。你可以使用声核处理、监听和路由自己的音频；未经授权，请勿将声核程序、界面素材或代码作为自己的产品再发布。</p>

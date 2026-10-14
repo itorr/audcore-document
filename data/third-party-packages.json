@@ -30,6 +30,22 @@
       "url": "/third-party/aur-oneclick-1.0.0.zip",
       "size": 569805,
       "sha256": "a5c0fe63e321da5e3a51ebe487a4e520700d3b417ea8704c6c209b00e96bae23"
+    },
+    {
+      "name": "WDM2VST Ultra 独立安装",
+      "version": "1.2.0-v1",
+      "url": "/third-party/wdm2vst-ultra-standalone-1.2.0-v1.zip",
+      "official_url": "https://github.com/GeekAudio/WDM2VST-Ultra/releases/tag/v1.2.0",
+      "size": 7519074,
+      "sha256": "d55e42a8eabe10dfb62267b12890c7495c2d35c48321aaa607f0d9daa39cdf74"
+    },
+    {
+      "name": "VB-CABLE 精简测试安装",
+      "version": "v8",
+      "url": "/third-party/vbcable-test-v8.zip",
+      "official_url": "https://vb-audio.com/Cable/",
+      "size": 69673,
+      "sha256": "c84123e50860d58e2148d2f098c254801775bca23a0e8681d8efd1465c2cf08e"
     }
   ]
 }

@@ -1401,3 +1401,14 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 .recording-table thead, .recording-table tbody tr:nth-child(even) { background: rgba(128,128,128,.07); }
 .recording-table th:first-child { width: 100px; }
 @media (max-width: 480px) { .recording-table { font-size: 12px; } .recording-table th, .recording-table td { padding: 8px 5px; } }
+
+/* Virtual routing comparisons use the existing reading-page typography. */
+.reading .virtual-routing-scroll { overflow-x:auto; margin:20px 0; }
+.reading .virtual-routing-table { width:100%; min-width:580px; border-collapse:collapse; text-align:left; font-size:14px; line-height:1.7; }
+.reading .virtual-routing-table caption { text-align:left; font-weight:600; margin-bottom:12px; }
+.reading .virtual-routing-table th,.reading .virtual-routing-table td { padding:12px; border:0; vertical-align:top; }
+.reading .virtual-routing-table thead,.reading .virtual-routing-table tr:nth-child(even) { background:var(--surface,#f5f5f7); }
+.reading .virtual-routing-table th:first-child { width:20%; }
+.reading .virtual-routing-table td { width:40%; color:var(--muted); }
+
+.roadmap-list strong[data-status="deprecated"] { color:#6e6e73; background:#e5e5e7; }

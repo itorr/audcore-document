@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="W2V 与 VB-CABLE 虚拟跳线对比、独立安装、旧版卸载和使用界限。"><meta name="theme-color" content="#fafbfc"><title>虚拟跳线 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/guide/" aria-label="指北"><span class="nav-full">指北</span><span class="nav-short" aria-hidden="true">指北</span></a><a href="/gallery/" aria-label="效果链" hidden><span class="nav-full">效果链</span><span class="nav-short" aria-hidden="true">效果链</span></a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
+  </header>
+<main id="main">
+<section class="page-header wrap"><h1>虚拟跳线</h1><p>接收伴奏，送出混音与人声。两种独立安装方案，按需选择。</p></section>
+<div class="wrap reading">
+<nav class="toc" aria-label="本页导航"><a href="#compare">方案对比</a><a href="#vbcable">VB-CABLE</a><a href="#w2v">W2V</a><a href="#legacy-uninstall">旧版卸载</a><a href="#limits">使用界限</a></nav>
+<section class="guide-panel" id="compare"><h2>先看是否需要</h2>
+<p>声卡自带的回环已经满足伴奏、监听和直播输出时，可以继续使用现有路由。声核不会要求安装虚拟跳线，也不会因为更新声核而卸载现有驱动。</p>
+<p>声核已移除内置 W2V 安装、卸载及证书导入。设置里的“虚拟跳线”打开本页；已经安装的旧 W2V 与独立安装的固定版本仍可识别，并在输入和发送中直接选择。</p>
+<div class="virtual-routing-scroll"><table class="virtual-routing-table"><caption>当前提供的两种方案</caption><thead><tr><th scope="col">项目</th><th scope="col">VB-CABLE</th><th scope="col">WDM2VST Ultra（W2V）</th></tr></thead><tbody>
+<tr><th scope="row">本页安装包</th><td>精简测试包第 8 版，驱动 1.0.3.5</td><td>独立安装包第 1 版，固定 v1.2.0</td></tr>
+<tr><th scope="row">跳线数量</th><td>本包创建 3 条立体声跳线</td><td>作者安装器可选 4 / 8 / 16 组；声核当前抹平前 4 组</td></tr>
+<tr><th scope="row">声核接入</th><td>普通 Windows 音频端点，直接选入输入和发送，无需 W2V 插件</td><td>识别两个原版桥接插件，将已有虚拟端点抹平为输入和发送选项</td></tr>
+<tr><th scope="row">安装过程</th><td>一次管理员授权后自动清理旧普通 VB-CABLE、安装并更名</td><td>一次管理员授权后打开作者安装向导，选择驱动与两个 64 位桥接插件</td></tr>
+<tr><th scope="row">签名情况</th><td>2014 年 Vincent Burel 旧交叉签名，Symantec 时间戳；不是已确认的微软 WHQL/Attestation 签名</td><td>第三方旧签名，时间戳依赖额外私人根；当前版本无微软 WHQL/Attestation 签名</td></tr>
+<tr><th scope="row">适用界限</th><td>已完成本机三条跳线及命名测试，不保证所有现代 Windows 都兼容</td><td>保留旧方案与原版插件接入；安装及游戏兼容取决于系统策略</td></tr>
+</tbody></table></div>
+<p>两种包都不包含声核主程序。这里没有同条件的延迟对照结果，不据此承诺某一方案一定更快或更稳定。</p></section>
+<section class="guide-panel" id="vbcable"><h2>VB-CABLE：三条普通跳线</h2>
+<p>本包使用用户提供的普通 VB-CABLE 1.0.3.5 原始签名驱动，保留 INF、SYS、CAT 内容。它不是官方 Cable A+B，也不代表三次安装普通驱动等同获得 A+B 授权。</p>
+<p>
+<a href="/third-party/vbcable-test-v8.zip" download>下载 VB-CABLE 精简测试包第 8 版</a>
+</p>
+<ol><li>正常退出正在使用旧普通 VB-CABLE 的音频程序，将 ZIP 完整解压到本机可写目录。</li><li>运行“安装并改名.cmd”，确认一次 Windows 管理员授权。安装会先卸载所有旧普通 VB-CABLE，再创建三条固定用途跳线；不清理 W2V、官方 A/B/C/D 或其他声卡。</li><li>安装后回到声核选择设备。Windows 输出列表中的“输入伴奏／输入混音／输入人声”是送入跳线的一侧；Windows 输入列表中的“输出伴奏／输出混音／输出人声”是取出声音的一侧，后缀均为 VB-CABLE。</li></ol>
+<p>伴奏：播放器选“输入伴奏”，声核从伴奏跳线取入。混音和人声：声核向相应跳线发送，直播或通话软件选“输出混音”或“输出人声”。声核按登记用途识别设备，重装后重新对应端点；不会擅自修改你的预设。</p>
+<p>安装包保存并恢复默认播放、录音和通信设备，发现应用占用时提示正常关闭。不能释放占用、端点未就绪或恢复失败时明确报错，不自动重启 Windows。安装过程中可能短暂中断声音或切换默认设备。</p>
+<p>
+<a href="https://vb-audio.com/Cable/" target="_blank" rel="noopener noreferrer">VB-Audio 官方产品与原始下载</a>
+</p><p>
+<a href="https://vb-audio.com/Services/licensing.htm" target="_blank" rel="noopener noreferrer">VB-Audio 授权与分发条件</a>
+</p></section>
+<section class="guide-panel" id="w2v"><h2>W2V：保留原版桥接接入</h2>
+<p>作者 GeekAudio。固定使用 WDM2VST Ultra v1.2.0，内部驱动版本显示 1.1.0.0；独立包包含校验过的作者原始安装器和旧声核安装的卸载工具，没有重新签名的驱动。</p>
+<p>
+<a href="/third-party/wdm2vst-ultra-standalone-1.2.0-v1.zip" download>下载 W2V v1.2.0 独立安装包第 1 版</a>
+</p>
+<ol><li>保存预设，正常退出声核和使用虚拟设备的其他软件。已经正常工作的旧安装无需为更新声核重装。</li><li>完整解压 ZIP，运行“安装W2V.cmd”，确认管理员授权后按作者向导安装。</li><li>保留内核驱动、64 位 WDM2VST Ultra 与 VST2WDM Ultra 两个桥接插件，使用作者默认插件目录。按需选择端点组数量；需要重启时按作者提示操作。</li><li>重新打开声核并扫描效果器。驱动和两个固定版本原版插件就绪后，对应端点继续在通道输入和发送中直接选择，不必把桥接插件手动插入效果链。</li></ol>
+<p>例如 Ultra PLAY 01/02（旧声核命名可能为“声核输入 1/2”）接收播放器伴奏；Ultra REC 01/02 对应混音取出，Ultra REC 03/04 对应单独人声。使用旧安装时保留实际设备名，声核不会为识别设备重新命名或覆盖硬件路由。</p>
+<p>安装器会按作者流程添加第三方签名与时间戳证书。我们核对的这一版时间戳名称为 Fake TimeStamp Responder，信任链依赖额外的 JemmyLoveJenny 私人根；在已额外信任该根的本机验证通过，不能据此保证干净系统或反作弊环境接受。</p>
+<p>
+<a href="https://github.com/GeekAudio/WDM2VST-Ultra/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer">作者 v1.2.0 原始发布与下载</a>
+</p><p>
+<a href="https://github.com/GeekAudio/WDM2VST-Ultra" target="_blank" rel="noopener noreferrer">作者项目与使用说明</a>
+</p></section>
+<section class="guide-panel" id="legacy-uninstall"><h2>旧版如何卸载</h2>
+<p>卸载是可选操作。已经正常工作的旧虚拟跳线可以继续使用；升级或卸载声核不会连带删除这些驱动。卸载前保存预设，正常退出声核及使用跳线的其他程序；旧跳线如果仍是 Windows 默认设备，先选择其他默认播放、录音和通信设备。</p>
+<h3>旧声核内置安装的 W2V</h3><p>先在 Windows“设置 → 应用 → 已安装的应用”找到“WDM2VST Ultra”，使用旧安装留下的卸载入口。若入口缺失或无法运行，下载上面的 W2V 独立包，运行“卸载旧声核安装的W2V.cmd”。</p>
+<p>此工具仅处理旧声核登记的固定 v1.2.0 安装，核对驱动与两个插件的原始内容；登记不符、驱动已被其他版本替换、同时存在作者安装登记或插件被修改时停止。不会强制结束声核，不移除共享证书。旧登记已丢失时不猜测归属，请使用原安装器或向作者求助。</p>
+<h3>作者安装器独立安装的 W2V</h3><p>使用 Windows“已安装的应用”中的作者卸载入口。本包的旧版清理工具不会代替作者安装器卸载。按卸载结果处理待重启提示。</p>
+<h3>旧 VB-CABLE 测试包</h3><p>使用对应测试包内“卸载测试设备.cmd”，只移除登记的实例。第 8 版沿用旧测试包的登记，也可卸载此前登记的测试设备；保留 ProgramData 下的设备登记，不要手动删除。未经登记的官方 VB-CABLE 使用其原始安装器移除。</p>
+</section>
+<section class="guide-panel" id="limits"><h2>使用界限</h2>
+<ul><li>这是第三方方案说明与独立安装包，不是声核自研驱动，也不提供声核内置安装或卸载。</li><li>保持原始签名不等于经过微软认证。驱动初始化失败、签名受限或反作弊拦截时，声核无法代替 Windows 放行；不会要求关闭 Secure Boot、内存完整性或整体安全防护。</li><li>VB-CABLE 的个人使用、专业使用与再分发遵循 VB-Audio 的条件；Donationware 不自动授予 OEM 整合或任意分发权限。W2V 免费使用声明也不等同任意改包授权，原作者权利保留。</li><li>保留原有麦克风、耳返与已配置的硬件路由。直播软件不要重复采集已包含在人声与混音中的同一份音频，也不要把直播回放送回同一跳线形成反馈。</li></ul>
+<p>
+<a href="/guide/#loopback">回到声核使用指北</a>
+</p></section>
+</div></main>
+
+<footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/sponsor/">赞助</a>
+    <a href="/guide/#agreement">协议</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+</body></html>
