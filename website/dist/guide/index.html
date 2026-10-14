@@ -64,36 +64,18 @@
   <h3>为什么比声卡直接输出更慢？</h3>
   <p>声音先经过输入、效果器和声核的处理缓冲，再排入系统设备的播放缓冲。主声卡与系统输出设备的播放节奏可能不同，需要额外预留声音，避免断续和撕裂；采样率不同时还需要转换。Windows 播放通路、设备驱动和蓝牙连接也可能增加延迟。</p>
   <p>因此，设置页显示的主 ASIO 延迟不能代表“额外输出”的完整延迟。把主声卡缓冲调小，也不能消除系统输出这条路线的全部等待时间。</p>
-  <h3>更推荐通过 FlexASIO 选择输出设备</h3>
-  <p>如果普通扬声器、集成声卡或 USB 耳机是你的主要监听输出，优先尝试用 FlexASIO 直接连接输入与输出，减少“主 ASIO 处理后再转送系统设备”的额外缓冲。</p>
-  <ol>
-    <li>在声核设置中安装 FlexASIO，并在“音频设备”中选择 FlexASIO。</li>
-    <li>回到通道，在输入菜单选择实际麦克风，在输出菜单选择需要的扬声器或耳机，使用硬件输出路线。</li>
-    <li>确认声音正常后，关闭不再需要的“额外输出”路线，避免同一设备同时播放两份声音。</li>
-    <li>按设备支持情况调整缓冲；出现爆音或断续时适当增大。可尝试设备支持的 KS 或 WASAPI 独占方式；独占方式会影响其他软件同时使用该设备。</li>
-  </ol>
-  <p>FlexASIO 的延迟仍取决于设备、播放方式和缓冲，默认配置也不保证最低延迟。如果声卡自带稳定的厂商 ASIO 驱动，并且耳机直接接在这台声卡上，仍优先使用厂商驱动。必须保留原 ASIO 声卡、同时向另一台系统设备输出时，再使用“额外输出”。</p>
-  <p>
-    <a href="/flexasio/">FlexASIO 安装、设备选择与延迟设置详解</a>
-  </p>
-  <p>参考：
-    <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/audio/low-latency-audio" target="_blank" rel="noopener noreferrer">微软 Windows 低延迟音频说明</a>
-    ·
-    <a href="https://github.com/dechamps/FlexASIO/blob/master/FAQ.md" target="_blank" rel="noopener noreferrer">FlexASIO 官方延迟说明</a>
-  </p>
+  <h3>直接连接主要监听设备</h3>
+  <p>耳机接在原生 ASIO 声卡上时，优先使用该声卡的直接输出。普通声卡或 USB 耳机作为主要输出时，可以在各通道的「WASAPI」输入输出菜单直接选择麦克风和耳返；这与保留主 ASIO、再向另一台系统设备发送声音是不同的通路。</p>
+  <p>WASAPI 共享便于和其他软件同时使用设备。实际延迟取决于设备、模式、缓冲和效果器，请先低音量试音。</p>
 </section>
 <section id="asio" class="guide-panel">
   <h2>不支持 ASIO 时</h2>
-  <p>有厂商 ASIO 驱动时优先使用厂商驱动。USB 麦克风、集成声卡或普通音频设备没有 ASIO 驱动时，主要推荐 FlexASIO；不兼容时再尝试 ASIO4ALL。</p>
-  <h3>优先使用 FlexASIO</h3>
-  <ol>
-    <li>打开声核设置，点击“安装 FlexASIO”，按提示完成 Windows 管理员授权。没有 ASIO 设备时也会直接提供安装引导。</li>
-    <li>在“音频设备”中选择 FlexASIO。</li>
-    <li>回到通道，在输入菜单直接选择麦克风，在硬件输出菜单选择耳返设备。</li>
-    <li>保持低音量试音，再按设备支持情况调整采样率和缓冲。</li>
-  </ol>
+  <p>有厂商 ASIO 驱动时优先使用厂商驱动。USB 麦克风、集成声卡和普通音频设备没有 ASIO 驱动时，可以直接使用原生 WASAPI，无需先安装通用 ASIO 驱动。</p>
+  <h3>在通道中选择 WASAPI 设备</h3>
+  <ol><li>打开通道输入菜单，进入一级选项「WASAPI」，选择麦克风。</li><li>打开通道输出菜单，进入一级选项「WASAPI」，选择耳机或扬声器。</li><li>低音量试音。设置页无需再选择音频后端或重复选择设备。</li></ol>
+  <p>如果仍需 FlexASIO 或 AUR，可以独立安装，再作为普通 ASIO 驱动使用。声核不再提供两者的内置安装或专用配置。</p>
   <p>
-  <a href="/flexasio/">FlexASIO 安装、设备选择与延迟设置详解</a>
+  <a href="/third-party/">FlexASIO 与 AUR 一键安装下载</a>
   </p>
   <h3>备选：ASIO4ALL</h3>
   <p>FlexASIO 无法稳定连接你的设备时，可以尝试 ASIO4ALL。安装后在声核选择 ASIO4ALL v2，在其控制面板启用需要的输入输出，再回到通道选择对应声道。</p>

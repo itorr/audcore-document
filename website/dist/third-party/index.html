@@ -75,12 +75,15 @@
 <a href="https://github.com/GeekAudio/WDM2VST-Ultra/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer">固定版本驱动说明</a>
 </p>
 </section>
-<section class="guide-panel"><h2>FlexASIO 1.10b</h2><p>作者 Etienne Dechamps，第三方通用 ASIO 驱动。用于接入没有原生 ASIO 驱动的普通声卡和 USB 麦克风。声核官网保存固定官方安装包，客户端安装前校验 SHA-256；保留原始授权与发行内容。</p><p>
-<a href="/flexasio/">声核中的 FlexASIO 使用指南</a>
-·
-<a href="/third-party/flexasio-1.10b.exe">下载固定官方版本</a>
-·
-<a href="https://github.com/dechamps/FlexASIO/releases/tag/flexasio-1.10b" target="_blank" rel="noopener noreferrer">官方发行页</a>
+<section class="guide-panel"><h2>FlexASIO 1.10b 独立安装</h2><p>第三方通用 ASIO 驱动，作者 Etienne Dechamps。声核保留普通 ASIO 支持，已移除内置安装及专用配置；普通声卡和 USB 麦克风优先使用原生 WASAPI。</p><p>
+<a href="/third-party/flexasio-oneclick-1.10b.zip" download>下载 FlexASIO 一键安装 ZIP</a>
+</p><p>
+<a href="/flexasio/">安装与普通 ASIO 使用说明</a>
+</p></section>
+<section class="guide-panel"><h2>AUR 1.0.0 独立安装</h2><p>Audio Ultra Router 作为普通虚拟 ASIO 驱动使用。声核不再自动包装实体声卡或管理 AUR 的程序路由；底层声卡和路由由 AUR 驱动配置管理。</p><p>
+<a href="/third-party/aur-oneclick-1.0.0.zip" download>下载 AUR 一键安装 ZIP</a>
+</p><ol><li>正常退出声核及使用此驱动的其他音频软件。</li><li>完整解压到本机可写目录，双击「一键安装.cmd」，确认一次管理员授权。</li><li>安装成功后在通道输入输出菜单的「ASIO 声卡」中选择已安装的 AUR 驱动，通过「打开驱动配置」选择底层 ASIO 声卡和所需路由。</li></ol><p>安装资源离线内置并逐文件校验，不覆盖已有驱动安装或配置。需要移除本包的固定版本时使用「卸载AUR.cmd」。安装及卸载结束、失败退出时恢复并校验系统默认声音设备；需要重启时按提示操作。</p><p>
+<a href="https://github.com/GeekAudio/Audio-Ultra-Router" target="_blank" rel="noopener noreferrer">作者项目</a>
 </p></section></div></main>
 <footer class="site-footer wrap">
   <div class="footer-brand">

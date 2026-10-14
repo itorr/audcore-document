@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="没有 ASIO 驱动时，在声核安装 FlexASIO、选择 USB 麦克风和耳返，并调整缓冲与采样率。"><meta name="theme-color" content="#fafbfc"><title>FlexASIO 使用指南 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="FlexASIO 独立一键安装，以及在声核中作为普通 ASIO 驱动使用。"><meta name="theme-color" content="#fafbfc"><title>FlexASIO 使用指南 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="site-header wrap">
     <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
@@ -7,49 +7,26 @@
   </header>
 <main id="main"><section class="page-header wrap"><h1>FlexASIO 使用指南</h1><p>让普通声卡和 USB 麦克风接入声核。</p></section>
 <div class="wrap reading">
-<section class="guide-panel"><h2>什么时候用 FlexASIO</h2>
-<p>声卡有厂商提供的 ASIO 驱动时，优先使用厂商驱动。没有 ASIO 驱动的 USB 麦克风、集成声卡和普通音频设备，可以先尝试 FlexASIO；它不适用时，再尝试 ASIO4ALL。</p>
-<p>FlexASIO 是第三方通用 ASIO 驱动。声核使用其原始官方发行版，并提供安装、设备选择及音频格式调整。</p></section>
-<section class="guide-panel"><h2>在声核中安装</h2>
-<ol><li>打开设置，点击“安装 FlexASIO”。没有 ASIO 设备时，启动引导也会提供这个按钮。</li>
-<li>确认 Windows 管理员授权，等待全局安装进度完成。</li>
-<li>在设置的“音频设备”中选择 FlexASIO。安装引导完成后会自动选中。</li></ol>
-<p>安装后同一个按钮显示“卸载 FlexASIO”。此前通过其他程序安装的版本，请在 Windows“已安装的应用”中管理。</p>
-<p>声核官网下载入口保存固定的官方 FlexASIO 1.10b 安装包，安装前校验 SHA-256；文件与官方发行版一致。</p>
+<section class="guide-panel"><h2>直接在通道选择设备</h2>
+<p>有厂商 ASIO 驱动的声卡优先使用厂商驱动。普通声卡和 USB 麦克风可以直接在通道输入输出菜单的「WASAPI」中选择设备，无需安装 FlexASIO。</p>
+<p>通道菜单中「ASIO 声卡」与「WASAPI」为并列一级项。FlexASIO 和 AUR 作为普通 ASIO 驱动出现在「ASIO 声卡」中。</p></section>
+<section class="guide-panel"><h2>FlexASIO 独立一键安装</h2>
+<p>仅在你需要这个通用 ASIO 驱动时安装。声核已移除内置安装、卸载和专用设备配置。</p>
 <p>
-<a href="/third-party/flexasio-1.10b.exe">下载 FlexASIO 1.10b</a>
-·
-<a href="https://github.com/dechamps/FlexASIO/releases/tag/flexasio-1.10b" target="_blank" rel="noopener noreferrer">官方发行说明</a>
-</p></section>
-<section class="guide-panel"><h2>直接选择麦克风和耳返</h2>
-<p>安装不会替你更改 Windows 默认播放、录制或通信设备；需要调整时，由你明确设置。</p>
-<ol><li>回到通道，点击通道顶部的输入菜单，选择实际麦克风名称。</li>
-<li>点击已有硬件输出名称，或通过“添加路由”选择硬件输出，选择耳机或扬声器设备。</li>
-<li>首次配置时选齐输入与输出后才会连接。麦克风输入自动采用 L 左声道模式。</li>
-<li>调低监听音量后说话，确认输入电平和耳返正常，再逐个启用效果器。</li></ol>
-<p>选择 FlexASIO 后，通道菜单直接显示实际设备名称。设置页仍只选择 ASIO 驱动，不需要另开一个设备设置界面。</p>
-<p>同一个 FlexASIO 实例使用一台输入设备和一台输出设备。更换实际输入或输出，会影响所有使用这个实例的通道；它不代表每条通道都能单独连接不同的 USB 麦克风。</p></section>
-<section class="guide-panel"><h2>采样率、缓冲与监听延迟</h2>
-<p>可先用设备支持的 48kHz 和 256 帧稳定运行，再尝试 128 或 64 帧。出现爆音、欠载或设备打不开时，增大缓冲；声核会在格式修改失败时恢复原配置。</p>
-<p>较小的缓冲有助于降低部分处理等待时间，实际监听还包含输入设备、输出设备和效果器的延迟。界面显示的驱动延迟不是物理往返测量，也不能保证 USB 麦克风达到同样的数值。</p>
-<p>测试耳返时先旁通效果器。只保留一条监听路径，关闭直播软件对同一声音的再次监听，避免听到重复声音。</p></section>
-<section class="guide-panel"><h2>设备不出现或连接失败</h2>
-<ul><li>确认设备已插好，并在 Windows 声音设置中启用；重新插拔后声核会更新设备选项。</li>
-<li>关闭可能占用麦克风或耳返的其他软件，再用支持的采样率和较大的缓冲重试。</li>
-<li>已有其他软件的 FlexASIO 配置时，声核会提示确认备份后再修改；这个配置也会影响其他使用 FlexASIO 的软件。</li>
-<li>仍不兼容时，再尝试 ASIO4ALL，或使用设备厂商的 ASIO 驱动。</li></ul>
-<p>“虚拟跳线”用于接收伴奏、把混音或人声送给其他软件；FlexASIO 用于连接实际麦克风和耳返。两者用途不同。</p>
+<a href="/third-party/flexasio-oneclick-1.10b.zip" download>下载 FlexASIO 1.10b 一键安装 ZIP</a>
+</p>
+<ol><li>保存工作，正常退出声核及使用此驱动的其他音频软件。</li><li>完整解压到本机可写目录，双击「一键安装.cmd」，同意 Windows 管理员授权。</li><li>等待安装结果；需要重启时先保存工作，再重启 Windows。</li><li>打开声核，在通道输入输出菜单的「ASIO 声卡」中选择 FlexASIO。通道菜单显示该驱动的声道。</li></ol>
+<p>安装资源离线内置，安装前核对文件校验值。已有安装不会被覆盖；安装结束及失败退出时恢复并核对 Windows 默认播放、录音和通信设备。FlexASIO 可从 Windows「已安装的应用」卸载。</p></section>
+<section class="guide-panel"><h2>输入输出和缓冲配置</h2>
+<p>FlexASIO 的底层设备与缓冲由用户目录的 FlexASIO.toml 配置，声核不再代写这个文件。没有配置文件时沿用 FlexASIO 默认设置；配置也会影响其他使用该驱动的软件。</p>
 <p>
-<a href="/guide/#loopback">虚拟跳线与直播软件设置</a>
-·
-<a href="https://github.com/dechamps/FlexASIO/blob/master/FAQ.md" target="_blank" rel="noopener noreferrer">FlexASIO 官方常见问题</a>
-</p></section>
-<section class="guide-panel"><h2>来源</h2><p>FlexASIO 作者为 Etienne Dechamps。声核镜像保留原始安装包，未修改其驱动与授权文件。</p><p>
+<a href="https://github.com/dechamps/FlexASIO/blob/master/CONFIGURATION.md" target="_blank" rel="noopener noreferrer">官方配置说明</a>
+</p>
+<p>旧预设中的独立输入输出会迁到原生捕获和系统输出；无法准确匹配的端点保留为不可用，请重新选择。主 ASIO 驱动和通道索引保留。新通路的延迟可能不同，请先低音量试音。</p></section>
+<section class="guide-panel"><h2>来源</h2><p>FlexASIO 作者为 Etienne Dechamps。独立安装包保留原始官方安装器。</p><p>
 <a href="https://github.com/dechamps/FlexASIO" target="_blank" rel="noopener noreferrer">官方项目</a>
 ·
-<a href="/third-party/">第三方工具与固定版本</a>
-·
-<a href="/guide/#asio">返回“不支持 ASIO 时”</a>
+<a href="/third-party/">第三方工具与 AUR 独立安装</a>
 </p></section></div></main>
 <footer class="site-footer wrap">
   <div class="footer-brand">
