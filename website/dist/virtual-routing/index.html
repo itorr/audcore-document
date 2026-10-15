@@ -1,144 +1,87 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="W2V 与 VB-CABLE 虚拟跳线对比、独立安装、旧版卸载和使用界限。"><meta name="theme-color" content="#fafbfc"><title>虚拟跳线 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="W2V 与 VB-CABLE 虚拟跳线下载、安装、卸载及常见问题。"><meta name="theme-color" content="#fafbfc"><title>虚拟跳线 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="site-header wrap">
     <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
     <nav aria-label="主导航"><a href="/#features">功能</a><a href="/guide/" aria-label="指北"><span class="nav-full">指北</span><span class="nav-short" aria-hidden="true">指北</span></a><a href="/gallery/" aria-label="效果链" hidden><span class="nav-full">效果链</span><span class="nav-short" aria-hidden="true">效果链</span></a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
   </header>
 <main id="main">
-<section class="page-header wrap"><h1>虚拟跳线</h1><p>接收伴奏，送出混音与人声。两种独立安装方案，按需选择。</p></section>
+<section class="page-header wrap"><h1>虚拟跳线</h1><p>把播放器的伴奏送进声核，再把混音或人声送给直播、通话软件。</p></section>
 <div class="wrap reading">
-<nav class="toc" aria-label="本页导航"><a href="#compare">方案对比</a><a href="#vbcable">VB-CABLE</a><a href="#w2v">W2V</a><a href="#legacy-uninstall">旧版卸载</a><a href="#certificates">证书与安全提示</a><a href="#troubleshooting">常见报错</a><a href="#limits">使用界限</a></nav>
-<section class="guide-panel" id="compare"><h2>先看是否需要</h2>
-<p>声卡自带的回环已经满足伴奏、监听和直播输出时，可以继续使用现有路由。声核不会要求安装虚拟跳线，也不会因为更新声核而卸载现有驱动。</p>
-<p>声核已移除内置 W2V 安装、卸载及证书导入。设置里的“虚拟跳线”打开本页；已经安装的旧 W2V 与独立安装的固定版本仍可识别，并在输入和发送中直接选择。</p>
-<div class="virtual-routing-scroll"><table class="virtual-routing-table"><caption>当前提供的两种方案</caption><thead><tr><th scope="col">项目</th><th scope="col">VB-CABLE</th><th scope="col">WDM2VST Ultra（W2V）</th></tr></thead><tbody>
-<tr><th scope="row">本页安装包</th><td>精简测试包第 11 版，驱动 1.0.3.5</td><td>独立安装包第 1 版，固定 v1.2.0</td></tr>
-<tr><th scope="row">跳线数量</th><td>本包创建 3 条立体声跳线</td><td>作者安装器可选 4 / 8 / 16 组；声核当前抹平前 4 组</td></tr>
-<tr><th scope="row">声核接入</th><td>普通 Windows 音频端点，直接选入输入和发送，无需 W2V 插件</td><td>识别两个原版桥接插件，将已有虚拟端点抹平为输入和发送选项</td></tr>
-<tr><th scope="row">安装过程</th><td>一次管理员授权后自动清理旧普通 VB-CABLE、安装并更名</td><td>一次管理员授权后打开作者安装向导，选择驱动与两个 64 位桥接插件</td></tr>
-<tr><th scope="row">签名情况</th><td>2014 年 Vincent Burel 旧交叉签名，Symantec 时间戳；不是已确认的微软 WHQL/Attestation 签名</td><td>第三方旧签名，时间戳依赖额外私人根；当前版本无微软 WHQL/Attestation 签名</td></tr>
-<tr><th scope="row">适用界限</th><td>已在 Win10、Win11 完成重装和三线传输隔离验证，兼容性仍以本机策略与实测为准</td><td>保留旧方案与原版插件接入；安装及游戏兼容取决于系统策略</td></tr>
-</tbody></table></div>
-<p>版本说明：官方 Pack45 同时保留旧系统驱动与 Win10 新驱动。本页三线测试包选用已通过多实例验证的 1.0.3.5；不能只按压缩包名或“最新版”判断三条线是否可同时工作。具体见下方代码 10 的说明。</p>
-<p>两种包都不包含声核主程序。这里没有同条件的延迟对照结果，不据此承诺某一方案一定更快或更稳定。</p></section>
-<section class="guide-panel" id="vbcable"><h2>VB-CABLE：三条普通跳线</h2>
-<p>第 11 版采用官方 Pack45 内保留的普通 VB-CABLE 1.0.3.5 原始签名驱动，保留 INF、SYS、CAT 内容。它不是官方 Cable A+B，也不代表三次安装普通驱动等同获得 A+B 授权。</p>
-<p>
-<a href="/third-party/vbcable-test-v11.zip" download>下载 VB-CABLE 精简测试包第 11 版</a>
+<nav class="toc" aria-label="本页导航"><a href="#compare">怎么选</a><a href="#vbcable">VB-CABLE</a><a href="#w2v">W2V</a><a href="#legacy-uninstall">卸载</a><a href="#certificates">证书提示</a><a href="#troubleshooting">常见问题</a></nav>
+<section class="guide-panel" id="compare"><h2>怎么选</h2>
+<p>声卡自带回环已经够用，就不用装。需要虚拟跳线时，两种选一种：</p>
+<ul><li><strong>VB-CABLE</strong>：三条跳线，分别用于伴奏、混音和人声；一键安装，在声核中直接选择。</li><li><strong>W2V</strong>：按作者向导安装；声核识别原版桥接插件后，在输入和发送中直接选择。</li></ul>
+<p>已有跳线能正常使用，无需重装。两个安装包都不包含声核主程序。</p></section>
+<section class="guide-panel" id="vbcable"><h2>VB-CABLE</h2><p>精简安装包第 11 版 · 驱动 1.0.3.5 · 三条立体声跳线</p>
+<p class="virtual-routing-download">
+<a class="pill" href="https://pan.quark.cn/s/f0d63791b963" target="_blank" rel="noopener noreferrer">夸克下载 VB-CABLE</a>
 </p>
-<ol><li>正常退出正在使用旧普通 VB-CABLE 的音频程序，将 ZIP 完整解压到本机可写目录。</li><li>运行“安装并改名.cmd”，确认一次 Windows 管理员授权。安装会先卸载所有旧普通 VB-CABLE，再创建三条固定用途跳线；不清理 W2V、官方 A/B/C/D 或其他声卡。</li><li>安装后回到声核选择设备。两侧名称统一为“跳线伴奏／跳线混音／跳线人声”，后缀均为 VB-CABLE。Windows 输出列表是送入跳线的一侧，Windows 输入列表是取出声音的一侧。</li></ol>
-<p>伴奏：播放器输出选“跳线伴奏”，声核输入也选“跳线伴奏”。混音和人声：声核向对应跳线发送，直播或通话软件输入选“跳线混音”或“跳线人声”。声核按登记用途识别设备，重装后重新对应端点；不会擅自修改你的预设。</p>
-<p>安装包保存并恢复默认播放、录音和通信设备，发现应用占用时提示正常关闭。不能释放占用、端点未就绪或恢复失败时明确报错，不自动重启 Windows。安装过程中可能短暂中断声音或切换默认设备。</p>
 <p>
-<a href="https://vb-audio.com/Cable/" target="_blank" rel="noopener noreferrer">VB-Audio 官方产品与原始下载</a>
-</p><p>
-<a href="https://vb-audio.com/Services/licensing.htm" target="_blank" rel="noopener noreferrer">VB-Audio 授权与分发条件</a>
-</p></section>
-<section class="guide-panel" id="w2v"><h2>W2V：保留原版桥接接入</h2>
-<p>作者 GeekAudio。固定使用 WDM2VST Ultra v1.2.0，内部驱动版本显示 1.1.0.0；独立包包含校验过的作者原始安装器和旧声核安装的卸载工具，没有重新签名的驱动。</p>
-<p>
-<a href="/third-party/wdm2vst-ultra-standalone-1.2.0-v1.zip" download>下载 W2V v1.2.0 独立安装包第 1 版</a>
+<a href="/third-party/vbcable-test-v11.zip" download>备用：直接下载 ZIP</a>
 </p>
-<ol><li>保存预设，正常退出声核和使用虚拟设备的其他软件。已经正常工作的旧安装无需为更新声核重装。</li><li>完整解压 ZIP，运行“安装W2V.cmd”，确认管理员授权后按作者向导安装。</li><li>保留内核驱动、64 位 WDM2VST Ultra 与 VST2WDM Ultra 两个桥接插件，使用作者默认插件目录。按需选择端点组数量；需要重启时按作者提示操作。</li><li>重新打开声核并扫描效果器。驱动和两个固定版本原版插件就绪后，对应端点继续在通道输入和发送中直接选择，不必把桥接插件手动插入效果链。</li></ol>
-<p>例如 Ultra PLAY 01/02（旧声核命名可能为“声核输入 1/2”）接收播放器伴奏；Ultra REC 01/02 对应混音取出，Ultra REC 03/04 对应单独人声。Windows 保留官方实际设备名；声核内将对应设备简写为 PLAY 1/2、REC 1/2 等，旧“声核输入／输出”名称也按同一格式显示，不重新命名设备或覆盖硬件路由。</p>
-<p>安装器会按作者流程添加第三方签名与时间戳证书。我们核对的这一版时间戳名称为 Fake TimeStamp Responder，信任链依赖额外的 JemmyLoveJenny 私人根；在已额外信任该根的本机验证通过，不能据此保证干净系统或反作弊环境接受。</p>
+<ol><li>退出正在使用跳线的音频软件，完整解压 ZIP。</li><li>运行<strong>安装并改名.cmd</strong>，确认管理员授权，等待完成。</li><li>回到声核，按用途选择<strong>跳线伴奏</strong>、<strong>跳线混音</strong>或<strong>跳线人声</strong>。</li></ol>
+<p>伴奏：播放器输出和声核输入都选<strong>跳线伴奏</strong>。直播或通话：声核发送与对方软件输入都选<strong>跳线混音</strong>或<strong>跳线人声</strong>。</p>
+<p>安装会替换旧普通 VB-CABLE，保留默认设备用途；不会删除 W2V、官方 A/B/C/D 或其他声卡。</p></section>
+<section class="guide-panel" id="w2v"><h2>W2V</h2><p>WDM2VST Ultra v1.2.0 · 独立安装包第 1 版</p>
+<p class="virtual-routing-download">
+<a class="pill" href="https://pan.quark.cn/s/f0d63791b963" target="_blank" rel="noopener noreferrer">夸克下载 W2V</a>
+</p>
 <p>
-<a href="https://github.com/GeekAudio/WDM2VST-Ultra/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer">作者 v1.2.0 原始发布与下载</a>
-</p><p>
-<a href="https://github.com/GeekAudio/WDM2VST-Ultra" target="_blank" rel="noopener noreferrer">作者项目与使用说明</a>
-</p></section>
-<section class="guide-panel" id="legacy-uninstall"><h2>旧版如何卸载</h2>
-<p>卸载是可选操作。已经正常工作的旧虚拟跳线可以继续使用；升级或卸载声核不会连带删除这些驱动。卸载前保存预设，正常退出声核及使用跳线的其他程序；旧跳线如果仍是 Windows 默认设备，先选择其他默认播放、录音和通信设备。</p>
-<h3>旧声核内置安装的 W2V</h3><p>先在 Windows“设置 → 应用 → 已安装的应用”找到“WDM2VST Ultra”，使用旧安装留下的卸载入口。若入口缺失或无法运行，下载上面的 W2V 独立包，运行“卸载旧声核安装的W2V.cmd”。</p>
-<p>此工具仅处理旧声核登记的固定 v1.2.0 安装，核对驱动与两个插件的原始内容；登记不符、驱动已被其他版本替换、同时存在作者安装登记或插件被修改时停止。不会强制结束声核，不移除共享证书。旧登记已丢失时不猜测归属，请使用原安装器或向作者求助。</p>
-<h3>作者安装器独立安装的 W2V</h3><p>使用 Windows“已安装的应用”中的作者卸载入口。本包的旧版清理工具不会代替作者安装器卸载。按卸载结果处理待重启提示。</p>
-<h3>旧 VB-CABLE 测试包</h3><p>使用对应测试包内“卸载测试设备.cmd”，只移除登记的实例。第 11 版沿用旧测试包的登记，也可卸载此前登记的测试设备；保留 ProgramData 下的设备登记，不要手动删除。未经登记的官方 VB-CABLE 使用其原始安装器移除。</p>
-</section>
-<section class="guide-panel" id="certificates"><h2>证书与安全提示</h2>
-<p>排查说明第 1 版，更新于 2026-10-15。先分清提示来自浏览器、安装程序还是 Windows 驱动加载。下载信誉提示、证书链失败和设备错误码是不同问题，处理方法也不同。</p>
-<h3 id="download-warning">“不常下载”“Windows 已保护你的电脑”“未知发布者”</h3>
-<p><strong>原因：</strong>这类提示通常与下载信誉或安装外壳的发布者签名有关，不能据此判断内部驱动已经通过或未通过签名检查。</p>
-<p><strong>处理：</strong>先确认从本页或原作者页面下载，完整解压，并核对包内文件与发布者。只有确认来源且愿意运行时，才使用该文件提示中可用的继续入口；如果提示的是已知恶意软件、系统管理员禁止或没有继续入口，停止并联系作者或管理员，不关闭全局防护。驱动能否工作还要检查设备状态和实际声音。</p>
-<h3 id="certificate-unavailable">安装提示“证书不可用”“证书链无法建立”</h3>
-<p><strong>原因：</strong>这句话本身不足以确定原因。可能是证书文件缺失、系统日期不正确、证书链缺少中间证书或可信根，也可能是联网验证失败。需要结合完整错误文字及错误码判断。</p>
-<ol><li>检查 Windows 日期、时区并校时，正常联网后完成 Windows 更新。</li><li>重新下载完整原包，解压到本机可写目录，不在 ZIP 中直接运行，也不把不同版本的脚本、证书和驱动混在一起。</li><li>使用包内管理员安装入口；若提示找不到证书文件，检查解压是否完整以及安全软件是否拦截文件，再从原始来源获取。</li><li>仍失败时，按下面的具体错误码处理。系统时间、更新和联网都正常后，重复安装不会自动解决一个不受信任的私人根或被系统拒绝的旧签名。</li></ol>
-<h3 id="certificate-codes">常见证书错误码</h3>
-<ul><li><code>0x800B0109</code>：证书链终止于不受信任的根。<code>0x800B010A</code>：无法建立到可信根的完整证书链。先检查原包、系统更新和链信息；不要从不明网站搜一个同名 CER 导入。</li><li><code>0x800B0101</code>：证书不在有效期或验证时间不正确。先校时；历史签名如果带有效、可信的时间戳，并不只因发布者证书今天已过期而自动失效，需要核对整个签名和时间戳链。</li><li><code>0x80092013</code>：吊销服务器离线或无法完成联网吊销检查。检查正常网络、代理和系统更新后重试；不要通过关闭吊销检查掩盖问题。</li><li>明确提示“证书已吊销”时，停止使用该文件并向原作者索取可验证的替代包，不把它当作普通断网错误处理。</li></ul>
-<h3 id="w2v-certificate">W2V 为什么要求添加额外证书？</h3>
-<p><strong>原因：</strong>本页固定 v1.2.0 的已核对文件依赖额外第三方时间戳信任链，名称包含 Fake TimeStamp Responder 与 JemmyLoveJenny 私人根。这不是微软 WHQL／Attestation 签名；一台已经信任该根的电脑验签通过，不代表另一台干净系统也能加载。</p>
-<p><strong>处理：</strong>需要使用此方案时，先了解作者原始安装器会添加哪些证书及其信任范围，再决定是否接受；不接受就取消安装，使用可被当前系统接受的其他方案或声卡硬件回环。证书导入成功后如果仍报签名错误，也不能靠反复导入或关闭安全策略解决。声核不代为导入共享证书；卸载声核或跳线也不应随意删除其他软件可能共用的根证书。</p>
-<h3 id="code-52">设备代码 52：“Windows 无法验证此设备所需驱动程序的数字签名”</h3>
-<p><strong>原因：</strong>Windows 拒绝当前驱动签名，不等于单纯缺少管理员权限。可能涉及文件损坏、信任链或当前内核签名策略；安装器能启动、文件属性显示有签名，都不能代替内核加载检查。</p>
-<p><strong>处理：</strong>确认文件来自原始来源且未混包，获取适合当前 Windows 的正式签名驱动。旧测试包不能在所有系统通过时，可考虑作者面向当前系统的单线驱动、按授权提供的官方多线方案或硬件回环；不要把 Win10 3.3.1.7 普通单线驱动重复安装三次当作三线替代。保留 Secure Boot、内存完整性及驱动签名检查，仍被拒绝时联系作者或系统管理员。</p>
-<p>安装记录里的单条证书警告不一定就是最终失败原因；以安装最终结果、设备状态和实际信号测试为准。</p>
-</section>
-<section class="guide-panel" id="troubleshooting"><h2>安装、卸载和接入报错</h2>
-<h3 id="access-denied">“拒绝访问”“Rename 失败”“0x80070005 / E_ACCESSDENIED”</h3>
-<p><strong>原因：</strong>可能是没有取得管理员权限，也可能是 Windows 拒绝写入音频端点属性、设备状态变化或系统策略限制。早期测试包曾在驱动装完后的更名步骤失败；不能只看到这条消息就判断驱动没装上。</p>
-<p><strong>处理：</strong>使用本页完整测试包的“安装并改名.cmd”并确认管理员授权。已经取得权限仍失败时，先查看设备是否已安装、名称和端点是否完整，保留“测试结果.txt”中的失败步骤；不要手动抢占系统注册表权限或连续叠加安装。来源和版本不一致时，先按旧版卸载说明处理，再用同一完整包重装。</p>
-<h3 id="device-code-10">代码 10：“该设备无法启动”；“设备忙 / STATUS_DEVICE_BUSY”</h3>
-<p><strong>原因：</strong>代码 10 是启动失败的统称，不能都归为缺证书。已在 Win10 复现：将 Pack45 的 Win10 3.3.1.7 普通驱动重复创建为三条线时，只有第一条能启动，另外两条设备忙（问题状态 <code>0x80000011</code>）；停用第一条后另一条可启动，说明是该版本的多实例兼容问题。</p>
-<p><strong>处理：</strong>本页三线方案使用第 11 版及原始签名 1.0.3.5，已验证三条同时传输且互不串音。不要使用第 10 版的 3.3.1.7 三实例方案，也不要把反复重启当作该问题的修复。其他设备或版本报代码 10 时，需要另查具体驱动、占用和问题状态，不能直接套用这个结论。</p>
-<h3 id="busy-apps">“程序正在使用 VB-CABLE”“无法释放占用”</h3>
-<p><strong>原因：</strong>播放器、直播软件、声核、系统声音设置或内核音频流仍在使用设备；关掉可见窗口不一定等于程序退出。</p>
-<p><strong>处理：</strong>保存预设并正常退出声核，在播放器与直播软件中停止使用跳线，再退出程序并关闭声音设置。按照包内占用提示释放后重试；网易云退出后仍驻留占用时，可确认播放已停止后结束其残留进程。不要强制结束声核、Windows Audio 或 audiodg。没有列出应用会话，也不代表内核已经释放。</p>
-<h3 id="restart-needed">“Removed on reboot”“需要重启”“设备仍存在”</h3>
-<p><strong>原因：</strong>旧设备注册可能已经移除，但其内核驱动或端点仍待释放。设备工具返回“restart 成功”或“Drivers installed successfully”不等于全部实例已经工作。</p>
-<p><strong>处理：</strong>先按占用项释放程序，再检查每个实例的设备状态、六个活动端点及实际声音。若安装包已完成核对且新三条线可正常使用，待重启提示可能只针对旧设备清理；可保存工作后择时重启。若设备仍不可用、卸载被阻止或包明确要求重启，保存工作后重启一次，再检查结果；不要删除系统驱动文件、清除待重启标记或反复叠装。</p>
-<h3 id="missing-endpoints">“端点未完整就绪”“设备缺失”“实际驱动版本不匹配”</h3>
-<p><strong>原因：</strong>驱动未能启动、卸载尚未完成、包内版本混用或绑定了其他版本。历史残留端点也可能让列表看起来已有设备。</p>
-<p><strong>处理：</strong>查看设备管理器中对应媒体设备的“设备状态”和驱动版本，再确认 Windows 播放、录音两侧各有三条活动跳线。按具体错误码处理，用同一完整第 11 版包重装；如果提示仍需重启，按上一项操作。第 11 版会核对每个实例实际绑定的版本，不靠端点名称判断成功。随后用播放器送入伴奏，并在接收端观察音量，确认三条线各走各的声音。</p>
-<h3 id="name-conflict">设备名前出现“2 -”；同名设备重复；声核列表重复</h3>
-<p><strong>原因：</strong>Windows 可能为重名适配器增加编号；重复安装、旧端点残留也会造成多份设备。早期声核还曾把同一个 VB 端点同时按普通 WASAPI 设备和托管跳线列出。</p>
-<p><strong>处理：</strong>先看 Windows 是否也重复：Windows 正常、只有声核重复时，更新已修复去重的声核版本；Windows 也有重名或重复时，先正常退出占用程序，再使用本页包清理重装。底层适配器分别叫“VB-CABLE 伴奏／混音／人声”，端点后缀统一 VB-CABLE，这是区分三条线的命名，不代表驱动装成了三个不同版本。</p>
-<h3 id="defaults-changed">安装后系统默认输出变了；“默认设备恢复失败”</h3>
-<p><strong>原因：</strong>Windows 会在设备移除或新增时重新选择默认设备；更早的测试包没有完整保存默认用途。普通播放、普通录音及通信用途也可能分别指向不同设备。</p>
-<p><strong>处理：</strong>本页包会保存并恢复六种默认用途；仍报告恢复失败时，在 Windows 中逐项选回原来的播放、录音和通信设备，再确认播放器、直播软件自己的选择。原跳线已删除时，其旧设备 ID 不再可用，需要按伴奏、混音、人声用途选回新端点；仅重开声核不能恢复 Windows 默认用途。</p>
-<h3 id="uninstall-stopped">“跳线仍是默认设备”“未找到登记”“版本／文件校验不匹配”</h3>
-<p><strong>原因：</strong>卸载工具为避免误删而停止；可能还在删除默认设备，或者当前设备不属于该包登记。文件校验失败也可能来自不完整下载、混用版本或文件被改动，不能简单视为可忽略提示。</p>
-<p><strong>处理：</strong>仍是默认设备时，先在 Windows 选择其他默认设备；只是更新测试包时可用其 Install 流程按用途迁移，不必先单独 Uninstall。登记缺失或归属不符时，使用原始安装器／Windows 中对应应用的卸载入口；不要删除 ProgramData 登记来强行继续，也不要用第三方通用清理器批量删除声卡。文件校验失败则重新下载完整原包，仍失败时停止并反馈。</p>
-<h3 id="w2v-not-ready">W2V 已安装，但声核找不到 PLAY / REC 或桥接插件</h3>
-<p><strong>原因：</strong>W2V 需要驱动与两个匹配版本的 64 位桥接插件共同就绪，只有端点或只安装一个插件都不完整。</p>
-<p><strong>处理：</strong>检查 WDM2VST Ultra 与 VST2WDM Ultra 两个 v1.2.0 原版桥接插件，保留作者安装目录并重新扫描；旧声核安装的组件使用其原有登记目录，不混用不同版本。驱动报签名或启动错误时先修复驱动；不要把缺桥接插件误当成普通 VB-CABLE 的接入要求。</p>
-<h3 id="no-sound">设备存在但没声音、串音或回授</h3>
-<p><strong>原因：</strong>送入与取出方向选反、软件仍绑定重装前的端点、同一份声音重复采集，或把输出又送回自身。</p>
-<p><strong>处理：</strong>播放器输出选“跳线伴奏”，声核从它接收；声核向“跳线混音／人声”发送，直播软件从相应用途取出。重装后若软件仍保存旧端点，重新选择同用途的新端点。先逐条低音量测试并观察两端电平，确认不串到其他线，再恢复完整路由；出现回授时先停止相关发送，再检查循环连接。</p>
-<h3 id="install-stalled">安装时声核长时间卡住；进度似乎没有变化</h3>
-<p><strong>原因：</strong>驱动安装可能在等待占用释放、端点重新出现或 Windows 确定默认用途；旧版声核也曾在密集设备变动通知下长时间无响应。</p>
-<p><strong>处理：</strong>安装前保存预设并正常退出声核及使用跳线的软件，完整解压后使用本页安装包。查看“测试结果.txt”最终停在哪一步：占用、端点未就绪和权限失败应按对应条目处理。声核自身在设备变动时卡顿可更新到已修复的版本；不要反复启动多个安装进程，也不要为恢复界面强制结束正在保存的声核。</p>
-<h3 id="asio-disconnected">ASIO 提示“No device is connected to the PC”，但 VB-CABLE 正常</h3>
-<p><strong>原因：</strong>主声卡驱动已经注册，不代表物理声卡当前连接在这台电脑。声卡拔下、接到另一台机器或 USB 未正常连接时，ASIO 和虚拟跳线可能呈现不同状态。</p>
-<p><strong>处理：</strong>确认声卡接在当前电脑、供电与 USB 连接正常，并检查所选 ASIO 驱动是否对应这张声卡。保留原预设，重新连接后再打开；没有这张硬件时由你主动选择其他设备。反复重装 VB-CABLE 不能修复主声卡未连接。</p>
-<h3 id="wasapi-format">WASAPI 采样率改不了；512 帧实际变成 480</h3>
-<p><strong>原因：</strong>当前共享模式采样率跟随 Windows 混音格式，缓冲周期需要满足设备真实范围和步长。这与虚拟跳线有没有正确安装是不同检查项。</p>
-<p><strong>处理：</strong>按实际可用值选择缓冲；需要切换共享采样率时在 Windows 设备属性中调整格式，再重新打开声核。完整说明见：
+<a href="/third-party/wdm2vst-ultra-standalone-1.2.0-v1.zip" download>备用：直接下载 ZIP</a>
+</p>
+<ol><li>保存预设并退出声核，完整解压 ZIP。</li><li>运行<strong>安装W2V.cmd</strong>，确认管理员授权，按作者向导安装。</li><li>保留<strong>内核驱动</strong>、64 位的<strong>WDM2VST Ultra</strong>与<strong>VST2WDM Ultra</strong>两个插件，使用默认安装目录。</li><li>重新打开声核并<strong>扫描效果器</strong>，在通道输入或发送中选择对应跳线，无需手动插入桥接插件。</li></ol>
+<p><strong>PLAY 1/2</strong>接收伴奏，<strong>REC 1/2</strong>取出混音，<strong>REC 3/4</strong>取出人声。旧版“声核输入／输出”也会识别。</p></section>
+<section class="guide-panel" id="legacy-uninstall"><h2>怎么卸载</h2>
+<p>先退出使用跳线的软件。如果跳线是 Windows 默认设备，先改选其他播放、录音和通信设备。</p>
+<ul><li><strong>本页 VB-CABLE</strong>：运行包内的<strong>卸载测试设备.cmd</strong>。</li><li><strong>旧声核安装的 W2V</strong>：运行 W2V 包内的<strong>卸载旧声核安装的W2V.cmd</strong>。</li><li><strong>作者向导安装的 W2V</strong>：在 Windows“已安装的应用”中找到<strong>WDM2VST Ultra</strong>并卸载。</li></ul>
+<p>声核更新不会自动卸载这些跳线。</p></section>
+<section class="guide-panel virtual-routing-faq" id="certificates"><h2>证书与安全提示</h2><div class="faq-list">
+<details id="download-warning"><summary>下载提示“不常下载”或“未知发布者”<span aria-hidden="true">+</span></summary><p>先确认下载来源、完整解压。确认可信后再决定是否继续；如果提示恶意软件或管理员禁止，请停止。下载信誉提示不等于驱动签名检查结果。</p></details>
+<details id="certificate-unavailable"><summary>安装提示“证书不可用”<span aria-hidden="true">+</span></summary><p>先校准 Windows 日期和时区，正常联网并更新系统，再重新下载、完整解压原包。仍失败时，按下面的错误码处理。</p></details>
+<details id="certificate-codes"><summary>常见证书错误码<span aria-hidden="true">+</span></summary><p><code>0x800B0109</code>：根证书不受信任；<code>0x800B010A</code>：证书链不完整。检查原包和系统更新，不导入来路不明的证书。<br><code>0x800B0101</code>：验证时间或有效期问题，先校时；有可信时间戳的旧签名不只看今天是否过期。<br><code>0x80092013</code>：无法联网检查吊销状态，检查网络后重试。明确提示“已吊销”时停止使用，联系作者。</p></details>
+<details id="w2v-certificate"><summary>W2V 为什么要添加证书？<span aria-hidden="true">+</span></summary><p>固定 v1.2.0 依赖第三方时间戳和私人根（Fake TimeStamp Responder / JemmyLoveJenny），并非微软 WHQL／Attestation 签名。接受这项信任后再按作者向导安装；不接受就取消，改用其他方案。不要为安装关闭安全防护。</p></details>
+<details id="code-52"><summary>代码 52：无法验证驱动签名<span aria-hidden="true">+</span></summary><p>Windows 拒绝加载当前驱动。重新获取原作者提供、适合当前系统的签名驱动；仍失败就换方案或联系作者，不关闭 Secure Boot、内存完整性或签名检查。</p></details>
+</div></section>
+<section class="guide-panel virtual-routing-faq" id="troubleshooting"><h2>安装和使用遇到问题</h2><div class="faq-list">
+<details id="access-denied"><summary>拒绝访问／Rename 失败／0x80070005<span aria-hidden="true">+</span></summary><p>使用完整包里的<strong>安装并改名.cmd</strong>并确认管理员授权。仍失败时查看<strong>测试结果.txt</strong>停在哪一步；驱动已安装但更名失败时，不要反复叠装或抢占系统注册表权限。</p></details>
+<details id="device-code-10"><summary>代码 10：设备无法启动／设备忙<span aria-hidden="true">+</span></summary><p>本三线方案请用<strong>第 11 版</strong>。第 10 版的 3.3.1.7 普通驱动在已测三实例中只能启动一条；第 11 版已回用三线验证通过的 1.0.3.5。其他版本报代码 10，还需检查具体驱动与占用。</p></details>
+<details id="busy-apps"><summary>提示程序占用，无法安装或卸载<span aria-hidden="true">+</span></summary><p>保存预设并正常退出声核，停止播放器、直播软件对跳线的使用，并关闭声音设置。网易云退出后仍占用，可结束其残留进程；不要强制结束声核或系统音频进程。</p></details>
+<details id="restart-needed"><summary>提示“需要重启”或设备仍存在<span aria-hidden="true">+</span></summary><p>先释放占用。新跳线已经可用时，可能只是旧设备待清理；设备仍不可用或卸载被阻止时，保存工作后重启一次再检查。不要清除待重启标记或连续叠装。</p></details>
+<details id="missing-endpoints"><summary>端点缺失／版本不匹配<span aria-hidden="true">+</span></summary><p>在设备管理器中检查设备状态与驱动版本，按具体错误码处理。VB 三线方案需在播放、录音两侧各有三条活动跳线；需要重装时使用同一份完整第 11 版包。</p></details>
+<details id="name-conflict"><summary>设备重名、出现“2 -”或列表重复<span aria-hidden="true">+</span></summary><p>先看 Windows 是否也重复：只有声核重复，更新声核；Windows 也重复，退出占用程序后用本页包清理重装。不要再安装一份来修复重名。</p></details>
+<details id="defaults-changed"><summary>系统默认设备变了<span aria-hidden="true">+</span></summary><p>在 Windows 中分别选回默认播放、默认录音和通信设备。若包内提示<strong>默认设备恢复失败</strong>，先修正这些选择，再使用跳线。</p></details>
+<details id="uninstall-stopped"><summary>卸载提示“仍是默认设备”或“校验不匹配”<span aria-hidden="true">+</span></summary><p>仍是默认设备：先改选其他设备。登记缺失或版本、文件不匹配：停止使用这个卸载工具，改用原安装器的卸载入口，不手动删驱动。</p></details>
+<details id="w2v-not-ready"><summary>W2V 装好了，声核没有 PLAY／REC<span aria-hidden="true">+</span></summary><p>在作者向导中安装驱动和两个 64 位插件，使用默认目录，再重开声核并<strong>扫描效果器</strong>。驱动有错误码时先解决驱动问题。</p></details>
+<details id="no-sound"><summary>设备存在，但没声音或有回音<span aria-hidden="true">+</span></summary><p>发送端输出与接收端输入要选同一条跳线。直播软件只采集需要的混音或人声，不要把直播回放送回同一条线；先观察输入音量，再检查后续发送。</p></details>
+<details id="install-stalled"><summary>安装进度不动，声核卡住<span aria-hidden="true">+</span></summary><p>先保存并正常退出声核及占用跳线的软件，再运行安装。查看<strong>测试结果.txt</strong>最后一步，按占用、权限或端点错误处理；不要同时启动多个安装进程。</p></details>
+<details id="asio-disconnected"><summary>ASIO 提示“No device is connected to the PC”<span aria-hidden="true">+</span></summary><p>检查声卡是否接在当前电脑、USB 与供电是否正常，以及选中的 ASIO 驱动是否对应这张声卡。保留原预设，重新连接后再打开；重装虚拟跳线解决不了声卡未连接。</p></details>
+<details id="wasapi-format"><summary>WASAPI 采样率改不了，512 帧变成 480<span aria-hidden="true">+</span></summary><p>共享模式采样率跟随 Windows 格式，缓冲大小受设备范围与步长限制。选声核提供的可用值，详见
 <a href="/wasapi/">WASAPI 支持说明</a>
-</p>
-<h3 id="report-install-error">以上步骤仍不能解决</h3>
-<p>反馈时附上 Windows 版本、安装包版次、完整报错与错误码、设备状态、实际绑定的驱动版本，以及“测试结果.txt”对应步骤。证书问题可补充安装时间附近的 <code>C:\Windows\INF\setupapi.dev.log</code> 相关错误段及 Code Integrity 事件，便于区分安装警告与最终加载失败。</p>
+。</p></details>
+<details id="report-install-error"><summary>还是解决不了<span aria-hidden="true">+</span></summary><p>反馈 Windows 版本、安装包版次、完整报错和设备状态，附上<strong>测试结果.txt</strong>。证书问题再附安装时的错误码，方便定位。</p></details>
+</div></section>
 <p>参考：
-<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/troubleshooting-driver-signing-installation" target="_blank" rel="noopener noreferrer">微软驱动签名排查</a>
-·
-<a href="https://support.microsoft.com/zh-cn/windows/hardware/drivers/error-codes-in-device-manager-in-windows" target="_blank" rel="noopener noreferrer">Windows 设备错误码</a>
-·
-<a href="https://learn.microsoft.com/en-us/windows/win32/seccrypto/time-stamping-authenticode-signatures" target="_blank" rel="noopener noreferrer">微软签名时间戳说明</a>
-·
-<a href="https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/smartscreen-reputation" target="_blank" rel="noopener noreferrer">微软 SmartScreen 下载信誉说明</a>
-·
-<a href="https://shop.vb-audio.com/en/contact-us" target="_blank" rel="noopener noreferrer">VB-Audio 安装常见问题</a>
+<a href="https://learn.microsoft.com/zh-cn/windows-hardware/drivers/install/troubleshooting-driver-signing-installation" target="_blank" rel="noopener noreferrer">Windows 驱动签名排查</a>
+ ·
+<a href="https://support.microsoft.com/zh-cn/windows/hardware/drivers/error-codes-in-device-manager-in-windows" target="_blank" rel="noopener noreferrer">设备错误码</a>
 </p>
-</section>
-<section class="guide-panel" id="limits"><h2>使用界限</h2>
-<ul><li>这是第三方方案说明与独立安装包，不是声核自研驱动，也不提供声核内置安装或卸载。</li><li>保持原始签名不等于经过微软认证。驱动初始化失败、签名受限或反作弊拦截时，声核无法代替 Windows 放行；不会要求关闭 Secure Boot、内存完整性或整体安全防护。</li><li>VB-CABLE 的个人使用、专业使用与再分发遵循 VB-Audio 的条件；Donationware 不自动授予 OEM 整合或任意分发权限。W2V 免费使用声明也不等同任意改包授权，原作者权利保留。</li><li>保留原有麦克风、耳返与已配置的硬件路由。直播软件不要重复采集已包含在人声与混音中的同一份音频，也不要把直播回放送回同一跳线形成反馈。</li></ul>
+<section class="guide-panel" id="limits"><h2>安装前留意</h2>
+<p>安装时声音可能短暂中断。两种驱动都受 Windows 安全策略和游戏反作弊限制；遇到拦截请停止安装，不要关闭系统安全防护。</p>
+<p>驱动和使用授权归原作者所有。W2V 安装器会添加第三方证书，按需选择安装。</p>
 <p>
-<a href="/guide/#loopback">回到声核使用指北</a>
+<a href="https://vb-audio.com/Cable/" target="_blank" rel="noopener noreferrer">VB-Audio 官方说明</a>
+ ·
+<a href="https://vb-audio.com/Services/licensing.htm" target="_blank" rel="noopener noreferrer">VB-CABLE 授权</a>
+ ·
+<a href="https://github.com/GeekAudio/WDM2VST-Ultra/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer">W2V 作者发布页</a>
 </p></section>
-</div></main>
+</div>
+</main>
 
 <footer class="site-footer wrap">
   <div class="footer-brand">
-    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
     <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
   </div>
   <nav class="footer-column" aria-label="产品导航">

@@ -470,12 +470,12 @@ p {
   gap:10px;
   align-content:start;
 }
-.faq details {
+.faq details, .virtual-routing-faq details {
   background:#f5f6f7;
   border-radius:13px;
   padding:19px 23px;
 }
-.faq summary {
+.faq summary, .virtual-routing-faq summary {
   font-size:16px;
   cursor:pointer;
   display:flex;
@@ -484,18 +484,18 @@ p {
   gap:20px;
   list-style:none;
 }
-.faq summary::-webkit-details-marker {
+.faq summary::-webkit-details-marker, .virtual-routing-faq summary::-webkit-details-marker {
   display:none;
 }
-.faq summary>span {
+.faq summary>span, .virtual-routing-faq summary>span {
   font-size:22px;
   font-weight:300;
   line-height:1;
 }
-.faq details[open] summary>span {
+.faq details[open] summary>span, .virtual-routing-faq details[open] summary>span {
   transform:rotate(45deg);
 }
-.faq details p {
+.faq details p, .virtual-routing-faq details p {
   font-size:14px;
   margin-top:15px;
   max-width:510px;
@@ -913,10 +913,10 @@ p {
     gap:30px;
     padding-block:70px;
   }
-  .faq details {
+  .faq details, .virtual-routing-faq details {
     padding:18px;
   }
-  .faq summary {
+  .faq summary, .virtual-routing-faq summary {
     font-size:15px;
   }
   .closing {
@@ -1374,6 +1374,8 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 .download-history-links { display:grid; grid-template-columns:repeat(2,minmax(0,220px)); gap:16px; }
 .download-history-link[data-emphasis="secondary"] { background:var(--surface); color:var(--ink); }
 .download-history-link[data-emphasis="secondary"]:hover { background:#e4ecfa; }
+.virtual-routing-download { display:flex; }
+.virtual-routing-download .pill { min-width:220px; max-width:100%; color:#fff; }
 .download-signature-note { margin:26px 0 10px; color:var(--muted); }
 .download-signature-note a { color:var(--blue); font-weight:600; }
 .download-prep { margin:0 0 48px; color:var(--muted); }
