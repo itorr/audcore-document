@@ -49,7 +49,9 @@ SDK 默认在网页来源的 IndexedDB 保存凭证，支持传入自己的异�
 | GET | `/info` | 运行版本、协议版本、实例标识 |
 | GET | `/devices` | 设备列表、已知声道能力与当前选择 |
 | GET | `/status` | 音频运行状态、采样率、缓冲、延迟 |
-| GET | `/channels` | 用户通道列表 |
+| GET | `/channels` | 用户通道列表，含视觉位置、对齐分组、输入及发送 |
+| GET / PATCH | `/graph` | 完整音频图及带版本检查的批量结构编辑 |
+| GET | `/plugins` | 可添加的已安装效果器目录 |
 | GET / PATCH | `/channels/{id}` | 读取通道；调整 `gain_db`、`mute` |
 | GET | `/channels/{id}/effects` | 效果器列表 |
 | GET / PATCH | `/effects/{id}` | 读取效果器；调整 `bypass` |
@@ -60,7 +62,7 @@ SDK 默认在网页来源的 IndexedDB 保存凭证，支持传入自己的异�
 | DELETE | `/subscriptions/{id}` | 取消订阅 |
 | DELETE | `/connections/current` | 断开并清理当前连接 |
 
-所有资源 ID 为字符串。音量范围为 -90 至 12 dB；参数归一化值范围为 0–1。离散参数按步数取整；参数响应包含是否可写、默认值、名称、单位、当前值以及可用的实际值和显示文本。离线或未加载效果器不能读取参数。不开放设备切换、音频启停、结构编辑或文件操作。
+所有资源 ID 为字符串。音量范围为 -90 至 12 dB；参数归一化值范围为 0–1。离散参数按步数取整；参数响应包含是否可写、默认值、名称、单位、当前值以及可用的实际值和显示文本。离线或未加载效果器不能读取参数。新增图编辑接口支持通道增删、效果器装卸排序及当前端点间的路由编辑；仍不开放全局设备切换、音频启停或文件操作。新增接口需本次更新后的主程序，旧版返回 404。
 
 状态码：200 成功，201 创建订阅，202 等待授权，400 无效请求或值，401 凭证失效，403 未授权，404 不存在，409 暂不可用，429 超过限制。
 
@@ -84,3 +86,32 @@ await client.disconnect();
 ## 浏览器使用
 
 官网提供跨来源加载固定版本 SDK 的响应头。SDK 使用本机 WS 地址，浏览器若询问本地网络权限，需要用户允许。第三方网页的 CSP 也须允许连接 `ws://127.0.0.1:对应端口`。此接口面向本机工具，手机和其他电脑的远程控制另用局域网控制入口。
+
+## 节点图、视觉顺序与输入输出（本次更新新增）
+
+`GET /graph` 返回 `revision`、图状态单调递增的 `sequence`、`visual_order`、`inputs`、`outputs` 和 `graph`。`revision` 是并发编辑凭据，必须原样用于下一次结构编辑，不能自行生成。图内通道、效果器和发送使用宿主原生标识；通道资源的 `id` 对应 `chain_uuid`（缺失时为内部 ID 字符串），不能与原生 `chain.id` 混用。
+
+- `/channels` 中的 `index` 是稳定的内部 ID，不代表显示位置。`visual_index` 才是从 0 开始的视觉位置；`align_right` 表示右侧常驻区域。`visual_order` 按普通通道在前、常驻通道在后的原生显示规则列出可见通道的资源 ID。
+- `inputs` / `outputs` 列出当前逻辑端点：`id`（如 `input:0`）、`pair_index`、从 0 开始的 `channel_offset`、独立 `device` 和当前全局 `primary_device`。独立设备存在时优先使用它；未选择的设备保持空值，不自动猜测第一张声卡。虚拟输入和录音端点由 `virtual_input` / `virtual_recording` 单独表示。
+- `graph.input_pairs` / `output_pairs` 的数组下标是逻辑端点 ID，数组值是声道偏移。`input_devices` / `output_devices` 是独立设备绑定，不能把两个不同设备的相同声道偏移当作同一端点。
+- `graph.chains[].inputs` 引用输入端点，`rack` 数组是实际效果顺序。`sends` 给出输出、目标通道或侧链实例，保留启用状态、增益和取样点。隐藏辅助通道仍在完整图中，编辑器应保留它们。
+- 新效果器从 `/plugins` 目录选择，提交准确的 `path`、`cid`、`fuid` 及新的安全整数 `instance`。不接受任意文件路径；虚拟跳线组件不在普通添加目录中。
+
+结构编辑使用固定 SDK 的通用请求方法，不更改已发布的 SDK 1.0.0 文件：
+
+```js
+const current = await client.request('GET', '/graph');
+await client.request('PATCH', '/graph', {
+  revision: current.revision,
+  edits: [{
+    op: 'set', target: { kind: 'chain', chain: 0 },
+    fields: { inputs: [0] }
+  }]
+});
+```
+
+支持操作：`add_chain`（先新增空通道）、`remove_chain`、`order_chains`（全部原生通道 ID 各出现一次）、`set_rack`、`set_sends`，以及通道的 `name` / `inputs` 字段。一个批次可先新增空通道，再配置效果链和路由。最多 512 项操作，仍受输入消息 64 KiB 限制。隐藏通道不可修改，重复实例、无效端点及反馈回路拒绝；删除节点须在同一批次清理引用。音量、静音、旁通和参数继续使用原有专用接口。
+
+结构操作在音频运行时执行并进入原生撤销历史；验证失败不会应用，加载失败会尝试恢复原图与已保存参数。恢复失败会明确返回 `recovery_failed`，不得将其显示为编辑成功。版本冲突返回 409 / `graph_conflict`，客户端以推送后的最新图为准重新操作，不自动覆盖其他窗口的修改。
+
+订阅 `/graph` 后先收到完整快照；之后的增量含 `base_revision`、`revision`、图状态 `sequence`、`visual_order` 和 `edits`。节流周期内的多个增量以 `changes` 数组按顺序聚合，必须逐项应用，不得只保留最后一个。结构积压达 128 项时提前发送以限制队列体积。已由请求响应确认的旧增量按图状态 `sequence` 跳过；该值与外层订阅消息的 `sequence` 不同。重连后重新接收快照。可订阅 `/plugins` 接收目录变更。
