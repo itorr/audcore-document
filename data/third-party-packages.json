@@ -54,6 +54,14 @@
       "official_url": "https://vb-audio.com/Cable/",
       "size": 70548,
       "sha256": "e88e3d78ff893b25ae43950997c90155f4610dedb41f6eee053a69e35598f4a3"
+    },
+    {
+      "name": "VB-CABLE 精简测试安装",
+      "version": "v11",
+      "url": "/third-party/vbcable-test-v11.zip",
+      "official_url": "https://vb-audio.com/Cable/",
+      "size": 70595,
+      "sha256": "e7973c17b8b6d503b3a06404efe7fa306ca89f8721b41a2cb4f2d5706c40aacf"
     }
   ]
 }
