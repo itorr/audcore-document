@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": "manual-20261008-2058-linfengtingchan",
+      "name": "林峰听蝉",
+      "message": "",
+      "amount_fen": 8800,
+      "paid_at": "2026-10-08T12:58:00Z"
+    },
+    {
+      "id": "AUDdebe1e3f4833482ca0374897df3d124b",
+      "name": "God Job",
+      "message": "最简单的解决声卡麦克风只有左声道的方法",
+      "amount_fen": 666,
+      "paid_at": "2026-10-10T14:18:25.927Z"
+    },
+    {
+      "id": "AUDdb98e8ba0b0b426ebb51c78925c5e732",
+      "name": "匿名支持者",
+      "message": "",
+      "amount_fen": 233,
+      "paid_at": "2026-10-10T07:45:15.182Z"
+    }
+  ],
+  "total": 3,
+  "updated_at": "2026-10-16T06:27:08.043Z"
+}

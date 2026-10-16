@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "packages": [
+    {
+      "name": "FlexASIO",
+      "version": "1.10b",
+      "url": "/third-party/flexasio-1.10b.exe?r=fe496b",
+      "official_url": "https://github.com/dechamps/FlexASIO/releases/download/flexasio-1.10b/FlexASIO-1.10b.exe",
+      "size": 13749698,
+      "sha256": "fe496bcc08d6c421c6244c8a60ac7b538560bda138000fd1a54ab8ebce031209"
+    },
+    {
+      "name": "WDM2VST Ultra",
+      "version": "1.2.0",
+      "url": "/third-party/wdm2vst-ultra-1.2.0.exe?r=edbfb9",
+      "official_url": "https://github.com/GeekAudio/WDM2VST-Ultra/releases/download/v1.2.0/WDM2VST_Ultra_v1.2.0_Setup.exe",
+      "size": 10875904,
+      "sha256": "edbfb9a1804861bf86368113791051196fb1f59edbdd9f74e5cb38344afa875a"
+    },
+    {
+      "name": "FlexASIO 一键安装",
+      "version": "1.10b",
+      "url": "/third-party/flexasio-oneclick-1.10b.zip",
+      "size": 13205206,
+      "sha256": "36051fae2196646dd8ceeb319436d83fc30e5676173a8f31bdba9e8999eed30d"
+    },
+    {
+      "name": "AUR 一键安装",
+      "version": "1.0.0",
+      "url": "/third-party/aur-oneclick-1.0.0.zip",
+      "size": 569805,
+      "sha256": "a5c0fe63e321da5e3a51ebe487a4e520700d3b417ea8704c6c209b00e96bae23"
+    },
+    {
+      "name": "WDM2VST Ultra 独立安装",
+      "version": "1.2.0-v1",
+      "url": "/third-party/wdm2vst-ultra-standalone-1.2.0-v1.zip",
+      "official_url": "https://github.com/GeekAudio/WDM2VST-Ultra/releases/tag/v1.2.0",
+      "size": 7519074,
+      "sha256": "d55e42a8eabe10dfb62267b12890c7495c2d35c48321aaa607f0d9daa39cdf74"
+    },
+    {
+      "name": "VB-CABLE 精简测试安装",
+      "version": "v8",
+      "url": "/third-party/vbcable-test-v8.zip",
+      "official_url": "https://vb-audio.com/Cable/",
+      "size": 69673,
+      "sha256": "c84123e50860d58e2148d2f098c254801775bca23a0e8681d8efd1465c2cf08e"
+    },
+    {
+      "name": "VB-CABLE 精简测试安装",
+      "version": "v9",
+      "url": "/third-party/vbcable-test-v9.zip",
+      "official_url": "https://vb-audio.com/Cable/",
+      "size": 70548,
+      "sha256": "e88e3d78ff893b25ae43950997c90155f4610dedb41f6eee053a69e35598f4a3"
+    },
+    {
+      "name": "VB-CABLE 精简测试安装",
+      "version": "v11",
+      "url": "/third-party/vbcable-test-v11.zip",
+      "official_url": "https://vb-audio.com/Cable/",
+      "size": 70595,
+      "sha256": "e7973c17b8b6d503b3a06404efe7fa306ca89f8721b41a2cb4f2d5706c40aacf"
+    }
+  ]
+}
