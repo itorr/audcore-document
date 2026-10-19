@@ -62,6 +62,14 @@
       "official_url": "https://vb-audio.com/Cable/",
       "size": 70595,
       "sha256": "e7973c17b8b6d503b3a06404efe7fa306ca89f8721b41a2cb4f2d5706c40aacf"
+    },
+    {
+      "name": "VB-CABLE 单文件安装",
+      "version": "v15",
+      "url": "/third-party/vbcable-v15.exe",
+      "official_url": "https://vb-audio.com/Cable/",
+      "size": 278528,
+      "sha256": "4be119998e29d2cae57fca0b24521cca6d04642dc54ea9ff19b9db5761e5e6ef"
     }
   ]
 }
