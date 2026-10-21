@@ -16,11 +16,11 @@
 
 ## 固定版本 SDK
 
-SDK 独立版本为 **1.0.0**，API 协议版本为 **v1**。版本文件发布后保持不变；使用时固定完整版本号，不使用 latest。
+SDK 独立版本为 **1.1.0**，API 协议版本为 **v1**。版本文件发布后保持不变；使用时固定完整版本号，不使用 latest。
 
 ```js
 import { AudcoreClient } from
-  'https://audcore.utae.cn/sdk/1.0.0/audcore.mjs';
+  'https://audcore.utae.cn/sdk/1.1.0/audcore.mjs';
 
 const client = new AudcoreClient({ appName: '我的控制面板' });
 client.on('authorization-pending', () => {
@@ -52,12 +52,16 @@ SDK 默认在网页来源的 IndexedDB 保存凭证，支持传入自己的异�
 | GET | `/channels` | 用户通道列表，含视觉位置、对齐分组、输入及发送 |
 | GET / PATCH | `/graph` | 完整音频图及带版本检查的批量结构编辑 |
 | GET | `/plugins` | 可添加的已安装效果器目录 |
-| GET / PATCH | `/channels/{id}` | 读取通道；调整 `gain_db`、`mute` |
+| GET / PATCH | `/channels/{id}` | 读取通道；调整 `gain_db`、`mute`、`fx_bypass`、`channel_mode`、`phase`、`align_right` |
 | GET | `/channels/{id}/effects` | 效果器列表 |
-| GET / PATCH | `/effects/{id}` | 读取效果器；调整 `bypass` |
+| GET / PATCH | `/effects/{id}` | 读取效果器；调整 `bypass`、`wet` |
 | GET | `/effects/{id}/parameters` | 参数列表、元数据与当前值 |
 | GET / PATCH | `/effects/{id}/parameters/{parameterId}` | 读取参数；写入 `normalized` |
 | GET | `/meters` | 当前通道电平 |
+| GET / PATCH | `/solo` | 临时独奏与独奏保护 |
+| GET | `/recording` | 录音设置与会话快照 |
+| GET / PATCH | `/recording/settings` | 录音目录与格式 |
+| GET / PATCH | `/recording/channels/{index}` | 通道录音状态与开始/停止 |
 | POST | `/subscriptions` | 创建资源订阅 |
 | DELETE | `/subscriptions/{id}` | 取消订阅 |
 | DELETE | `/connections/current` | 断开并清理当前连接 |
@@ -121,6 +125,55 @@ await client.request('PATCH', '/graph', {
 
 新增本地资源 `/solo`（需配套更新版主程序），支持 GET、PATCH 与订阅。状态为 `selected`、`safe`、`excluded` 三组原生通道编号；使用 `/channels` 的 `index` 对应，不能用视觉位置代替。订阅先发送完整快照，之后原生控制台或 API 修改独奏时主动推送新状态。
 
-`PATCH /solo` 接受 `{"channel":"通道资源ID","on":true}` 加入独奏、`on:false` 取消该通道，或 `{"clear":true}` 清除全部独奏。`channel` 使用 `/channels` 的字符串 `id`；请求不能混合其他字段，隐藏通道或无效 ID 被拒绝。`safe` 只读并保留主控制台已有设置。
+`PATCH /solo` 接受 `{"channel":"通道资源ID","on":true}` 加入独奏、`on:false` 取消该通道，或 `{"clear":true}` 清除全部独奏。`channel` 使用 `/channels` 的字符串 `id`；请求不能混合其他字段，隐藏通道或无效 ID 被拒绝。`{"channel":"通道资源ID","safe":true}` 设置独奏保护，`safe:false` 取消保护；不能与 `on` 或 `clear` 混用。清除独奏保留独奏保护，保护与选择均与原生控制台同步。
 
 独奏属于临时监听状态，不改变保存的静音、音量、路由与撤销历史。断开控制器不擅自清除其他控制台的独奏；可用“取消独奏”明确清除。该资源不开放给受限局域网控制接口。旧版返回资源不存在，客户端应禁用独奏，不能通过批量写静音模拟。
+
+
+## 通道控制、干湿比与录音（2026-10-21）
+
+这些扩展需要配套新版主程序；SDK 1.1.0 提供完整类型及录音、独奏便捷方法，已发布的 1.0.0 保持不变，也可继续通过 `request()` 调用。协议仍为 v1，旧主程序可能返回 400 或 404。
+
+`GET /channels`、详情及推送新增 `fx_bypass`、`channel_mode`、`phase`；未配置时返回 false、0、0。`PATCH /channels/{id}` 允许一次提交多个字段，先完整校验再应用：
+
+| 字段 | 值与含义 |
+| --- | --- |
+| `fx_bypass` | 布尔值；true 旁通整个通道 FX，保留每个效果器自己的旁通状态和延迟对齐；托管跳线不受影响 |
+| `channel_mode` | 整数 0=立体声、1=左单声道、2=右单声道；运行中互切单/双声道会重新适配效果器，失败尝试恢复原配置 |
+| `phase` | -180 至 180 的有限数值，单位为度 |
+| `align_right` | 布尔值；设置右侧常驻，响应与推送同步更新 visual_index、visual_order |
+
+原有 `gain_db`（-90 至 12）和 `mute` 仍可一同提交。停止音频时修改这些字段不会主动启动音频。声道模式改变会按原生规则停止并保存该通道的录音；改变格式后需明确重新开始录音。
+
+`GET /effects/{id}`、效果器列表及推送新增 `wet`，为宿主干湿比 0–1，旧工程默认 1。`PATCH /effects/{id}` 可提交 `wet`、`bypass` 或两者；只改宿主混合，不替换插件内部的干湿参数。通道 FX 总旁通期间单独取消效果器旁通，不会越过总开关启用效果。
+
+```js
+await client.updateChannel(channel.id, { fx_bypass: true, phase: 180, align_right: true });
+await client.updateEffect(effect.id, { wet: 0.35 });
+await client.setSoloSafe(channel.id, true);
+```
+
+### 录音资源
+
+| 方法 | 路径 | 数据 |
+| --- | --- | --- |
+| GET | `/recording` | `{settings:{directory,format}, channels:[录音状态]}`，channels 仅含已有录音会话 |
+| GET / PATCH | `/recording/settings` | `{directory,format}`；PATCH 可只提交其中一个字段 |
+| GET / PATCH | `/recording/channels/{index}` | GET 读取状态；PATCH 使用 `{active:true}` 开始或 `{active:false}` 停止 |
+
+此处 **index 使用 `/channels` 的整数 `index`**，不是字符串资源 id，也不是视觉位置；隐藏或不存在的通道拒绝访问。尚未录制的通道返回空闲状态。状态字段为 `{chain, active, stopping, path, error}`，chain 同样是原生整数编号。
+
+目录必须为绝对路径；格式沿用原生录音支持的 `caf_pcm16`、`caf_pcm24`、`caf_f32`、`wav_pcm24`、`flac_pcm24`、`opus`。设置修改持久保存，只影响之后开始的录音。开始前音频必须已运行；重复开始、仍在保存或文件不可写时返回 409 / `recording_unavailable`，不宣告开始成功。停止请求通常先返回 `active:true, stopping:true`，后台完成保存后主动推送 `active:false, stopping:false`；收到完成状态后再使用文件。失败信息在 `error` 中，重新订阅可恢复已保存文件和完成错误。
+
+订阅 `/recording` 先获得整体快照，随后按 `/recording/settings`、`/recording/channels/{index}` 推送变化；也可只订阅其中一个资源。原生界面发起的录音和设置操作走同一推送流程。连续变化仍按订阅频率合并为最新状态，不需要轮询。断开 API 不会擅自停止录音，录音不进入通道编辑撤销历史。录音接口不提供文件读取、删除或打开系统目录操作。
+
+```js
+const sub = await client.subscribe('/recording', { frequencyHz: 10 }, (data, event) => {
+  console.log(event.resource, data);
+});
+await client.updateRecordingSettings({ format: 'wav_pcm24' });
+await client.setChannelRecording(channel.index, true);
+await client.setChannelRecording(channel.index, false);
+```
+
+上述扩展面向已授权本地 API。受限局域网控制继续只允许通道音量与静音，不能修改 FX、格式、相位、常驻、独奏保护或录音。
