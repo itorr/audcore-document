@@ -1,4 +1,4 @@
 {
-  "payload": "{\"version\":\"v0.0.1635\",\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-setup-v0.0.1635.exe\",\"size\":5333726,\"sha256\":\"357f796555c9be2823d528f4c39a67307615f96c7c47d1861d54be00c428f12c\",\"notes\":\"破坏性更新：WASAPI 改为统一的输入、输出设备表。升级后请检查设备及通道路由，不可用项需重新选择。播放回环默认关闭。请先查看完整更新说明。\",\"portable\":{\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-portable.exe\",\"size\":10836992,\"sha256\":\"e76c453d2e508c15b152c2ef2a56ea9bb6e352ab9c6a97f61f72731de5361c7a\"}}",
-  "signature": "2AtTxSGLUD009kZ+n6yVxug+1ABQMFYVp0erkLh7mf3Zu9C7na97z/c8DxbS5JWLiYd2A365Lne2JUlPBXISBA=="
+  "payload": "{\"version\":\"v0.0.1635\",\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-setup-v0.0.1635.exe\",\"size\":5333507,\"sha256\":\"ab1b4e8be9017d1b7bb6b37d7fd580d90fab1b125f22ba7454b5a239e8a90b34\",\"notes\":\"破坏性更新：WASAPI 改为统一的输入、输出设备表。升级后请检查设备及通道路由，不可用项需重新选择。播放回环默认关闭。请先查看完整更新说明。\",\"portable\":{\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-portable.exe\",\"size\":10836480,\"sha256\":\"b731bb7f17820e2510b25dbb35cd53ac47eea0656ffdd65b16a3e7c7e2a7150a\"}}",
+  "signature": "XaVPCO+Qf80RG/JNErL3mNcVRD88TRzdEAqLNGqj8O2Miwo5Z/7lhmYvx49VuuyF4wL3eNA0dBqmaesNvyW6BQ=="
 }

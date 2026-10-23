@@ -5,14 +5,14 @@
     {
       "version": "v0.0.1635",
       "date": "2026-10-23",
-      "publishedAt": "2026-10-23T13:55:34Z",
+      "publishedAt": "2026-10-23T14:07:14Z",
       "url": "/releases/v0.0.1635/audcore-setup-v0.0.1635.exe",
-      "size": 5333726,
-      "sha256": "357f796555c9be2823d528f4c39a67307615f96c7c47d1861d54be00c428f12c",
+      "size": 5333507,
+      "sha256": "ab1b4e8be9017d1b7bb6b37d7fd580d90fab1b125f22ba7454b5a239e8a90b34",
       "portable": {
         "url": "/releases/v0.0.1635/audcore-portable.exe",
-        "size": 10836992,
-        "sha256": "e76c453d2e508c15b152c2ef2a56ea9bb6e352ab9c6a97f61f72731de5361c7a"
+        "size": 10836480,
+        "sha256": "b731bb7f17820e2510b25dbb35cd53ac47eea0656ffdd65b16a3e7c7e2a7150a"
       },
       "changes": [
         "每台设备独立设置共享／独占模式、采样率和缓冲，并查看实际生效的延迟；同一设备跨通道共用一份配置。",
