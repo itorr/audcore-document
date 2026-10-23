@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核 WASAPI 输入输出、共享采样率、可用缓冲与预设恢复说明。"><meta name="theme-color" content="#fafbfc"><title>WASAPI 支持说明 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核统一 WASAPI 设备表、共享与独占、播放回环及旧预设恢复说明。"><meta name="theme-color" content="#fafbfc"><title>WASAPI 支持说明 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="site-header wrap">
     <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
@@ -7,13 +7,13 @@
   </header>
 <main id="main"><section class="page-header wrap"><h1>WASAPI 支持说明</h1><p>普通声卡、USB 麦克风与耳机直接接入声核。</p></section>
 <div class="wrap reading">
-<section class="guide-panel"><h2>连接输入输出</h2><p>支持原生 WASAPI 的声核版本可以直接使用 Windows 音频设备，无需先安装通用 ASIO 驱动。在设置的音频设备中选择 WASAPI，再在通道选择麦克风和耳机或扬声器。</p><p>首次自动选择 WASAPI 时，新版优先尝试 128 帧附近的可用周期；已保存的预设继续使用自己的设置。实际可用范围由设备决定。</p></section>
-<section class="guide-panel"><h2>采样率为何不能直接切换？</h2><p>当前声核 WASAPI 共享模式跟随 Windows 设备的混音格式。固定采样率只显示实际值，不作为下拉选项。</p><p>需要切换采样率时，打开 Windows 声音设置，进入所用设备的属性，在「高级 → 默认格式」选择设备支持的格式，然后重新打开声核。播放与录音设备各有自己的格式。</p><p>ASIO 模式仍可在声核中选择驱动支持的采样率；WASAPI 共享模式的限制不适用于所有 ASIO 设备。</p></section>
-<section class="guide-panel"><h2>缓冲为何不是 32、64、128、512？</h2><p>共享模式只列设备实际允许的处理周期，数值需要满足最小值、最大值与基本步长。输入输出采样率相同时，声核优先取两端可用周期的交集。</p><p>例如一台 Win10 声卡允许 128～480 帧、步长 32：128 可以使用，32 和 64 太小，512 超过上限。请求 512 时，设备可能实际采用 480；界面以实际生效值为准。</p><p>只提供固定周期的设备显示实际值，不能在声核内选择其他档位。缓冲容量、处理周期与完整耳返延迟含义不同；更小的周期也需要结合设备与效果器负载判断稳定性。</p></section>
-<section class="guide-panel"><h2>保存与恢复</h2><p>新版保留 WASAPI 预设的采样率与缓冲请求，重新打开后按设备实际能力协商。设备变化或其他软件占用可能影响可用格式，以当前生效值为准。</p><p>
-<a href="https://learn.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudioclient3-getsharedmodeengineperiod" target="_blank" rel="noopener noreferrer">微软共享模式周期说明</a>
-·
-<a href="/guide/">返回声核指北</a>
+<section class="guide-panel"><h2>v0.0.1635：设备配置方式调整</h2><p>本次为破坏性更新：取消主 WASAPI 与额外 WASAPI 的区分，改为统一的输入、输出设备表。升级后请检查设备和通道路由，原先无法确认对应设备的绑定会保留为不可用，不自动改接其他设备。</p></section>
+<section class="guide-panel"><h2>连接输入输出</h2><ol><li>打开「设置 → 系统」，在音频设备中选择“系统音频 WASAPI”；已有 ASIO 声卡也可以继续使用。</li><li>进入「输入输出」，在设备表中添加所需麦克风、耳机或扬声器，逐台配置模式、采样率与缓冲。</li><li>回到通道选择已添加的输入、输出，调低音量试音。</li></ol><p>未选择 ASIO 时，声核从已配置且可用的输出设备获取处理时钟，需要至少配置一个可用输出。使用 ASIO 时，同一套 WASAPI 设备作为额外输入、输出；切换 ASIO 保留列表和配置。</p></section>
+<section class="guide-panel"><h2>共享与独占模式</h2><p>每台设备独立选择模式。共享模式便于与其他软件同时使用，采样率跟随 Windows 设备的混音格式；如需更改，在 Windows 声音设备属性的「高级 → 默认格式」中调整。独占模式可选择设备支持的采样率和缓冲，但可能与其他正在使用该设备的软件冲突。</p><p>设备不支持所选格式或被占用时，按提示调整参数、改用共享模式或释放占用，不需要安装通用 ASIO 驱动。</p></section>
+<section class="guide-panel"><h2>处理块、设备缓冲与延迟</h2><p>系统音频模式下的处理块与每台设备的实际缓冲周期是不同设置，不要求所有输入输出共用一组参数。设备表显示实际生效的采样率、缓冲和对应毫秒数；可用范围取决于设备与模式。</p><p>设备缓冲延迟不等于完整耳返延迟。输入输出设备、效果器和路线对齐都可能增加等待；请结合稳定性与延迟检测选择参数，不要仅凭更小的数字判断效果。</p></section>
+<section class="guide-panel"><h2>把播放声音作为输入</h2><p>“输出设备作为输入”默认关闭。需要捕获扬声器或耳机的播放声音时，开启此项，再添加对应回环输入。回环仅支持共享模式，周期跟随播放引擎；与同一设备的独占输出冲突时，按提示调整。</p><p>关闭此项会停止回环采集，但保留已有配置和通道绑定，方便之后恢复。</p></section>
+<section class="guide-panel"><h2>预设、设备离线与无声恢复</h2><p>设备配置与预设分开保存。加载预设保留当前设备、采样率和缓冲，恢复通道、效果器与路由；设备暂时离线时保留名称、参数和绑定，重新接通后按原配置恢复。</p><ol><li>升级后没有声音，先确认设备表中所需输入、输出已添加且可用。</li><li>检查通道输入和发送输出，重新选择标为不可用的设备。</li><li>原先使用播放回环时，开启“输出设备作为输入”，再确认对应绑定。</li></ol><p>
+<a href="/changelog/">本版完整更新与恢复说明</a>
 </p></section></div></main>
 <footer class="site-footer wrap">
   <div class="footer-brand">
