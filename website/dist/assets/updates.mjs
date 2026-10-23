@@ -52,19 +52,7 @@ function renderDownload(item) {
   const history = el('a', '更新记录', 'text-link'); history.href = '/changelog/';
   heading.append(el('h2', '本版更新'), history); changes.append(heading);
   const items = Array.isArray(item.changes) ? item.changes.filter(value => typeof value === 'string' && value.trim()) : [];
-  if (typeof item.release_notes === 'string' && item.release_notes.trim()) {
-    let list = null;
-    for (const source of item.release_notes.split(/\r?\n/)) {
-      const line = source.trim();
-      if (!line) { list = null; continue; }
-      const title = /^(#{2,3}) +(.+)$/.exec(line);
-      if (title) { list = null; changes.append(el(title[1].length === 2 ? 'h3' : 'h4', title[2])); }
-      else if (line.startsWith('- ')) {
-        if (!list) { list = el('ul'); changes.append(list); }
-        list.append(el('li', line.slice(2)));
-      } else { list = null; changes.append(el('p', line.replace(/^> +/, ''))); }
-    }
-  } else if (items.length) {
+  if (items.length) {
     const list = el('ul'); for (const change of items) list.append(el('li', change)); changes.append(list);
   } else if (typeof item.notes === 'string' && item.notes) {
     changes.append(el('p', item.notes));
@@ -126,7 +114,11 @@ if (commitTarget) {
       for (const item of summary.items) {
         if (typeof item === 'string' && item.trim()) list.append(el('li', item));
       }
-      if (list.childElementCount) commitTarget.append(el('h3', day, 'commit-day'), list);
+      if (list.childElementCount) {
+        commitTarget.append(el('h3', day, 'commit-day'));
+        if (typeof summary.title === 'string' && summary.title.trim()) commitTarget.append(el('h4', summary.title));
+        commitTarget.append(list);
+      }
     }
   } catch {
     countTarget.textContent = '暂时无法加载';
