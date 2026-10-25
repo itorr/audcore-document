@@ -8,7 +8,7 @@
 <main id="main"><section class="page-header wrap"><h1>指北</h1><p>从出声到上手。</p></section>
 <div class="guide-layout wrap">
 <nav class="guide-menu" aria-label="指北目录">
-<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="#input-output">输入输出设置说明</a><a href="#program-capture-echo">捕获程序声音</a><a href="#output-capture">输出设备作为输入</a><a href="#input-capture">添加输入设备</a><a href="#system-output-latency">输出设备与延迟</a><a href="#multi-core">多核心并行处理</a><a href="#plugin-sleep">效果器自动休眠</a><a href="#delay-alignment">并行路径延迟对齐</a><a href="#plugin-isolation">隔离外部效果器</a><a href="#capture-volume">录音设备 100% 音量</a><a href="#gain-limit">通道上限 0dB</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="/virtual-routing/">虚拟跳线</a><a href="/flexasio/">FlexASIO</a><a href="/third-party/">第三方工具</a><a href="/recording/">怎么录音？</a><a href="/api/">本地 API 与 SDK</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="/sponsor/">赞助</a><a href="#agreement">协议</a>
+<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="#input-output">输入输出设置说明</a><a href="#program-capture-echo">捕获程序声音</a><a href="#output-capture">输出设备作为输入</a><a href="#input-capture">添加输入设备</a><a href="#system-output-latency">输出设备与延迟</a><a href="#multi-core">多核心并行处理</a><a href="#plugin-sleep">效果器自动休眠</a><a href="#bypass-sleep">旁通效果器自动睡眠</a><a href="#delay-alignment">并行路径延迟对齐</a><a href="#plugin-isolation">隔离外部效果器</a><a href="#capture-volume">录音设备 100% 音量</a><a href="#gain-limit">通道上限 0dB</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="/virtual-routing/">虚拟跳线</a><a href="/flexasio/">FlexASIO</a><a href="/third-party/">第三方工具</a><a href="/recording/">怎么录音？</a><a href="/api/">本地 API 与 SDK</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="/sponsor/">赞助</a><a href="#agreement">协议</a>
 </nav>
 <div class="guide-content reading">
 <section id="start" class="guide-panel"><h2>开始使用</h2>
@@ -164,6 +164,23 @@
 <p>静音用于控制通道是否出声，旁通用于决定声音是否经过效果。自动休眠是在满足安静条件时减少不必要的处理，不替代这两个操作，也不保证每个效果器都能休眠。</p>
 <h3>如何设置</h3>
 <p>打开「设置 → 性能」，切换「效果器自动休眠」即可应用，不需要重启声核。开启后要等待符合安静与尾音条件，才会进入休眠。</p>
+</section>
+<section id="bypass-sleep" class="guide-panel">
+<h2>旁通效果器自动睡眠</h2>
+<h3>它有什么作用？</h3>
+<p>释放长时间未使用的效果器实例，减少内存占用。声核会保留效果器的参数和延迟记录，之后需要使用时重新加载。此功能默认关闭，首次开启需要确认风险；开启后的开关和名称显示为红色。</p>
+<h3>什么时候会睡眠？</h3>
+<ul><li>效果器持续旁通超过 60 秒后，释放该效果器。</li><li>通道持续关闭超过 5 分钟后，释放通道中的普通效果器。</li><li>同时开启「效果器自动休眠」时，若已开启通道中的所有在用普通效果器都进入休眠，该通道也按关闭状态累计 5 分钟。声音恢复会重新计时，通道开关本身保持原样。</li></ul>
+<p>托管虚拟跳线的输入输出桥接保持运行。无法可靠保存状态的效果器会保留实例，不强行释放。</p>
+<h3>如何唤醒？</h3>
+<p>取消旁通、重新打开通道、调整效果器参数或打开配置界面时，声核会先恢复实例和保存的参数，再接入声音。自动休眠通道也会检测主输入和侧链，信号回来后自动恢复。</p>
+<p>整条需要使用的效果链恢复完成前保持静音。重新加载需要时间，可能出现短暂断音或丢失开头的声音；直播、录音和实时演唱前，请先用自己的效果链测试。</p>
+<h3>打开预设时会加载吗？</h3>
+<p>已保存有效参数和延迟记录的旁通、关闭或自动睡眠效果器，可以直接保留延迟占位，等需要使用时再加载。旧预设没有记录，或效果器、参数、音频格式发生变化时，仍需先正常加载以确认延迟；保存后可使用新的记录。</p>
+<h3>开启风险与确认</h3>
+<p>效果器苏醒时崩溃风险激增，尤其是反复卸载和恢复第三方效果器时。首次开启会显示全窗口风险确认；其中的「每次开启时确认」可选择是否在以后重新开启此功能时再次询问，不是每次启动声核时询问。选择「放弃」不会开启功能，也不会保存确认选项的改动。</p>
+<h3>如何关闭？</h3>
+<p>在「设置 → 性能」关闭「旁通效果器自动睡眠」，声核会逐个恢复已释放的效果器。原有「效果器自动休眠」负责减少空闲 CPU 占用，是单独的开关。</p>
 </section>
 <section id="delay-alignment" class="guide-panel">
 <h2>并行路径延迟对齐</h2>
