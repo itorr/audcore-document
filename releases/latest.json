@@ -1,4 +1,4 @@
 {
-  "payload": "{\"version\":\"v0.0.1635\",\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-setup-v0.0.1635.exe\",\"size\":5333507,\"sha256\":\"ab1b4e8be9017d1b7bb6b37d7fd580d90fab1b125f22ba7454b5a239e8a90b34\",\"notes\":\"破坏性更新：WASAPI 改为统一的输入、输出设备表。升级后请检查设备及通道路由，不可用项需重新选择。播放回环默认关闭。请先查看完整更新说明。\",\"portable\":{\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-portable.exe\",\"size\":10836480,\"sha256\":\"b731bb7f17820e2510b25dbb35cd53ac47eea0656ffdd65b16a3e7c7e2a7150a\"}}",
-  "signature": "XaVPCO+Qf80RG/JNErL3mNcVRD88TRzdEAqLNGqj8O2Miwo5Z/7lhmYvx49VuuyF4wL3eNA0dBqmaesNvyW6BQ=="
+  "payload": "{\"version\":\"v0.0.1658\",\"url\":\"https://audcore.utae.cn/releases/v0.0.1658/audcore-setup-v0.0.1658.exe\",\"size\":5340503,\"sha256\":\"954f82fd7597ea12142a39b785187b955474992f3cefb2f8387a6b2c24ca1605\",\"notes\":\"修复部分显示缩放设置下，启动后托盘图标短暂出现、程序随即退出的问题。；修正机架部分移出屏幕后收起再打开的位置恢复，并保留最小化前的位置记录。；改善全部跳线输出的连续性，减少声音卡顿和断续；跳线优先保证稳定，播放延迟可能增加，普通硬件耳返保持原有策略。；修复导入 Reaper（RPP）和 Studio One（SONG）工程时，原本未开启监听的普通通道被意外启用的问题。\",\"portable\":{\"url\":\"https://audcore.utae.cn/releases/v0.0.1658/audcore-portable.exe\",\"size\":10856960,\"sha256\":\"fb031fed78615db1bf195be4bc6664ee2d5c83113959e42a97453d163545c422\"}}",
+  "signature": "p6LFciAkeUDKuvHg4/tjI8KPxZy5OwyxE9vCktt5pgTePtXicCtR7CkI4Pv3hKJAz52+oWowH/SGZjZZlvmWAQ=="
 }
