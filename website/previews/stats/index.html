@@ -4,50 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="声核全站静态统计界面方案，第 1 版。所有数字为演示数据。">
-  <title>统计 · Audcore · 界面预览</title>
+  <title>统计 · Audcore</title>
   <link rel="stylesheet" href="./stats.css">
   <script type="module" src="./stats.mjs"></script>
 </head>
 <body>
   <main id="terminal" aria-label="声核静态统计界面预览">
-    <header class="masthead">
-      <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="10" width="4" height="12" rx="2"/><rect x="10" y="4" width="4" height="24" rx="2"/><rect x="18" y="8" width="4" height="16" rx="2"/><rect x="26" y="12" width="4" height="8" rx="2"/></svg><strong>Audcore</strong><span class="page-name">全站统计</span></div>
-      <div class="snapshot"><span class="badge">演示数据 · 第 1 版</span><span>快照 2026.10.26</span><span>不定期更新</span></div>
-      <div class="tools"><button id="method" type="button">统计口径 ↗</button><fieldset class="theme"><legend>显示主题</legend><label><input type="radio" name="theme" value="light">亮</label><label><input type="radio" name="theme" value="dark" checked>暗</label></fieldset></div>
-    </header>
+    <div class="toolbar"><strong>Audcore <span>统计</span></strong><span id="period"></span><time id="generated"></time><fieldset class="theme"><legend>主题</legend><label><input type="radio" name="theme" value="light">亮</label><label><input type="radio" name="theme" value="dark" checked>暗</label></fieldset></div>
+    <div id="load-error" role="alert" hidden>统计快照暂不可用，请刷新重试</div>
 
     <section class="metrics" id="metrics" aria-label="统计概览"></section>
 
     <div class="workspace">
       <section class="panel devices" aria-labelledby="devices-title">
-        <div class="panel-head"><div><h1 id="devices-title">声卡概览 <span>DEVICES</span></h1><p>每份最新设备报告去重 · 检出不等于正在使用</p></div><span class="panel-count" id="device-count"></span></div>
+        <div class="panel-head"><div><h1 id="devices-title">声卡 / 驱动</h1></div><span class="panel-count" id="device-count"></span></div>
         <div class="table-tools"><label class="search"><span>⌕</span><input id="device-search" type="search" placeholder="搜索声卡型号、驱动" aria-label="搜索声卡型号、驱动" autocomplete="off"></label><label class="filter">类型 <select id="device-type"><option value="">全部</option><option>ASIO</option><option>WASAPI</option></select></label></div>
-        <div class="table-space"><table id="device-table"><caption>声卡安装样本排行</caption><colgroup><col class="rank-col"><col><col class="device-users"><col class="share-col"><col class="buffer-col"><col class="rate-col"></colgroup><thead><tr><th>#</th><th data-key="name"><button type="button">声卡 / 驱动</button></th><th data-key="users" aria-sort="descending"><button type="button">安装样本 ↓</button></th><th>占比</th><th data-key="buffer"><button type="button">常用缓冲</button></th><th data-key="rate"><button type="button">采样率</button></th></tr></thead><tbody></tbody></table><p class="empty" id="device-empty" hidden>没有匹配的声卡，试试其他关键词</p></div>
-        <div class="table-foot"><span>缓冲单位 frames · 采样率 kHz</span><nav aria-label="声卡分页"><span id="device-page"></span><button id="device-prev" type="button" aria-label="声卡上一页">←</button><button id="device-next" type="button" aria-label="声卡下一页">→</button></nav></div>
+        <div class="table-space"><table id="device-table"><caption>声卡安装样本排行</caption><colgroup><col class="rank-col"><col><col class="device-users"><col class="share-col"><col class="buffer-col"><col class="rate-col"></colgroup><thead><tr><th>#</th><th data-key="name"><button type="button">声卡 / 驱动</button></th><th data-key="users" aria-sort="descending"><button type="button">检出 ↓</button></th><th data-key="runningUsers" title="有运行配置记录的安装样本"><button type="button">运行</button></th><th data-key="buffer"><button type="button">缓冲 fr</button></th><th data-key="rate"><button type="button">kHz</button></th></tr></thead><tbody></tbody></table><p class="empty" id="device-empty" hidden>没有匹配的声卡，试试其他关键词</p></div>
+        <div class="table-foot"><nav aria-label="声卡分页"><span id="device-page"></span><button id="device-prev" type="button" aria-label="声卡上一页">←</button><button id="device-next" type="button" aria-label="声卡下一页">→</button></nav></div>
       </section>
 
       <section class="panel plugins" aria-labelledby="plugins-title">
-        <div class="panel-head"><div><h2 id="plugins-title">效果器概览 <span>EFFECTS</span></h2><p>安装与启用分别计数 · 性能仅同条件参考</p></div><span class="panel-count" id="plugin-count"></span></div>
-        <div class="table-tools"><label class="search"><span>⌕</span><input id="plugin-search" type="search" placeholder="搜索效果器、厂商" aria-label="搜索效果器、厂商" autocomplete="off"></label><label class="filter">排序 <select id="plugin-order"><option value="users">安装样本</option><option value="active">启用样本</option><option value="median">处理耗时</option><option value="name">名称</option></select></label><span class="condition">48 kHz / 256 fr / 立体声</span></div>
-        <div class="table-space"><table id="plugin-table"><caption>效果器安装、启用与处理耗时排行，全部为演示数据</caption><colgroup><col class="rank-col"><col><col class="vendor-col"><col class="user-col"><col class="user-col"><col class="perf-col"><col class="perf-col"></colgroup><thead><tr><th>#</th><th data-key="name"><button type="button">效果器</button></th><th data-key="vendor"><button type="button">厂商</button></th><th data-key="users" aria-sort="descending"><button type="button">安装 ↓</button></th><th data-key="active"><button type="button">启用</button></th><th data-key="median"><button type="button">中位 μs</button></th><th data-key="p95"><button type="button">P95 μs</button></th></tr></thead><tbody></tbody></table><p class="empty" id="plugin-empty" hidden>没有匹配的效果器，试试名称或厂商</p></div>
-        <div class="table-foot"><span>点击名称查看版本、样本条件及分布 · — 无样本</span><nav aria-label="效果器分页"><span id="plugin-page"></span><button id="plugin-prev" type="button" aria-label="效果器上一页">←</button><button id="plugin-next" type="button" aria-label="效果器下一页">→</button></nav></div>
+        <div class="panel-head"><div><h2 id="plugins-title">效果器</h2></div><span class="panel-count" id="plugin-count"></span></div>
+        <div class="table-tools"><label class="search"><span>⌕</span><input id="plugin-search" type="search" placeholder="搜索效果器、厂商" aria-label="搜索效果器、厂商" autocomplete="off"></label><label class="filter">排序 <select id="plugin-order"><option value="users">安装样本</option><option value="sampled">处理样本</option><option value="mean">处理均耗</option><option value="name">名称</option></select></label><select id="perf-condition" aria-label="性能采样条件" title="诊断采样；CPU、版本与参数未统一，不作横向性能排名"></select></div>
+        <div class="table-space"><table id="plugin-table"><caption>效果器安装量与诊断处理样本，缺失字段为空</caption><colgroup><col class="rank-col"><col><col class="vendor-col"><col class="user-col"><col class="user-col"><col class="perf-col"><col class="perf-col"></colgroup><thead><tr><th>#</th><th data-key="name"><button type="button">效果器</button></th><th data-key="vendor"><button type="button">厂商</button></th><th data-key="users" aria-sort="descending"><button type="button">安装 ↓</button></th><th data-key="sampled" title="所选条件下有处理记录的安装数"><button type="button">处理样本</button></th><th data-key="mean" title="各安装最新诊断均耗再平均，不是中位数"><button type="button">均耗 μs</button></th><th data-key="peak" title="保留采样中的最大峰值，不是 P95"><button type="button">峰值 μs</button></th></tr></thead><tbody></tbody></table><p class="empty" id="plugin-empty" hidden>没有匹配的效果器，试试名称或厂商</p></div>
+        <div class="table-foot"><nav aria-label="效果器分页"><span id="plugin-page"></span><button id="plugin-prev" type="button" aria-label="效果器上一页">←</button><button id="plugin-next" type="button" aria-label="效果器下一页">→</button></nav></div>
       </section>
 
-      <section class="panel buffer-panel" aria-labelledby="buffer-title"><div class="small-head"><h2 id="buffer-title">缓冲分布 <span>BUFFER SIZE</span></h2><span>frames</span></div><div id="buffer-chart" class="columns" aria-label="缓冲帧数分布"></div><div class="small-foot">按各安装最新有效配置 · 缺失单列</div></section>
-      <section class="panel rate-panel" aria-labelledby="rate-title"><div class="small-head"><h2 id="rate-title">采样率 <span>SAMPLE RATE</span></h2><span>kHz</span></div><div id="rate-chart" class="horizontal"></div><div class="small-foot">音频配置样本，与设备检出量分开统计</div></section>
-      <section class="panel trend-panel" aria-labelledby="trend-title"><div class="small-head"><h2 id="trend-title">启动安装样本 <span>30 DAYS</span></h2><span id="trend-range"></span></div><div id="trend-chart" class="trend"></div><div class="small-foot">按接收日期去重 · 持续运行未启动的安装不计入</div></section>
-      <section class="panel version-panel" aria-labelledby="version-title"><div class="small-head"><h2 id="version-title">版本分布 <span>VERSIONS</span></h2><span>最新上报</span></div><div id="version-chart" class="horizontal"></div><div class="small-foot">按窗口内每个安装的最新有效版本</div></section>
+      <section class="panel buffer-panel" aria-labelledby="buffer-title"><div class="small-head"><h2 id="buffer-title">缓冲</h2><span>frames</span></div><div id="buffer-chart" class="columns" aria-label="缓冲帧数分布"></div></section>
+      <section class="panel rate-panel" aria-labelledby="rate-title"><div class="small-head"><h2 id="rate-title">采样率</h2><span>kHz</span></div><div id="rate-chart" class="horizontal"></div></section>
+      <section class="panel trend-panel" aria-labelledby="trend-title"><div class="small-head"><h2 id="trend-title">每日启动安装数</h2><span id="trend-range"></span></div><div id="trend-chart" class="trend"></div></section>
+      <section class="panel version-panel" aria-label="版本或厂商分布"><div class="small-head"><select id="distribution" aria-label="分布内容"><option value="versions">声核版本</option><option value="vendors">效果器厂商</option></select><span id="distribution-unit"></span></div><div id="version-chart" class="horizontal"></div></section>
     </div>
 
-    <footer class="footer"><span><i class="status-dot"></i>静态快照 <b>·</b> 无实时刷新</span><span class="demo-note">界面方案：全部数字为演示，不代表真实人数、设备排名或性能结论</span><span>1600 × 900 <b>·</b> 等比适配 <b>·</b> 01</span></footer>
-    <dialog id="detail-dialog" aria-labelledby="detail-title"><div class="dialog-head"><div><span class="eyebrow">SNAPSHOT DETAIL · 演示数据</span><h2 id="detail-title"></h2></div><button type="button" data-close aria-label="关闭详情">×</button></div><div id="detail-content"></div></dialog>
-    <dialog id="method-dialog" aria-labelledby="method-title"><div class="dialog-head"><div><span class="eyebrow">DESIGN NOTES · 第 1 版</span><h2 id="method-title">统计口径与接入规划</h2></div><button type="button" data-close aria-label="关闭统计口径">×</button></div><div class="method-content">
-      <p class="notice">这是可操作的界面方案，所有数字与曲线均为构造的演示数据；未连接管理 API，不在正式官网发布。</p>
-      <dl class="method-grid"><dt>更新方式</dt><dd>建议每月或重要版本后，手动生成一次汇总快照。页面一次加载静态文件，无轮询与常驻连接；显示实际生成时间及样本起止日期。</dd><dt>用户量</dt><dd>现有匿名安装标识只能得到安装样本，不能准确得到真实用户数。声卡检出、效果器安装、效果器启用分别计算分母，不相加为全站人数。</dd><dt>声卡型号</dt><dd>从每个安装最新设备报告聚合。保留驱动类别，使用经过核对的型号映射；虚拟驱动单列，不能用驱动名猜具体硬件。缓冲和采样率需核对实际运行配置来源，缺失显示“—”。</dd><dt>效果器目录</dt><dd>复用现有完整清单数据库，按 FUID 与版本统计安装样本。跨版本去重需回到安装级来源，不能直接相加版本计数；不完整清单不覆盖有效清单。</dd><dt>效果器性能</dt><dd>展示同采样率、缓冲、声道数、插件版本和处理条件下的中位数、P95 与样本量。启用样本、CPU 型号与实际处理耗时需逐项核对可用来源；缺失时保留空值，不用安装量或操作耗时替代。</dd><dt>可以先接入</dt><dd>安装样本、每日启动安装样本、声核版本、声卡检出量、效果器目录与厂商覆盖。现有设备统计以驱动检出为主，不能直接称作真实使用声卡排行。</dd><dt>发布边界</dt><dd>仅导出经过审核的聚合白名单。移除安装标识、IP、路径、事件原文与自由文本；稀疏组合合并展示。原始资料与管理凭据不进入静态目录。</dd></dl>
-      <p class="method-tail">画布固定 1600 × 900，按可用宽高中的较小比例整体缩放并居中。表格分页固定行高；主题、搜索与详情不改变面板占位。窄屏仍保留完整布局，可用浏览器放大查看。</p>
-    </div></dialog>
+    <dialog id="detail-dialog" aria-labelledby="detail-title"><div class="dialog-head"><div><h2 id="detail-title"></h2></div><button type="button" data-close aria-label="关闭详情">×</button></div><div id="detail-content"></div></dialog>
   </main>
-  <noscript>请启用 JavaScript 查看本地演示统计。所有数字为演示数据。</noscript>
+  <noscript>请启用 JavaScript 查看统计</noscript>
 </body>
 </html>
