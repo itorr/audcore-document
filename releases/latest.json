@@ -1,4 +1,4 @@
 {
-  "payload": "{\"version\":\"v0.0.1635\",\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-setup-v0.0.1635.exe\",\"size\":5333507,\"sha256\":\"ab1b4e8be9017d1b7bb6b37d7fd580d90fab1b125f22ba7454b5a239e8a90b34\",\"notes\":\"破坏性更新：WASAPI 改为统一的输入、输出设备表。升级后请检查设备及通道路由，不可用项需重新选择。播放回环默认关闭。请先查看完整更新说明。\",\"portable\":{\"url\":\"https://audcore.utae.cn/releases/v0.0.1635/audcore-portable.exe\",\"size\":10836480,\"sha256\":\"b731bb7f17820e2510b25dbb35cd53ac47eea0656ffdd65b16a3e7c7e2a7150a\"}}",
-  "signature": "XaVPCO+Qf80RG/JNErL3mNcVRD88TRzdEAqLNGqj8O2Miwo5Z/7lhmYvx49VuuyF4wL3eNA0dBqmaesNvyW6BQ=="
+  "payload": "{\"version\":\"v0.0.1653\",\"url\":\"https://audcore.utae.cn/releases/v0.0.1653/audcore-setup-v0.0.1653.exe\",\"size\":5339971,\"sha256\":\"1c93f204b197222d55c8e37ebabe6e53fb5acb67fb152e87023682d137a2e7d9\",\"notes\":\"改善伴奏、混音、人声及扩展跳线输出的连续性，减少声音卡顿和断续；跳线优先保证稳定，播放延迟可能增加，普通硬件耳返保持原有策略。；修复导入 Reaper（RPP）和 Studio One（SONG）工程时，原本未开启监听的普通通道被意外启用的问题，保留总线、效果返回和主输出的原有状态。\",\"portable\":{\"url\":\"https://audcore.utae.cn/releases/v0.0.1653/audcore-portable.exe\",\"size\":10856448,\"sha256\":\"228b801081b35759b7b0cfe200a9b668448f695745d9c57ce4942d252338bd61\"}}",
+  "signature": "yxFjBRO6Bf1rewxe9MI7au6d402h23qbJfngpoDqOPNTy5ZXxkSezptJLwoh4LI7N1lb+VCEul/3kHoqDHFkCw=="
 }
