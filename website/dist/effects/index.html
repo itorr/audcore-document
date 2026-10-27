@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="认识声核 Audcore 的独立 VST3 效果器：降噪、压缩、均衡、混响、音色与创意声音。提供 JING 静音降噪独立版夸克网盘下载。">
+  <meta name="theme-color" content="#fafbfc">
+  <title>效果器 - 声核 Audcore</title>
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/effects.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/" aria-current="page">效果器</a><a href="/guide/">指北</a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
+  </header>
+  <main id="main">
+    <section class="page-header wrap">
+      <h1>每一种声音，<br>都有自己的调法。</h1>
+      <p>从干净的人声，到有趣的音色。认识声核的独立 VST3 效果器，为自己的效果链找到合适的一环。</p>
+    </section>
+    <div class="wrap page-content effects-page">
+      <section class="effects-download" id="jing-download" aria-labelledby="download-title">
+        <div><p class="effect-code">JING · Windows x64 · VST3</p><h2 id="download-title">静音降噪，单独带走。</h2><p>JING v1.11.0 已独立发布。在声核或其他支持 VST3 的 Windows 宿主中使用，无需安装声核主程序。</p></div>
+        <div class="effects-download-action"><a class="pill" href="https://pan.quark.cn/s/60a64420ed63" target="_blank" rel="noopener noreferrer">夸克下载 JING</a><p>JING-v1.11.0.vst3 · 248.5 KiB</p></div>
+      </section>
+      <nav class="effects-toc" aria-label="效果器分类"><a href="#vocal">人声与动态</a><a href="#space">空间与融合</a><a href="#tone">音色与质感</a><a href="#creative">创意声音</a><a href="#utility">实用工具</a><a href="#use">如何使用</a></nav>
+      <p class="effects-note">以下介绍当前独立插件系列。部分效果器也随声核内置；独立版按各自发布进度提供，本页目前提供 JING 下载。试听版本已单独标注。</p>
+      <section class="effects-group" id="vocal" aria-labelledby="vocal-title">
+        <h2 id="vocal-title">人声与动态</h2><p>先整理底噪、音量与齿音，让说话和演唱更从容。</p>
+        <div class="chain-list effects-grid">
+          <article id="jing"><p class="effect-code">JING</p><h3>静音降噪</h3><p>在人声停顿时压低风扇、空调等持续底噪，发声时逐步放开对应频带。用一根强度杆平衡安静程度与自然感，可配合 80 Hz 低切减轻低频轰鸣。</p><p class="effect-tip">放在人声链前部，从较低强度开始。它不做人声与噪声分离，开口时仍可能带起底噪。</p><a href="#jing-download">下载独立版 JING v1.11.0</a></article>
+          <article id="jiang"><p class="effect-code">JIANG</p><h3>多频段降噪</h3><p>把声音分为六个频段，分别设置降噪门槛、最大衰减与偏置。配合自适应、慢速跟随及高低切，对不同频段的噪声做更细的取舍。</p><p class="effect-tip">适合需要逐段调节的场景；先处理最明显的噪声频段，再调整其他频段。</p></article>
+          <article id="tai"><p class="effect-code">TAI</p><h3>抬升压缩</h3><p>用一根推杆收拢人声的音量起伏，让轻声更容易听见、大声更稳。保留可选低切，适合直播说话与实时演唱的快速调整。</p><p class="effect-tip">放在降噪之后，一边说话一边增加压缩，听清字句即可。</p></article>
+          <article id="chi"><p class="effect-code">CHI</p><h3>去齿音</h3><p>收敛人声中突出的“嘶”“齿”声。门槛决定何时介入，范围决定最多压下多少，方便在清晰度和柔和度之间取舍。</p><p class="effect-tip">用齿音明显的句子调节，避免把正常辅音也压得发闷。</p></article>
+          <article id="xian"><p class="effect-code">XIAN</p><h3>峰值限制</h3><p>控制过高峰值，设置输出上限，为最终输出保留余量。提供门槛、释放、上限与前瞻调节。</p><p class="effect-tip">适合放在输出链末端。增加前瞻会增加处理延迟，实时监听时按需要取舍。</p></article>
+          <article id="heng"><p class="effect-code">HENG</p><h3>自动音色</h3><p>在持续说话或演唱中慢慢学习人声，形成温和的音色修正。用强度和温暖度控制方向，满意后停止学习，保存当前结果。</p><p class="effect-tip">给它听到不同音域与力度；更换人或麦克风时重新学习。作为独立 VST3 使用。</p></article>
+        </div>
+      </section>
+      <section class="effects-group" id="space" aria-labelledby="space-title">
+        <h2 id="space-title">空间与融合</h2><p>让伴奏让出位置，也让声音拥有合适的距离。</p>
+        <div class="chain-list effects-grid">
+          <article id="yi"><p class="effect-code">YI</p><h3>伴奏融合</h3><p>由人声侧链触发伴奏的频段避让，让演唱出现时伴奏适度后退。通过深度、灵敏度、重心和释放调整融合程度。</p><p class="effect-tip">插在伴奏通道，把麦克风送入它的侧链。只插入插件而不接侧链，无法按人声避让。</p></article>
+          <article id="san"><p class="effect-code">SAN</p><h3>融合混响</h3><p>给干声补上空间和尾韵。融合、层次、尾音、音色与清晰度共同决定混响的远近与浓淡，也可切换发送用途。</p><p class="effect-tip">直接插在人声链时适量融合；独立混响通道使用发送方式，再由通道音量控制整体混响量。</p></article>
+          <article id="ying"><p class="effect-code">YING</p><h3>耳畔环绕</h3><p>通过强度、距离与速度塑造耳畔移动的空间感，让声音有更明显的远近与环绕变化。</p><p class="effect-tip">用耳机试听更直观，先从较轻强度和较慢速度开始。</p></article>
+          <article id="xiao"><p class="effect-code">XIAO</p><h3>消除回声</h3><p>用一根强度杆减轻输入中的回声感，适合尝试整理房间或收音环境带来的重复与拖尾。</p><p class="effect-tip">边听人声边调整强度；明显的房间反射仍应优先从麦克风距离与环境改善。</p></article>
+        </div>
+      </section>
+      <section class="effects-group" id="tone" aria-labelledby="tone-title">
+        <h2 id="tone-title">音色与质感</h2><p>从细致修整，到一点温暖、明亮或磁带味。</p>
+        <div class="chain-list effects-grid">
+          <article id="eq"><p class="effect-code">JUN · EQ</p><h3>动态均衡</h3><p>用多段均衡调整声音轮廓，也可让频段随输入电平动态变化。按需处理轰鸣、突出频率与明亮度，保留更细的音色控制。</p><p class="effect-tip">先听出需要处理的位置，再少量调整；动态处理适合只在某些字句出现的频率突出。</p></article>
+          <article id="huan"><p class="effect-code">HUAN</p><h3>高频激励</h3><p>为声音增加明亮度与高频质感。用强度控制染色，用重心选择侧重位置，并可配合高切整理最上方的高频。</p><p class="effect-tip">从轻量开始，交替旁通试听，避免把齿音和底噪一同推得太突出。</p></article>
+          <article id="run"><p class="effect-code">RUN</p><h3>自然饱和</h3><p>用适度饱和增加声音密度与质感，一根强度杆控制变化。提供零延迟选项，方便按监听需求选择。</p><p class="effect-tip">适合轻量润色；增加强度时留意输出响度，避免只因为更响而误判效果。</p></article>
+          <article id="tape"><p class="effect-code">TAPE</p><h3>磁带过载</h3><p>用一根强度杆增加磁带方向的厚度、饱和与动态收拢，从轻微染色逐步推向更明显的过载质感。</p><p class="effect-tip">从默认的轻量设置开始，适合为人声或音乐补一点厚度。</p></article>
+          <article id="tapew"><p class="effect-code">TAPEW · 试听版</p><h3>磁带厚润</h3><p>偏向饱满柔和的磁带音色，保留低频余量，用较缓的压缩和温和高频谐波增加密度。</p><p class="effect-tip">与 TAPE 使用不同插件身份，可并排试听，不覆盖原有实例。</p></article>
+          <article id="tapet"><p class="effect-code">TAPET · 试听版</p><h3>磁带紧实</h3><p>用更快的动态收拢、略收的低频和较开放的高频，让声音轮廓更明确、节奏更紧凑。</p><p class="effect-tip">可与厚润版使用相同强度对比，根据声音素材选择。</p></article>
+        </div>
+      </section>
+      <section class="effects-group" id="creative" aria-labelledby="creative-title">
+        <h2 id="creative-title">创意声音</h2><p>让声音成为角色，也成为表演的一部分。</p>
+        <div class="chain-list effects-grid">
+          <article id="wei"><p class="effect-code">WEI</p><h3>电话音</h3><p>把声音变成窄频、带有电话感的音色。用强度调整效果与原声的融合，适合对白、段落切换和趣味互动。</p><p class="effect-tip">需要恢复清晰原声时，降低强度或旁通即可。</p></article>
+          <article id="dian"><p class="effect-code">DIAN</p><h3>电音</h3><p>面向单个人声的快速锁音效果。选择主音及半音、大调或小调，再用强度控制音高纠正程度。</p><p class="effect-tip">放在独立人声通道，不用于和弦或混合伴奏；它不提供独立共振峰矫正。</p></article>
+          <article id="pix"><p class="effect-code">PIX</p><h3>像素话</h3><p>把人声的音高、力度与说话节奏变为像素单音。音调、明亮度与锐化控制角色感，强度决定与原声的融合。</p><p class="effect-tip">完整效果不保留原来的字词，适合角色互动与游戏风格声音。作为独立 VST3 使用。</p></article>
+          <article id="mori"><p class="effect-code">MORI</p><h3>动森口音</h3><p>把实时人声变成短小、带抑扬的角色合成音。调整音调和速度，得到轻快或低沉的小动物说话氛围。</p><p class="effect-tip">不使用游戏原始语音，也不按文字逐字生成；完整强度不保留原人声字词。作为独立 VST3 使用。</p></article>
+          <article id="hajimi"><p class="effect-code">HAJIMI</p><h3>哈基米</h3><p>让人声、吉他等有明显起音的声音驱动“哈基米／曼波”音节序列。每次起音推进一个片段，音高、时值与力度跟随实时演奏。</p><p class="effect-tip">按输入选择人声、乐器或通用模式，再调整门槛与灵敏度。不是按一下就独立播放的音效。作为独立 VST3 使用。</p></article>
+        </div>
+      </section>
+      <section class="effects-group" id="utility" aria-labelledby="utility-title">
+        <h2 id="utility-title">实用工具</h2><p>对齐声音，也整理游戏里的轻重细节。</p>
+        <div class="chain-list effects-grid">
+          <article id="sampledelay"><p class="effect-code">SAMPLEDELAY</p><h3>采样延迟</h3><p>按秒、毫秒与采样点设置声音延迟，细调不同信号的到达时间。</p><p class="effect-tip">用于给较早到达的一路加延迟；它不能让已经落后的声音提前。</p></article>
+          <article id="bu"><p class="effect-code">BU</p><h3>脚步增强</h3><p>面向游戏立体声输出，减轻低频轰鸣、抬升安静的中频细节，并收敛大冲击声。增强、抬升、收敛、重心与输出分别控制力度。</p><p class="effect-tip">放在游戏音频到耳机的链路中。它不识别敌我，也不分离脚步，其他弱声同样可能被增强。作为独立 VST3 使用。</p></article>
+        </div>
+      </section>
+      <section class="effects-use reading" id="use" aria-labelledby="use-title"><h2 id="use-title">如何使用独立效果器</h2><ol><li>下载已发布的独立 VST3 文件；压缩包需要先完整解压。</li><li>把插件放进宿主的 VST3 扫描目录。在声核中也可使用程序旁的 VST3 目录。</li><li>在宿主中扫描效果器，按名称添加到需要的通道，再打开参数界面调节。</li></ol><p>独立 VST3 需要宿主加载，不能双击当作独立程序运行。YI 等侧链效果还需要宿主支持并连接侧链。</p><p>初次使用声核，可以查看
+      <a href="/guide/">声核指北</a>
+      了解通道与效果链的基本操作。</p></section>
+    </div>
+  </main>
+  <footer class="site-footer wrap"><div class="footer-bottom"><small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a></div></footer>
+</body>
+</html>

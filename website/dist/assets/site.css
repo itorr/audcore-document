@@ -1402,6 +1402,15 @@ a:any-link, a:hover, a:focus, a:active { text-decoration:none; }
 .recording-table th, .recording-table td { padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
 .recording-table thead, .recording-table tbody tr:nth-child(even) { background: rgba(128,128,128,.07); }
 .recording-table th:first-child { width: 100px; }
+
+/* Leave room for all four primary links on compact screens. */
+@media(max-width:480px) {
+  .site-header { gap:12px; }
+  .site-header nav { gap:12px; font-size:13px; }
+  .site-header .brand { --brand-icon-size:44px; padding-left:52px; }
+  .site-header .brand-name strong { font-size:20px; line-height:24px; }
+  .site-header .brand-name>span { font-size:12px; line-height:16px; }
+}
 @media (max-width: 480px) { .recording-table { font-size: 12px; } .recording-table th, .recording-table td { padding: 8px 5px; } }
 
 /* Virtual routing comparisons use the existing reading-page typography. */
