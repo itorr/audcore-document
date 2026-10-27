@@ -3,27 +3,11 @@
 .effects-download p { margin:0; }
 .effects-download-action { text-align:center; }
 .effects-download-action p { margin-top:12px; font-size:13px; color:var(--muted); overflow-wrap:anywhere; }
-.effects-toc { display:flex; flex-wrap:wrap; gap:10px; margin:32px 0 20px; }
-.effects-toc a { padding:10px 16px; border-radius:12px; background:#f5f5f7; font-size:14px; }
-.effects-toc a:hover { background:#e9edf3; color:var(--blue); }
-.effects-note,.effect-tip { color:var(--muted); }
-.effects-note { max-width:760px; font-size:14px; }
-.effects-group { margin-top:64px; scroll-margin-top:28px; }
-.effects-group>h2,.effects-use>h2 { font-size:30px; margin:0 0 12px; }
-.effects-group>p { color:var(--muted); margin:0 0 24px; }
-.effects-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-.effects-grid article { min-width:0; scroll-margin-top:28px; }
 .effect-code { color:var(--muted); font-size:13px; font-weight:650; letter-spacing:.06em; }
-.effects-grid h3 { font-size:24px; margin:8px 0 16px; }
-.effects-grid p { margin:0 0 14px; }
-.effects-grid p:last-child { margin-bottom:0; }
-.effects-grid .effect-tip { font-size:14px; }
-.effects-grid a,.effects-use a { color:var(--blue); }
+.effects-use>h2 { font-size:30px; margin:0 0 12px; }
 .effects-use.reading { max-width:760px; margin:64px 0 0; padding:0; }
 .site-header nav a[aria-current="page"] { color:var(--blue); font-weight:700; }
 @media(max-width:700px) {
   .effects-download { grid-template-columns:1fr; gap:24px; padding:24px; }
   .effects-download-action { text-align:left; }
-  .effects-grid { grid-template-columns:1fr; }
-  .effects-group { margin-top:48px; }
 }
