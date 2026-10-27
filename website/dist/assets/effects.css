@@ -4,10 +4,19 @@
 .effects-download-action { text-align:center; }
 .effects-download-action p { margin-top:12px; font-size:13px; color:var(--muted); overflow-wrap:anywhere; }
 .effect-code { color:var(--muted); font-size:13px; font-weight:650; letter-spacing:.06em; }
-.effects-use>h2 { font-size:30px; margin:0 0 12px; }
+.effects-builtins>h2,.effects-use>h2 { font-size:30px; margin:0 0 12px; }
 .effects-use.reading { max-width:760px; margin:64px 0 0; padding:0; }
 .site-header nav a[aria-current="page"] { color:var(--blue); font-weight:700; }
+.effects-builtins { margin-top:64px; }
+.effects-builtins>p { margin:0 0 24px; color:var(--muted); }
+.effects-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin-bottom:24px; }
+.effects-grid article { min-width:0; }
+.effects-grid h3 { margin:8px 0 16px; font-size:24px; }
+.effects-grid p { margin:0 0 14px; }
+.effects-grid p:last-child { margin-bottom:0; }
+.effects-builtins a { color:var(--blue); }
 @media(max-width:700px) {
+  .effects-grid { grid-template-columns:1fr; }
   .effects-download { grid-template-columns:1fr; gap:24px; padding:24px; }
   .effects-download-action { text-align:left; }
 }
