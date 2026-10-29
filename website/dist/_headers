@@ -30,3 +30,7 @@
   Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Resource-Policy: same-origin
   Permissions-Policy: loopback-network=(self), local-network=(self)
+
+/favicon.ico
+  Content-Type: image/x-icon
+  Cache-Control: public, max-age=3600, must-revalidate
