@@ -1,0 +1,14 @@
+:root { background: transparent; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+canvas {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: min(100vw, 100vh);
+	height: min(100vw, 100vh);
+	aspect-ratio: 1;
+	object-fit: contain;
+	pointer-events: none;
+}

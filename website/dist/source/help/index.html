@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="把声核声音与声控动画接入 OBS 或直播姬。"><title>网页源说明 - 声核 Audcore</title><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="./help.css"><script type="module" src="./help.mjs"></script></head><body>
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site-header wrap"><a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a><nav aria-label="主导航"><a href="/">首页</a><a href="/effects/">效果器</a><a href="/guide/">指北</a></nav></header>
+<main id="main"><section class="page-header wrap"><h1>网页源说明</h1><p>把声音与声控动画接入直播软件。</p></section>
+<div class="wrap page-content reading">
+<section aria-labelledby="address-title"><h2 id="address-title">复制当前网页源地址</h2>
+<p>添加网页源时，声核会自动复制地址。也可以在对应发送上右键打开本页，再复制一次。</p>
+<label class="source-label" for="source-address">网页源地址</label>
+<input class="source-address" id="source-address" type="text" readonly spellcheck="false" aria-describedby="copy-status">
+<div class="source-actions"><button type="button" class="pill" id="copy-address" disabled>复制网页源地址</button><span id="copy-status" role="status" aria-live="polite"></span></div>
+<p>请在声核所在的同一台电脑使用。保持声核运行，并保留这条网页源发送；声音只在本机传输。</p>
+</section>
+<section id="obs"><h2>在 OBS 中使用</h2><ol>
+<li>在“来源”中添加“浏览器”，把上面的完整地址粘贴到 URL，关闭“本地文件”。</li>
+<li>宽度、高度先都填 <strong>512</strong>，帧率设为 <strong>30</strong>。画面是透明背景，不需要抠像。</li>
+<li>在浏览器源属性中勾选<strong>“通过 OBS 控制音频”</strong>，让这一路声音出现在 OBS 音频混音器中，并取消静音。</li>
+<li>打开音频混音器的“高级音频属性”。声核已经提供本地耳返时，网页源选<strong>“监听关闭”</strong>，声音仍进入直播；需要通过 OBS 听这一路时才选<strong>“监听并输出”</strong>，并在 OBS 的高级音频设置中选择耳机作为监听设备。</li>
+<li>不要选“仅监听（输出静音）”来送直播；同时确认网页源勾选了正在推流使用的音轨。</li>
+</ol>
+<p>想切换场景时不断声，保留同一份网页源，关闭“不可见时关闭源”和“场景激活时刷新浏览器”。声音需要跟随场景停止时，再按需求启用前者。</p>
+<p>OBS 的浏览器源属性说明见
+<a href="https://obsproject.com/kb/browser-source" target="_blank" rel="noopener noreferrer">OBS 官方文档</a>
+。</p></section>
+<section id="bililive"><h2>在哔哩哔哩直播姬中使用</h2><ol>
+<li>添加“网页”或“浏览器”素材，粘贴完整地址；素材宽高先都填 <strong>512</strong>。</li>
+<li>若网页素材提供独立音量、音频输出或监听设置，优先让它<strong>直接输出到直播混音</strong>，取消静音；先关闭额外监听。不同版本选项名称可能不同，按“输出到直播”和“仅本机监听”区分。</li>
+<li>若该版本把网页声音播放到 Windows 的扬声器设备，在直播姬的扬声器采集列表中选择<strong>网页实际播放的同一台设备</strong>。可以在 Windows 音量混合器中核对直播姬的播放设备。</li>
+<li>网页独立音频输出与扬声器采集同一份声音，二者保留一路。先用本地短录或预览回放确认观众端能听见，再开播。</li>
+</ol>
+<p>版本和声音设置入口以
+<a href="https://www.bilibili.com/blackboard/activity-ZsCOtSzYUJ.html" target="_blank" rel="noopener noreferrer">直播姬官方帮助手册</a>
+及当前客户端为准。</p></section>
+<section id="size"><h2>网页源尺寸怎么设</h2><ul>
+<li>推荐先填 <strong>512 × 512</strong>；需要小一点可用 <strong>256 × 256</strong>，最小原生画布是 <strong>128 × 128</strong>。</li>
+<li>保持宽高相同，再在直播画布中等比缩放。横向或竖向的素材区域也会把动画居中放进最大的正方形，完整显示。</li>
+<li>不要拉伸或裁切素材；如果变形，先重置变换，再恢复相同的宽度与高度。</li>
+<li>内部动画固定为 128 × 128 渲染，设置较大的网页尺寸不会提高内部渲染分辨率。画面只有 canvas，没有标题、按钮或连接文字。</li>
+</ul></section>
+<section id="sound"><h2>避免重音与回声</h2><ul>
+<li>选择混音通道发送时，里面已经有的人声和伴奏，不要在直播软件里重复采集。</li>
+<li>声核本地耳返继续沿用原设置。网页源保留约半秒播放缓冲，适合直播取声与展示，不用来做实时耳返。</li>
+<li>只保留需要的一个收听页面，关闭用于试听的重复标签页。声音与摄像头需要同步时，按实际短录结果调整直播软件的视频延迟。</li>
+</ul></section>
+<section id="connect"><h2>没声音时检查</h2><ol>
+<li>确认声核正在运行、这条发送已启用，且发送音量与对应通道有实际声音。</li>
+<li>确认粘贴的是完整地址，包含端口参数和 <code>#token=…</code> 后的内容；从声核右键说明页重新复制。</li>
+<li>浏览器若询问访问本机网络，请允许。在普通浏览器里自动播放受限时，点一下 canvas；OBS 中可打开该来源的“交互”后点击。播放器仍不会出现文字或按钮。</li>
+<li>确认直播软件没有静音网页源、没有只监听而关闭直播输出；等待缓冲完成。若仍无声，刷新网页源一次。</li>
+</ol></section>
+</div></main></body></html>

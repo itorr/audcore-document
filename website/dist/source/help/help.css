@@ -1,0 +1,45 @@
+.source-label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 600;
+}
+.source-address {
+	width: 100%;
+	min-width: 0;
+	height: 48px;
+	padding: 0 14px;
+	font: inherit;
+	font-size: 14px;
+	color: var(--ink);
+	background: var(--surface);
+	border: 0;
+	border-radius: 12px;
+}
+.source-address:focus-visible {
+	outline: 2px solid var(--blue);
+	outline-offset: 2px;
+}
+.source-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 16px 0;
+}
+.source-actions .pill {
+	border: 0;
+	cursor: pointer;
+	flex: 0 0 auto;
+}
+.source-actions .pill:disabled {
+	opacity: .5;
+	cursor: default;
+}
+#copy-status {
+	flex: 0 0 100%;
+	height: 48px;
+	line-height: 24px;
+	overflow: auto;
+	color: var(--muted);
+}
+.reading code { overflow-wrap: anywhere; }

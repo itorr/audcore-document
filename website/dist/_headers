@@ -23,3 +23,10 @@
 
 /sdk/1.1.0/audcore.d.ts
   Content-Type: text/plain; charset=utf-8
+
+/source/*
+  Cache-Control: no-store
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Resource-Policy: same-origin
+  Permissions-Policy: loopback-network=(self), local-network=(self)
