@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核常见问题：导入 Studio One 和 REAPER 工程、效果器兼容、输入输出与声音排查。"><meta name="theme-color" content="#fafbfc"><title>常见问题与工程导入 - 声核 Audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/">效果器</a><a href="/guide/" aria-label="指北"><span class="nav-full">指北</span><span class="nav-short" aria-hidden="true">指北</span></a><a href="/gallery/" aria-label="效果链" hidden><span class="nav-full">效果链</span><span class="nav-short" aria-hidden="true">效果链</span></a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
+  </header>
+<main id="main"><section class="page-header wrap"><h1>常见问题与工程导入</h1><p>导入 Studio One、REAPER 工程，以及使用声核时的常见问题。</p></section>
+<div class="wrap reading">
+<section class="guide-panel"><h2>先了解导入范围</h2>
+<p>声核是实时调音台，不是 Studio One 或 REAPER 的完整替代品。导入工程的目的，是尽可能迁移双方具有相同概念的部分，例如通道、效果器及其顺序、可恢复的 VST3 参数和部分路由。具体结果取决于原工程、插件和设备，不能保证所有同类内容都能完整还原。</p>
+<p><strong>声核只承诺处理双方具有相同概念的部分，不承诺还原原软件独有的功能或整个工程。</strong>时间轴、音频素材、MIDI、自动化及原软件专有功能等，请继续在原软件中使用，或自行寻找替代方式。导入后需要自己检查并调整效果器、参数和连接，确认声音符合预期。</p></section>
+<section class="guide-panel"><h2>怎么导入工程？</h2><ol><li>先在原软件保存工程，并保留原文件备份。</li><li>在声核设置中扫描已安装的 VST3 效果器。</li><li>通过“打开文件”选择 Studio One 的 <code>.song</code> 或 REAPER 的 <code>.rpp</code>；也可以将文件拖入控制台。</li><li>查看导入提示，检查每个通道的效果器、参数、输入输出和发送。先调低监听音量，再逐路试听，确认后保存为声核预设。</li></ol></section>
+<section class="guide-panel"><h2>工程导入常见问题</h2>
+<div class="guide-answer"><h3>为什么有些效果器不能用？</h3><p>声核加载 VST3 效果器。原工程使用的 VST2、Studio One 或 REAPER 自带的专有效果器及其他格式，不能自动转换成 VST3；部分不可用效果器会保留占位并提示。</p><p>如果厂商提供独立 VST3，可以安装并扫描后，在声核中手动添加，参照原工程重新设置参数。格式不同不代表参数可以自动转换；没有可用 VST3 时，请自行选择替代效果器，或继续在原软件中使用。</p></div>
+<div class="guide-answer"><h3>明明安装了 VST3，为什么仍找不到？</h3><p>确认安装的是当前电脑可用的 VST3，而不只是 VST2 或另一台电脑上的插件；在声核设置中检查扫描目录并重新扫描。确认插件已完成厂商要求的授权。名称相同也不一定是同一个插件或同一变体，版本、插件身份或单声道／立体声变体不同都可能无法匹配。</p><p>检查插件是否因扫描或加载失败被隔离；确认插件安全且问题已解决后，可解除隔离并重试扫描。仍无法匹配时，可以手动添加可用插件并重新调整参数。</p></div>
+<div class="guide-answer"><h3>效果器出现了，为什么参数或声音不一样？</h3><p>导入会尝试恢复可读取的 VST3 状态，但插件版本、授权、状态数据或宿主之间的差异可能影响恢复；相同名称也不保证是同一个插件。导入成功不等于声音完全一致。</p><p>在原软件中打开工程，对照插件版本、预设、各项参数、旁通状态和效果器顺序，必要时手动调整；也可以尝试用插件自身的预设导出与导入功能。替换效果器时需要自行重新调音。</p></div>
+<div class="guide-answer"><h3>为什么导入后没有声音，或声音走错地方？</h3><p>原工程使用的声卡、端口和路由在当前电脑上可能不存在或不同。检查声核中的音频设备、通道输入输出、静音、推子及发送目标；无法匹配的设备需要手动重新选择。总线、侧链和发送也应逐项核对，不能假设所有复杂路由都已还原。</p></div>
+<div class="guide-answer"><h3>为什么没有导入音频片段和自动化？</h3><p>工程导入面向实时调音台中可对应的内容，不是完整的工程转换。素材编辑、时间轴编排、MIDI 和自动化等内容请在原工作站处理；需要实时使用的部分可自行重建或调整工作方式。</p></div>
+<div class="guide-answer"><h3>工程打不开怎么办？</h3><p>先确认选择的是原软件保存的完整 <code>.song</code> 或 <code>.rpp</code> 工程，而非快捷方式或其他文件；回到原软件确认工程能正常打开，并另存一份后重试。声核支持部分加密的 Studio One 工程，不代表支持所有加密或特殊格式。仍有问题时，请提供声核版本、原软件版本、错误提示和复现步骤；分享工程前请先检查其中的个人信息和授权内容。</p></div></section>
+<section class="guide-panel"><h2>其他常见问题</h2>
+<div class="guide-answer"><h3>有电平但听不到声音？</h3><p>检查通道是否静音、输出是否连接到耳机或扬声器，以及声卡和系统音量。逐路检查发送和监听，避免同时监听原声与处理后的声音。</p></div>
+<div class="guide-answer"><h3>监听延迟或爆音怎么办？</h3><p>检查设备缓冲和效果器自身延迟。爆音时可适当增大缓冲；延迟明显时，逐个旁通效果器排查，并在稳定的前提下调整缓冲。</p></div>
+<div class="guide-answer"><h3>关闭窗口会停止处理吗？</h3><p>关闭控制台窗口后声核仍在托盘运行；结束使用请选择“退出声核”。</p></div>
+<p>更多操作请看
+<a href="/guide/">指北</a>
+；遇到无法解决的问题，可在
+<a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+说明版本、设备、操作步骤及实际结果。</p></section></div></main>
+<footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/sponsor/">赞助</a>
+    <a href="/guide/#agreement">协议</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+</body></html>
