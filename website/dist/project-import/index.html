@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核常见问题：导入 Studio One 和 REAPER 工程、效果器兼容、输入输出与声音排查。"><meta name="theme-color" content="#fafbfc"><title>常见问题与工程导入 - 声核 Audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核导入 Studio One 和 REAPER 工程的范围、效果器兼容与处理建议。"><meta name="theme-color" content="#fafbfc"><title>工程导入说明 - 声核 Audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="site-header wrap">
     <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
     <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/">效果器</a><a href="/guide/" aria-label="指北"><span class="nav-full">指北</span><span class="nav-short" aria-hidden="true">指北</span></a><a href="/gallery/" aria-label="效果链" hidden><span class="nav-full">效果链</span><span class="nav-short" aria-hidden="true">效果链</span></a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
   </header>
-<main id="main"><section class="page-header wrap"><h1>常见问题与工程导入</h1><p>导入 Studio One、REAPER 工程，以及使用声核时的常见问题。</p></section>
+<main id="main"><section class="page-header wrap"><h1>工程导入说明</h1><p>导入 Studio One 与 REAPER 工程的范围、步骤和常见问题。</p></section>
 <div class="wrap reading">
 <section class="guide-panel"><h2>先了解导入范围</h2>
 <p>声核是实时调音台，不是 Studio One 或 REAPER 的完整替代品。导入工程的目的，是尽可能迁移双方具有相同概念的部分，例如通道、效果器及其顺序、可恢复的 VST3 参数和部分路由。具体结果取决于原工程、插件和设备，不能保证所有同类内容都能完整还原。</p>
@@ -18,10 +18,7 @@
 <div class="guide-answer"><h3>为什么导入后没有声音，或声音走错地方？</h3><p>原工程使用的声卡、端口和路由在当前电脑上可能不存在或不同。检查声核中的音频设备、通道输入输出、静音、推子及发送目标；无法匹配的设备需要手动重新选择。总线、侧链和发送也应逐项核对，不能假设所有复杂路由都已还原。</p></div>
 <div class="guide-answer"><h3>为什么没有导入音频片段和自动化？</h3><p>工程导入面向实时调音台中可对应的内容，不是完整的工程转换。素材编辑、时间轴编排、MIDI 和自动化等内容请在原工作站处理；需要实时使用的部分可自行重建或调整工作方式。</p></div>
 <div class="guide-answer"><h3>工程打不开怎么办？</h3><p>先确认选择的是原软件保存的完整 <code>.song</code> 或 <code>.rpp</code> 工程，而非快捷方式或其他文件；回到原软件确认工程能正常打开，并另存一份后重试。声核支持部分加密的 Studio One 工程，不代表支持所有加密或特殊格式。仍有问题时，请提供声核版本、原软件版本、错误提示和复现步骤；分享工程前请先检查其中的个人信息和授权内容。</p></div></section>
-<section class="guide-panel"><h2>其他常见问题</h2>
-<div class="guide-answer"><h3>有电平但听不到声音？</h3><p>检查通道是否静音、输出是否连接到耳机或扬声器，以及声卡和系统音量。逐路检查发送和监听，避免同时监听原声与处理后的声音。</p></div>
-<div class="guide-answer"><h3>监听延迟或爆音怎么办？</h3><p>检查设备缓冲和效果器自身延迟。爆音时可适当增大缓冲；延迟明显时，逐个旁通效果器排查，并在稳定的前提下调整缓冲。</p></div>
-<div class="guide-answer"><h3>关闭窗口会停止处理吗？</h3><p>关闭控制台窗口后声核仍在托盘运行；结束使用请选择“退出声核”。</p></div>
+<section class="guide-panel"><h2>获取帮助</h2>
 <p>更多操作请看
 <a href="/guide/">指北</a>
 ；遇到无法解决的问题，可在
