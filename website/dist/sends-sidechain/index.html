@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核发送与侧链使用说明：连接通道、选择取点，让人声控制伴奏效果器。"><meta name="theme-color" content="#fafbfc"><title>发送与侧链 - 声核 Audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/">效果器</a><a href="/guide/" aria-label="指北"><span class="nav-full">指北</span><span class="nav-short" aria-hidden="true">指北</span></a><a href="/gallery/" aria-label="效果链" hidden><span class="nav-full">效果链</span><span class="nav-short" aria-hidden="true">效果链</span></a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
+  </header>
+<main id="main"><section class="page-header wrap"><h1>发送与侧链</h1><p>将声音送到其他通道、输出设备，或交给效果器作为侧链信号。</p></section>
+<div class="wrap reading">
+<section class="guide-panel"><h2>发送是什么？</h2><p>发送让一个通道的声音进入另一个目标。可以把人声和伴奏分别发送到混音通道，也可以接入耳机或直播软件使用的输出。一个来源可按需要添加多条发送，目标各自调节音量。</p><p>开始前先调低监听音量，确认设备与输入已配置。不同声卡的输入和输出编号不同，请按实际连接选择。</p></section>
+<section class="guide-panel"><h2>把人声和伴奏送到混音通道</h2><ol><li>建立人声、伴奏和混音三个通道，在人声与伴奏通道分别选择对应输入。混音通道可以使用空输入。</li><li>点击人声通道下方发送区域的“＋”，在“通道”中选择混音通道；伴奏通道同样发送到混音通道。</li><li>说话并播放伴奏，检查来源和混音通道是否都有电平，分别调整两条发送音量。</li><li>在混音通道添加耳机或需要的直播输出，再低音量试听。</li></ol><p>检查各通道和发送是否启用、是否静音。发送目标和具体设备要按自己的声卡及用途配置；其他软件接收声音的步骤见
+<a href="/routing-guide/">声音路由与无声排查</a>
+。</p></section>
+<section class="guide-panel"><h2>发送音量和取点</h2><p>右键发送行，可调整发送音量、启用或停用、选择取点及删除路由。取点决定从来源通道的哪个位置取声音：</p><ul><li><strong>效果前</strong>：从效果器处理之前取声音。</li><li><strong>效果后推子前</strong>：取经过效果器处理、尚未经过通道推子的声音。</li><li><strong>推子后</strong>：取经过效果器和通道推子的声音，推子变化会影响这条发送。</li></ul><p>新建发送默认使用推子后、0 dB；0 dB 表示发送本身不额外增减电平。多个来源相加仍可能过载，请看电平并试听。</p></section>
+<section class="guide-panel"><h2>侧链是什么？</h2><p>声核已经支持侧链。普通发送把声音送入目标通道参与混音；侧链发送把来源信号交给目标效果器，用来控制它怎样处理目标通道的声音。例如人声控制伴奏上的压缩器，让人说话时伴奏降低。侧链信号不等于自动把人声混入伴奏。</p><p>目标效果器必须提供并让声核识别侧链输入；插件自身也可能需要选择外部侧链或调整检测设置，具体取决于插件。不同效果器的参数和处理方式不完全相同。</p></section>
+<section class="guide-panel"><h2>例子：让人声控制伴奏音量</h2><ol><li>准备人声和伴奏两个通道，确认两者输入正常。将支持外部侧链的压缩器添加到伴奏通道；也可以使用声核自带的伴奏融合。</li><li>在<strong>人声通道</strong>下方点击发送区域的“＋”，在“侧链”分组中选择伴奏通道上的目标效果器。</li><li>在目标效果器中按需选择外部侧链，调整阈值、强度等参数。具体名称和步骤以该效果器界面为准。</li><li>让伴奏播放并对麦克风说话，试听伴奏是否按预期降低；再调整发送音量和效果器参数。人声与伴奏仍需分别连接到混音或监听输出。</li></ol><p>发送侧链不会代替人声的正常输出；只接侧链时，目标效果器可以收到检测信号，但不代表直播或耳机一定能听到人声。</p></section>
+<section class="guide-panel"><h2>找不到侧链目标或没有效果？</h2><ul><li>确认目标效果器已添加到另一个通道、处于在线状态，并且支持声核可识别的侧链输入；普通 VST3 效果器并非都支持侧链。</li><li>确认从来源通道的“＋”添加侧链，选对目标效果器，发送处于启用状态；同一目标已添加时不必重复添加。</li><li>检查来源是否有电平、发送取点和音量是否合适，并在目标效果器中检查外部侧链、阈值与处理强度。</li><li>如果目标不显示，检查现有发送是否形成反向依赖或循环；调整路由后再试，避免将声音送回自身。</li><li>插件不提供可用侧链时，可自行选择支持侧链的替代效果器。</li></ul><p>仍有问题可在
+<a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+提供声核及插件版本、通道和发送设置、复现步骤与诊断信息。</p></section></div></main>
+<footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/sponsor/">赞助</a>
+    <a href="/guide/#agreement">协议</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+</body></html>
