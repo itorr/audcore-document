@@ -6,7 +6,7 @@
 .sponsor-amounts { border:0; padding:0; margin:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
 .sponsor-amounts legend { margin-bottom:12px; }
 .sponsor-amounts label { position:relative; margin:0; font-weight:500; cursor:pointer; }
-.sponsor-form .sponsor-amounts small { display:block; margin:2px 0 0; text-align:center; font-size:10px; line-height:12px; font-weight:400; color:inherit; opacity:.5; }
+.sponsor-form .sponsor-amounts small { display:block; margin:2px 0 0; text-align:center; font-size:11px; line-height:13px; font-weight:400; color:inherit; opacity:.5; }
 .sponsor-amounts input { position:absolute; opacity:0; width:1px; height:1px; }
 .sponsor-amounts span { display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:12px; height:50px; box-sizing:border-box; line-height:18px; background:var(--surface); padding:4px 10px; }
 .sponsor-amounts input:checked + span { background:var(--ink); color:var(--paper); }
