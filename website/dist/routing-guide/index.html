@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="从麦克风、伴奏到耳返和直播软件，逐段检查声音去向。"><meta name="theme-color" content="#fafbfc"><title>声音路由与无声排查 - 声核 Audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/">效果器</a><a href="/guide/" aria-label="指北"><span class="nav-full">指北</span><span class="nav-short" aria-hidden="true">指北</span></a><a href="/gallery/" aria-label="效果链" hidden><span class="nav-full">效果链</span><span class="nav-short" aria-hidden="true">效果链</span></a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
+  </header>
+<main id="main"><section class="page-header wrap"><h1>声音路由与无声排查</h1><p>从麦克风、伴奏到耳返和直播软件，逐段检查声音去向。</p></section>
+<div class="wrap reading">
+<section class="guide-panel"><h2>先看声音走到哪里</h2><p>声核中的通道负责接收、处理和发送声音。先调低耳机和输出音量，关闭不必要的重复监听，再从最简单的一条路线试起。每通过一段，查看下一个通道是否有电平。</p><p>常见路线：麦克风 → 人声通道 → 混音通道 → 耳机或直播输出。伴奏可以接入单独通道，再发送到混音通道。总输出和监听可以使用普通通道承担，不需要寻找固定的“总线”通道。</p></section>
+<section class="guide-panel"><h2>麦克风有电平，耳机没有声音</h2><ol><li>检查人声通道是否静音、推子是否过低，输入是否选中实际麦克风。单支麦克风通常选择对应的单声道输入，左右编号以设备实际连接为准。</li><li>若人声先发送到混音或监听通道，检查发送是否启用、目标和音量是否正确，并确认目标通道也有电平。</li><li>检查最后一个通道的硬件输出是否指向实际耳机或扬声器，以及声卡控制面板和耳机音量。不同声卡的输出编号不同，不要直接照搬其他声卡教程。</li></ol><p>使用系统音频时，先在“输入输出”设备表添加需要的设备，再在通道中选择。详细步骤见
+<a href="/wasapi/">WASAPI 支持说明</a>
+。</p></section>
+<section class="guide-panel"><h2>自己能听到，直播或通话软件没有声音</h2><p>耳机监听和发送给其他软件是两条用途不同的路线。把需要的声音汇入相应通道，再从该通道发送到可用的虚拟录音设备或声卡回环；在 OBS、会议或语音软件中选择对应的输入设备。平台仍选物理麦克风时，通常会绕过声核效果。</p><p>只送人声就选择人声输出；需要人声和伴奏，就先将两者送入混音通道，再把混音送给平台。是否需要虚拟跳线取决于声卡已有路由，详见
+<a href="/virtual-routing/">虚拟跳线</a>
+。</p></section>
+<section class="guide-panel"><h2>伴奏、回音和重复声音</h2><p>伴奏可以通过程序声音捕获、设备播放回环或虚拟跳线接入，按实际需要选择一种。程序列表中找不到播放器时，先让它播放声音，再检查 Windows 音量合成器和声核的程序输入列表。</p><p>既捕获播放器又捕获整个扬声器，或同时监听声卡直通和声核处理声，都可能听到重复声音。逐条关闭重复路线定位；播放回环请避开将回环声音再次送回同一个被捕获的输出，防止反馈。</p></section>
+<section class="guide-panel"><h2>升级或换设备后无声</h2><p>先确认设备已连接且在设备表可用，再检查通道输入、发送和标为不可用的输出。原来使用播放回环时，检查“输出设备作为输入”是否开启。旧设备不匹配时需要重新选择，设备编号和声卡控制面板因型号而异。</p><p>仍有问题时，记录声核版本、设备、音频模式、每段输入输出以及哪一级有电平，到
+<a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+说明。</p></section>
+<p>返回
+<a href="/guide/">指北</a>
+。</p></div></main>
+<footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/sponsor/">赞助</a>
+    <a href="/guide/#agreement">协议</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+</body></html>

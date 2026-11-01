@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="区分音量过载、缓冲不足和不同位置的延迟。"><meta name="theme-color" content="#fafbfc"><title>延迟、爆音与杂音排查 - 声核 Audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/">效果器</a><a href="/guide/" aria-label="指北"><span class="nav-full">指北</span><span class="nav-short" aria-hidden="true">指北</span></a><a href="/gallery/" aria-label="效果链" hidden><span class="nav-full">效果链</span><span class="nav-short" aria-hidden="true">效果链</span></a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
+  </header>
+<main id="main"><section class="page-header wrap"><h1>延迟、爆音与杂音排查</h1><p>区分音量过载、缓冲不足和不同位置的延迟。</p></section>
+<div class="wrap reading">
+<section class="guide-panel"><h2>先判断发生在哪一段</h2><p>先保存预设，调低音量，用一条麦克风到耳机的简单路线试听。依次旁通效果器，再逐段恢复路由，比较耳返、本地录音和直播或通话软件。记录哪一路异常，可以缩小范围；不同声音症状可能同时存在。</p></section>
+<section class="guide-panel"><h2>声音失真、喊大声就破</h2><p>先看麦克风和声卡输入是否过大，降低声卡输入增益，让最大声时也不削顶；再检查通道、效果器和混音后的电平。多路叠加也可能造成过载。输入已经削顶后，下游推子或限制器不能恢复丢失的波形。</p></section>
+<section class="guide-panel"><h2>断续、噼啪或偶发爆音</h2><p>如果是断续而非持续失真，检查设备缓冲、驱动、采样率和效果器负载。可逐步增大设备支持的缓冲，观察是否稳定；不同设备适合的帧数不同。ASIO 设置受驱动支持范围限制，必要时在驱动控制面板调整；WASAPI 可在设备表检查各设备配置。</p><p>如果耳返和本地录音正常，仅直播软件收到的声音异常，重点检查虚拟跳线及平台选择的输入；如果每条输出都异常，应先检查共同的输入、设备和效果链。具体情况见
+<a href="/virtual-routing/">虚拟跳线说明</a>
+。</p></section>
+<section class="guide-panel"><h2>监听延迟明显</h2><p>设备缓冲显示的是该设备缓冲对应的时间，不是完整耳返延迟。输入、效果器、输出、并行路径对齐和其他软件都可能增加等待。逐个检查效果器报告的延迟，结合耳返回路延迟检测试听；部分效果器带前瞻或较长处理延迟。</p><p>旁通用于跳过效果处理，可能保留延迟对齐；需要移除某效果器的延迟时，可尝试将其离线。重新启用可能需要加载时间，直播前先测试。并行路径对齐可避免混合时的时间错位，不要只为降低数字而盲目关闭。</p><p>选择缓冲时在稳定和延迟之间取舍；出现爆音时优先保证声音稳定。更多设备设置见
+<a href="/wasapi/">WASAPI 支持说明</a>
+。</p></section>
+<p>返回
+<a href="/guide/">指北</a>
+。</p></div></main>
+<footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/sponsor/">赞助</a>
+    <a href="/guide/#agreement">协议</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+</body></html>

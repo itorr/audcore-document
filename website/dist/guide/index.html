@@ -8,17 +8,32 @@
 <main id="main"><section class="page-header wrap"><h1>指北</h1><p>从出声到上手。</p></section>
 <div class="guide-layout wrap">
 <nav class="guide-menu" aria-label="指北目录">
-<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="/project-import/">工程导入说明</a><a href="#input-output">输入输出设置说明</a><a href="#program-capture-echo">捕获程序声音</a><a href="#output-capture">输出设备作为输入</a><a href="#input-capture">添加输入设备</a><a href="#system-output-latency">输出设备与延迟</a><a href="#multi-core">多核心并行处理</a><a href="#plugin-sleep">效果器自动休眠</a><a href="#bypass-sleep">旁通效果器自动睡眠</a><a href="#delay-alignment">并行路径延迟对齐</a><a href="#plugin-isolation">隔离外部效果器</a><a href="#capture-volume">录音设备 100% 音量</a><a href="#gain-limit">通道上限 0dB</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="/virtual-routing/">虚拟跳线</a><a href="/flexasio/">FlexASIO</a><a href="/third-party/">第三方工具</a><a href="/recording/">怎么录音？</a><a href="/api/">本地 API 与 SDK</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="/sponsor/">赞助</a><a href="#agreement">协议</a>
+<a href="#start" aria-current="page">开始使用</a><a href="#windows-warning">Windows 安全提示</a><a href="#faq">常见问题</a><a href="/project-import/">工程导入说明</a><a href="/routing-guide/">声音路由与无声排查</a><a href="/plugin-guide/">效果器安装与兼容</a><a href="/audio-troubleshooting/">延迟、爆音与杂音排查</a><a href="/preset-guide/">预设保存与分享</a><a href="/channel-switching/">说话、唱歌与监听切换</a><a href="#input-output">输入输出设置说明</a><a href="#program-capture-echo">捕获程序声音</a><a href="#output-capture">输出设备作为输入</a><a href="#input-capture">添加输入设备</a><a href="#system-output-latency">输出设备与延迟</a><a href="#multi-core">多核心并行处理</a><a href="#plugin-sleep">效果器自动休眠</a><a href="#bypass-sleep">旁通效果器自动睡眠</a><a href="#delay-alignment">并行路径延迟对齐</a><a href="#plugin-isolation">隔离外部效果器</a><a href="#capture-volume">录音设备 100% 音量</a><a href="#gain-limit">通道上限 0dB</a><a href="#asio">不支持 ASIO 时</a><a href="#loopback">声卡不支持回环时</a><a href="/virtual-routing/">虚拟跳线</a><a href="/flexasio/">FlexASIO</a><a href="/third-party/">第三方工具</a><a href="/recording/">怎么录音？</a><a href="/api/">本地 API 与 SDK</a><a href="#community">互助交流群</a><a href="#roadmap">待办</a><a href="/sponsor/">赞助</a><a href="#agreement">协议</a>
 </nav>
 <div class="guide-content reading">
 <section id="start" class="guide-panel"><h2>开始使用</h2>
-<h3 id="prepare">准备这三样</h3><ul><li><a href="/download/">声核</a></li><li>支持 ASIO 的声卡</li><li>VST3 效果器</li></ul>
-<h3 id="device">连接设备</h3><ol><li>安装声卡驱动，接好麦克风和耳机。</li><li>在声核设置中选择 ASIO 驱动。</li><li>通道输入选麦克风，输出选耳机通道。</li><li>调低音量，试着说句话。</li></ol>
+<h3 id="prepare">准备这三样</h3><ul><li><a href="/download/">声核</a></li><li>麦克风及耳机或扬声器（支持 ASIO 或 Windows 音频）</li><li>需要时安装 64 位 VST3 效果器</li></ul>
+<h3 id="device">连接设备</h3><ol><li>安装声卡驱动，接好麦克风和耳机。</li><li>在设置中选择声卡的 ASIO 驱动；没有 ASIO 驱动时选择“系统音频 WASAPI”，并在“输入输出”添加麦克风和耳机或扬声器。</li><li>通道输入选麦克风，输出选耳机通道。</li><li>调低音量，试着说句话。</li></ol>
 <h3 id="plugins">添加效果</h3><ol><li>在设置中扫描效果器。</li><li>在通道添加 VST3，调顺序和参数。</li><li>用旁通对比，按 Ctrl+S 保存。</li></ol>
 <div hidden><h3 id="import">导入效果链</h3><p>在 <a href="/gallery/">效果链</a>选择效果链，在客户端查看、下载并导入，再设置输入输出。</p></div>
 </section>
 <section id="device-guides" class="guide-panel"><h2>设备与安装说明</h2>
 <ul>
+<li>
+<a href="/routing-guide/">声音路由与无声排查</a>
+</li>
+<li>
+<a href="/plugin-guide/">效果器安装与兼容</a>
+</li>
+<li>
+<a href="/audio-troubleshooting/">延迟、爆音与杂音排查</a>
+</li>
+<li>
+<a href="/preset-guide/">预设保存与分享</a>
+</li>
+<li>
+<a href="/channel-switching/">说话、唱歌与监听切换</a>
+</li>
 <li>
 <a href="/wasapi/">WASAPI 支持：输入输出、采样率和缓冲</a>
 </li>
@@ -59,11 +74,11 @@
 <a href="/project-import/">工程导入说明</a>
 。</p>
 <div class="guide-answer"><h3>声核免费吗？</h3><p>声核免费使用。第三方效果器需自行安装和授权。</p></div>
-<div class="guide-answer"><h3>支持集成声卡吗？</h3><p>声核通过 ASIO 连接音频设备。没有厂商 ASIO 驱动时，优先使用
-<a href="/flexasio/">FlexASIO</a>
-接入集成声卡或 USB 麦克风；ASIO4ALL 可作为备选，兼容性与延迟取决于设备。</p></div>
+<div class="guide-answer"><h3>支持集成声卡吗？</h3><p>支持。集成声卡、USB 麦克风和耳机可以直接使用 Windows 音频 WASAPI，无需先安装通用 ASIO 驱动；在设置中添加所需输入和输出后，再到通道选择。</p><p>详见
+<a href="/wasapi/">WASAPI 支持说明</a>
+。</p></div>
 <div class="guide-answer"><h3>有电平，没声音？</h3><p>检查通道静音、输出通道和声卡音量。</p></div>
-<div class="guide-answer"><h3>监听延迟明显？</h3><p>检查 ASIO 缓冲和插件延迟；爆音时适当增大缓冲。</p></div>
+<div class="guide-answer"><h3>监听延迟明显？</h3><p>检查设备缓冲和效果器延迟；爆音时适当增大缓冲。</p></div>
 <div class="guide-answer" id="listen"><h3>关闭窗口会停止处理吗？</h3><p>不会，声核仍在托盘运行。结束使用请选择“退出声核”。</p></div>
 <div class="guide-answer"><h3>怎么混音？</h3><p>声核不支持基于时间轴的混音，已移除相关功能，专注实时通道处理与路由。多轨编辑和混音请使用其他音频工作站。</p></div>
 <div class="guide-answer" id="recording-formats"><h3>怎么录音？</h3><p>点击通道 REC 图标开始，再次点击停止。在设置的“通道录制”中选择保存目录与格式，更改在下次录制时生效。</p><p>
@@ -294,7 +309,7 @@
     </ul><form class="request-form" id="request-form"><label for="request-text">你还需要什么功能？</label><textarea id="request-text" name="text" rows="3" maxlength="1000" required placeholder="描述你的使用场景和需求"></textarea><button class="pill" type="submit" disabled>提交需求</button><p id="request-feedback" role="status"></p></form></section>
 <section id="agreement" class="guide-panel"><h2>声核使用协议</h2><p class="agreement-meta">适用于声核 v0.0.267 抢先体验版 · 更新于 2026 年 9 月 25 日</p>
 <h3>使用声核</h3><p>声核是免费的 Windows 实时音频处理软件，目前处于早期测试阶段。声核不是开源项目。你可以使用声核处理、监听和路由自己的音频；未经授权，请勿将声核程序、界面素材或代码作为自己的产品再发布。</p>
-<h3>设备与效果器</h3><p>当前版本使用 ASIO 音频设备与 VST3 效果器。第三方驱动、效果器及桥接工具由各自提供方负责安装、许可与支持。不同设备和插件可能产生延迟、爆音或不兼容；正式直播或录制前，请先试音，并自行保存工程和预设备份。</p>
+<h3>设备与效果器</h3><p>当前版本支持 ASIO 或 WASAPI 音频设备，以及 VST3 效果器。第三方驱动、效果器及桥接工具由各自提供方负责安装、许可与支持。不同设备和插件可能产生延迟、爆音或不兼容；正式直播或录制前，请先试音，并自行保存工程和预设备份。</p>
 <h3>效果链与分享</h3><p>你可以在客户端提交和导入效果链。提交前，请确认你有权分享其中的名称、说明及插件状态，并检查可能包含的个人信息或不愿公开的设置。申请公开的效果链经审核后才会进入网页列表；持有分享码的人可能读取未被拒绝的分享。导入不会替你安装第三方插件，导入通道默认静音，需自行确认输入、输出和音量。</p>
 <h3>数据与反馈</h3><p>启用云服务的客户端会发送用于识别安装的派生标识、启动与设备日志及你主动提交的分享内容；其中可能包含程序路径、设备名称和通道信息。网站需求入口启用后，提交的文字会写入服务端日志，供人工整理；不会自动公开。请勿在需求、分享说明或公开内容中填写密码、联系方式等敏感信息。</p>
 <h3>测试阶段</h3><p>功能和数据格式仍可能调整。我们会持续修复问题，但不承诺所有设备、插件或工作场景都能正常运行。本说明不排除或限制法律规定的用户权利，也不免除依法应承担的责任。</p>
