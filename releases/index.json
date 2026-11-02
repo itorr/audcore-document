@@ -1,18 +1,18 @@
 {
     "schema":  1,
-    "latest":  "v0.0.2198",
+    "latest":  "v0.0.2202",
     "releases":  [
                      {
-                         "version":  "v0.0.2198",
+                         "version":  "v0.0.2202",
                          "date":  "2026-11-02",
-                         "publishedAt":  "2026-11-02T08:56:42Z",
-                         "url":  "/releases/v0.0.2198/audcore-setup-v0.0.2198.exe",
-                         "size":  5870669,
-                         "sha256":  "a7da59b03f9cb5a48078e2842b8f057a1f5c061c582670a28db9f13f65fc23ec",
+                         "publishedAt":  "2026-11-02T09:27:55Z",
+                         "url":  "/releases/v0.0.2202/audcore-setup-v0.0.2202.exe",
+                         "size":  5871217,
+                         "sha256":  "8ff6ee1745db1a71aa28070ee6eaea39622bd978d1ebb6af443fd7f28a29fd5c",
                          "portable":  {
-                                          "url":  "/releases/v0.0.2198/audcore-portable.exe",
-                                          "size":  11304448,
-                                          "sha256":  "1f9946959948285563d09c0868c2fd69994f2a00363b4a1836cfe02d8f5c7292"
+                                          "url":  "/releases/v0.0.2202/audcore-portable.exe",
+                                          "size":  11304960,
+                                          "sha256":  "fe4dbf1eb9ee1b1c33c346bd039a1aaf8eadc596dc21ec5452f6658385e82901"
                                       },
                          "changes":  [
                                          "新增截获播放器声音功能，无需回环音频设备或虚拟跳线，即可将播放器的声音无损、低延迟地接入声核。支持网易云音乐、酷狗音乐、QQ 音乐、全民 K 歌、Apple Music、iTunes 和歌歌。",
