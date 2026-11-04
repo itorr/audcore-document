@@ -29,8 +29,11 @@ vec4 siri(vec2 uv){
   rgb+=vec3(.4,.1,.9)*audio*.04*feather(1.,r);
   rgb+=beat*.1*vec3(.5,.4,1.);
   vec3 e=exp(-2.0*rgb);rgb=(1.0-e)/(1.0+e);
-  float alpha=max(rgb.r,max(rgb.g,rgb.b))*(1.0-smoothstep(.3,1.0,r));
-  return vec4(rgb*alpha,alpha);
+  // Brightness becomes coverage, not a second darkening of the foreground.
+  // Straight RGB is rgb/peak; premultiplication leaves rgb*edge.
+  float peak=max(rgb.r,max(rgb.g,rgb.b));
+  float edge=1.0-smoothstep(.3,1.0,r);
+  return vec4(rgb*edge,peak*edge);
 }`;
 export function shaderSources(webgl2){return {
   vertex:webgl2?'#version 300 es\nin vec2 position;void main(){gl_Position=vec4(position,0.,1.);}':'attribute vec2 position;void main(){gl_Position=vec4(position,0.,1.);}',
@@ -53,7 +56,8 @@ export function sampleSiri(x,y,time,loudness,beat,out){
   red=Math.tanh(red*mask+.4*spill+beat*.05);
   green=Math.tanh(green*mask+.1*spill+beat*.04);
   blue=Math.tanh(blue*mask+.9*spill+beat*.1);
-  out[0]=red;out[1]=green;out[2]=blue;out[3]=Math.max(red,green,blue)*(1-smooth(.3,1,r));return out;
+  const peak=Math.max(red,green,blue),alpha=peak*(1-smooth(.3,1,r));
+  out[0]=alpha>0?red/peak:0;out[1]=alpha>0?green/peak:0;out[2]=alpha>0?blue/peak:0;out[3]=alpha;return out;
 }
 export function renderSiriPixels(data,time,level,beat,scratch){
   for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++){
