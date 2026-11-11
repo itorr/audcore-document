@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="用 C ABI 为声核添加音频输入和输出。下载 Windows x64 最小样例与 IO 扩展开发说明。">
+<meta name="description" content="下载声核 IO 扩展开发演示和最小 C 样例，了解编译、菜单绑定、PCM 写入和卸载。">
 <title>IO 扩展开发 - 声核 Audcore</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/io-dev/io-dev.css">
 </head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
@@ -14,39 +15,45 @@
   <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
   <nav aria-label="主导航"><a href="/">首页</a><a href="/guide/">指北</a><a href="/api/">API</a></nav>
 </header>
-<main id="main">
-  <section class="page-header wrap">
-    <h1>IO 扩展开发</h1>
-    <p>给声核调音台接入自己的音源或输出。扩展使用 Windows x64 C ABI，可以用 C、C++、Rust 等能导出 C 接口的语言编写。</p>
-    <div>
-      <a class="pill" href="/io-dev/audcore-io-example.zip" download>下载最小样例 ZIP</a>
-      <a class="pill pill-light" href="/io-dev/development.md" download="IO 扩展开发.md">下载开发说明 Markdown</a>
+<main id="main" class="io-dev">
+  <section class="io-hero" aria-labelledby="io-title">
+    <div class="wrap io-hero-layout">
+      <div>
+        <p class="io-target">Windows x64 / C ABI 1.5</p>
+        <h1 id="io-title">IO 扩展开发</h1>
+        <p class="io-lead">用最小 C 样例给声核接入一个音源。演示逐步讲解编译、菜单绑定、PCM 写入和安全卸载。</p>
+        <div class="io-downloads">
+          <a class="pill io-download-primary" href="/io-dev/audcore-io-development.pptx" download>下载 PowerPoint</a>
+          <a href="/io-dev/audcore-io-example.zip" download>样例 ZIP</a>
+          <a href="/io-dev/development.md" download="IO 扩展开发.md">开发说明 MD</a>
+        </div>
+      </div>
+      <div class="io-sample">
+        <strong>440 Hz</strong>
+        <span>Test Tone · 单声道输入</span>
+      </div>
     </div>
   </section>
-  <div class="wrap reading">
-    <section class="guide-panel">
-      <h2>先听到一个测试音</h2>
-      <p>需要支持 IO ABI 1.5 的声核，设置中应有“扩展输入输出”。</p>
-      <ol>
-        <li>解压样例，在 x64 Native Tools Command Prompt 里进入样例目录。运行 <code>cl /nologo /O2 /LD tone.c /link /OUT:tone.in.audcore /EXPORT:audcore_io_entry</code>。</li>
-        <li>在声核托盘菜单中选择“打开配置目录”。把生成的 <code>tone.in.audcore</code> 和样例内的 <code>tone.io.json</code> 放进该目录的 <code>extensions/io</code>。</li>
-        <li>重启声核，在通道输入菜单选 <strong>Test Tone</strong>。开启音频后看通道电平，或接到低音量监听试听 440 Hz 单声道测试音。</li>
+  <div class="wrap io-reading">
+    <section aria-labelledby="io-run">
+      <h2 id="io-run">运行 Test Tone</h2>
+      <p>需要支持 IO ABI 1.5 的声核，以及 Visual Studio 的 x64 Native Tools Command Prompt。</p>
+      <ol class="io-steps">
+        <li><strong>编译</strong>解压样例，在 x64 命令行进入样例目录，运行下方命令。</li>
+        <li><strong>放置文件</strong>从托盘菜单打开配置目录。将 DLL 和 <code>tone.io.json</code> 放入 <code>extensions/io</code>。</li>
+        <li><strong>确认电平</strong>重启声核并开启音频。在通道输入菜单选 <b>Test Tone</b>，观察通道电平。</li>
       </ol>
-      <p>测试完成后，在“设置 → 输入输出 → 扩展输入输出”卸载样例。</p>
+      <pre><code>cl /nologo /O2 /LD tone.c /link /OUT:tone.in.audcore /EXPORT:audcore_io_entry</code></pre>
+      <p>试用完成后，可在“设置 → 输入输出 → 扩展输入输出”卸载。</p>
     </section>
-    <section class="guide-panel">
-      <h2>选择扩展方向</h2>
-      <ul>
-        <li><strong>输入</strong>用 <code>.in.audcore</code>，例如音频文件或其他音源。</li>
-        <li><strong>输出</strong>用 <code>.out.audcore</code>，例如把通道音频发给网页。</li>
-        <li><strong>配对输入输出</strong>用 <code>.io.audcore</code>，让两端共用一个实例。</li>
-      </ul>
-      <p>每个扩展由 DLL 和同目录的 <code>*.io.json</code> 清单组成。清单提供名称和能力，通道绑定保存端点标识和扩展状态。</p>
-    </section>
-    <section class="guide-panel">
-      <h2>从样例扩展到自己的设备</h2>
-      <p>样例使用暂定 ABI 1.5。它用宿主采样率生成 PCM，并在卸载前停止工作线程。接入有独立时钟的设备时，按设备实际采样率报告格式或读取输出。</p>
-      <p>输入可允许用户切换单双声道，也可声明固定声道。扩展可以提供多级菜单、单选或多选、端点选项和全局设置。开发说明记录了清单字段、回调、菜单响应和生命周期。</p>
+    <section aria-labelledby="io-direction">
+      <h2 id="io-direction">扩展的三种方向</h2>
+      <dl class="io-directions">
+        <div><dt>输入 <code>.in.audcore</code></dt><dd>向调音台供帧，例如音频文件。</dd></div>
+        <div><dt>输出 <code>.out.audcore</code></dt><dd>接收通道送出的音频，例如网页源。</dd></div>
+        <div><dt>配对 <code>.io.audcore</code></dt><dd>输入和输出共用一个实例。</dd></div>
+      </dl>
+      <p>每个扩展由 DLL 与同目录的 <code>*.io.json</code> 清单组成。清单声明身份和能力，通道绑定保存端点与扩展状态。</p>
     </section>
   </div>
 </main>

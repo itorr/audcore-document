@@ -1,0 +1,111 @@
+.io-dev {
+  --io-ink:#17242b;
+  --io-dark:#102c29;
+  --io-mint:#85e2b6;
+  --io-pale:#d5ebdf;
+  --io-paper:#f3f4ef;
+  color:var(--io-ink);
+  background:var(--io-paper);
+}
+.io-hero {
+  background:var(--io-dark);
+  color:#fff;
+}
+.io-hero-layout {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, .55fr);
+  align-items:end;
+  gap:clamp(32px, 6vw, 96px);
+  padding-block:clamp(56px, 10vw, 132px);
+}
+.io-target {
+  margin:0 0 18px;
+  font:600 14px/1.6 Consolas,monospace;
+  color:var(--io-pale);
+}
+.io-hero h1 {
+  margin:0;
+  font-size:clamp(44px, 7vw, 94px);
+  letter-spacing:-.045em;
+  line-height:1.12;
+}
+.io-lead {
+  max-width:36em;
+  margin:24px 0 0;
+  color:var(--io-pale);
+  font-size:clamp(17px, 2vw, 23px);
+}
+.io-downloads {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px 23px;
+  margin-top:30px;
+}
+.io-downloads a {color:var(--io-pale)}
+.io-downloads a:hover {text-decoration:underline}
+.io-downloads .io-download-primary {
+  background:var(--io-mint);
+  color:var(--io-dark);
+  font-weight:700;
+}
+.io-downloads .io-download-primary:hover {
+  background:#adf0d2;
+  text-decoration:none;
+}
+.io-sample {
+  display:grid;
+  justify-items:end;
+  gap:9px;
+  padding-bottom:7px;
+}
+.io-sample strong {
+  color:var(--io-mint);
+  font:700 clamp(48px, 7vw, 108px)/1 Consolas,monospace;
+  letter-spacing:-.09em;
+  white-space:nowrap;
+}
+.io-sample span {color:var(--io-pale)}
+.io-reading {
+  display:grid;
+  gap:52px;
+  padding-block:clamp(44px, 7vw, 86px);
+}
+.io-reading h2 {
+  margin:0;
+  font-size:clamp(28px, 4vw, 43px);
+  line-height:1.22;
+  letter-spacing:-.04em;
+}
+.io-reading p {margin:13px 0 0}
+.io-reading pre {
+  margin:23px 0 0;
+  padding:18px 22px;
+  border-radius:12px;
+  overflow-x:auto;
+  background:var(--io-dark);
+  color:var(--io-pale);
+  font-size:15px;
+}
+.io-steps,.io-directions {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px 30px;
+  margin:24px 0 0;
+}
+.io-steps {padding-inline-start:24px}
+.io-steps li {padding-inline-start:4px}
+.io-steps li::marker {color:#126356;font-weight:700}
+.io-steps strong,.io-directions dt {
+  display:block;
+  margin-bottom:3px;
+  color:#126356;
+  font-size:19px;
+  font-weight:700;
+}
+.io-directions dd {margin:0}
+.io-directions code {font-size:14px}
+@media (max-width:720px) {
+  .io-hero-layout,.io-steps,.io-directions {grid-template-columns:1fr}
+  .io-sample {justify-items:start}
+}
