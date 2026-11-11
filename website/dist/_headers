@@ -40,3 +40,8 @@
   Access-Control-Allow-Origin: *
   Cache-Control: no-cache
 
+
+/skin-dev/audcore_skin.h
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: no-cache

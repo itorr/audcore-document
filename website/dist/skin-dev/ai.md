@@ -3,7 +3,7 @@
 此文件面向实现声核皮肤的开发者和 AI。以本文及实际宿主版本为准；接口仍处于开发期，未经验证的能力不要假定已完成。网页皮肤运行在 WebView2，原生皮肤是可信进程内代码，两者与本地 WebSocket API 是不同接口。网页无需开启本地 API。
 
 开发者入口：https://audcore.utae.cn/skin-dev/  
-原生 C 头文件：https://audcore.utae.cn/skin-dev/native-abi.md
+原生 C 头文件：https://audcore.utae.cn/skin-dev/audcore_skin.h
 
 ## 快速开始
 
