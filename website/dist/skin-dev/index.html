@@ -37,12 +37,14 @@
           <h3>网页皮肤</h3>
           <p>HTML、CSS 和 JavaScript，适合快速设计、迭代界面和使用网页生态。</p>
           <dl><div><dt>优势</dt><dd>开发与调整直观，布局和视觉工具丰富。</dd></div><div><dt>取舍</dt><dd>需要 WebView2 运行环境；界面与宿主通过桥接通信。</dd></div><div><dt>适合</dt><dd>熟悉网页开发，或希望快速尝试多种界面。</dd></div></dl>
+          <a class="skin-route-link" href="/skin-dev/web.md">查看网页皮肤文档 →</a>
         </article>
         <article class="skin-route">
           <p class="skin-route-label">C ABI · WIN32</p>
           <h3>原生皮肤</h3>
           <p>使用 C ABI 接入，可用 C++ 和 Win32 自行实现窗口与绘制。</p>
           <dl><div><dt>优势</dt><dd>直接使用原生窗口与绘图能力，不依赖网页运行环境。</dd></div><div><dt>取舍</dt><dd>需要处理窗口、DPI 和生命周期；模块在声核进程内运行。</dd></div><div><dt>适合</dt><dd>熟悉 Windows 原生开发，需要直接控制界面细节。</dd></div></dl>
+          <a class="skin-route-link" href="/skin-dev/native.md">查看原生皮肤文档 →</a>
         </article>
       </div>
       <p class="skin-note">原生皮肤是可信进程内代码，请只加载信任的来源。皮肤接口仍在开发中，可能随声核版本调整。</p>
@@ -62,7 +64,8 @@
       <div><p class="skin-kicker">03 / 资料</p><h2>让想法，<br>开始运行。</h2><p class="skin-section-lead">把开发包交给 AI Agent，或直接查阅需要的接口说明。</p></div>
       <div class="skin-resource-list">
         <a href="/skin-dev/audcore-skin-dev.zip" download><strong>AI 皮肤开发包</strong><span>Markdown、C 头文件和最简网页示例</span><b aria-hidden="true">↗</b></a>
-        <a href="/skin-dev/ai.md"><strong>完整接口说明</strong><span>网页与原生接口 · Markdown</span><b aria-hidden="true">↗</b></a>
+        <a href="/skin-dev/web.md"><strong>网页皮肤开发文档</strong><span>WebView2 · JavaScript 接口与样例</span><b aria-hidden="true">↗</b></a>
+        <a href="/skin-dev/native.md"><strong>原生皮肤开发文档</strong><span>进程内 C ABI · 生命周期与窗口</span><b aria-hidden="true">↗</b></a>
         <a href="/skin-dev/audcore_skin.h"><strong>原生 C 头文件</strong><span>原生皮肤接口声明</span><b aria-hidden="true">↗</b></a>
         <a href="/skin-dev/native-abi.md"><strong>原生接口说明</strong><span>在线查看 C 接口</span><b aria-hidden="true">↗</b></a>
       </div>

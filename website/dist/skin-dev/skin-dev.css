@@ -187,3 +187,13 @@
     gap: 12px;
   }
 }
+
+.skin-route-link {
+  display: inline-block;
+  margin-top: 30px;
+  color: var(--blue);
+  font-weight: 600;
+}
+.skin-route-link:hover {
+  color: #184d9f;
+}
