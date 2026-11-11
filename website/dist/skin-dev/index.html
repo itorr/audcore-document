@@ -5,6 +5,6 @@
 <main id="main"><section class="page-header wrap"><h1>皮肤开发</h1><p>用网页或原生代码制作属于自己的声核控制台。</p></section><div class="wrap reading">
 <h2>选择实现方式</h2><p>网页皮肤用 HTML、CSS 和 JavaScript 绘制，由声核的 WebView2 承载；原生皮肤使用 C ABI 接入，可以使用 C++ 和 Win32。宿主负责音频状态、命令、标准菜单和浮层。</p><p>皮肤接口正在开发，可能随版本调整。原生皮肤在声核进程内运行，请只加载可信来源的皮肤。</p>
 <h2>开始制作</h2><ol><li>为网页皮肤准备包根目录的 manifest.json 和入口 HTML，或按 C 头文件实现原生模块。</li><li>订阅宿主状态，按需订阅电平；用户操作调用对应接口，并以宿主推送为准更新界面。</li><li>将网页资源打包为 ZIP，或编译原生 DLL，使用 .skin.audcore 扩展名。声核按文件头识别类型。</li><li>在声核中打开皮肤文件安装，再在设置的皮肤页应用。</li></ol>
-<h2>开发资料</h2><p>完整清单包含清单示例、生命周期、状态订阅、通道和效果器操作、宿主菜单、外观及窗体约定，适合直接交给 AI 阅读。</p><ul><li><a href="/skin-dev/ai.md">皮肤开发完整说明（Markdown，适合 AI）</a></li><li><a href="/skin-dev/audcore_skin.h">原生皮肤 C 接口头文件</a></li><li><a href="/api/">本地 API 与 SDK</a>（用于独立外部应用，与皮肤接口不同）</li></ul>
+<h2>开发资料</h2><p>完整清单包含清单示例、生命周期、状态订阅、通道和效果器操作、宿主菜单、外观及窗体约定，适合直接交给 AI 阅读。</p><ul><li><a href="/skin-dev/ai.md">皮肤开发完整说明（Markdown，适合 AI）</a></li><li><a href="/skin-dev/native-abi.md">原生皮肤 C 接口头文件</a></li><li><a href="/api/">本地 API 与 SDK</a>（用于独立外部应用，与皮肤接口不同）</li></ul>
 <p>亮暗模式遵循声核的全局设置；皮肤可以声明只支持一种主题。宿主管理界面休眠和恢复。官网模拟预览使用模拟数据，不会操作真实音频或工程。</p></div></main>
 <footer class="site-footer wrap"><p>声核 · Audcore</p><nav><a href="/guide/">指北</a><a href="/api/">本地 API</a><a href="https://github.com/itorr/audcore-document/issues">问题反馈</a></nav><small>© 2026 声核</small></footer></body></html>

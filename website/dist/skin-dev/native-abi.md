@@ -1,3 +1,8 @@
+# 声核原生皮肤 C 接口
+
+复制以下内容保存为 `audcore_skin.h`。接口仍在开发中；使用前核对主版本及结构大小。原生皮肤在宿主进程内运行，只应加载可信代码。
+
+```c
 /* Draft only: trusted in-process native skin contract; not a stable ABI. */
 #ifndef AUDCORE_SKIN_DRAFT_H
 #define AUDCORE_SKIN_DRAFT_H
@@ -95,3 +100,5 @@ typedef const audcore_skin_descriptor *(AUDCORE_SKIN_CALL *audcore_skin_get_desc
 }
 #endif
 #endif
+
+```
