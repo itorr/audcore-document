@@ -34,7 +34,7 @@ const stop = await window.audcore.state.subscribe(event => {
 // 页面清理时调用 stop()；电平只在需要时单独订阅。
 ```
 
-宿主注入 `window.audcore`；不要自行通过 WebSocket 模拟真实宿主。菜单和标准浮层调用宿主接口，页面负责入口和界面。显示颜色使用 `channels[].displayColor`；设备名称使用宿主提供的标签。缩放与系统 DPI 分开；亮暗采用全局设置，支持单一主题的皮肤使用自己声明的主题，不为每个皮肤单独保存亮暗选择。休眠、恢复和订阅生产由宿主管理。
+宿主注入 `window.audcore`；不要自行通过 WebSocket 模拟真实宿主。菜单和标准浮层调用宿主接口，页面负责入口和界面。显示颜色使用 `channels[].displayColor`；设备名称使用宿主提供的标签。缩放与系统 DPI 分开；亮暗采用全局设置，支持单一主题的皮肤使用自己声明的主题；声核本体仍可自由切换亮色或暗色，不受皮肤支持范围限制。不为每个皮肤单独保存亮暗选择。休眠、恢复和订阅生产由宿主管理。
 
 启动时若 `window.audcore.window.requiresStartup()` 为真，调用 `showUnderCover()`，在实际界面完成首帧绘制后调用 `presentFrame()`；失败调用 `startupFailed()`。不要用资源加载完成代替界面首帧。官网模拟只使用模拟状态和操作，不代表已连接本机声核。
 

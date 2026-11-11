@@ -1,10 +1,106 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="声核网页皮肤与原生皮肤开发说明。"><title>皮肤开发 - 声核 Audcore</title><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/site.css"></head><body>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="选择网页或原生路线，制作属于自己的声核皮肤。">
+<title>皮肤开发 - 声核 Audcore</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/skin-dev/skin-dev.css">
+</head>
+<body>
 <a class="skip-link" href="#main">跳到正文</a>
-<header class="site-header wrap"><a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a><nav aria-label="主导航"><a href="/">首页</a><a href="/guide/">指北</a><a href="/api/">API</a></nav></header>
-<main id="main"><section class="page-header wrap"><h1>皮肤开发</h1><p>用网页或原生代码制作属于自己的声核控制台。</p></section><div class="wrap reading">
-<h2>选择实现方式</h2><p>网页皮肤用 HTML、CSS 和 JavaScript 绘制，由声核的 WebView2 承载；原生皮肤使用 C ABI 接入，可以使用 C++ 和 Win32。宿主负责音频状态、命令、标准菜单和浮层。</p><p>皮肤接口正在开发，可能随版本调整。原生皮肤在声核进程内运行，请只加载可信来源的皮肤。</p>
-<h2>开始制作</h2><ol><li>为网页皮肤准备包根目录的 manifest.json 和入口 HTML，或按 C 头文件实现原生模块。</li><li>订阅宿主状态，按需订阅电平；用户操作调用对应接口，并以宿主推送为准更新界面。</li><li>将网页资源打包为 ZIP，或编译原生 DLL，使用 .skin.audcore 扩展名。声核按文件头识别类型。</li><li>在声核中打开皮肤文件安装，再在设置的皮肤页应用。</li></ol>
-<h2>开发资料</h2><p>完整清单包含清单示例、生命周期、状态订阅、通道和效果器操作、宿主菜单、外观及窗体约定，适合直接交给 AI 阅读。ZIP 包含说明、接口头文件和最简网页皮肤示例。</p><ul><li><a href="/skin-dev/audcore-skin-dev.zip" download>下载 AI Agent 皮肤开发包（ZIP）</a></li><li><a href="/skin-dev/ai.md">皮肤开发完整说明（Markdown，适合 AI）</a></li><li><a href="/skin-dev/audcore_skin.h">下载原生皮肤 C 头文件</a></li><li><a href="/skin-dev/native-abi.md">查看原生接口说明</a></li><li><a href="/api/">本地 API 与 SDK</a>（用于独立外部应用，与皮肤接口不同）</li></ul>
-<p>亮暗模式遵循声核的全局设置；皮肤可以声明只支持一种主题。宿主管理界面休眠和恢复。官网模拟预览使用模拟数据，不会操作真实音频或工程。</p></div></main>
-<footer class="site-footer wrap"><p>声核 · Audcore</p><nav><a href="/guide/">指北</a><a href="/api/">本地 API</a><a href="https://github.com/itorr/audcore-document/issues">问题反馈</a></nav><small>© 2026 声核</small></footer></body></html>
+<header class="site-header wrap">
+  <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
+  <nav aria-label="主导航"><a href="/">首页</a><a href="/guide/">指北</a><a href="/api/">API</a></nav>
+</header>
+<main id="main" class="skin-page">
+  <section class="skin-hero wrap">
+    <p class="skin-kicker">AUDCORE · SKIN DEVELOPMENT</p>
+    <h1>给声核，<br>换一种样子。</h1>
+    <p class="skin-lead">用网页或原生代码，做自己的调音台。声音交给声核，界面由你设计。</p>
+    <div class="skin-actions">
+      <a class="pill" href="/skin-dev/audcore-skin-dev.zip" download>下载 AI 开发包</a>
+      <a class="skin-text-link" href="#routes">选择开发路线 →</a>
+    </div>
+    <p class="skin-caption">包含接口说明、C 头文件与最简网页示例</p>
+  </section>
+  <section id="routes" class="skin-section skin-routes">
+    <div class="wrap">
+      <p class="skin-kicker">01 / 路线</p>
+      <h2>两种方式，<br>同一个声核。</h2>
+      <p class="skin-section-lead">从自己熟悉的工具开始。两种皮肤都通过宿主获取状态、执行操作，并调用标准菜单和浮层。</p>
+      <div class="skin-route-grid">
+        <article class="skin-route">
+          <p class="skin-route-label">WEBVIEW2</p>
+          <h3>网页皮肤</h3>
+          <p>HTML、CSS 和 JavaScript，适合快速设计、迭代界面和使用网页生态。</p>
+          <dl><div><dt>优势</dt><dd>开发与调整直观，布局和视觉工具丰富。</dd></div><div><dt>取舍</dt><dd>需要 WebView2 运行环境；界面与宿主通过桥接通信。</dd></div><div><dt>适合</dt><dd>熟悉网页开发，或希望快速尝试多种界面。</dd></div></dl>
+        </article>
+        <article class="skin-route">
+          <p class="skin-route-label">C ABI · WIN32</p>
+          <h3>原生皮肤</h3>
+          <p>使用 C ABI 接入，可用 C++ 和 Win32 自行实现窗口与绘制。</p>
+          <dl><div><dt>优势</dt><dd>直接使用原生窗口与绘图能力，不依赖网页运行环境。</dd></div><div><dt>取舍</dt><dd>需要处理窗口、DPI 和生命周期；模块在声核进程内运行。</dd></div><div><dt>适合</dt><dd>熟悉 Windows 原生开发，需要直接控制界面细节。</dd></div></dl>
+        </article>
+      </div>
+      <p class="skin-note">原生皮肤是可信进程内代码，请只加载信任的来源。皮肤接口仍在开发中，可能随声核版本调整。</p>
+    </div>
+  </section>
+  <section class="skin-section wrap">
+    <p class="skin-kicker">02 / 开始</p>
+    <h2>从一个文件包开始。</h2>
+    <div class="skin-steps">
+      <article><span>01</span><h3>选择路线</h3><p>网页皮肤准备清单与入口页面；原生皮肤按 C 接口实现模块。</p></article>
+      <article><span>02</span><h3>连接声核</h3><p>订阅状态并按需接收电平，通过宿主接口执行用户操作。</p></article>
+      <article><span>03</span><h3>打开皮肤</h3><p>网页资源打成 ZIP，或编译原生 DLL，统一使用 .skin.audcore 扩展名，在声核中打开并应用。</p></article>
+    </div>
+  </section>
+  <section id="resources" class="skin-section skin-resources">
+    <div class="wrap skin-resource-layout">
+      <div><p class="skin-kicker">03 / 资料</p><h2>让想法，<br>开始运行。</h2><p class="skin-section-lead">把开发包交给 AI Agent，或直接查阅需要的接口说明。</p></div>
+      <div class="skin-resource-list">
+        <a href="/skin-dev/audcore-skin-dev.zip" download><strong>AI 皮肤开发包</strong><span>Markdown、C 头文件和最简网页示例</span><b aria-hidden="true">↗</b></a>
+        <a href="/skin-dev/ai.md"><strong>完整接口说明</strong><span>网页与原生接口 · Markdown</span><b aria-hidden="true">↗</b></a>
+        <a href="/skin-dev/audcore_skin.h"><strong>原生 C 头文件</strong><span>原生皮肤接口声明</span><b aria-hidden="true">↗</b></a>
+        <a href="/skin-dev/native-abi.md"><strong>原生接口说明</strong><span>在线查看 C 接口</span><b aria-hidden="true">↗</b></a>
+      </div>
+    </div>
+    <div class="wrap"><p class="skin-note">皮肤可只支持一种亮暗外观；声核本体的亮暗设置仍可自由切换，不受皮肤限制。</p>
+    <p class="skin-note">独立外部应用请查看 <a href="/api/">本地 API 与 SDK</a>；它与皮肤接口不同。官网模拟预览使用模拟数据，不操作真实音频或工程。</p></div>
+  </section>
+</main>
+<footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/sponsor/">赞助</a>
+    <a href="/guide/#agreement">协议</a>
+    <a href="/api/">本地 API 与 SDK</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+</body>
+</html>
