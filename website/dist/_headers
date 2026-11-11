@@ -34,3 +34,13 @@
 /favicon.ico
   Content-Type: image/x-icon
   Cache-Control: public, max-age=3600, must-revalidate
+
+/skin-dev/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: no-cache
+
+/skin-dev/*.h
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: no-cache
