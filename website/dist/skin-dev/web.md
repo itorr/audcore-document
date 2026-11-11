@@ -142,6 +142,11 @@ const stop = await window.audcore.state.subscribe(event => {
 | --- | --- |
 | `appearance.setTheme(theme)` | 请求 `dark` 或 `light`，由宿主按皮肤声明校验并推送确认 |
 | `appearance.setScale(scale)` | 请求皮肤缩放；独立于系统 DPI |
+| `window.getBounds()` | 读取物理位置、逻辑客户区尺寸、DPI 和置顶状态 |
+| `window.setBounds({x, y, width, height})` | 请求调整窗口，字段可省略；成功表示宿主已接受 |
+| `window.subscribeBounds(listener)` | 订阅窗口变化，返回取消订阅函数 |
+| `window.getDisplays()` | 读取显示器、工作区物理坐标与 DPI |
+| `window.setAlwaysOnTop(enabled)` | 修改声核共用的置顶设置 |
 | `window.minimize()` / `window.toggleMaximize()` / `window.close()` | 最小化、切换最大化、关闭控制台 |
 | `window.startDrag()` | 左键按下时委托宿主拖动窗体 |
 | `window.startResize(direction)` | 委托调整窗体，方向为 `north`、`south`、`east`、`west`、`northEast`、`northWest`、`southEast`、`southWest` |
@@ -149,6 +154,8 @@ const stop = await window.audcore.state.subscribe(event => {
 | `window.showUnderCover()` | 请求在原生启动遮盖下显示网页 |
 | `window.presentFrame()` | 最终界面绘制完成后通知宿主交接 |
 | `window.startupFailed()` | 通知启动失败 |
+
+窗体的 `x`、`y` 是虚拟桌面物理像素（可能为负），`width`、`height` 为 96 DPI 逻辑客户区尺寸；显示器 `bounds` 和 `workArea` 均使用物理像素。宿主按皮肤清单限制尺寸，拒绝无法在屏幕中看到的位置；异步移动的最终结果以订阅通知为准。浏览器预览使用模拟数据，不会改变真实浏览器窗体。
 
 `state.display` 的 `dpi`、`clientWidth`、`clientHeight` 由宿主推送；客户区尺寸为 96 DPI 逻辑像素，皮肤缩放不重复乘入。网页模拟无法读取实际 DPI。声明默认、最小、最大尺寸及主题、缩放范围使用皮肤清单，参考本文的清单示例。
 
