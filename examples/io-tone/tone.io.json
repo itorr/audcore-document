@@ -1,0 +1,12 @@
+{
+  "id": "example.audcore.tone",
+  "name": "Test Tone",
+  "version": "1.0.0",
+  "directions": 1,
+  "abi_major": 1,
+  "min_host_minor": 5,
+  "menu": true,
+  "direct": true,
+  "input_channel_mode": 1,
+  "binary": "tone.in.audcore"
+}

@@ -48,3 +48,11 @@
 
 /skin-dev/*.zip
   Cache-Control: no-cache
+
+/io-dev/development.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: no-cache
+
+/io-dev/audcore-io-example.zip
+  Content-Type: application/zip
+  Cache-Control: no-cache
