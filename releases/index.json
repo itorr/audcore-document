@@ -7,12 +7,12 @@
       "date": "2026-11-12",
       "publishedAt": "2026-11-12T09:58:35Z",
       "url": "/releases/v0.0.3737/audcore-setup-v0.0.3737.exe",
-      "size": 6275361,
-      "sha256": "398e4a6bdf2ae0361a18044e772cc8bb367951ee31396a974c5eff224e3b979d",
+      "size": 6281016,
+      "sha256": "2741926b8e5b3ec705b65faf78af82f314694b6b7404d6de3f3844d411a19e8c",
       "portable": {
         "url": "/releases/v0.0.3737/audcore-portable.exe",
-        "size": 12954112,
-        "sha256": "7bfbb0de22f52a4fd630bddefc53aa597660f72a32affda164c63f770a2875e7"
+        "size": 12971520,
+        "sha256": "331af90acbf5815becc982f30ed8f9b4d8352032b494eee45436d7cda9f6082a"
       },
       "changes": [
         "在「设置 → 输入输出」按需安装程序声音、音频文件、截获播放器和网页源扩展，再从通道菜单接入。一个通道可接入多个程序的声音。旧预设缺少扩展时会提示安装。",
