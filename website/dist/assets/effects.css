@@ -1,4 +1,6 @@
 .effects-download { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:32px; padding:32px; border-radius:20px; background:#f1f5fb; }
+.effects-download + .effects-download { margin-top:24px; }
+.effects-download > div > p + p { margin-top:8px; }
 .effects-download h2 { margin:8px 0 12px; font-size:clamp(24px,3vw,34px); }
 .effects-download p { margin:0; }
 .effects-download-action { text-align:center; }
