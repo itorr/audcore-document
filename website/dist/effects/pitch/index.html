@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="在线体验声核伴奏变调的交互界面，下载 Windows x64 FX 包。">
+  <title>伴奏变调 PITCH - 声核 Audcore</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/effects.css">
+  <link rel="stylesheet" href="/assets/pitch-preview.css">
+  <script src="/assets/pitch-preview.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/">效果器</a><a href="/guide/">指北</a><a href="https://www.bilibili.com/video/BV1EiaY6zEne/" target="_blank" rel="noopener noreferrer">视频</a></nav>
+  </header>
+  <main id="main">
+    <section class="page-header wrap">
+      <h1>伴奏变调</h1>
+      <p>左右拖动或滚动鼠标滚轮调节半音，双击归零。</p>
+    </section>
+    <div class="wrap page-content effects-page">
+      <p>网页可体验变调界面和流光，实时音频变调用声核 FX 包。</p>
+<div class="preview">
+<div class="pitch-field">
+  <canvas width="540" height="300" role="slider" tabindex="0" aria-label="变调半音"
+    aria-valuemin="-12" aria-valuemax="12" aria-valuenow="0" aria-orientation="horizontal"></canvas>
+  <svg id="pitch-readout" viewBox="-36 0 264 62" aria-hidden="true">
+    <defs>
+      <path id="pitch-0" d="M15 5C7 5 4 12 4 23S7 41 15 41 26 34 26 23 23 5 15 5Z"/>
+      <path id="pitch-1" d="M9 13 17 5V41"/>
+      <path id="pitch-2" d="M5 13C6 8 10 5 16 5 23 5 26 9 26 14 26 19 22 23 18 27L5 41H26"/>
+      <path id="pitch-3" d="M6 9Q10 5 16 5C22 5 26 9 26 14S22 23 15 23H12 M15 23C23 23 27 27 27 32S22 41 15 41Q9 41 5 37"/>
+      <path id="pitch-4" d="M21 41V6L4 29H27"/>
+      <path id="pitch-5" d="M25 5H8L6 22Q10 19 16 19C23 19 27 24 27 30S23 41 15 41Q9 41 5 37"/>
+      <path id="pitch-6" d="M25 8Q21 5 17 5C8 5 4 13 4 25 4 36 8 41 16 41 23 41 27 36 27 30S23 20 16 20Q9 20 5 26"/>
+      <path id="pitch-7" d="M5 5H26L11 41"/>
+      <path id="pitch-8" d="M15 23C8 23 5 19 5 14S9 5 15 5 25 9 25 14 22 23 15 23ZM15 23C7 23 3 27 3 32S8 41 15 41 27 37 27 32 23 23 15 23Z"/>
+      <path id="pitch-9" d="M5 38Q9 41 13 41C22 41 26 33 26 21 26 10 22 5 14 5 7 5 3 10 3 16S7 26 14 26Q21 26 25 20"/>
+      <path id="pitch-plus" d="M3 23H17 M10 16V30"/>
+      <path id="pitch-minus" d="M3 23H17"/>
+    </defs>
+    <g class="digits" transform="translate(0 8)"></g>
+  </svg>
+</div>
+<div class="preview-audio">
+  <button id="demo" type="button">试听示例</button>
+  <button id="choose" type="button">选音频</button>
+  <button id="play" type="button" aria-pressed="false" disabled>播放</button>
+  <input id="file" type="file" accept="audio/*" hidden>
+  <select id="resolution" aria-label="Shader 渲染分辨率">
+    <option value="1">渲染 1×</option>
+    <option value="2" selected>渲染 ½</option>
+    <option value="4">渲染 ¼</option>
+  </select>
+  <span id="audio-status" role="status"></span>
+</div>
+</div>
+      <p>
+        <a class="pill" href="/extensions/plugin/windows-x86_64/cn.audcore.bian/1.12.0/923e5b86af3ecd364cca6df716f2ad0c6ab3cfcd0a8bcd930daa8af10fc0470d.fx.audcore" download="PITCH-v1.12.0.fx.audcore">下载 PITCH v1.12.0 · Windows x64</a>
+      </p>
+    </div>
+  </main>
+  <footer class="site-footer wrap">
+  <div class="footer-brand">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
+    <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+  </div>
+  <nav class="footer-column" aria-label="产品导航">
+    <h2>产品</h2>
+    <a href="/#features">功能介绍</a>
+    <a href="/download/">下载</a>
+    <a href="/gallery/" hidden>效果链</a>
+    <a href="/changelog/">更新记录</a>
+  </nav>
+  <nav class="footer-column" aria-label="了解声核">
+    <h2>了解声核</h2>
+    <a href="/guide/">指北</a>
+    <a href="/guide/#roadmap">待办</a>
+    <a href="/sponsor/">赞助</a>
+    <a href="/guide/#agreement">协议</a>
+  </nav>
+  <div class="footer-feedback footer-column">
+    <h2>交流</h2>
+    <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
+    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="/guide/#community">互助交流群</a>
+  </div>
+  <div class="footer-meta">
+    <small>© 2026 声核<span class="footer-separator"> · </span><a href="https://lab.magiconch.com/" target="_blank" rel="noopener noreferrer">神奇海螺试验场</a></small>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+  </div>
+</footer>
+</body>
+</html>
