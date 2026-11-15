@@ -11,12 +11,13 @@
 .aud-r-page .aud-r-gold:hover { background:#f0d09e; }
 .aud-r-panel { display:block; width:100%; height:auto; border-radius:12px; outline:1px solid #42403d; }
 .aud-r-section { margin-top:clamp(42px,7vw,88px); }
-.aud-r-section-lead { margin:0 0 8px; color:var(--muted); font-size:clamp(17px,2.2vw,24px); font-weight:650; }
-.aud-r-feature-intro { container-type:inline-size; width:min(100%,44rem); margin:clamp(36px,6vw,76px) auto clamp(22px,4vw,46px); }
+.aud-r-poster { container-type:inline-size; width:min(100%,44rem); margin:0 auto clamp(22px,4vw,46px); text-align:center; }
+.aud-r-poster > strong { display:block; font-size:min(8.2cqi,57px); font-weight:800; line-height:1.15; }
+.aud-r-poster em { color:#865419; font-style:normal; }
+.aud-r-feature-intro { margin-top:clamp(36px,6vw,76px); }
 .aud-r-feature-intro > * { display:block; white-space:nowrap; text-align:justify; text-align-last:justify; text-justify:inter-character; }
 .aud-r-feature-intro > span { color:var(--muted); font-size:min(3.8cqi,26px); font-weight:650; line-height:1.4; }
-.aud-r-feature-intro > strong { margin-top:.14em; font-size:min(8.2cqi,57px); font-weight:800; line-height:1.15; }
-.aud-r-feature-intro em { color:#865419; font-style:normal; }
+.aud-r-feature-intro > strong { margin-top:.14em; }
 .aud-r-section h2,.aud-r-privacy h2 { margin:0 0 16px; font-size:clamp(25px,4vw,36px); }
 .aud-r-section h3 { margin:0 0 8px; font-size:21px; }
 .aud-r-layers,.aud-r-details,.aud-r-editions { display:grid; gap:14px; }
