@@ -40,21 +40,25 @@
 .aud-r-meters img { display:block; width:min(100%,490px); height:auto; border-radius:10px; }
 .aud-r-languages { background:#eee9f6; }
 .aud-r-languages ul { display:flex; flex-wrap:wrap; align-items:center; gap:8px 24px; margin:0; padding:0; list-style:none; font-weight:700; font-size:clamp(16px,2.2vw,22px); }
-.aud-r-performance { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.12fr); align-items:center; gap:clamp(12px,2vw,24px) clamp(20px,4vw,48px); padding:clamp(20px,4vw,48px); border-radius:24px; background:#181818; color:#f4f2ed; }
-.aud-r-performance > .aud-r-poster { grid-column:1 / -1; }
-.aud-r-performance p { margin:0; color:#d0ccca; }
-.aud-r-chain { display:grid; gap:10px; margin:0 0 12px; }
-.aud-r-chain > div { display:grid; grid-template-columns:max-content minmax(0,1fr); align-items:center; gap:12px; background:#262525; padding:10px 14px; border-radius:12px; }
-.aud-r-chain dt { min-width:4.5em; color:#e1d8ca; font-size:13px; }
+.aud-r-performance-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.aud-r-performance-card { background:var(--surface); border-radius:16px; padding:clamp(16px,2.5vw,30px); }
+.aud-r-performance-card p { margin:0; color:#48505a; }
+.aud-r-benchmark,.aud-r-chain { display:grid; gap:8px; margin:14px 0 0; }
+.aud-r-benchmark > div,.aud-r-chain > div { display:grid; align-items:center; gap:8px 12px; background:var(--paper); padding:9px 12px; border-radius:10px; }
+.aud-r-benchmark > div { grid-template-columns:minmax(0,1fr) max-content; }
+.aud-r-benchmark dd { margin:0; font-size:13px; font-variant-numeric:tabular-nums; }
+.aud-r-benchmark strong { font-size:clamp(18px,2vw,25px); }
+.aud-r-performance-card .aud-r-performance-test { margin-top:12px; font-size:12px; line-height:1.55; }
+.aud-r-chain > div { grid-template-columns:max-content minmax(0,1fr); }
+.aud-r-chain dt { min-width:4.5em; color:var(--muted); font-size:13px; }
 .aud-r-chain dd { min-width:0; margin:0; }
 .aud-r-chain ul { display:flex; flex-wrap:wrap; gap:6px; margin:0; padding:0; list-style:none; }
 .aud-r-chain li,.aud-r-chain-plugin { display:block; width:fit-content; padding:4px 10px; border-radius:7px; font-size:13px; font-weight:650; }
-.aud-r-chain li:nth-child(1) { color:#eadcf6; background:#443955; }
-.aud-r-chain li:nth-child(2) { color:#d2eee2; background:#324a40; }
-.aud-r-chain li:nth-child(3) { color:#f7dfd0; background:#544033; }
-.aud-r-chain li:nth-child(4) { color:#f5dae9; background:#503645; }
-.aud-r-chain-plugin { min-width:7em; text-align:center; color:#f4f2ed; background:#454343; }
-.aud-r-performance .aud-r-performance-test { font-size:12px; line-height:1.55; }
+.aud-r-chain li:nth-child(1) { background:#eee9f6; }
+.aud-r-chain li:nth-child(2) { background:#e4f1ec; }
+.aud-r-chain li:nth-child(3) { background:#faece3; }
+.aud-r-chain li:nth-child(4) { background:#f6e8ee; }
+.aud-r-chain-plugin { min-width:7em; text-align:center; background:#e8eaed; }
 .aud-r-editions-summary { margin:0 0 20px; color:var(--muted); }
 .aud-r-editions article { display:grid; grid-template-columns:minmax(9.5rem,.85fr) minmax(0,2fr) minmax(13rem,1fr); align-items:start; gap:clamp(20px,3vw,36px); padding:clamp(20px,3vw,36px); border-radius:16px; background:var(--surface); scroll-margin-top:20px; }
 .aud-r-editions #buy { background:#f5ecdf; }
@@ -80,13 +84,12 @@
 .aud-r-privacy p a { color:var(--blue); font-weight:600; }
 @media(max-width:820px) {
   .aud-r-hero { grid-template-columns:minmax(0,1fr); }
-  .aud-r-performance { grid-template-columns:minmax(0,1fr); }
   .aud-r-layers { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .aud-r-editions article { grid-template-columns:minmax(0,1fr) minmax(12rem,.7fr); row-gap:14px; }
   .aud-r-edition-header { grid-column:1 / -1; }
 }
 @media(max-width:600px) {
-  .aud-r-details,.aud-r-editions article { grid-template-columns:minmax(0,1fr); }
+  .aud-r-details,.aud-r-editions article,.aud-r-performance-columns { grid-template-columns:minmax(0,1fr); }
   .aud-r-feature h3 { font-size:18px; }
   .aud-r-status { min-height:3.2em; }
 }
