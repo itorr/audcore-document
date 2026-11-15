@@ -93,33 +93,36 @@
       <div class="aud-r-poster">
         <h2 class="aud-r-poster-title" id="performance-title">超低占用，直播用也不卡</h2>
       </div>
-      <div class="aud-r-performance-columns">
-        <section class="aud-r-performance-card" aria-labelledby="benchmark-title">
-          <h3 id="benchmark-title">实测处理耗时</h3>
-          <p class="aud-r-performance-saving"><strong>节省至少 80%</strong> 性能占用</p>
-          <p>以原方案的三路并行混响为基准，比较混响处理开销。发送和额外混音开销另计。</p>
-          <p class="aud-r-performance-test">单实例处理耗时占音频块时长的比例</p>
-          <dl class="aud-r-benchmark">
-            <div><dt>基础处理</dt><dd>约 <strong>0.37%</strong></dd></div>
-            <div><dt>开启人声避让和电平表</dt><dd>约 <strong>0.44%</strong></dd></div>
-          </dl>
-          <p class="aud-r-performance-test">Aud-R v1.13.0 声核版 · Ryzen 7 9700X<br>48 kHz / 128 帧 · 双声道合成信号</p>
-        </section>
-        <section class="aud-r-performance-card" aria-labelledby="chain-title">
-          <h3 id="chain-title">四组混响，合在一个效果器</h3>
-          <p>三路混响分开挂，可能占掉大半条效果链。一个 Aud-R 就能把四组混响合在一起，给直播留出处理余量。</p>
-          <dl class="aud-r-chain">
+      <div class="aud-r-performance-board">
+        <div class="aud-r-performance-lead">
+          <p class="aud-r-performance-saving">节省至少 <strong>80%</strong> 性能占用</p>
+          <p>早期反射、双声、尾音和回声，合进一个 Aud-R。</p>
+        </div>
+        <div class="aud-r-comparison">
+          <dl aria-label="相对混响处理开销">
             <div>
-              <dt>原方案</dt>
-              <dd><span class="aud-r-chain-original">三路并行混响</span></dd>
+              <dt>原方案 · 三路并行混响</dt><dd>100%</dd>
+              <dd class="aud-r-comparison-bar" data-series="original" aria-hidden="true"></dd>
             </div>
             <div>
-              <dt>Aud-R</dt>
-              <dd><ul><li>早期反射</li><li>双声</li><li>尾音</li><li>回声</li></ul></dd>
+              <dt>Aud-R · 单实例</dt><dd>≤ 20%</dd>
+              <dd class="aud-r-comparison-bar" data-series="aud-r" aria-hidden="true"></dd>
             </div>
           </dl>
-        </section>
+          <p>原方案的混响处理开销记为 100%，发送和额外混音开销另计。</p>
+        </div>
       </div>
+      <section class="aud-r-performance-measurements" aria-labelledby="benchmark-title">
+        <div>
+          <h3 id="benchmark-title">单实例处理耗时</h3>
+          <p>占音频块时长的比例</p>
+        </div>
+        <dl>
+          <div><dt>基础处理</dt><dd>约 <strong>0.37%</strong></dd></div>
+          <div><dt>开启人声避让和电平表</dt><dd>约 <strong>0.44%</strong></dd></div>
+        </dl>
+        <p class="aud-r-performance-test">Aud-R v1.13.0 声核版 · Ryzen 7 9700X<br>48 kHz / 128 帧 · 双声道合成信号</p>
+      </section>
     </section>
     <section class="aud-r-section" aria-labelledby="get-title">
       <h2 id="get-title">获取 Aud-R</h2>
