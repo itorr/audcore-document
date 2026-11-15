@@ -11,6 +11,7 @@
 .aud-r-page .aud-r-gold:hover { background:#f0d09e; }
 .aud-r-panel { display:block; width:100%; height:auto; border-radius:12px; outline:1px solid #42403d; }
 .aud-r-section { margin-top:clamp(42px,7vw,88px); }
+.aud-r-feature-intro { max-width:35em; margin:0 0 clamp(20px,3.6vw,44px); font-size:clamp(19px,2.4vw,28px); font-weight:650; line-height:1.5; }
 .aud-r-section h2,.aud-r-privacy h2 { margin:0 0 16px; font-size:clamp(25px,4vw,36px); }
 .aud-r-section h3 { margin:0 0 8px; font-size:21px; }
 .aud-r-layers,.aud-r-details,.aud-r-editions { display:grid; gap:14px; }
