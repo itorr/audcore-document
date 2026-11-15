@@ -73,13 +73,12 @@
 .aud-r-edition-action .pill { min-inline-size:148px; }
 .aud-r-edition-action button:disabled { opacity:.6; cursor:not-allowed; }
 .aud-r-note { color:var(--muted); font-size:13px; }
-.aud-r-order-actions { display:flex; flex-wrap:wrap; gap:8px 14px; }
-.aud-r-link,.aud-r-privacy-link { border:0; background:none; color:#604719; font-size:13px; font-weight:650; padding:0; }
-.aud-r-link:hover,.aud-r-privacy-link:hover { color:var(--ink); }
-.aud-r-link { display:inline-flex; min-height:28px; align-items:center; }
+.aud-r-checkout-actions { display:flex; align-items:center; flex-wrap:wrap; gap:4px 14px; }
+.aud-r-order-actions { display:grid; }
+.aud-r-link { grid-area:1 / 1; justify-self:start; display:inline-flex; min-height:28px; align-items:center; border:0; background:none; color:#604719; font-size:13px; font-weight:650; padding:0; }
+.aud-r-link:hover { color:var(--ink); }
 .aud-r-order-actions button[hidden] { display:inline-flex !important; visibility:hidden; }
-.aud-r-status { min-height:4.8em; margin:8px 0 0; overflow-wrap:anywhere; }
-.aud-r-privacy-link { display:inline-block; margin-top:4px; }
+.aud-r-status { min-height:2.8em; margin:8px 0 0; overflow-wrap:anywhere; }
 .aud-r-privacy { max-width:850px; margin-top:clamp(36px,6vw,66px); scroll-margin-top:20px; }
 .aud-r-privacy h2 { font-size:clamp(21px,3vw,28px); }
 .aud-r-privacy p { margin:0 0 10px; color:var(--muted); }
@@ -95,5 +94,4 @@
 @media(max-width:600px) {
   .aud-r-details,.aud-r-editions article,.aud-r-performance-board,.aud-r-performance-measurements { grid-template-columns:minmax(0,1fr); }
   .aud-r-feature h3 { font-size:18px; }
-  .aud-r-status { min-height:3.2em; }
 }

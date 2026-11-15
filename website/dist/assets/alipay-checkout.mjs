@@ -1,4 +1,4 @@
-export function mountCheckout({api, page, key, versionPattern, paidMessage, filename, downloadLabel = "下载 VST3", onVersion}) {
+export function mountCheckout({api, page, key, versionPattern, paidMessage, filename, downloadLabel = "下载 VST3", pendingLabel = "继续支付宝付款", copyPending = true, onVersion}) {
   const checkout = document.querySelector('#checkout');
   const check = document.querySelector('#check-order');
   const copy = document.querySelector('#copy-order');
@@ -34,10 +34,10 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
   function refreshButtons() {
     const paid = current?.status === 'paid';
     const pending = Boolean(order?.id && !paid && current?.status !== 'closed');
-    checkout.textContent = paid ? downloadLabel : pending ? '继续支付宝付款' : current?.status === 'closed' ? '重新购买' : '支付宝购买';
+    checkout.textContent = paid ? downloadLabel : pending ? pendingLabel : current?.status === 'closed' ? '重新购买' : '支付宝购买';
     checkout.disabled = busy || checking;
     check.hidden = !pending;
-    copy.hidden = !pending && !paid;
+    copy.hidden = !paid && !(pending && copyPending);
     check.disabled = busy || checking;
   }
 
@@ -53,7 +53,7 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
     order.version = result.version;
     try { save(); } catch { /* The order link can still be copied from this page. */ }
     feedback.textContent = {
-      pending:'付款后本页会自动更新。支付失败或取消后，可继续付款。',
+      pending:'待付款。',
       paid:typeof paidMessage === "function" ? paidMessage(result.version) : paidMessage,
       closed:'这笔订单已关闭，可以重新购买。',
     }[result.status];
@@ -96,7 +96,7 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
       const response = await post(`/orders/${order.id}/reconcile`);
       const result = await response.json();
       showOrder(result);
-      if (current?.status === 'pending') feedback.textContent = '尚未确认到账。如果已付款，请稍后再确认。';
+      if (current?.status === 'pending') feedback.textContent = '尚未确认到账，请稍后再试。';
     } catch (error) {
       if (current?.status !== 'paid') feedback.textContent = error.message;
     } finally {
@@ -182,8 +182,8 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
       showOrder(result);
       if (current?.status === 'pending' && result.payment) {
         if (!stream || stream.signal.aborted) subscribe();
-        if (cashier?.closed) throw new Error('支付宝窗口已关闭，可点击「继续支付宝付款」。');
-        feedback.textContent = '请在支付宝完成付款。支付失败或取消后，可回到这里继续。';
+        if (cashier?.closed) throw new Error(`支付宝窗口已关闭，可点击「${pendingLabel}」。`);
+        feedback.textContent = '请在支付宝完成付款。';
         pay(result.payment, cashier?.document ?? document);
         submitted = true;
       } else if (current?.status === 'pending') {
@@ -227,12 +227,11 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
   }
   if (order?.id) {
     showOrder({id:order.id, status:order.status, version:order.version});
-    if (!current || current.status === 'pending')
-      feedback.textContent = '可继续付款。如果已经付款，请点击「确认到账」。';
+    if (!current) feedback.textContent = '待确认付款。';
   } else if (returned) {
     feedback.textContent = '本浏览器找不到这笔订单。请使用付款前的浏览器或已保存的订单链接。';
   } else {
-    feedback.textContent = '一次性支付。付款后本页会自动更新。';
+    feedback.textContent = '付款后即可下载。';
   }
   refreshButtons();
 }

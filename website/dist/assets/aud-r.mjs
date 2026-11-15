@@ -6,6 +6,8 @@ mountCheckout({
   page:'/aud-r/',
   key:'audcore-aud-r-order',
   versionPattern:/^\d+\.\d+\.\d+$/,
-  paidMessage:version => `付款已确认，可下载 Aud-R v${version}。订单链接可用于再次下载，请妥善保存。`,
+  pendingLabel:'继续付款',
+  copyPending:false,
+  paidMessage:version => `已付款 · Aud-R v${version}`,
   filename:version => `Aud-R-v${version}-vst3-win-x64.zip`,
 });
