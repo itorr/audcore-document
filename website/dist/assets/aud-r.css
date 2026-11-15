@@ -55,12 +55,12 @@
 .aud-r-chain dt { min-width:4.5em; color:var(--muted); font-size:13px; }
 .aud-r-chain dd { min-width:0; margin:0; }
 .aud-r-chain ul { display:flex; flex-wrap:wrap; gap:6px; margin:0; padding:0; list-style:none; }
-.aud-r-chain li,.aud-r-chain-plugin { display:block; width:fit-content; padding:4px 10px; border-radius:7px; font-size:13px; font-weight:650; }
+.aud-r-chain li,.aud-r-chain-original { display:block; width:fit-content; padding:4px 10px; border-radius:7px; font-size:13px; font-weight:650; }
 .aud-r-chain li:nth-child(1) { background:#eee9f6; }
 .aud-r-chain li:nth-child(2) { background:#e4f1ec; }
 .aud-r-chain li:nth-child(3) { background:#faece3; }
 .aud-r-chain li:nth-child(4) { background:#f6e8ee; }
-.aud-r-chain-plugin { min-width:7em; text-align:center; background:#e8eaed; }
+.aud-r-chain-original { background:#e8eaed; }
 .aud-r-editions-summary { margin:0 0 20px; color:var(--muted); }
 .aud-r-editions article { display:grid; grid-template-columns:minmax(9.5rem,.85fr) minmax(0,2fr) minmax(13rem,1fr); align-items:start; gap:clamp(20px,3vw,36px); padding:clamp(20px,3vw,36px); border-radius:16px; background:var(--surface); scroll-margin-top:20px; }
 .aud-r-editions #buy { background:#f5ecdf; }

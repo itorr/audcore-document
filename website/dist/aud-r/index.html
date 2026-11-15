@@ -97,7 +97,7 @@
         <section class="aud-r-performance-card" aria-labelledby="benchmark-title">
           <h3 id="benchmark-title">实测处理耗时</h3>
           <p class="aud-r-performance-saving"><strong>节省至少 80%</strong> 性能占用</p>
-          <p>以四组混响分开处理的方案为基准，比较混响处理开销。多路发送和额外混音开销另计。</p>
+          <p>以原方案的三路并行混响为基准，比较混响处理开销。发送和额外混音开销另计。</p>
           <p class="aud-r-performance-test">单实例处理耗时占音频块时长的比例</p>
           <dl class="aud-r-benchmark">
             <div><dt>基础处理</dt><dd>约 <strong>0.37%</strong></dd></div>
@@ -107,15 +107,15 @@
         </section>
         <section class="aud-r-performance-card" aria-labelledby="chain-title">
           <h3 id="chain-title">四组混响，合在一个效果器</h3>
-          <p>分开挂效果器，混响就可能占掉大半条效果链。一个 Aud-R 就能同时处理这四组混响，给直播留出处理余量。</p>
+          <p>三路混响分开挂，可能占掉大半条效果链。一个 Aud-R 就能把四组混响合在一起，给直播留出处理余量。</p>
           <dl class="aud-r-chain">
             <div>
-              <dt>分开挂</dt>
-              <dd><ul><li>早期反射</li><li>双声</li><li>尾音</li><li>回声</li></ul></dd>
+              <dt>原方案</dt>
+              <dd><span class="aud-r-chain-original">三路并行混响</span></dd>
             </div>
             <div>
-              <dt>合在一起</dt>
-              <dd><span class="aud-r-chain-plugin">Aud-R</span></dd>
+              <dt>Aud-R</dt>
+              <dd><ul><li>早期反射</li><li>双声</li><li>尾音</li><li>回声</li></ul></dd>
             </div>
           </dl>
         </section>
