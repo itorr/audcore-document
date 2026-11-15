@@ -37,7 +37,7 @@ async function post(route, body = {}) {
 function refreshButtons() {
   const paid = current?.status === 'paid';
   const pending = Boolean(order?.id && !paid && current?.status !== 'closed');
-  checkout.textContent = paid ? '下载 VST3' : pending ? '继续支付宝付款' : '支付宝购买 · ¥9.90';
+  checkout.textContent = paid ? '下载 VST3' : pending ? '继续支付宝付款' : '支付宝购买';
   checkout.disabled = busy || (!paid && !ready) || (pending && !order.request_id);
   check.hidden = !pending;
   copy.hidden = !pending && !paid;

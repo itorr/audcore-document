@@ -34,39 +34,92 @@
     <section class="aud-r-section" aria-labelledby="layers-title">
       <h2 id="layers-title">四组空间声，独立调节</h2>
       <div class="aud-r-layers">
-        <article><h3>早期反射</h3><p>用反射延迟和空间尺寸，调出声音离墙面的距离感。</p></article>
-        <article><h3>双声</h3><p>轻微错开左右的音高与时间，让人声更宽、更厚。</p></article>
-        <article><h3>尾音</h3><p>调节衰减时间和高频阻尼，控制混响尾巴的长度和明暗。</p></article>
-        <article><h3>节拍回声</h3><p>用毫秒或节拍设定回声间隔，支持附点和三连音。</p></article>
+        <article class="aud-r-feature">
+          <img src="/assets/aud-r-early.webp" width="600" height="320" loading="lazy" alt="早期反射的延迟和尺寸旋钮">
+          <div><h3>早期反射</h3><p>用反射延迟和空间尺寸，调出声音离墙面的距离感。</p></div>
+        </article>
+        <article class="aud-r-feature">
+          <img src="/assets/aud-r-double.webp" width="600" height="320" loading="lazy" alt="双声的延迟和偏调旋钮">
+          <div><h3>双声</h3><p>轻微错开左右的音高与时间，让人声更宽、更厚。</p></div>
+        </article>
+        <article class="aud-r-feature">
+          <img src="/assets/aud-r-tail.webp" width="600" height="320" loading="lazy" alt="尾音的衰减和阻尼旋钮">
+          <div><h3>尾音</h3><p>调节衰减时间和高频阻尼，控制混响尾巴的长度和明暗。</p></div>
+        </article>
+        <article class="aud-r-feature">
+          <img src="/assets/aud-r-echo.webp" width="600" height="320" loading="lazy" alt="回声的节拍间隔和反馈旋钮">
+          <div><h3>节拍回声</h3><p>用毫秒或节拍设定回声间隔，支持附点和三连音。</p></div>
+        </article>
       </div>
-      <dl class="aud-r-details">
-        <div><dt>实时分频人声避让</dt><dd>开口时，尾音和回声在对应频段自动降低，停下来后逐步恢复。</dd></div>
-        <div><dt>湿声高低切</dt><dd>控制混响的低频堆积和高频亮度，保留干声原有音色。</dd></div>
-        <div><dt>零额外处理延迟</dt><dd>插件不向宿主引入额外处理延迟。面板支持中文、English、日本語。</dd></div>
-      </dl>
+      <div class="aud-r-details">
+        <article class="aud-r-feature">
+          <img src="/assets/aud-r-ducking.webp" width="600" height="320" loading="lazy" alt="人声响起时，尾音和回声的各频段按不同幅度降低">
+          <div><h3>实时分频人声避让</h3><p>开口时，尾音和回声在对应频段自动降低，停下来后逐步恢复。</p></div>
+        </article>
+        <article class="aud-r-feature">
+          <img src="/assets/aud-r-filters.webp" width="600" height="320" loading="lazy" alt="湿声频率示意，两端的低频和高频被削减">
+          <div><h3>湿声高低切</h3><p>控制混响的低频堆积和高频亮度，保留干声原有音色。</p></div>
+        </article>
+        <article class="aud-r-feature">
+          <img src="/assets/aud-r-latency.webp" width="600" height="320" loading="lazy" alt="输入和干声输出的脉冲在同一采样位置">
+          <div><h3>零额外处理延迟</h3><p>插件不向宿主引入额外处理延迟。面板支持中文、English、日本語。</p></div>
+        </article>
+      </div>
     </section>
     <section class="aud-r-section" aria-labelledby="get-title">
       <h2 id="get-title">获取 Aud-R</h2>
-      <p>两个版本共用处理器和界面，均需要双声道。</p>
+      <p class="aud-r-editions-summary">两个版本共用处理器和界面，均需要双声道。</p>
       <div class="aud-r-editions">
-        <article id="free">
-          <h3>声核内免费使用</h3>
-          <p>在双声道通道打开「添加效果器」，在列表中搜索 Aud-R，点击「下载」，完成后添加到通道。</p>
-          <a class="pill" href="/download/">下载声核</a>
-        </article>
-        <article id="buy">
-          <h3>Windows x64 VST3 <span class="aud-r-price">¥9.90</span></h3>
-          <p>适用于支持 64 位 VST3 的 Windows 宿主。支付宝付款确认后在本页下载，解压并将 Aud-R.vst3 文件夹放入宿主的 VST3 扫描目录。</p>
-          <p class="aud-r-note">购买金额计入声核赞助，记录仅显示为匿名支持和「购买 Aud-R」。</p>
-          <div class="aud-r-actions">
-            <button class="pill aud-r-gold" id="checkout" type="button" disabled>支付宝购买 · ¥9.90</button>
-            <button class="aud-r-link" id="check-order" type="button" hidden>确认到账</button>
-            <button class="aud-r-link" id="copy-order" type="button" hidden>复制订单链接</button>
+        <article id="free" aria-labelledby="free-title">
+          <header class="aud-r-edition-header">
+            <h3 id="free-title">声核版</h3>
+            <strong class="aud-r-price">免费</strong>
+          </header>
+          <div class="aud-r-edition-info">
+            <p class="aud-r-license"><strong>授权范围</strong> 仅授权在声核内进行个人使用及直播。</p>
+            <ol>
+              <li>在声核的双声道通道打开「添加效果器」。</li>
+              <li>搜索 Aud-R，点击「下载」，完成后添加到通道。</li>
+            </ol>
           </div>
-          <p class="aud-r-note aud-r-status" id="order-status" role="status">正在连接购买服务…</p>
-          <noscript>购买和下载需要启用 JavaScript。</noscript>
+          <div class="aud-r-edition-action">
+            <a class="pill" href="/download/">下载声核</a>
+          </div>
+        </article>
+        <article id="buy" aria-labelledby="buy-title">
+          <header class="aud-r-edition-header">
+            <h3 id="buy-title">Windows x64 VST3</h3>
+            <strong class="aud-r-price">¥9.90</strong>
+          </header>
+          <div class="aud-r-edition-info">
+            <p class="aud-r-license"><strong>授权范围</strong> 授权给个人商用，<strong>允许直播使用</strong>，可在声核以外任意支持 64 位 VST3 的 Windows 宿主中使用。</p>
+            <ol>
+              <li>支付宝付款后回到本页，确认到账即可下载。</li>
+              <li>解压后，将 Aud-R.vst3 文件夹放入宿主的 VST3 扫描目录。</li>
+            </ol>
+          </div>
+          <div class="aud-r-edition-action">
+            <button class="pill aud-r-gold" id="checkout" type="button" disabled>支付宝购买</button>
+            <p class="aud-r-note aud-r-status" id="order-status" role="status">正在连接购买服务…</p>
+            <div class="aud-r-order-actions">
+              <button class="aud-r-link" id="check-order" type="button" hidden>确认到账</button>
+              <button class="aud-r-link" id="copy-order" type="button" hidden>复制订单链接</button>
+            </div>
+            <a class="aud-r-privacy-link" href="#privacy">隐私协议</a>
+            <noscript>购买和下载需要启用 JavaScript。</noscript>
+          </div>
         </article>
       </div>
+    </section>
+    <section id="privacy" class="aud-r-privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">Aud-R 购买隐私协议</h2>
+      <p>声核使用订单号、商品版本、付款金额、状态、时间及支付宝交易号确认付款和提供下载。服务端在支持重新下载及交易核对期间保留订单记录，并临时使用连接 IP 限制频繁请求。浏览器保存订单凭据，服务端保存其校验值。清除本站数据前，可复制订单链接并私下保存。</p>
+      <p>付款由支付宝处理，支付宝会收到订单号、商品名称和金额。声核官网不收集你的支付宝密码或银行卡信息。付款金额计入声核赞助，公开记录显示匿名支持、金额、日期和「购买 Aud-R」。</p>
+      <p>如需查阅、更正或删除相关信息，请通过
+        <a href="/guide/#community">声核互助交流群</a>
+        联系维护者，私下核对订单。支付宝处理付款信息的规则见
+        <a href="https://render.alipay.com/p/c/17qjvbnlkcw0">支付宝隐私权政策</a>。
+      </p>
     </section>
   </main>
   <footer class="site-footer wrap">
