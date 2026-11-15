@@ -30,8 +30,12 @@
 .aud-r-layers .aud-r-feature:nth-child(3) { background:#faece3; }
 .aud-r-layers .aud-r-feature:nth-child(4) { background:#f6e8ee; }
 .aud-r-details { grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:14px; }
-.aud-r-languages { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px 24px; margin-top:14px; padding:clamp(16px,3vw,28px); border-radius:16px; background:#eee9f6; }
-.aud-r-languages p { margin:0; color:#48505a; }
+.aud-r-panel-feature { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px 24px; margin-top:14px; padding:clamp(16px,3vw,28px); border-radius:16px; }
+.aud-r-panel-feature p { margin:0; color:#48505a; }
+.aud-r-meters { background:var(--surface); }
+.aud-r-meters > div { flex:1 1 280px; }
+.aud-r-meters img { display:block; width:min(100%,490px); height:auto; border-radius:10px; }
+.aud-r-languages { background:#eee9f6; }
 .aud-r-languages ul { display:flex; flex-wrap:wrap; align-items:center; gap:8px 24px; margin:0; padding:0; list-style:none; font-weight:700; font-size:clamp(16px,2.2vw,22px); }
 .aud-r-editions-summary { margin:0 0 20px; color:var(--muted); }
 .aud-r-editions article { display:grid; grid-template-columns:minmax(9.5rem,.85fr) minmax(0,2fr) minmax(13rem,1fr); align-items:start; gap:clamp(20px,3vw,36px); padding:clamp(20px,3vw,36px); border-radius:16px; background:var(--surface); scroll-margin-top:20px; }
