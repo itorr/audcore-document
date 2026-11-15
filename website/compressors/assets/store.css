@@ -1,0 +1,68 @@
+:root {
+  color-scheme: dark;
+  font-family: "Instrument Sans", system-ui, "Microsoft YaHei", sans-serif;
+  background: #131514;
+  color: #fbf4e9;
+  --muted: #c6c4b9;
+  --card: #232724;
+  --accent: #f6c493;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.shell { max-width: 76rem; margin: auto; padding-inline: clamp(1rem, 4vw, 3rem); }
+a { color: inherit; }
+a:hover { color: var(--accent); }
+.masthead, .footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.3rem; }
+.brand, nav { display: flex; align-items: center; gap: 0.7rem; }
+.brand, nav a, .product-visual { text-decoration: none; }
+nav { gap: clamp(0.8rem, 3vw, 2rem); }
+.hero { text-align: center; padding-block: clamp(2.25rem, 7vw, 5.8rem) 1rem; }
+h1, h2, p { margin: 0; }
+.hero h1 { font-size: clamp(2.35rem, 8vw, 6.2rem); line-height: 1.03; letter-spacing: -0.05em; }
+.hero h1 span { color: var(--accent); }
+.lead { font-size: clamp(1.1rem, 2.6vw, 1.85rem); font-weight: 650; margin-top: 0.9rem; }
+.pitch { color: var(--muted); margin: 0.65rem auto 1.6rem; max-width: 38rem; line-height: 1.7; }
+.pitch strong { color: #fbf4e9; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(0.7rem, 2vw, 1.4rem); }
+.hero-panels { margin-top: clamp(1.5rem, 5vw, 3.2rem); }
+.product-visual { border-radius: 1rem; padding: clamp(0.5rem, 2.8vw, 2rem); }
+.product-visual.optical { background: #352725; }
+.product-visual.fet { background: #252d30; }
+.product-visual:hover { background: #343932; }
+.product-visual img { width: 100%; height: auto; aspect-ratio: 1.8; object-fit: contain; display: block; margin: auto; }
+.product-visual span { display: block; margin-top: 0.9rem; font-size: clamp(0.95rem, 2.2vw, 1.35rem); font-weight: 700; }
+.product-visual small { display: block; font-size: 0.83rem; color: var(--muted); font-weight: 500; }
+.details { margin-block: 0.4rem 1.5rem; }
+.card, .purchase { background: var(--card); border-radius: 1rem; padding: clamp(1rem, 3.3vw, 2.4rem); }
+.card h2, .purchase h2 { font-size: clamp(1.25rem, 2.8vw, 2rem); }
+.card p, .purchase p, .privacy p { line-height: 1.75; margin-top: 0.65rem; }
+.product-tagline, .metric { font-weight: 650; }
+.metric { color: var(--accent); }
+.purchase { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.5rem; background: #2e3026; margin-block: 1.5rem; }
+.purchase .price { margin: 0; font-size: clamp(2.3rem, 5vw, 3.5rem); line-height: 1; font-weight: 750; }
+.delivery { margin: 1rem 0; padding: 0; display: grid; gap: 0.5rem; list-style: none; }
+.delivery li { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; padding: 0.55rem 0.75rem; border-radius: 0.45rem; background: #3a3d33; font-weight: 650; }
+.delivery span, .muted { color: var(--muted); font-weight: 400; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
+.primary, button { display: inline-block; border: 0; border-radius: 0.55rem; padding: 0.72rem 1rem; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; }
+button { background: #484c3e; color: #fbf4e9; }
+.primary { background: var(--accent); color: #271b14; }
+.primary:hover { background: #ffdab3; color: #271b14; }
+button:disabled { opacity: 0.62; cursor: default; }
+button[hidden] { display: none; }
+:focus-visible { outline: 2px solid #fff0a6; outline-offset: 3px; }
+#order-status { min-height: 5.3em; }
+.privacy { max-width: 52rem; padding-block: 3rem; }
+.privacy h2 { margin-top: 1.6rem; font-size: 1.2rem; }
+.footer { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 42rem) {
+  .details, .purchase { grid-template-columns: 1fr; }
+  .masthead, .footer { gap: 0.7rem; }
+}
+
+
+.measurements { padding: 1rem 1.25rem; border-radius: 0.75rem; background: #1e211e; line-height: 1.65; }
+.measurements summary { cursor: pointer; font-weight: 650; }
+.measurements p, .measurements dl { margin-block: 0.65rem 0; color: var(--muted); }
+.measurements dt { font-weight: 650; color: #fbf4e9; }
+.measurements dd { margin: 0 0 0.5rem; }

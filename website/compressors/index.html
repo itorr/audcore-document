@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="为实时直播特化的声核压缩器。Aud2A 光电压缩与 Aud76 FET 压缩，超低占用，插件额外延迟 0 个采样点。">
+  <title>Aud2A + Aud76 · 声核直播压缩组合</title>
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/store.css">
+  <script type="module" src="./assets/store.mjs"></script>
+</head>
+<body>
+  <header class="shell masthead">
+    <a class="brand" href="https://audcore.utae.cn/"><img src="./assets/logo.svg" alt="" width="28" height="28">声核 Audcore</a>
+    <nav aria-label="站内导航"><a href="#plugins">插件</a><a href="#buy">购买</a></nav>
+  </header>
+  <main class="shell">
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title">Aud2A <span>+</span> Aud76</h1>
+      <p class="lead">为实时直播特化的两款压缩器</p>
+      <p class="pitch">纯算法精细建模，超低占用，<strong>真 0 延迟</strong>。两款插件的额外处理延迟均为 <strong>0 个采样点</strong>。与各自指定的同类插件对照，实测处理耗时均低于 20%。</p>
+      <a class="primary" href="#buy">¥19.80 购买两款 VST3</a>
+      <div class="pair hero-panels">
+        <a class="product-visual optical" href="#aud2a" aria-label="了解 Aud2A 光电压缩">
+          <img src="./assets/aud2a.svg" alt="Aud2A 暖色原生面板，带两个大旋钮、光电灯板与指针表" width="540" height="300">
+          <span>Aud2A <small>光电压缩</small></span>
+        </a>
+        <a class="product-visual fet" href="#aud76" aria-label="了解 Aud76 FET 压缩">
+          <img src="./assets/aud76.svg" alt="Aud76 深色原生面板，带输入输出旋钮、压缩比按键与指针表" width="640" height="300">
+          <span>Aud76 <small>FET 压缩</small></span>
+        </a>
+      </div>
+    </section>
+    <section id="plugins" class="pair details" aria-label="两款压缩器">
+      <article class="card" id="aud2a">
+        <h2>Aud2A</h2>
+        <p class="product-tagline">细腻、顺滑的 2A 光电压缩</p>
+        <p>用实机录音校准光电衰减与旋钮曲线，建模 T4 光电记忆和随节目变化的释放。用 PEAK 和 GAIN 稳住人声，让大小声之间的过渡保留自然起伏。</p>
+        <p class="metric">实测处理耗时低于 Revenger 2A 的 20%，保留 2A 细腻的声音特性。</p>
+      </article>
+      <article class="card" id="aud76">
+        <h2>Aud76</h2>
+        <p class="product-tagline">快速、有力度的 76 FET 压缩</p>
+        <p>建模 76 式的快速启动、随持续输入变化的释放和轻微饱和。用四档压缩比控制直播人声和乐器的瞬态，干湿混合可以保留原始动态。</p>
+        <p class="metric">实测处理耗时低于 FETish 的 20%，保留 FET 压缩的速度与力度。</p>
+      </article>
+    </section>
+    <details class="measurements">
+      <summary>查看性能对照与测试条件</summary>
+      <p>AMD Ryzen 7 9700X，Windows x64 VST3，48 kHz、128 帧、双声道，默认参数、宽带测试信号，编辑器关闭。每项预热后测量 5 轮，每轮 2,000 个块。占用按每块平均处理耗时计算。</p>
+      <dl>
+        <dt>Aud2A</dt>
+        <dd>v1.30.0 约 7.2 μs／块，为 Revenger 2A v1.2.0（350 μs／块）的约 2.1%，为 LALA v3.1.0（16.7 μs／块）的约 43%。</dd>
+        <dt>Aud76</dt>
+        <dd>v1.23.0 约 1.47 μs／块，为 FETish v6.0.0（18.6 μs／块）的约 7.9%。</dd>
+      </dl>
+      <p>两款 VST3 激活后向宿主报告的插件额外处理延迟均为 0 个采样点。直播的总延迟还取决于声卡、宿主缓冲及效果链里的其他插件。</p>
+    </details>
+    <section class="purchase" id="buy" aria-labelledby="purchase-title">
+      <div>
+        <h2 id="purchase-title">Aud2A + Aud76</h2>
+        <p>Windows x64 VST3 · 个人商用授权</p>
+        <ul class="delivery">
+          <li>Aud2A <span id="version-aud2a">v1.30.0 · VST3</span></li>
+          <li>Aud76 <span id="version-aud76">v1.23.0 · VST3</span></li>
+        </ul>
+        <p class="muted">一笔订单，到账后下载包含两款插件的 ZIP。请保存私密订单链接，以便再次下载。</p>
+      </div>
+      <div class="checkout">
+        <p class="price">¥19.80</p>
+        <div class="actions">
+          <button id="checkout" class="primary" type="button" disabled>支付宝购买</button>
+          <button id="check-order" type="button" hidden>确认到账</button>
+          <button id="copy-order" type="button" hidden>复制订单链接</button>
+        </div>
+        <p id="order-status" class="muted" role="status" aria-live="polite">一次性支付。付款后本页会自动更新。</p>
+        <noscript><p>请启用 JavaScript 后购买或打开订单。</p></noscript>
+      </div>
+    </section>
+    <section class="pair details" aria-label="使用说明">
+      <article class="card">
+        <h2>宿主与安装</h2>
+        <p>可在任何兼容的 Windows x64 VST3 宿主中使用。解压后将两款完整的 <code>.vst3</code> 文件夹放入 <code>C:\Program Files\Common Files\VST3</code>，再让宿主重新扫描。</p>
+        <p>在声核内可免费使用 Aud2A 和 Aud76。
+          <a href="https://audcore.utae.cn/effects/">查看声核效果器</a></p>
+      </article>
+      <article class="card">
+        <h2>个人商用授权</h2>
+        <p>购买者本人可以将两款插件用于盈利直播、成品发布和项目交付。授权允许交付使用插件处理后的成品。禁止再分发付费插件及安装包。</p>
+        <p>付款、订单存储和下载凭据的处理方式见
+          <a href="./privacy.html">购买隐私说明</a>。</p>
+      </article>
+    </section>
+  </main>
+  <footer class="shell footer"><span>声核 Audcore</span><a href="./privacy.html">购买隐私说明</a></footer>
+</body>
+</html>
