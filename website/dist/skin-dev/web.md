@@ -57,6 +57,40 @@ const stop = await window.audcore.state.subscribe(event => {
 
 状态订阅先收到 `snapshot`，之后收到连续修订号的 `change`、`patch`、`graph_patch`、`channel`、`channel_batch`、`effect_batch`、`order`、`structure`、`primary`；发现缺口应停止应用增量并重同步。电平属于瞬时数据，可以合并或丢弃，不占权威修订号。休眠和恢复由宿主管理，不用网页定时轮询状态。`recording_saved` 提供 `name` 和 `token`，可调用 `recording.revealSaved(token)` 定位保存结果。
 
+### 皮肤数据存储
+
+从声核 v0.0.4110 起，可使用两个独立的异步存储区；宿主根据当前皮肤 ID 自动隔离，无需传入 ID。更新皮肤时应保持 ID 不变。
+
+| 存储区 | 用途 | 保存方式 |
+| --- | --- | --- |
+| `audcore.document.storage` | 当前工程的皮肤数据，例如布局 | 保存或另存工程时写入工程文件；会话自动保存和恢复也包含这些数据。切换工程后读取新工程的数据 |
+| `audcore.local.storage` | 本机皮肤偏好，例如界面选项 | 写入声核状态目录的 `skin-storage.json`，在不同工程间共用，不随工程分享 |
+
+两个存储区的方法一致，均返回 Promise；失败会 reject：
+
+| 方法 | 返回 / 作用 |
+| --- | --- |
+| `get(key)` | 获取 JSON 值；键不存在时返回 `null` |
+| `set(key, value)` | 保存 JSON 值，返回 `null` |
+| `remove(key)` | 删除指定键，返回 `null` |
+| `keys()` | 返回当前存储区的键数组 |
+| `clear()` | 清除当前皮肤在当前存储区的所有键，返回 `null` |
+
+键为字符串，最多 256 个 UTF-8 字节，不能包含控制字符；值必须可序列化为 JSON。每个皮肤在每个存储区的数据总量上限为 1 MiB（JSON 序列化后），单次请求还受消息大小限制。`null` 是合法值，因此 `get()` 不能区分已保存的 `null` 和不存在的键；需要区分时使用 `keys()`。这些接口不提供变更订阅，按需读取即可。
+
+```js
+const project = window.audcore.document.storage;
+const local = window.audcore.local.storage;
+
+await project.set("layout", { columns: 3 });
+const layout = await project.get("layout");
+await local.set("showMeters", true);
+const showMeters = await local.get("showMeters");
+// 删除单个键：await project.remove("layout");
+```
+
+请处理 Promise 错误。工程数据会随工程文件复制或分享，本机数据不会；不要将秘密信息存入这两个存储区。
+
 ### 播放、工程和历史
 
 | 方法 | 用途 |

@@ -26,6 +26,32 @@
 
 原生命令通过 `command` 发送，命令名称及参数语义可参考 [网页皮肤接口清单](https://audcore.utae.cn/skin-dev/web.md)，但 JSON 参数与网页函数签名并非 C ABI，需按宿主协议构造；原生菜单锚点使用屏幕物理坐标。不要假定所有网页便利方法均可直接用于原生。
 
+## 皮肤数据存储
+
+从声核 v0.0.4110 起，原生皮肤通过 `host.command` 使用与网页相同的两个存储区：`document.storage` 跟随当前工程，`local.storage` 保存在本机并跨工程共用。宿主按皮肤 ID 自动隔离；每个存储区提供 `get`、`set`、`remove`、`keys`、`clear`，无需传入皮肤 ID。保存时机、限制及返回值见 [网页皮肤存储说明](https://audcore.utae.cn/skin-dev/web.md#皮肤数据存储)。
+
+先通过 `subscribe` 注册事件回调，再发送 UTF-8 JSON 命令。例如（`request_id` 应为当前未完成请求中唯一的编号）：
+
+```c
+const char request[] = "{\"method\":\"document.storage.set\","
+                       "\"params\":{\"key\":\"layout\",\"value\":{\"columns\":3}}}";
+audcore_skin_bytes bytes = { (const uint8_t *)request, sizeof(request) - 1 };
+int32_t accepted = host.command(host.ctx, 42, bytes);
+// accepted 为 0 只表示已接收；等待 request_id 为 42 的 RESPONSE。
+```
+
+其他请求格式：
+
+```json
+{"method":"document.storage.get","params":{"key":"layout"}}
+{"method":"local.storage.set","params":{"key":"showMeters","value":true}}
+{"method":"local.storage.remove","params":{"key":"showMeters"}}
+{"method":"local.storage.keys","params":{}}
+{"method":"local.storage.clear","params":{}}
+```
+
+回调中按 `AUDCORE_SKIN_EVENT_RESPONSE` 和 `request_id` 匹配结果：`status == 0` 表示成功，`payload` 是 UTF-8 JSON 结果；非零表示失败，负载为错误信息。回调返回后负载不再有效，需要保留时必须复制。请求被接收不代表数据已保存；皮肤隐藏或销毁时应停止发起请求并取消订阅。实际 JSON 应使用可靠的序列化器转义，避免直接拼接用户输入。
+
 ## 头文件
 
 下载 [audcore_skin.h](https://audcore.utae.cn/skin-dev/audcore_skin.h)，或 [在线查看接口声明](https://audcore.utae.cn/skin-dev/native-abi.md)。
