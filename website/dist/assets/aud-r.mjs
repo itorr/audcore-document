@@ -8,7 +8,7 @@ const feedback = document.querySelector('#order-status');
 const key = 'audcore-aud-r-order';
 const idPattern = /^AUD[0-9a-f]{32}$/;
 const tokenPattern = /^[0-9a-f]{64}$/;
-let order, current, stream, ready = false, busy = false, checking = false;
+let order, current, stream, busy = false, checking = false;
 
 function restore(storageKey) {
   try { return JSON.parse(localStorage.getItem(storageKey)); } catch { return null; }
@@ -26,7 +26,7 @@ async function post(route, body = {}) {
     headers:{'Content-Type':'application/json', Authorization:`Bearer ${order.token}`},
     body:JSON.stringify(body),
     signal:AbortSignal.timeout(20000),
-  });
+  }).catch(() => { throw new Error('暂时无法连接购买服务，请重试。'); });
   if (!response.ok) {
     const result = await response.json().catch(() => ({}));
     throw new Error(result.error ?? '购买服务暂不可用，请稍后重试。');
@@ -37,8 +37,8 @@ async function post(route, body = {}) {
 function refreshButtons() {
   const paid = current?.status === 'paid';
   const pending = Boolean(order?.id && !paid && current?.status !== 'closed');
-  checkout.textContent = paid ? '下载 VST3' : pending ? '继续支付宝付款' : '支付宝购买';
-  checkout.disabled = busy || (!paid && !ready) || (pending && !order.request_id);
+  checkout.textContent = paid ? '下载 VST3' : pending ? '继续支付宝付款' : current?.status === 'closed' ? '重新购买' : '支付宝购买';
+  checkout.disabled = busy || checking;
   check.hidden = !pending;
   copy.hidden = !pending && !paid;
   check.disabled = busy || checking;
@@ -46,12 +46,13 @@ function refreshButtons() {
 
 function showOrder(result) {
   if (result?.id !== order?.id || !['pending','paid','closed'].includes(result?.status) ||
-      !/^\d+\.\d+\.\d+$/.test(result.version) || current?.status === 'paid' && result.status !== 'paid') return;
+      !/^\d+\.\d+\.\d+$/.test(result.version) || current?.status === 'paid' && result.status !== 'paid' ||
+      current?.status === 'closed' && result.status === 'pending') return;
   if (result.status !== 'pending') stream?.abort();
   if (current?.status === result.status) return;
   current = result;
   feedback.textContent = {
-    pending:'等待付款确认。付款后可回到本页下载。',
+    pending:'付款后本页会自动更新。支付失败或取消后，可继续付款。',
     paid:`付款已确认，可下载 Aud-R v${result.version}。订单链接可用于再次下载，请妥善保存。`,
     closed:'这笔订单已关闭，可以重新购买。',
   }[result.status];
@@ -81,6 +82,8 @@ async function subscribe() {
     }
   } catch {
     if (!controller.signal.aborted && !current) feedback.textContent = '暂时无法读取订单，请点击「确认到账」重试。';
+  } finally {
+    if (stream === controller) stream = undefined;
   }
 }
 
@@ -101,24 +104,24 @@ async function checkOrder() {
   }
 }
 
-function pay(payment) {
+function pay(payment, paymentDocument) {
   if (payment?.gateway_url !== 'https://openapi.alipay.com/gateway.do') throw new Error('支付信息无效，请重试。');
   const gateway = new URL(payment.gateway_url);
   gateway.searchParams.set('charset', 'utf-8');
-  const form = document.createElement('form');
+  const form = paymentDocument.createElement('form');
   form.method = 'POST';
   form.acceptCharset = 'UTF-8';
   form.action = gateway.href;
   form.hidden = true;
   for (const [name, value] of Object.entries(payment.fields)) {
     if (name === 'charset') continue;
-    const input = document.createElement('input');
+    const input = paymentDocument.createElement('input');
     input.type = 'hidden';
     input.name = name;
     input.value = value;
     form.append(input);
   }
-  document.body.append(form);
+  paymentDocument.body.append(form);
   form.submit();
   form.remove();
 }
@@ -136,34 +139,59 @@ async function download() {
   setTimeout(() => URL.revokeObjectURL(url), 30000);
 }
 
+async function createOrder() {
+  if (!order || order.id) {
+    order = {request_id:crypto.randomUUID(), token:[...crypto.getRandomValues(new Uint8Array(32))].map(byte => byte.toString(16).padStart(2,'0')).join('')};
+    current = undefined;
+  }
+  try { save(); } catch { throw new Error('请允许本站保存订单，再发起付款。'); }
+  const response = await post('/orders', {request_id:order.request_id});
+  return response.json();
+}
+
 checkout.addEventListener('click', async () => {
-  if (busy) return;
+  if (busy || checking) return;
   busy = true;
   refreshButtons();
+  let cashier;
+  let submitted = false;
   try {
     if (current?.status === 'paid') {
       await download();
       return;
     }
-    if (!order || current?.status === 'closed') {
-      order = {request_id:crypto.randomUUID(), token:[...crypto.getRandomValues(new Uint8Array(32))].map(byte => byte.toString(16).padStart(2,'0')).join('')};
-      current = undefined;
+    cashier = window.open('about:blank', '_blank');
+    if (cashier) {
+      cashier.opener = null;
+      cashier.document.body.textContent = '正在打开支付宝…';
     }
-    try { save(); } catch { throw new Error('请允许本站保存订单，再发起付款。'); }
     feedback.textContent = '正在准备支付宝支付…';
-    const response = await post('/orders', {request_id:order.request_id});
-    const result = await response.json();
+    let result;
+    if (order?.id && current?.status !== 'closed') {
+      const response = await post(`/orders/${order.id}/pay`);
+      result = await response.json();
+      showOrder(result);
+    }
+    if (!result || result.status === 'closed') result = await createOrder();
     if (!idPattern.test(result.id)) throw new Error('订单信息无效，请重试。');
-    order.id = result.id;
-    save();
+    if (!order.id) {
+      order.id = result.id;
+      save();
+    }
     showOrder(result);
-    if (result.payment) {
-      subscribe();
-      pay(result.payment);
-    } else if (result.status === 'pending') feedback.textContent = '付款时限已到，正在核对订单。请稍后确认到账。';
+    if (current?.status === 'pending' && result.payment) {
+      if (!stream || stream.signal.aborted) subscribe();
+      if (cashier?.closed) throw new Error('支付宝窗口已关闭，可点击「继续支付宝付款」。');
+      feedback.textContent = '请在支付宝完成付款。支付失败或取消后，可回到这里继续。';
+      pay(result.payment, cashier?.document ?? document);
+      submitted = true;
+    } else if (current?.status === 'pending') {
+      feedback.textContent = '付款时限已到。支付宝关闭旧订单后，页面会提示重新购买。';
+    }
   } catch (error) {
     feedback.textContent = error.message;
   } finally {
+    if (cashier && !submitted) cashier.close();
     busy = false;
     refreshButtons();
   }
@@ -200,15 +228,12 @@ if (returned || receiptId || receiptToken) {
 if (order?.id) {
   feedback.textContent = '正在确认订单…';
   subscribe();
-  if (returned) checkOrder();
 } else if (returned) {
   feedback.textContent = '本浏览器找不到这笔订单。请使用付款前的浏览器或已保存的订单链接。';
+} else {
+  feedback.textContent = '一次性支付。付款后本页会自动更新。';
 }
 refreshButtons();
-try {
-  const response = await fetch(api + '/config', {signal:AbortSignal.timeout(10000)});
-  const config = await response.json();
-  ready = response.ok && config.amount_fen === 990;
-} catch { ready = false; }
-if (!order?.id && !returned) feedback.textContent = ready ? '一次性支付。付款确认后即可下载。' : '购买服务暂不可用，请稍后重试。';
-refreshButtons();
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && !stream && order?.id && !['paid','closed'].includes(current?.status)) subscribe();
+});
