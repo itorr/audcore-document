@@ -1,4 +1,4 @@
-.aud-r-page { padding-block:28px 76px; }
+.aud-r-page { container-type:inline-size; padding-block:28px 76px; }
 .aud-r-hero { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); align-items:center; gap:clamp(24px,4vw,54px); padding:clamp(22px,4vw,54px); background:#181818; color:#f4f2ed; border-radius:24px; }
 .aud-r-intro > * { margin:0; }
 .aud-r-credit { color:#d4b684; font-size:14px; font-weight:650; }
@@ -11,18 +11,16 @@
 .aud-r-page .aud-r-gold:hover { background:#f0d09e; }
 .aud-r-panel { display:block; width:100%; height:auto; border-radius:12px; outline:1px solid #42403d; }
 .aud-r-section { margin-top:clamp(42px,7vw,88px); }
-.aud-r-poster { container-type:inline-size; width:min(100%,44rem); margin:0 auto clamp(22px,4vw,46px); text-align:center; }
-.aud-r-poster > strong { display:block; font-size:min(8.2cqi,57px); font-weight:800; line-height:1.15; }
-.aud-r-poster em { color:#865419; font-style:normal; }
-.aud-r-feature-intro { margin-top:clamp(36px,6vw,76px); }
+.aud-r-poster { container-type:inline-size; display:flex; flex-direction:column; justify-content:center; width:min(100%,44rem); min-block-size:clamp(65px,24cqi,168px); margin-inline:auto; text-align:center; }
+.aud-r-section .aud-r-poster-title { margin:0; font-size:min(8.2cqi,57px); font-weight:800; line-height:1.15; }
+.aud-r-feature-intro { margin-block:clamp(18px,3vw,40px) 8px; }
 .aud-r-feature-intro > * { display:block; white-space:nowrap; text-align:justify; text-align-last:justify; text-justify:inter-character; }
-.aud-r-feature-intro > span { color:var(--muted); font-size:min(3.8cqi,26px); font-weight:650; line-height:1.4; }
-.aud-r-feature-intro > strong { margin-top:.14em; }
+.aud-r-feature-intro > span { font-size:min(3.8cqi,26px); font-weight:650; line-height:1.4; }
+.aud-r-section .aud-r-feature-intro > strong { margin-top:.14em; }
 .aud-r-section h2,.aud-r-privacy h2 { margin:0 0 16px; font-size:clamp(25px,4vw,36px); }
 .aud-r-section h3 { margin:0 0 8px; font-size:21px; }
-.aud-r-layers-heading { margin-bottom:clamp(18px,3.5vw,36px); text-align:center; }
-.aud-r-layers-heading .aud-r-poster { margin-bottom:8px; }
-.aud-r-layers-heading h2 { margin:0; color:var(--muted); font-size:clamp(19px,2.3vw,28px); }
+.aud-r-layers-heading { margin-bottom:clamp(18px,3.5vw,36px); }
+.aud-r-layers-heading h2 { margin:8px 0 0; color:var(--muted); font-size:clamp(19px,2.3vw,28px); }
 .aud-r-layers,.aud-r-details,.aud-r-editions { display:grid; gap:14px; }
 .aud-r-layers { grid-template-columns:repeat(4,minmax(0,1fr)); }
 .aud-r-feature { overflow:hidden; border-radius:16px; background:var(--surface); }
@@ -41,7 +39,8 @@
 .aud-r-meters img { display:block; width:min(100%,490px); height:auto; border-radius:10px; }
 .aud-r-languages { background:#eee9f6; }
 .aud-r-languages ul { display:flex; flex-wrap:wrap; align-items:center; gap:8px 24px; margin:0; padding:0; list-style:none; font-weight:700; font-size:clamp(16px,2.2vw,22px); }
-.aud-r-performance { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.12fr); align-items:center; gap:clamp(20px,4vw,48px); padding:clamp(20px,4vw,48px); border-radius:24px; background:#181818; color:#f4f2ed; }
+.aud-r-performance { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.12fr); align-items:center; gap:clamp(12px,2vw,24px) clamp(20px,4vw,48px); padding:clamp(20px,4vw,48px); border-radius:24px; background:#181818; color:#f4f2ed; }
+.aud-r-performance > .aud-r-poster { grid-column:1 / -1; }
 .aud-r-performance p { margin:0; color:#d0ccca; }
 .aud-r-chain { display:grid; gap:10px; margin:0 0 12px; }
 .aud-r-chain > div { display:grid; grid-template-columns:max-content minmax(0,1fr); align-items:center; gap:12px; background:#262525; padding:10px 14px; border-radius:12px; }
@@ -53,7 +52,7 @@
 .aud-r-chain li:nth-child(2) { color:#d2eee2; background:#324a40; }
 .aud-r-chain li:nth-child(3) { color:#f7dfd0; background:#544033; }
 .aud-r-chain li:nth-child(4) { color:#f5dae9; background:#503645; }
-.aud-r-chain-plugin { min-width:7em; text-align:center; color:#231a0f; background:#e4be83; }
+.aud-r-chain-plugin { min-width:7em; text-align:center; color:#f4f2ed; background:#454343; }
 .aud-r-performance .aud-r-performance-test { font-size:12px; line-height:1.55; }
 .aud-r-editions-summary { margin:0 0 20px; color:var(--muted); }
 .aud-r-editions article { display:grid; grid-template-columns:minmax(9.5rem,.85fr) minmax(0,2fr) minmax(13rem,1fr); align-items:start; gap:clamp(20px,3vw,36px); padding:clamp(20px,3vw,36px); border-radius:16px; background:var(--surface); scroll-margin-top:20px; }
