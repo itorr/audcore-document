@@ -20,6 +20,9 @@
 .aud-r-feature-intro > strong { margin-top:.14em; }
 .aud-r-section h2,.aud-r-privacy h2 { margin:0 0 16px; font-size:clamp(25px,4vw,36px); }
 .aud-r-section h3 { margin:0 0 8px; font-size:21px; }
+.aud-r-layers-heading { margin-bottom:clamp(18px,3.5vw,36px); text-align:center; }
+.aud-r-layers-heading .aud-r-poster { margin-bottom:8px; }
+.aud-r-layers-heading h2 { margin:0; color:var(--muted); font-size:clamp(19px,2.3vw,28px); }
 .aud-r-layers,.aud-r-details,.aud-r-editions { display:grid; gap:14px; }
 .aud-r-layers { grid-template-columns:repeat(4,minmax(0,1fr)); }
 .aud-r-feature { overflow:hidden; border-radius:16px; background:var(--surface); }
