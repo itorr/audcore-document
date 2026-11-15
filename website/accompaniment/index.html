@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="伴奏分离与伴奏变调，两款面向伴奏播放的 Windows VST3 效果器。">
+  <title>伴奏分离 + 变调 · 声核 Audcore</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./scene.mjs"></script>
+</head>
+<body>
+  <header class="shell">
+    <a href="https://audcore.utae.cn/">声核 <span lang="en">Audcore</span></a>
+    <a href="#compatibility">使用说明</a>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="format">WINDOWS x64 · VST3</p>
+        <h1>伴奏分离<span>＋</span><br>伴奏变调</h1>
+        <p class="intro">从原唱分出人声与伴奏。把伴奏升降到适合开唱的调。</p>
+        <a class="action" href="#bundle"><b>¥19.80</b> 查看组合</a>
+      </div>
+      <canvas width="192" height="128" aria-hidden="true"></canvas>
+    </section>
+    <div class="pair" id="bundle">
+      <section class="card">
+        <h2>伴奏分离</h2>
+        <p>人声 / 原唱 / 伴奏</p>
+        <p>在三种听感之间连续调整。实时分离需要兼容 DirectML 的 GPU，默认缓冲 3 秒。</p>
+      </section>
+      <section class="card">
+        <h2>伴奏变调 <span lang="en">PITCH</span></h2>
+        <p>−12 ～ +12 半音</p>
+        <p>按整半音升降调，保持播放速度。默认算法缓冲约 150 毫秒。</p>
+      </section>
+    </div>
+    <section class="compatibility" id="compatibility">
+      <h2>独立 VST3 组合</h2>
+      <p>计划支持 Windows x64 VST3 宿主。两款插件各自在内部缓冲，宿主补偿值为 0。和干声、其他通道或画面对齐时，请按实际缓冲手动补偿。</p>
+      <p class="availability"><strong>¥19.80 / 两款</strong><span>暂未开售</span></p>
+    </section>
+  </main>
+</body>
+</html>
