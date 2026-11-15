@@ -19,12 +19,13 @@ function render(items, count) {
   list.replaceChildren(...items.map(item => {
     const time = document.createElement('time'); time.dateTime = item.paid_at;
     time.textContent = new Intl.DateTimeFormat('zh-CN', {timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date(item.paid_at));
+    const note = item.source === 'aud-r' ? '购买 Aud-R' : item.message;
     if (fullRecords) {
       const row = document.createElement('tr');
       const name = document.createElement('th'); name.scope = 'row'; name.textContent = item.name;
       const amount = document.createElement('td'); amount.textContent = money(item.amount_fen);
       const date = document.createElement('td'); date.append(time);
-      const message = document.createElement('td'); message.textContent = item.message || '—';
+      const message = document.createElement('td'); message.textContent = note || '—';
       row.append(name, amount, date, message);
       return row;
     }
@@ -33,7 +34,7 @@ function render(items, count) {
     const name = document.createElement('strong'); name.textContent = item.name;
     const amount = document.createElement('span'); amount.textContent = money(item.amount_fen);
     head.append(name, amount); li.append(head, time);
-    if (item.message) { const p = document.createElement('p'); p.textContent = item.message; li.append(p); }
+    if (note) { const p = document.createElement('p'); p.textContent = note; li.append(p); }
     return li;
   }));
   listStatus.textContent = count ? `已收到 ${count} 次支持，谢谢你们。` : '还没有赞助记录，感谢每一份支持。';

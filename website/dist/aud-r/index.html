@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aud-R 立体声混响，集早期反射、双声、尾音、节拍回声和实时人声避让于一身。声核内免费，Windows x64 VST3 版 ¥9.90。">
+  <meta name="theme-color" content="#fafbfc">
+  <link rel="canonical" href="https://audcore.utae.cn/aud-r/">
+  <title>Aud-R 立体声混响 - 声核 Audcore</title>
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/aud-r.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header wrap">
+    <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
+    <nav aria-label="主导航"><a href="/#features">功能</a><a href="/effects/">效果器</a><a href="/guide/">指北</a></nav>
+  </header>
+  <main id="main" class="wrap aud-r-page">
+    <section class="aud-r-hero" aria-labelledby="aud-r-title">
+      <div class="aud-r-intro">
+        <p class="aud-r-credit">立体声混响 · tororo</p>
+        <h1 id="aud-r-title">Aud-R</h1>
+        <p class="aud-r-tagline">一个效果器搞定混响！</p>
+        <p class="aud-r-lead">从贴近人声的早期反射，到铺开的尾音和跟拍的回声。四组空间声独立混合，让混响在开口时给人声留位置。</p>
+        <div class="aud-r-actions">
+          <a class="pill pill-light" href="#free">声核内免费使用</a>
+          <a class="pill aud-r-gold" href="#buy">购买 VST3 · ¥9.90</a>
+        </div>
+      </div>
+      <img class="aud-r-panel" src="/assets/aud-r-panel.png" width="1536" height="1024" alt="Aud-R 中文面板。六组旋钮分别控制总混合、早期反射、双声、尾音、回声和人声避让。">
+    </section>
+    <section class="aud-r-section" aria-labelledby="layers-title">
+      <h2 id="layers-title">四组空间声，独立调节</h2>
+      <div class="aud-r-layers">
+        <article><h3>早期反射</h3><p>用反射延迟和空间尺寸，调出声音离墙面的距离感。</p></article>
+        <article><h3>双声</h3><p>轻微错开左右的音高与时间，让人声更宽、更厚。</p></article>
+        <article><h3>尾音</h3><p>调节衰减时间和高频阻尼，控制混响尾巴的长度和明暗。</p></article>
+        <article><h3>节拍回声</h3><p>用毫秒或节拍设定回声间隔，支持附点和三连音。</p></article>
+      </div>
+      <dl class="aud-r-details">
+        <div><dt>实时分频人声避让</dt><dd>开口时，尾音和回声在对应频段自动降低，停下来后逐步恢复。</dd></div>
+        <div><dt>湿声高低切</dt><dd>控制混响的低频堆积和高频亮度，保留干声原有音色。</dd></div>
+        <div><dt>零额外处理延迟</dt><dd>插件不向宿主引入额外处理延迟。面板支持中文、English、日本語。</dd></div>
+      </dl>
+    </section>
+    <section class="aud-r-section" aria-labelledby="get-title">
+      <h2 id="get-title">获取 Aud-R</h2>
+      <p>两个版本共用处理器和界面，均需要双声道。</p>
+      <div class="aud-r-editions">
+        <article id="free">
+          <h3>声核内免费使用</h3>
+          <p>在双声道通道打开「添加效果器」，在列表中搜索 Aud-R，点击「下载」，完成后添加到通道。</p>
+          <a class="pill" href="/download/">下载声核</a>
+        </article>
+        <article id="buy">
+          <h3>Windows x64 VST3 <span class="aud-r-price">¥9.90</span></h3>
+          <p>适用于支持 64 位 VST3 的 Windows 宿主。支付宝付款确认后在本页下载，解压并将 Aud-R.vst3 文件夹放入宿主的 VST3 扫描目录。</p>
+          <p class="aud-r-note">购买金额计入声核赞助，记录仅显示为匿名支持和「购买 Aud-R」。</p>
+          <div class="aud-r-actions">
+            <button class="pill aud-r-gold" id="checkout" type="button" disabled>支付宝购买 · ¥9.90</button>
+            <button class="aud-r-link" id="check-order" type="button" hidden>确认到账</button>
+            <button class="aud-r-link" id="copy-order" type="button" hidden>复制订单链接</button>
+          </div>
+          <p class="aud-r-note aud-r-status" id="order-status" role="status">正在连接购买服务…</p>
+          <noscript>购买和下载需要启用 JavaScript。</noscript>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer wrap">
+    <div class="footer-brand">
+      <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>Audcore</span></span></a>
+      <p>免费、轻巧的实时调音台。<br>让声音，自由连接。</p>
+    </div>
+    <nav class="footer-column" aria-label="产品导航">
+      <h2>产品</h2>
+      <a href="/effects/">效果器</a>
+      <a href="/download/">下载</a>
+      <a href="/changelog/">更新记录</a>
+    </nav>
+    <nav class="footer-column" aria-label="使用帮助">
+      <h2>使用帮助</h2>
+      <a href="/plugin-guide/">效果器安装与兼容</a>
+      <a href="/guide/#community">互助交流群</a>
+    </nav>
+    <div class="footer-meta">
+      <small>© 2026 声核</small>
+      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2022004311号-4</a>
+    </div>
+  </footer>
+  <script type="module" src="/assets/aud-r.mjs"></script>
+</body>
+</html>
