@@ -43,6 +43,8 @@
 .aud-r-performance-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
 .aud-r-performance-card { background:var(--surface); border-radius:16px; padding:clamp(16px,2.5vw,30px); }
 .aud-r-performance-card p { margin:0; color:#48505a; }
+.aud-r-performance-card .aud-r-performance-saving { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; margin-block:10px 8px; }
+.aud-r-performance-saving strong { color:var(--ink); font-size:clamp(26px,4vw,44px); line-height:1.1; white-space:nowrap; }
 .aud-r-benchmark,.aud-r-chain { display:grid; gap:8px; margin:14px 0 0; }
 .aud-r-benchmark > div,.aud-r-chain > div { display:grid; align-items:center; gap:8px 12px; background:var(--paper); padding:9px 12px; border-radius:10px; }
 .aud-r-benchmark > div { grid-template-columns:minmax(0,1fr) max-content; }
