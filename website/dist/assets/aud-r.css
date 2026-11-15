@@ -1,5 +1,6 @@
 .aud-r-page { container-type:inline-size; padding-block:28px 76px; }
-.aud-r-hero { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); align-items:center; gap:clamp(24px,4vw,54px); padding:clamp(22px,4vw,54px); background:#181818; color:#f4f2ed; border-radius:24px; }
+.aud-r-hero { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); align-items:center; overflow:hidden; background:#181818; color:#f4f2ed; border-radius:24px; }
+.aud-r-intro { padding:clamp(22px,4vw,54px); }
 .aud-r-intro > * { margin:0; }
 .aud-r-credit { color:#d4b684; font-size:14px; font-weight:650; }
 .aud-r-intro h1 { font-family:"Arial Rounded MT Bold",system-ui,sans-serif; font-weight:800; font-size:clamp(76px,10vw,132px); line-height:1.03; letter-spacing:-.075em; margin:.05em 0 .12em; }
@@ -9,7 +10,7 @@
 .aud-r-actions .pill { min-height:44px; padding:9px 17px; }
 .aud-r-page .aud-r-gold { background:#e4be83; color:#231a0f; }
 .aud-r-page .aud-r-gold:hover { background:#f0d09e; }
-.aud-r-panel { display:block; width:100%; height:auto; border-radius:12px; outline:1px solid #42403d; }
+.aud-r-panel { display:block; width:100%; height:auto; }
 .aud-r-section { margin-top:clamp(42px,7vw,88px); }
 .aud-r-poster { container-type:inline-size; display:flex; flex-direction:column; justify-content:center; width:min(100%,44rem); min-block-size:clamp(65px,24cqi,168px); margin-inline:auto; text-align:center; }
 .aud-r-section .aud-r-poster-title { margin:0; font-size:min(8.2cqi,57px); font-weight:800; line-height:1.15; }
@@ -81,7 +82,6 @@
   .aud-r-hero { grid-template-columns:minmax(0,1fr); }
   .aud-r-performance { grid-template-columns:minmax(0,1fr); }
   .aud-r-layers { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .aud-r-panel { max-width:660px; justify-self:center; }
   .aud-r-editions article { grid-template-columns:minmax(0,1fr) minmax(12rem,.7fr); row-gap:14px; }
   .aud-r-edition-header { grid-column:1 / -1; }
 }
