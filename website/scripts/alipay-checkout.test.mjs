@@ -148,7 +148,7 @@ test('Music-in official entry restores a real version and enables checkout witho
 
 test('网页源商品页只在服务器已启用当前正式路径时开放购买', async t => {
   const browser = page(t, {
-    pathname:'/browser-source/',
+    pathname:'/web-out/',
     request:async () => new Response(null, {status:503}),
   });
   browser.document.querySelector('#checkout').disabled = true;

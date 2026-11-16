@@ -16,7 +16,7 @@ if (requestService.enabled) {
       page: product.page,
       key: 'audcore-browser-source-order',
       versionPattern,
-      paidMessage: version => '已付款，可以下载网页源输出 v' + version + '。请保存订单链接。',
+      paidMessage: version => '已付款，可以下载 Web-out v' + version + '。请保存订单链接。',
       filename: version => 'Browser-Source-v' + version + '.vst3',
       downloadType: 'application/octet-stream',
       downloadOnPayment: true,
