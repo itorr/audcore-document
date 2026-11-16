@@ -1,4 +1,4 @@
-export function mountCheckout({api, page, key, versionPattern, paidMessage, filename, downloadLabel = "下载 VST3", pendingLabel = "继续支付宝付款", copyPending = true, onVersion, downloadType = "application/zip"}) {
+export function mountCheckout({api, page, key, versionPattern, paidMessage, filename, downloadLabel = "下载 VST3", pendingLabel = "继续支付宝付款", copyPending = true, onVersion, downloadType = "application/zip", downloadOnPayment = false}) {
   const checkout = document.querySelector('#checkout');
   const check = document.querySelector('#check-order');
   const copy = document.querySelector('#copy-order');
@@ -47,6 +47,7 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
         current?.status === 'closed' && result.status === 'pending') return;
     if (result.status !== 'pending') stream?.abort();
     if (current?.status === result.status) return;
+    const justPaid = current?.status === 'pending' && result.status === 'paid';
     current = result;
     onVersion?.(result.version);
     order.status = result.status;
@@ -58,6 +59,9 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
       closed:'这笔订单已关闭，可以重新购买。',
     }[result.status];
     refreshButtons();
+    if (downloadOnPayment && justPaid) {
+      download().catch(() => { feedback.textContent = '已付款。请点击「下载 VST3」保存文件。'; });
+    }
   }
 
   async function subscribe() {

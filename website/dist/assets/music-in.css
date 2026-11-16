@@ -45,6 +45,7 @@ button:disabled { opacity: .58; }
 }
 .tagline { font-size: clamp(27px, 3.65vw, 54px); font-weight: 800; line-height: 1.17; letter-spacing: -.035em; }
 .intro { max-width: 32em; margin-top: 18px; color: var(--muted); font-size: 16px; line-height: 1.85; }
+.routing-note { margin-top: 12px; color: var(--accent); font-size: 15px; line-height: 1.7; }
 .hero-actions, .order-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .hero-actions { margin-top: 24px; }
 .button {
@@ -101,11 +102,12 @@ a.button, button:enabled { cursor: pointer; }
 }
 .purchase p { max-width: 38em; line-height: 1.7; }
 .compatibility { margin-block: 8px; color: var(--accent); font-weight: 700; }
+.purchase .license, .purchase .installation { margin-top: 10px; }
 .checkout .price { color: var(--accent); font: 760 clamp(43px, 6vw, 74px)/1.05 Inter, "Segoe UI", sans-serif; letter-spacing: -.06em; }
 .order-actions { margin-top: 12px; }
 #order-status { margin-top: 10px; font-size: 13px; min-height: 2.2em; color: var(--muted); }
 .privacy { margin-block: 24px; color: var(--muted); }
-.privacy summary { cursor: pointer; }
+.privacy h2 { font-size: 18px; color: var(--ink); }
 .privacy p { margin-top: 9px; max-width: 65em; line-height: 1.75; font-size: 14px; }
 .site-foot { padding-block: 20px 28px; color: var(--muted); font-size: 14px; }
 

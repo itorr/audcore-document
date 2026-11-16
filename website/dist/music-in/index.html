@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="无需跳线，直传伴奏。常见播放器打开并播放即可接入。Music-in Windows x64 独立 VST3 售价 ¥9.90。在声核内选择「截获播放器」即可免费使用。">
+  <meta name="description" content="无需跳线，直传伴奏。常见播放器打开并播放即可接入。Music-in Windows x64 独立 VST3 售价 ¥9.9。在声核内选择「截获播放器」即可免费使用。">
   <meta name="theme-color" content="#151716">
   <link rel="canonical" href="https://audcore.utae.cn/music-in/">
   <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
@@ -28,8 +28,9 @@
         <h1 id="title">Music-in</h1>
         <p class="tagline">无需跳线，直传伴奏</p>
         <p class="intro">网易云音乐、QQ 音乐、酷狗音乐、全民 K 歌等常见播放器，打开并播放即可接入。用双声道波形确认声音，新增的播放器名单随工程保存。</p>
+        <p class="routing-note">直播连线时，伴奏直接进通道，避免选错伴奏跳线造成重音。</p>
         <div class="hero-actions">
-          <a class="button button-accent" href="#buy">购买 VST3 · ¥9.90</a>
+          <a class="button button-accent" href="#buy">购买 VST3 · ¥9.9</a>
         </div>
       </div>
       <figure class="hero-panel">
@@ -64,10 +65,12 @@
       <div>
         <h2 id="buy-title">购买独立 VST3</h2>
         <p class="compatibility">适用于 Windows 64 位 VST3 宿主</p>
-        <p>下载后，把 <code>Music-in.vst3</code> 放进宿主的 VST3 扫描目录并重新扫描。播放器兼容性取决于版本、输出方式和内容保护。</p>
+        <p class="license"><strong>个人授权 · 可商用</strong>。授权购买者本人使用，可用于盈利直播、商业音视频制作，也可为客户制作并交付混音等成品。</p>
+        <p class="license">不得分享或转售插件文件，也不得公开分享含下载凭据的订单链接。</p>
+        <p class="installation">付款确认后直接下载单个 <code>Music-in.vst3</code> 文件。放入宿主的 VST3 扫描目录后重新扫描。播放器兼容性取决于版本、输出方式和内容保护。</p>
       </div>
       <div class="checkout">
-        <p class="price">¥9.90</p>
+        <p class="price">¥9.9</p>
         <div class="order-actions">
           <button class="button button-accent" id="checkout" type="button" disabled>支付宝购买</button>
           <button class="button button-secondary" id="check-order" type="button" hidden>确认到账</button>
@@ -78,10 +81,10 @@
       </div>
     </section>
 
-    <details class="privacy" id="privacy">
-      <summary>购买隐私说明</summary>
+    <section class="privacy" id="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">购买隐私说明</h2>
       <p>付款由支付宝处理。声核用订单号、商品版本、金额、付款状态及支付宝交易号核对交易和提供下载。浏览器保存订单和下载凭据，服务端保存凭据的校验值。订单链接可用于再次下载，请保存并避免公开分享。</p>
-    </details>
+    </section>
   </main>
   <footer class="site-foot wrap">
     <a href="../">声核 Audcore</a>

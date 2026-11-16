@@ -19,6 +19,7 @@ try {
     paidMessage: version => `已付款，可以下载 Music-in v${version}。请保存订单链接。`,
     filename: () => 'Music-in.vst3',
     downloadType: 'application/octet-stream',
+    downloadOnPayment: true,
   });
 } catch {
   status.textContent = 'VST3 购买暂未开放。';
