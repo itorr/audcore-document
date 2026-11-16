@@ -36,6 +36,8 @@ canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; 
 .reading > small { font-size: .8em; }
 .score .reading, .gpu-stat .reading { grid-template-columns: 5ch 2ch; color: var(--mint); font-size: clamp(1rem, 3.5vw, 2.8rem); line-height: 1.15; }
 .score:last-child strong { color: var(--gold); }
+.comparison .score .reading { font-size: clamp(.75rem, 3vw, 2.4rem); }
+.comparison .score:last-child .reading { grid-template-columns: 7ch 2ch; }
 .score > span, .gpu-stat > span { display: block; margin-top: 4px; font-size: .88rem; }
 .metrics { width: 100%; border-spacing: 0 4px; table-layout: fixed; text-align: left; font-variant-numeric: tabular-nums; }
 .metrics th, .metrics td { padding: 8px; background: #292640; overflow-wrap: anywhere; }
@@ -52,12 +54,19 @@ canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; 
 .routing { display: grid; gap: 6px; }
 .routing p { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 10px; background: #77d6a0; padding: 9px 12px; }
 .routing p + p { margin-top: 0; }
-.gpu h3 { margin: 22px 0 0; }
-.inference, .hardware { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 18px; }
+.gpu h3 { margin: 0; }
+.compute, .hardware { display: grid; gap: 8px; margin-top: 18px; }
+.compute { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+.hardware { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .gpu-stat { background: #30284a; padding: 12px 18px; }
 .gpu-stat .reading { grid-template-columns: 6ch 1ch; font-size: clamp(1.05rem, 5vw, 3.6rem); }
-.gpu-tiers { margin-top: 8px; }
+.cpu-stat { display: grid; align-content: center; }
+.cpu-stat .reading { grid-template-columns: 4ch 1ch; }
+.gpu-controls { background: #292640; padding: 12px; }
+.gpu-tiers { margin-block: 8px 0; }
+.gpu-tiers .score { padding: 8px; }
 .gpu-tiers .reading { grid-template-columns: 5ch 1ch; }
+.gpu .gpu-usage { color: var(--mint); font-weight: 800; margin-top: 10px; }
 .hardware .reading { grid-template-columns: 6ch 3ch; font-size: clamp(1.05rem, 4vw, 2.6rem); }
 .modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-block: 18px 0; }
 .modes div { padding: 12px; background: #30284a; }
@@ -71,7 +80,7 @@ canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; 
 .availability strong { color: var(--gold); font-size: 1.35rem; }
 @media (max-width: 680px) {
   .shell { width: calc(100% - 32px); }
-  .hero, .free { grid-template-columns: minmax(0, 1fr); }
+  .hero, .free, .compute { grid-template-columns: minmax(0, 1fr); }
   .hero { gap: 24px; }
   .score > span, .metrics { font-size: .8rem; }
   .metrics th, .metrics td { padding-inline: 4px; }
