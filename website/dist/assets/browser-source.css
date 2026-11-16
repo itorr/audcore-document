@@ -4,6 +4,7 @@
 }
 .tagline { font-size: clamp(23px, 3.2vw, 44px); }
 .panel-demo {
+  position: relative;
   background: #181818;
   color: #e4e4e4;
   border: 1px solid #3b3c38;
@@ -12,13 +13,26 @@
   padding: clamp(16px, 3vw, 30px);
   font: 15px/1.45 "Segoe UI", sans-serif;
 }
-.panel-title {
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 16px;
+}
+.hero-panel .panel-logo {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.panel-title {
   color: #dab57c;
   font-size: clamp(24px, 3.5vw, 40px);
-  font-weight: 600;
+  font-weight: 800;
 }
-.panel-label { margin-bottom: 5px; }
+.panel-label { margin-bottom: 5px; color: #dab57c; font-weight: 700; }
 .panel-controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -34,10 +48,23 @@
   padding: 0 10px;
   white-space: nowrap;
 }
-.panel-controls span:first-child { background: #222; }
+.panel-controls span:first-child {
+  display: block;
+  overflow: hidden;
+  line-height: 42px;
+  text-overflow: ellipsis;
+  background: #222;
+}
 .panel-controls span:last-child { background: #dab57c; color: #181818; font-weight: 600; }
 .panel-status { color: #a6a6a6; }
-.panel-help { margin-top: 17px; }
+.panel-version {
+  position: absolute;
+  inset-inline-end: 8px;
+  inset-block-end: 8px;
+  color: #a6a6a6;
+  font-size: 10px;
+  line-height: 1;
+}
 .checkout .price { min-height: 1.05em; }
 @media (max-width: 360px) {
   .site-head { flex-wrap: wrap; }
