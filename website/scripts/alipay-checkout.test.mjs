@@ -105,3 +105,31 @@ test('confirming a recovered order requires a click and authenticates with its s
   assert.equal(JSON.parse(browser.storage.get('order')).status,'paid');
 });
 
+test('Music-in downloads one raw VST3 when payment changes from pending to paid', async t => {
+  const musicVersion = '0.1.0';
+  const links = [];
+  const browser = page(t, {
+    records: saved({...order, status:'pending', version:musicVersion}),
+    request: async url => {
+      if (url.endsWith('/reconcile')) return Response.json({id,status:'paid',version:musicVersion});
+      assert.equal(url,api+'/orders/'+id+'/download');
+      return new Response('VST3 bytes', {headers:{'Content-Type':'application/octet-stream'}});
+    },
+  });
+  browser.document.createElement = name => {
+    assert.equal(name,'a');
+    return {click() { links.push(this.download); }, remove() {}};
+  };
+  t.mock.method(globalThis,'setTimeout',callback => { callback(); return 0; });
+  mountCheckout({
+    ...options, page:'/music-in/', versionPattern:/^\d+\.\d+\.\d+$/,
+    filename:() => 'Music-in.vst3', downloadType:'application/octet-stream', downloadOnPayment:true,
+  });
+  await browser.elements.get('#check-order').click();
+  for (let i = 0; i < 10 && !links.length; ++i) await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(browser.calls.map(call => call.url),[
+    api+'/orders/'+id+'/reconcile', api+'/orders/'+id+'/download',
+  ]);
+  assert.deepEqual(links,['Music-in.vst3']);
+  assert.equal(browser.elements.get('#checkout').textContent,'下载 VST3');
+});
