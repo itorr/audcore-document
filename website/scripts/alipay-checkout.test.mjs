@@ -160,7 +160,7 @@ test('网页源商品页只在服务器已启用当前正式路径时开放购�
 
 test('网页源商品页显示配置价格，恢复订单并按订单版本下载单个 VST3', async t => {
   const pathname = '/configured-product/';
-  const pendingVersion = '0.1.0';
+  const pendingVersion = '0.1.1';
   const links = [];
   const browser = page(t, {
     pathname,
@@ -183,5 +183,5 @@ test('网页源商品页显示配置价格，恢复订单并按订单版本下�
   assert.equal(browser.calls.length,1);
   await browser.elements.get('#check-order').click();
   for (let i = 0; i < 10 && !links.length; ++i) await new Promise(resolve => setImmediate(resolve));
-  assert.deepEqual(links,['Browser-Source-v0.1.0.vst3']);
+  assert.deepEqual(links,['Web-out-v0.1.1.vst3']);
 });
