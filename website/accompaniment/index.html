@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="高质量伴奏提取与伴奏变调。用 GPU 分离人声，在声核内免费下载使用。">
+  <meta name="description" content="高质量伴奏提取与伴奏变调。新版伴奏分离压低主唱，保留原曲和声与伴唱。">
   <title>伴奏分离 + 变调 · 声核 Audcore</title>
   <link rel="stylesheet" href="./style.css">
   <script defer src="./scene.mjs"></script>
@@ -22,6 +22,7 @@
       <div>
         <p class="format">GPU 伴奏分离 · Windows x64</p>
         <h1>高质量<br>伴奏提取</h1>
+        <p class="harmony">压低主唱，保留原曲和声</p>
         <p class="intro">从原唱提取伴奏，尽量保留乐器细节，再按需要升降调。</p>
         <a class="action" href="#comparison">看提取质量对比</a>
       </div>
@@ -46,7 +47,7 @@
         </tbody>
       </table>
       <p class="method">
-        单曲测试，44.1 kHz 立体声，比较声核线上版伴奏分离 v0.1.16 的 2000 ms 窗口与 Remix v1.0.1 静音人声后的输出。对齐后用伴奏 SDR 衡量还原度，用拟合到原始人声分轨的增益衡量人声残留。延迟为各自配置下的缓冲采样数换算值。
+        单曲测试，44.1 kHz 立体声，比较声核线上版伴奏分离 v0.1.16 的 2000 ms 窗口与 Remix v1.0.1 静音人声后的输出。对齐后用伴奏 SDR 衡量还原度，用拟合到原始人声分轨的增益衡量人声残留。延迟为各自配置下的缓冲采样数换算值。保留和声的新版使用另一套模型。
         <a href="https://acondigital.com/products/remix">Remix 产品说明</a>
       </p>
     </section>
@@ -102,7 +103,7 @@
       <dl class="modes">
         <div><dt>人声</dt><dd>向左推，单听歌声。</dd></div>
         <div><dt>原唱</dt><dd>推子居中，听完整混音。</dd></div>
-        <div><dt>伴奏</dt><dd>向右推，压低人声，保留乐器。</dd></div>
+        <div><dt>伴奏</dt><dd>向右推。独立 FX 测试版 v0.1.19 会压低主唱，保留原曲和声、伴唱与乐器。</dd></div>
       </dl>
       <p class="method">从 2000 ms 起步。缓冲窗口可在 2000～8000 ms 间按 500 ms 步进调整。</p>
     </section>

@@ -22,6 +22,7 @@ h1, h2, p { margin: 0; }
 h1 { font-size: clamp(2.5rem, 6.5vw, 5.3rem); line-height: 1.06; font-weight: 950; letter-spacing: -.04em; margin-block: 12px 20px; }
 h1 span { color: var(--gold); font-size: .62em; vertical-align: .15em; }
 .intro { max-width: 27ch; color: #d0c8dd; }
+.harmony { color: var(--mint); font-size: clamp(1.1rem, 2.6vw, 1.65rem); font-weight: 800; margin-bottom: 8px; }
 .action { display: inline-flex; gap: 1ch; margin-top: 26px; color: #24162e; background: var(--gold); padding: 10px 18px; font-weight: 800; }
 .action:hover { background: #ffd598; }
 canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; background: var(--panel); }
