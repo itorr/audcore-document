@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="把播放器声音带进宿主。Music-in Windows x64 独立 VST3 售价 ¥9.90。在声核内选择「截获播放器」即可免费使用。">
+  <meta name="theme-color" content="#151716">
+  <link rel="canonical" href="https://audcore.utae.cn/music-in/">
+  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/music-in.css">
+  <script type="module" src="../assets/music-in.mjs"></script>
+  <title>Music-in · 播放器声音捕获 VST3 · 声核 Audcore</title>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-head wrap">
+    <a class="brand" href="../"><img src="../assets/logo.svg" width="28" height="28" alt="">Audcore 声核</a>
+    <nav aria-label="页面导航">
+      <a href="#free">声核内免费</a>
+      <a href="#buy">购买 VST3</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="format">Windows x64 · VST3</p>
+        <h1 id="title">Music-in</h1>
+        <p class="tagline">把播放器的声音<br>接进你的宿主</p>
+        <p class="intro">选中播放伴奏的程序，把声音接进通道。用双声道波形确认声音进来了，新增的播放器名单随工程保存。</p>
+        <div class="hero-actions">
+          <a class="button button-accent" href="#buy">购买 VST3 · ¥9.90</a>
+          <a class="button button-light" href="#free">声核内免费使用</a>
+        </div>
+      </div>
+      <figure class="hero-panel">
+        <img src="../assets/music-in-panel.png" alt="Music-in 三栏面板，左侧为扫描列表，中间显示两路正在捕获的波形，右侧为捕获名单" width="960" height="500">
+        <figcaption>Music-in 捕获波形截图</figcaption>
+      </figure>
+    </section>
+
+    <section class="free" id="free" aria-labelledby="free-title">
+      <div>
+        <h2 id="free-title">用声核，免费接入</h2>
+        <p>打开通道的输入菜单，选择「截获播放器」，然后在播放器里开始播放。这个功能在声核里免费，直接选用即可。</p>
+      </div>
+      <a class="button button-light" href="../player-capture/">查看截获播放器用法</a>
+    </section>
+
+    <section class="details" aria-labelledby="use-title">
+      <h2 id="use-title">在宿主里接入播放器</h2>
+      <div class="features">
+        <article>
+          <h3>刷新列表，选中要接入的程序</h3>
+          <p>左侧查看扫描到的程序，选中后点击加号加入捕获名单。网易云音乐、QQ 音乐、酷狗音乐和全民 K 歌等常用播放器已在右侧。</p>
+        </article>
+        <article>
+          <h3>看波形，确认声音已接入</h3>
+          <p>两块示波区分别显示捕获到的左右声道。下次打开工程，手动添加的播放器会自动回到名单里。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="purchase" id="buy" aria-labelledby="buy-title">
+      <div>
+        <h2 id="buy-title">购买独立 VST3</h2>
+        <p class="compatibility">适用于 Windows 64 位 VST3 宿主</p>
+        <p>下载后，把 <code>Music-in.vst3</code> 放进宿主的 VST3 扫描目录并重新扫描。播放器兼容性取决于版本、输出方式和内容保护。</p>
+      </div>
+      <div class="checkout">
+        <p class="price">¥9.90</p>
+        <div class="order-actions">
+          <button class="button button-accent" id="checkout" type="button" disabled>支付宝购买</button>
+          <button class="button button-secondary" id="check-order" type="button" hidden>确认到账</button>
+          <button class="button button-secondary" id="copy-order" type="button" hidden>复制订单链接</button>
+        </div>
+        <p id="order-status" role="status">VST3 购买暂未开放。</p>
+        <noscript><p>请启用 JavaScript 后购买或查询订单。</p></noscript>
+      </div>
+    </section>
+
+    <details class="privacy" id="privacy">
+      <summary>购买隐私说明</summary>
+      <p>付款由支付宝处理。声核用订单号、商品版本、金额、付款状态及支付宝交易号核对交易和提供下载。浏览器保存订单和下载凭据，服务端保存凭据的校验值。订单链接可用于再次下载，请保存并避免公开分享。</p>
+    </details>
+  </main>
+  <footer class="site-foot wrap">
+    <a href="../">声核 Audcore</a>
+    <a href="../plugin-guide/">效果器安装说明</a>
+  </footer>
+</body>
+</html>

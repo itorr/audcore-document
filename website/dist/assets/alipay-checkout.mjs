@@ -1,4 +1,4 @@
-export function mountCheckout({api, page, key, versionPattern, paidMessage, filename, downloadLabel = "下载 VST3", pendingLabel = "继续支付宝付款", copyPending = true, onVersion}) {
+export function mountCheckout({api, page, key, versionPattern, paidMessage, filename, downloadLabel = "下载 VST3", pendingLabel = "继续支付宝付款", copyPending = true, onVersion, downloadType = "application/zip"}) {
   const checkout = document.querySelector('#checkout');
   const check = document.querySelector('#check-order');
   const copy = document.querySelector('#copy-order');
@@ -129,7 +129,7 @@ export function mountCheckout({api, page, key, versionPattern, paidMessage, file
 
   async function download() {
     const response = await post(`/orders/${order.id}/download`);
-    if (response.headers.get('Content-Type') !== 'application/zip') throw new Error('下载暂不可用，请重试。');
+    if (response.headers.get('Content-Type') !== downloadType) throw new Error('下载暂不可用，请重试。');
     const url = URL.createObjectURL(await response.blob());
     const link = document.createElement('a');
     link.href = url;
