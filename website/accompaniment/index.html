@@ -3,25 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="伴奏分离与伴奏变调，两款面向伴奏播放的 Windows VST3 效果器。">
+  <meta name="description" content="高质量伴奏提取与伴奏变调。用 GPU 分离人声，在声核内免费下载使用。">
   <title>伴奏分离 + 变调 · 声核 Audcore</title>
   <link rel="stylesheet" href="./style.css">
-  <script type="module" src="./scene.mjs"></script>
+  <script defer src="./scene.mjs"></script>
 </head>
 <body>
   <header class="shell">
     <a href="https://audcore.utae.cn/">声核 <span lang="en">Audcore</span></a>
-    <a href="#compatibility">使用说明</a>
+    <nav aria-label="站内导航">
+      <a href="#comparison">质量对比</a>
+      <a href="#free">声核免费用</a>
+    </nav>
   </header>
   <main class="shell">
     <section class="hero">
       <div>
-        <p class="format">WINDOWS x64 · VST3</p>
-        <h1>伴奏分离<span>＋</span><br>伴奏变调</h1>
-        <p class="intro">从原唱分出人声与伴奏。把伴奏升降到适合开唱的调。</p>
-        <a class="action" href="#bundle"><b>¥19.80</b> 查看组合</a>
+        <p class="format">GPU 伴奏分离 · Windows x64</p>
+        <h1>高质量<br>伴奏提取</h1>
+        <p class="intro">从原唱提取伴奏，尽量保留乐器细节，再按需要升降调。</p>
+        <a class="action" href="#comparison">看提取质量对比</a>
       </div>
       <canvas width="192" height="128" aria-hidden="true"></canvas>
+    </section>
+    <section class="comparison" id="comparison" aria-labelledby="comparison-title">
+      <h2 id="comparison-title">更少人声残留，更多伴奏细节</h2>
+      <p>同一段混音，分别提取伴奏，再和原始伴奏分轨对照。</p>
+      <div class="scoreboard">
+        <div class="score"><strong>−8.5 dB</strong><span>人声残留更低</span></div>
+        <div class="score"><strong>＋3.9 dB</strong><span>伴奏还原度更高</span></div>
+        <div class="score"><strong>3.0 秒</strong><span>分离缓冲更长</span></div>
+      </div>
+      <table class="metrics">
+        <thead>
+          <tr><th scope="col">实测指标</th><th scope="col">声核<br>伴奏分离</th><th scope="col">Acon Digital<br>Remix</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">人声残留 ↓</th><td><strong>−22.06 dB</strong></td><td>−13.51 dB</td></tr>
+          <tr><th scope="row">伴奏还原度 ↑</th><td><strong>12.6 dB</strong></td><td>8.7 dB</td></tr>
+          <tr><th scope="row">处理延迟 ↓</th><td>3.0 秒</td><td><strong>255 ms</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="method">
+        单曲测试，44.1 kHz 立体声，比较声核线上版伴奏分离 v0.1.16 默认 3 秒窗口与 Remix v1.0.1 静音人声后的输出。对齐后用伴奏 SDR 衡量还原度，用拟合到原始人声分轨的增益衡量人声残留。延迟为各自配置下的缓冲采样数换算值。
+        <a href="https://acondigital.com/products/remix">Remix 产品说明</a>
+      </p>
+    </section>
+    <section class="free" id="free" aria-labelledby="free-title">
+      <div>
+        <h2 id="free-title">在声核里，免费用</h2>
+        <p>在声核的线上效果器列表中免费下载「伴奏分离」和「伴奏变调」，添加到你的伴奏通道。</p>
+        <p>在伴奏通道开启「忽略当前通道延迟」，它的分离缓冲留在伴奏通道，独立的麦克风返听通道无需为它等待。</p>
+        <a class="action" href="https://audcore.utae.cn/download/">获取声核</a>
+      </div>
+      <div class="routing" aria-label="启用忽略延迟后的通道示意">
+        <p><strong>伴奏通道</strong><span>3 秒分离缓冲</span></p>
+        <p><strong>麦克风返听</strong><span>＋0 ms 补偿</span></p>
+      </div>
+    </section>
+    <section class="gpu" aria-labelledby="gpu-title">
+      <div class="gpu-stat"><strong>0%</strong><span>CPU 模型推理占比</span></div>
+      <div>
+        <h2 id="gpu-title">分离模型交给 GPU</h2>
+        <p>使用 DirectML 在 GPU 上运行模型。CPU 负责音频传输、重采样和频谱处理，GPU 不可用时显示故障提示。</p>
+      </div>
     </section>
     <div class="pair" id="bundle">
       <section class="card">
