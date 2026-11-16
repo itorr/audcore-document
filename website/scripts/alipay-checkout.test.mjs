@@ -133,3 +133,15 @@ test('Music-in downloads one raw VST3 when payment changes from pending to paid'
   assert.deepEqual(links,['Music-in.vst3']);
   assert.equal(browser.elements.get('#checkout').textContent,'下载 VST3');
 });
+
+test('Music-in official entry restores a real version and enables checkout without a config request', async t => {
+  const musicVersion = '0.1.0';
+  const browser = page(t, {
+    records: [['audcore-music-in-order', JSON.stringify({...order, version:musicVersion, status:'paid'})]],
+  });
+  await import('../dist/assets/music-in.mjs');
+  assert.equal(browser.elements.get('#checkout').textContent,'下载 VST3');
+  assert.equal(browser.elements.get('#checkout').disabled,false);
+  assert.match(browser.elements.get('#order-status').textContent,/Music-in v0\.1\.0/);
+  assert.deepEqual(browser.calls,[]);
+});
