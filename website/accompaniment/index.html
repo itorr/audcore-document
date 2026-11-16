@@ -13,6 +13,7 @@
     <a href="https://audcore.utae.cn/">声核 <span lang="en">Audcore</span></a>
     <nav aria-label="站内导航">
       <a href="#comparison">质量对比</a>
+      <a href="#separation">伴奏分离</a>
       <a href="#free">声核免费用</a>
     </nav>
   </header>
@@ -30,18 +31,18 @@
       <h2 id="comparison-title">更少人声残留，更多伴奏细节</h2>
       <p>同一段混音，分别提取伴奏，再和原始伴奏分轨对照。</p>
       <div class="scoreboard">
-        <div class="score"><strong>−8.5 dB</strong><span>人声残留更低</span></div>
-        <div class="score"><strong>＋3.9 dB</strong><span>伴奏还原度更高</span></div>
-        <div class="score"><strong>3.0 秒</strong><span>分离缓冲更长</span></div>
+        <div class="score"><strong class="reading"><span>−8.55</span><small>dB</small></strong><span>人声残留更低</span></div>
+        <div class="score"><strong class="reading"><span>+3.89</span><small>dB</small></strong><span>伴奏还原度更高</span></div>
+        <div class="score"><strong class="reading"><span>3.00</span><small>秒</small></strong><span>分离缓冲更长</span></div>
       </div>
       <table class="metrics">
         <thead>
           <tr><th scope="col">实测指标</th><th scope="col">声核<br>伴奏分离</th><th scope="col">Acon Digital<br>Remix</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">人声残留 ↓</th><td><strong>−22.06 dB</strong></td><td>−13.51 dB</td></tr>
-          <tr><th scope="row">伴奏还原度 ↑</th><td><strong>12.6 dB</strong></td><td>8.7 dB</td></tr>
-          <tr><th scope="row">处理延迟 ↓</th><td>3.0 秒</td><td><strong>255 ms</strong></td></tr>
+          <tr><th scope="row">人声残留 ↓</th><td><strong class="reading"><span>−22.06</span><small>dB</small></strong></td><td><span class="reading"><span>−13.51</span><small>dB</small></span></td></tr>
+          <tr><th scope="row">伴奏还原度 ↑</th><td><strong class="reading"><span>12.59</span><small>dB</small></strong></td><td><span class="reading"><span>8.70</span><small>dB</small></span></td></tr>
+          <tr><th scope="row">处理延迟 ↓</th><td><span class="reading"><span>3000.00</span><small>ms</small></span></td><td><strong class="reading"><span>255.42</span><small>ms</small></strong></td></tr>
         </tbody>
       </table>
       <p class="method">
@@ -57,31 +58,56 @@
         <a class="action" href="https://audcore.utae.cn/download/">获取声核</a>
       </div>
       <div class="routing" aria-label="启用忽略延迟后的通道示意">
-        <p><strong>伴奏通道</strong><span>3 秒分离缓冲</span></p>
-        <p><strong>麦克风返听</strong><span>＋0 ms 补偿</span></p>
+        <p><strong>伴奏通道</strong><span class="reading"><span>3000.00</span><small>ms</small></span></p>
+        <p><strong>返听附加补偿</strong><span class="reading"><span>0.00</span><small>ms</small></span></p>
       </div>
     </section>
     <section class="gpu" aria-labelledby="gpu-title">
-      <div class="gpu-stat"><strong>0%</strong><span>CPU 模型推理占比</span></div>
       <div>
         <h2 id="gpu-title">分离模型交给 GPU</h2>
         <p>使用 DirectML 在 GPU 上运行模型。CPU 负责音频传输、重采样和频谱处理，GPU 不可用时显示故障提示。</p>
       </div>
+      <div class="inference" aria-label="模型推理分配">
+        <div class="gpu-stat"><strong class="reading"><span>0.00</span><small>%</small></strong><span>CPU 模型推理占比</span></div>
+        <div class="gpu-stat"><strong class="reading"><span>100.00</span><small>%</small></strong><span>GPU 模型推理占比</span></div>
+      </div>
+      <div>
+        <h3>三档 GPU 调度</h3>
+        <div class="scoreboard gpu-tiers">
+          <div class="score"><strong class="reading"><span>25.00</span><small>%</small></strong><span>默认，给其他应用留余量</span></div>
+          <div class="score"><strong class="reading"><span>40.00</span><small>%</small></strong><span>减少分离任务的等待</span></div>
+          <div class="score"><strong class="reading"><span>60.00</span><small>%</small></strong><span>分离任务调度更积极</span></div>
+        </div>
+        <p class="method">百分比是分离任务的调度目标。任务管理器显示的是实际 GPU 使用率，会随显卡和其他应用变化。</p>
+      </div>
+      <div class="hardware">
+        <div class="gpu-stat">
+          <strong class="reading"><span>571.99</span><small>MiB</small></strong>
+          <span>专用显存峰值</span>
+          <p class="method">RTX 5060 Ti 实测，声核伴奏分离 v0.1.16、单实例、默认 3 秒窗口。三档的显存峰值基本一致。</p>
+        </div>
+        <div class="gpu-stat">
+          <strong class="reading"><span>4.00</span><small>GiB</small></strong>
+          <span>建议的显卡显存起点</span>
+          <p class="method">Windows 10/11 x64，支持 DirectX 12 和 DirectML 的独立显卡。初次使用从 25% 档开始。较低配置的持续分离能力需按设备实测。
+            <a href="https://onnxruntime.ai/docs/execution-providers/DirectML-ExecutionProvider.html">DirectML 设备要求</a>
+          </p>
+        </div>
+      </div>
     </section>
-    <div class="pair" id="bundle">
-      <section class="card">
-        <h2>伴奏分离</h2>
-        <p>人声 / 原唱 / 伴奏</p>
-        <p>在三种听感之间连续调整。实时分离需要兼容 DirectML 的 GPU，默认缓冲 3 秒。</p>
-      </section>
-      <section class="card">
-        <h2>伴奏变调 <span lang="en">PITCH</span></h2>
-        <p>−12 ～ +12 半音</p>
-        <p>按整半音升降调，保持播放速度。默认算法缓冲约 150 毫秒。</p>
-      </section>
-    </div>
-    <section class="compatibility" id="compatibility">
+    <section class="separation" id="separation" aria-labelledby="separation-title">
+      <h2 id="separation-title">伴奏分离</h2>
+      <p>把效果器加在伴奏通道，一根推子连续调整人声和伴奏的比例。推回中央即可听原唱。</p>
+      <dl class="modes">
+        <div><dt>人声</dt><dd>向左推，单听歌声。</dd></div>
+        <div><dt>原唱</dt><dd>推子居中，听完整混音。</dd></div>
+        <div><dt>伴奏</dt><dd>向右推，压低人声，保留乐器。</dd></div>
+      </dl>
+      <p class="method">默认缓冲 3 秒。可在 2～8 秒间按 0.5 秒步进调整，为实时分离留出处理时间。</p>
+    </section>
+    <section class="compatibility" id="bundle">
       <h2>独立 VST3 组合</h2>
+      <p>包含伴奏分离和伴奏变调 PITCH。变调支持 −12～+12 个半音，保持播放速度，默认算法缓冲约 150 毫秒。</p>
       <p>计划支持 Windows x64 VST3 宿主。两款插件各自在内部缓冲，宿主补偿值为 0。和干声、其他通道或画面对齐时，请按实际缓冲手动补偿。</p>
       <p class="availability"><strong>¥19.80 / 两款</strong><span>暂未开售</span></p>
     </section>
