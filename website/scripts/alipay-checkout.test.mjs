@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {mountCheckout} from '../dist/assets/alipay-checkout.mjs';
 
@@ -146,27 +147,40 @@ test('Music-in official entry restores a real version and enables checkout witho
   assert.deepEqual(browser.calls,[]);
 });
 
-test('网页源商品页只在服务器已启用当前正式路径时开放购买', async t => {
-  const browser = page(t, {
-    pathname:'/web-out/',
-    request:async () => new Response(null, {status:503}),
-  });
+function sharedStore(t, product, options) {
+  const browser = page(t, {pathname:`/${product}/`, ...options});
+  const html = readFileSync(new URL(`../dist/${product}/index.html`, import.meta.url), 'utf8');
+  const match = html.match(/data-vst3-store="([^"]+)"/);
+  assert.ok(match && html.includes('/assets/vst3-store.mjs'));
+  browser.document.querySelector('#buy').dataset = {vst3Store:match[1]};
+  return browser;
+}
+
+test('Web-out 与 Aud-R 使用同一入口，打开时启用购买且零请求', async t => {
+  const browser = sharedStore(t, 'web-out');
   browser.document.querySelector('#checkout').disabled = true;
-  await import('../dist/assets/browser-source.mjs?disabled');
-  assert.equal(browser.elements.get('#checkout').disabled,true);
-  assert.equal(browser.calls.length,1);
-  assert.ok(browser.calls[0].url.endsWith('/v1/store/browser-source/config'));
+  await import('../dist/assets/vst3-store.mjs?web-out-first-visit');
+  assert.equal(browser.elements.get('#checkout').disabled,false);
+  assert.equal(browser.elements.get('#checkout').textContent,'支付宝购买');
+  assert.deepEqual(browser.calls,[]);
 });
 
-test('网页源商品页显示配置价格，恢复订单并按订单版本下载单个 VST3', async t => {
-  const pathname = '/configured-product/';
-  const pendingVersion = '0.1.1';
+test('Aud-R 保留旧订单键和继续付款行为，恢复时零请求', async t => {
+  const browser = sharedStore(t, 'aud-r', {
+    records:[['audcore-aud-r-order', JSON.stringify({...order,status:'pending',version:'1.14.0'})]],
+  });
+  await import('../dist/assets/vst3-store.mjs?aud-r-pending');
+  assert.equal(browser.elements.get('#checkout').textContent,'继续付款');
+  assert.equal(browser.elements.get('#copy-order').hidden,true);
+  assert.deepEqual(browser.calls,[]);
+});
+
+test('Web-out 确认到账后按订单版本下载单文件，恢复时零请求', async t => {
+  const pendingVersion = '0.1.2';
   const links = [];
-  const browser = page(t, {
-    pathname,
+  const browser = sharedStore(t, 'web-out', {
     records:[['audcore-browser-source-order', JSON.stringify({...order,status:'pending',version:pendingVersion})]],
     request:async url => {
-      if (url.endsWith('/config')) return Response.json({page:pathname,version:'0.2.0',amount_fen:1250});
       if (url.endsWith('/reconcile')) return Response.json({id,status:'paid',version:pendingVersion});
       assert.ok(url.endsWith('/orders/'+id+'/download'));
       return new Response('VST3 bytes', {headers:{'Content-Type':'application/octet-stream'}});
@@ -177,11 +191,18 @@ test('网页源商品页显示配置价格，恢复订单并按订单版本下�
     return {click() { links.push(this.download); }, remove() {}};
   };
   t.mock.method(globalThis,'setTimeout',callback => { callback(); return 0; });
-  await import('../dist/assets/browser-source.mjs?enabled');
-  assert.equal(browser.elements.get('#price').textContent,'¥12.50');
+  await import('../dist/assets/vst3-store.mjs?web-out-pending');
   assert.equal(browser.elements.get('#checkout').textContent,'继续支付宝付款');
-  assert.equal(browser.calls.length,1);
+  assert.deepEqual(browser.calls,[]);
   await browser.elements.get('#check-order').click();
   for (let i = 0; i < 10 && !links.length; ++i) await new Promise(resolve => setImmediate(resolve));
-  assert.deepEqual(links,['Web-out-v0.1.1.vst3']);
+  assert.deepEqual(links,['Web-out-v0.1.2.vst3']);
+  assert.deepEqual(browser.calls.map(call => call.url.split('/').at(-1)),['reconcile','download']);
+});
+
+test('缓存的 Web-out 页面使用旧脚本地址时也能启用购买，打开时零请求', async t => {
+  const browser = page(t, {pathname:'/web-out/'});
+  await import('../dist/assets/browser-source.mjs');
+  assert.equal(browser.elements.get('#checkout').disabled,false);
+  assert.deepEqual(browser.calls,[]);
 });
