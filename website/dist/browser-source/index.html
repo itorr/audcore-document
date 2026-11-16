@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="把宿主通道的声音和透明声控动画送进本机 OBS 浏览器源。支持 Windows x64 VST3 宿主。">
+  <meta name="theme-color" content="#151716">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/music-in.css">
+  <link rel="stylesheet" href="/assets/browser-source.css">
+  <script type="module" src="/assets/browser-source.mjs"></script>
+  <title>网页源输出 · Windows x64 VST3 · 声核 Audcore</title>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-head wrap">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="28" height="28" alt="">Audcore 声核</a>
+    <nav aria-label="页面导航">
+      <a href="#free">声核内免费</a>
+      <a href="#buy">购买 VST3</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="format">Windows x64 · VST3</p>
+        <h1 id="title">网页源输出</h1>
+        <p class="tagline">宿主里的声音，直接送进直播</p>
+        <p class="intro">把效果器插在想要播出的通道上，复制地址粘贴到同一台电脑的 OBS 浏览器源。直播画面可以叠加透明声控动画，宿主里原有的监听也可继续使用。</p>
+        <div class="hero-actions"><a class="button button-accent" href="#buy">购买 VST3</a></div>
+      </div>
+      <figure class="hero-panel source-panel">
+        <div class="panel-demo" aria-hidden="true">
+          <p class="panel-title">Browser Source</p>
+          <p class="panel-label">Browser source URL</p>
+          <div class="panel-controls"><span>http://127.0.0.1:…</span><span>Copy URL</span></div>
+          <p class="panel-status">Ready for a local browser source.</p>
+          <p class="panel-help">Paste the URL into a browser source on this computer.</p>
+        </div>
+        <figcaption>独立 VST3 面板示意</figcaption>
+      </figure>
+    </section>
+
+    <section class="free" id="free" aria-labelledby="free-title">
+      <div>
+        <h2 id="free-title">用声核，免费输出网页源</h2>
+        <p>在通道的输出发送中选择「网页源」并创建，声核会复制地址。菜单里没有「网页源」时，用「安装或启用输出扩展…」安装或启用官方「网页源」扩展。已创建的发送也可以右键打开「网页源说明」重新复制地址。</p>
+      </div>
+      <a class="button button-light" href="/source/help/">查看网页源用法</a>
+    </section>
+
+    <section class="details" aria-labelledby="use-title">
+      <h2 id="use-title">把宿主里的声音送进 OBS</h2>
+      <div class="features">
+        <article>
+          <h3>插入效果器，复制地址</h3>
+          <p>在通道或主输出上插入 VST3，让宿主实时处理音频，然后点击「Copy URL」。网页播放器随插件交付，音频通过本机 WebSocket 直传。</p>
+        </article>
+        <article>
+          <h3>添加浏览器源，开启音频控制</h3>
+          <p>在 OBS 添加「浏览器」来源并粘贴完整地址，勾选「通过 OBS 控制音频」。已有耳返时，可在 OBS 的高级音频属性里保持「监听关闭」。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="purchase" id="buy" aria-labelledby="buy-title">
+      <div>
+        <h2 id="buy-title">购买独立 VST3</h2>
+        <p class="compatibility">适用于 Windows 64 位 VST3 宿主</p>
+        <p class="installation">付款确认后直接下载单个 <code>.vst3</code> 文件。将文件放入宿主的 VST3 扫描目录后重新扫描。</p>
+      </div>
+      <div class="checkout">
+        <p class="price" id="price"></p>
+        <div class="order-actions">
+          <button class="button button-accent" id="checkout" type="button" disabled>支付宝购买</button>
+          <button class="button button-secondary" id="check-order" type="button" hidden>确认到账</button>
+          <button class="button button-secondary" id="copy-order" type="button" hidden>复制订单链接</button>
+        </div>
+        <p id="order-status" role="status">暂未开放购买。</p>
+        <noscript><p>请启用 JavaScript 后购买或查询订单。</p></noscript>
+      </div>
+    </section>
+
+    <section class="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">购买隐私说明</h2>
+      <p>付款由支付宝处理。声核用订单号、商品版本、金额、付款状态及支付宝交易号核对交易和提供下载。浏览器保留下载凭据，服务端保存凭据的校验值。请妥善保存订单链接，以便再次下载。</p>
+    </section>
+  </main>
+  <footer class="site-foot wrap">
+    <a href="/">声核 Audcore</a>
+    <a href="/plugin-guide/">效果器安装说明</a>
+  </footer>
+</body>
+</html>

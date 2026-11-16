@@ -1,0 +1,45 @@
+.hero h1 {
+  font: 800 clamp(40px, 6vw, 84px)/1.12 "Microsoft YaHei", "PingFang SC", sans-serif;
+  letter-spacing: -.05em;
+}
+.tagline { font-size: clamp(23px, 3.2vw, 44px); }
+.panel-demo {
+  background: #181818;
+  color: #e4e4e4;
+  border: 1px solid #3b3c38;
+  border-radius: 12px;
+  box-shadow: 0 22px 40px #0005;
+  padding: clamp(16px, 3vw, 30px);
+  font: 15px/1.45 "Segoe UI", sans-serif;
+}
+.panel-title {
+  margin-bottom: 16px;
+  color: #dab57c;
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 600;
+}
+.panel-label { margin-bottom: 5px; }
+.panel-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 9px;
+  margin-bottom: 9px;
+}
+.panel-controls span {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+.panel-controls span:first-child { background: #222; }
+.panel-controls span:last-child { background: #dab57c; color: #181818; font-weight: 600; }
+.panel-status { color: #a6a6a6; }
+.panel-help { margin-top: 17px; }
+.checkout .price { min-height: 1.05em; }
+@media (max-width: 360px) {
+  .site-head { flex-wrap: wrap; }
+  .panel-demo { font-size: 13px; }
+}

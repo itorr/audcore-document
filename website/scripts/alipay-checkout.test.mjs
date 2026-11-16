@@ -13,7 +13,7 @@ const version = '1.29.0+1.22.0';
 const order = {id, token};
 const saved = value => [['order',JSON.stringify(value)], ['order-'+id,JSON.stringify(value)]];
 
-function page(t, {records = [], query = '', hash = '', request} = {}) {
+function page(t, {records = [], pathname = '/', query = '', hash = '', request} = {}) {
   const elements = new Map();
   const storage = new Map(records);
   const calls = [];
@@ -29,7 +29,7 @@ function page(t, {records = [], query = '', hash = '', request} = {}) {
     },
   };
   const window = {...element(), open:() => null};
-  const location = {origin:'https://example.test', search:query, hash};
+  const location = {origin:'https://example.test', pathname, search:query, hash};
   const history = {replaceState() {}};
   const localStorage = {getItem:key => storage.get(key), setItem:(key,value) => storage.set(key,value)};
   const fetch = (url, params) => {
@@ -144,4 +144,44 @@ test('Music-in official entry restores a real version and enables checkout witho
   assert.equal(browser.elements.get('#checkout').disabled,false);
   assert.match(browser.elements.get('#order-status').textContent,/Music-in v0\.1\.0/);
   assert.deepEqual(browser.calls,[]);
+});
+
+test('网页源商品页只在服务器已启用当前正式路径时开放购买', async t => {
+  const browser = page(t, {
+    pathname:'/browser-source/',
+    request:async () => new Response(null, {status:503}),
+  });
+  browser.document.querySelector('#checkout').disabled = true;
+  await import('../dist/assets/browser-source.mjs?disabled');
+  assert.equal(browser.elements.get('#checkout').disabled,true);
+  assert.equal(browser.calls.length,1);
+  assert.ok(browser.calls[0].url.endsWith('/v1/store/browser-source/config'));
+});
+
+test('网页源商品页显示配置价格，恢复订单并按订单版本下载单个 VST3', async t => {
+  const pathname = '/configured-product/';
+  const pendingVersion = '0.1.0';
+  const links = [];
+  const browser = page(t, {
+    pathname,
+    records:[['audcore-browser-source-order', JSON.stringify({...order,status:'pending',version:pendingVersion})]],
+    request:async url => {
+      if (url.endsWith('/config')) return Response.json({page:pathname,version:'0.2.0',amount_fen:1250});
+      if (url.endsWith('/reconcile')) return Response.json({id,status:'paid',version:pendingVersion});
+      assert.ok(url.endsWith('/orders/'+id+'/download'));
+      return new Response('VST3 bytes', {headers:{'Content-Type':'application/octet-stream'}});
+    },
+  });
+  browser.document.createElement = name => {
+    assert.equal(name,'a');
+    return {click() { links.push(this.download); }, remove() {}};
+  };
+  t.mock.method(globalThis,'setTimeout',callback => { callback(); return 0; });
+  await import('../dist/assets/browser-source.mjs?enabled');
+  assert.equal(browser.elements.get('#price').textContent,'¥12.50');
+  assert.equal(browser.elements.get('#checkout').textContent,'继续支付宝付款');
+  assert.equal(browser.calls.length,1);
+  await browser.elements.get('#check-order').click();
+  for (let i = 0; i < 10 && !links.length; ++i) await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(links,['Browser-Source-v0.1.0.vst3']);
 });
