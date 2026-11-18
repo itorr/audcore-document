@@ -19,7 +19,7 @@ function render(items, count) {
   list.replaceChildren(...items.map(item => {
     const time = document.createElement('time'); time.dateTime = item.paid_at;
     time.textContent = new Intl.DateTimeFormat('zh-CN', {timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date(item.paid_at));
-    const note = item.source === 'aud-r' ? '购买 Aud-R' : item.message;
+    const note = item.message;
     if (fullRecords) {
       const row = document.createElement('tr');
       const name = document.createElement('th'); name.scope = 'row'; name.textContent = item.name;
