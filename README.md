@@ -4,7 +4,7 @@
 
 声核是免费、轻巧的 Windows 实时调音台。连接音频设备，组合 VST3 效果器，让麦克风、伴奏和监听各走各的通道。支持 ASIO，适合直播、唱歌和实时监听。
 
-[获取 Windows 版](https://audcore.utae.cn/download/) · [使用指北](docs/指北.md) · [更新记录](docs/更新记录.md) · [BUG 反馈与建议](https://github.com/itorr/audcore-document/issues)
+[获取 Windows 版](https://audcore.utae.cn/download/) · [使用指北](docs/指北.md) · [更新记录](docs/更新记录.md) · [BUG 反馈与建议](https://github.com/audcore/audcore-document/issues)
 
 ![声核调音台界面](website/dist/assets/hero-window.png)
 
@@ -28,6 +28,12 @@
 - [阅读使用指北](docs/指北.md)：连接设备、添加效果器及排查常见问题。
 - [选择录制格式](docs/通道录制格式说明.md)：比较 CAF 与 WAV / RF64 的精度、容量和中断恢复方式。
 - [查看更新记录](docs/更新记录.md)：了解各版本的用户可见变化。
-- [提交 BUG 与建议](https://github.com/itorr/audcore-document/issues)：公开反馈统一在这里处理。
+- [提交 BUG 与建议](https://github.com/audcore/audcore-document/issues)：公开反馈统一在这里处理。
 
 声核仍处于早期测试阶段。下载和运行前，请阅读[使用协议](https://audcore.utae.cn/guide/#agreement)。
+
+## 皮肤与开发
+
+[皮肤项目列表](skins.md) · [开发指引](docs/皮肤开发指引.md) · [开发与发布规范](docs/皮肤发布规范.md) · [skin-dev 开发入口](https://audcore.utae.cn/skin-dev/) · [社区讨论](https://github.com/audcore/audcore-document/discussions)
+
+各皮肤已在 [Audcore 组织](https://github.com/audcore) 下独立维护，源码和构建方法以各仓库为准。初次登记通过 skins.md 的 PR 人工审核，在线版本以官方签名列表为准。

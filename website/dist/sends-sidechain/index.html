@@ -15,7 +15,7 @@
 <section class="guide-panel"><h2>侧链是什么？</h2><p>声核已经支持侧链。普通发送把声音送入目标通道参与混音；侧链发送把来源信号交给目标效果器，用来控制它怎样处理目标通道的声音。例如人声控制伴奏上的压缩器，让人说话时伴奏降低。侧链信号不等于自动把人声混入伴奏。</p><p>目标效果器必须提供并让声核识别侧链输入；插件自身也可能需要选择外部侧链或调整检测设置，具体取决于插件。不同效果器的参数和处理方式不完全相同。</p></section>
 <section class="guide-panel"><h2>例子：让人声控制伴奏音量</h2><ol><li>准备人声和伴奏两个通道，确认两者输入正常。将支持外部侧链的压缩器添加到伴奏通道；也可以使用声核自带的伴奏融合。</li><li>在<strong>人声通道</strong>下方点击发送区域的“＋”，在“侧链”分组中选择伴奏通道上的目标效果器。</li><li>在目标效果器中按需选择外部侧链，调整阈值、强度等参数。具体名称和步骤以该效果器界面为准。</li><li>让伴奏播放并对麦克风说话，试听伴奏是否按预期降低；再调整发送音量和效果器参数。人声与伴奏仍需分别连接到混音或监听输出。</li></ol><p>发送侧链不会代替人声的正常输出；只接侧链时，目标效果器可以收到检测信号，但不代表直播或耳机一定能听到人声。</p></section>
 <section class="guide-panel"><h2>找不到侧链目标或没有效果？</h2><ul><li>确认目标效果器已添加到另一个通道、处于在线状态，并且支持声核可识别的侧链输入；普通 VST3 效果器并非都支持侧链。</li><li>确认从来源通道的“＋”添加侧链，选对目标效果器，发送处于启用状态；同一目标已添加时不必重复添加。</li><li>检查来源是否有电平、发送取点和音量是否合适，并在目标效果器中检查外部侧链、阈值与处理强度。</li><li>如果目标不显示，检查现有发送是否形成反向依赖或循环；调整路由后再试，避免将声音送回自身。</li><li>插件不提供可用侧链时，可自行选择支持侧链的替代效果器。</li></ul><p>仍有问题可在
-<a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+<a href="https://github.com/audcore/audcore-document/issues">BUG 反馈</a>
 提供声核及插件版本、通道和发送设置、复现步骤与诊断信息。</p></section></div></main>
 <footer class="site-footer wrap">
   <div class="footer-brand">
@@ -39,7 +39,7 @@
   <div class="footer-feedback footer-column">
     <h2>交流</h2>
     <p>声核仍在早期内测。<br>欢迎加入互助交流群。</p>
-    <a href="https://github.com/itorr/audcore-document/issues">BUG 反馈</a>
+    <a href="https://github.com/audcore/audcore-document/issues">BUG 反馈</a>
     <a href="/guide/#community">互助交流群</a>
   </div>
   <div class="footer-meta">
