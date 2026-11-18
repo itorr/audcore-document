@@ -1,11 +1,11 @@
 import {requestService} from './config.mjs';
+import {formatMoney as money} from './money.mjs';
 const api = requestService.origin;
 const form = document.querySelector('#sponsor-form');
 const feedback = document.querySelector('#sponsor-feedback');
 const list = document.querySelector('#sponsor-list');
 const listStatus = document.querySelector('#sponsor-list-status');
 const fullRecords = document.body.hasAttribute('data-sponsor-records');
-const money = fen => `¥${(fen/100).toFixed(2)}`;
 let events, pending, page = 1, total = 0;
 const storage = {
   get(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } },

@@ -4,6 +4,11 @@ import {mountCheckout} from './alipay-checkout.mjs';
 // These are static product declarations. The order service owns the actual price,
 // version, and payment status. Opening a page only restores browser-local state.
 const products = new Map([
+  ['aud-eq6', {
+    page: '/aud-eq6/',
+    name: 'AudEQ6',
+    file: 'AudEQ6-v{version}.vst3',
+  }],
   ['aud-eqp1a', {
     page: '/aud-eqp1a/',
     name: 'AudEQP1A',

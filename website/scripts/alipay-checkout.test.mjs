@@ -231,3 +231,45 @@ test('AudEQP1A 确认到账后按订单版本下载单文件，恢复时零请�
   assert.deepEqual(links,['AudEQP1A-v0.1.6.vst3']);
   assert.deepEqual(browser.calls.map(call => call.url.split('/').at(-1)),['reconcile','download']);
 });
+
+
+test('AudEQ6 新页面沿用共用结账，首次打开零请求', async t => {
+  const browser = sharedStore(t, 'aud-eq6');
+  browser.document.querySelector('#checkout').disabled = true;
+  await import('../dist/assets/vst3-store.mjs?aud-eq6-first');
+  assert.equal(browser.elements.get('#checkout').disabled,false);
+  assert.equal(browser.elements.get('#checkout').textContent,'支付宝购买');
+  assert.deepEqual(browser.calls,[]);
+});
+
+test('AudEQ6 确认到账后按订单实际版本下载单文件，恢复时零请求', async t => {
+  const pendingVersion = '0.1.33';
+  const links = [];
+  const browser = sharedStore(t, 'aud-eq6', {
+    records:[['audcore-aud-eq6-order', JSON.stringify({...order,status:'pending',version:pendingVersion})]],
+    request:async url => {
+      if (url.endsWith('/reconcile')) return Response.json({id,status:'paid',version:pendingVersion});
+      assert.ok(url.endsWith('/orders/'+id+'/download'));
+      return new Response('VST3 bytes', {headers:{'Content-Type':'application/octet-stream'}});
+    },
+  });
+  browser.document.createElement = name => {
+    assert.equal(name,'a');
+    return {click() { links.push(this.download); }, remove() {}};
+  };
+  t.mock.method(globalThis,'setTimeout',callback => { callback(); return 0; });
+  await import('../dist/assets/vst3-store.mjs?aud-eq6-pending');
+  assert.deepEqual(browser.calls,[]);
+  await browser.elements.get('#check-order').click();
+  for (let i = 0; i < 10 && !links.length; ++i) await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(links,['AudEQ6-v0.1.33.vst3']);
+  assert.deepEqual(browser.calls.map(call => call.url.split('/').at(-1)),['reconcile','download']);
+  assert.ok(browser.calls.every(call=>new URL(call.url).pathname.startsWith('/v1/store/aud-eq6/')));
+});
+
+test('面向用户的金额保留必要小数，不改变原始分值', async () => {
+  const {formatMoney} = await import('../dist/assets/money.mjs');
+  for (const [fen,label] of [[0,'¥0'],[1,'¥0.01'],[10,'¥0.1'],[100,'¥1'],[990,'¥9.9'],[999,'¥9.99'],[1000,'¥10'],[1010,'¥10.1'],[12345,'¥123.45']]) {
+    assert.equal(formatMoney(fen),label);
+  }
+});

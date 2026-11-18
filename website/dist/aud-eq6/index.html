@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AudEQ6 六段并联均衡器，支持 AIR 高频、曲线点拖动和实时频谱。声核内免费，Windows 64 位 VST3 ¥9.9。">
+  <meta name="theme-color" content="#151716">
+  <link rel="canonical" href="https://audcore.utae.cn/aud-eq6/">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/music-in.css">
+  <link rel="stylesheet" href="/assets/aud-eq6.css">
+  <script type="module" src="/assets/vst3-store.mjs"></script>
+  <title>AudEQ6 · 均衡器 VST3 · 声核 Audcore</title>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-head wrap">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="28" height="28" alt="">Audcore 声核</a>
+    <nav aria-label="页面导航">
+      <a href="#free">声核内免费</a>
+      <a href="#buy">购买 VST3</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap eq6-page">
+    <section class="hero">
+      <div>
+        <p class="format">SIX-BAND PARALLEL EQ</p>
+        <h1>AudEQ6</h1>
+        <p class="intro">从低频轮廓到高频空气感，直接在曲线上找到你想要的声音。</p>
+        <div class="hero-actions"><a class="button button-light" href="#free">声核内免费使用</a>
+          <a class="button button-accent" href="#buy">购买 VST3 · ¥9.9</a></div>
+      </div>
+      <img src="/assets/aud-eq6-panel.png" width="847" height="500"
+        class="eq6-panel" alt="AudEQ6 原生界面，上方显示实时频谱、均衡曲线、彩色控制点和频段贡献，下方为蓝底彩色旋钮">
+    </section>
+    <section class="free" id="free">
+      <div><h2>在声核内免费使用</h2>
+        <p>打开声核的「在线效果器」，下载 AudEQ6，即可添加到通道效果链。</p></div>
+      <a class="button button-light" href="/#download">下载声核</a>
+    </section>
+    <section class="details">
+      <h2>每一段调整，都能听见也看见</h2>
+      <div class="features">
+        <article><h3>六段并联均衡</h3><p>SUB、40 Hz、160 Hz、650 Hz、2.5 kHz 与 AIR 六段，分别塑造低频厚度、中频轮廓和高频明亮度。</p></article>
+        <article><h3>AIR 高频空气感</h3><p>AIR BAND 可选 2.5、5、10、20、40 kHz，配合 AIR GAIN 调节高频提升量，用宽缓的过渡带出通透细节。</p></article>
+        <article><h3>直接拖动曲线点</h3><p>彩色点与下方旋钮一一对应。上下拖动调整增益，AIR 点还可左右切换频率档位。单击输入、双击复位。</p></article>
+        <article><h3>声音驱动的实时画面</h3><p>实时频谱辉光随声音起伏；操作或悬停某个频段，以彩色色面突出它对当前均衡响应的影响。</p></article>
+        <article><h3>混合原声，独立匹配音量</h3><p>MIX 提供 0～100% 干湿混合，OUT GAIN 提供 −24～+24 dB 输出调节。输出音量不改变上方均衡曲线。</p></article>
+        <article><h3>原生面板，零额外延迟</h3><p>Windows 64 位 VST3，原生界面支持自由调整窗口并保持等比缩放。音频处理不增加额外延迟。</p></article>
+      </div>
+    </section>
+    <section class="purchase" id="buy" data-vst3-store="aud-eq6" aria-labelledby="buy-title">
+      <div>
+        <h2 id="buy-title">购买独立 VST3</h2>
+        <p class="compatibility">适用于 Windows 64 位 VST3 宿主</p>
+        <p class="installation">付款确认后直接下载单个 <code>.vst3</code> 文件。将文件放入宿主的 VST3 扫描目录后重新扫描。</p>
+      </div>
+      <div class="checkout">
+        <p class="price" id="price">¥9.9</p>
+        <div class="order-actions">
+          <button class="button button-accent" id="checkout" type="button" disabled>支付宝购买</button>
+          <button class="button button-secondary" id="check-order" type="button" hidden>确认到账</button>
+          <button class="button button-secondary" id="copy-order" type="button" hidden>复制订单链接</button>
+        </div>
+        <p id="order-status" role="status">付款后即可下载。</p>
+        <noscript><p>请启用 JavaScript 后购买或查询订单。</p></noscript>
+      </div>
+    </section>
+
+    <section class="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">购买隐私说明</h2>
+      <p>付款由支付宝处理。声核用订单号、商品版本、金额、付款状态及支付宝交易号核对交易和提供下载。浏览器保留下载凭据，服务端保存凭据的校验值。请妥善保存订单链接，以便再次下载。</p>
+    </section>
+  </main>
+  <footer class="site-foot wrap">
+    <a href="/">声核 Audcore</a>
+    <a href="/plugin-guide/">效果器安装说明</a>
+  </footer>
+</body>
+</html>

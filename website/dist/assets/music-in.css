@@ -28,7 +28,7 @@ button:disabled { opacity: .58; }
 .brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; white-space: nowrap; }
 .site-head nav { display: flex; gap: clamp(12px, 2vw, 27px); font-size: 14px; }
 .site-head nav a { white-space: nowrap; }
-.site-head nav a:hover, .site-foot a:hover { text-decoration: underline; }
+.site-head nav a:hover, .site-foot a:hover { color: var(--accent); }
 
 .hero {
   display: grid;

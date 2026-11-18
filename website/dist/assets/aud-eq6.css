@@ -1,0 +1,4 @@
+.eq6-page .hero { grid-template-columns: minmax(0, 1fr); }
+.eq6-page .hero h1 { font-size: clamp(44px, 9vw, 116px); letter-spacing: -.045em; }
+.eq6-page .eq6-panel { display: block; width: 100%; max-width: 1100px; height: auto; margin-inline: auto; }
+.eq6-page .intro { max-width: 40em; }
