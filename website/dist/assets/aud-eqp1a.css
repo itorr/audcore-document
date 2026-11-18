@@ -1,0 +1,4 @@
+.eqp-page .hero { grid-template-columns: minmax(0, 1fr); }
+.eqp-page .hero h1 { font-size: clamp(44px, 9vw, 116px); letter-spacing: -.045em; }
+.eqp-page .eqp-panel { display: block; width: 100%; height: auto; }
+.eqp-page .intro { max-width: 40em; }

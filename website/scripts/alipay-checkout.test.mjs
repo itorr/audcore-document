@@ -206,3 +206,28 @@ test('缓存的 Web-out 页面使用旧脚本地址时也能启用购买，打�
   assert.equal(browser.elements.get('#checkout').disabled,false);
   assert.deepEqual(browser.calls,[]);
 });
+
+test('AudEQP1A 确认到账后按订单版本下载单文件，恢复时零请求', async t => {
+  const pendingVersion = '0.1.6';
+  const links = [];
+  const browser = sharedStore(t, 'aud-eqp1a', {
+    records:[['audcore-aud-eqp1a-order', JSON.stringify({...order,status:'pending',version:pendingVersion})]],
+    request:async url => {
+      if (url.endsWith('/reconcile')) return Response.json({id,status:'paid',version:pendingVersion});
+      assert.ok(url.endsWith('/orders/'+id+'/download'));
+      return new Response('VST3 bytes', {headers:{'Content-Type':'application/octet-stream'}});
+    },
+  });
+  browser.document.createElement = name => {
+    assert.equal(name,'a');
+    return {click() { links.push(this.download); }, remove() {}};
+  };
+  t.mock.method(globalThis,'setTimeout',callback => { callback(); return 0; });
+  await import('../dist/assets/vst3-store.mjs?aud-eqp1a-pending');
+  assert.equal(browser.elements.get('#checkout').textContent,'继续支付宝付款');
+  assert.deepEqual(browser.calls,[]);
+  await browser.elements.get('#check-order').click();
+  for (let i = 0; i < 10 && !links.length; ++i) await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(links,['AudEQP1A-v0.1.6.vst3']);
+  assert.deepEqual(browser.calls.map(call => call.url.split('/').at(-1)),['reconcile','download']);
+});

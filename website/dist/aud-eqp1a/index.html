@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AudEQP1A 均衡器，支持低频升降联动、高频带宽和输出增益。声核内免费，Windows 64 位 VST3 ¥9.90。">
+  <meta name="theme-color" content="#151716">
+  <link rel="canonical" href="https://audcore.utae.cn/aud-eqp1a/">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/music-in.css">
+  <link rel="stylesheet" href="/assets/aud-eqp1a.css">
+  <script type="module" src="/assets/vst3-store.mjs"></script>
+  <title>AudEQP1A · 均衡器 VST3 · 声核 Audcore</title>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-head wrap">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="28" height="28" alt="">Audcore 声核</a>
+    <nav aria-label="页面导航">
+      <a href="#free">声核内免费</a>
+      <a href="#buy">购买 VST3</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap eqp-page">
+    <section class="hero">
+      <div>
+        <p class="format">PROGRAM EQUALIZER</p>
+        <h1>AudEQP1A</h1>
+        <p class="intro">用宽缓的低频和可调的高频峰，塑造声音的厚度与明亮度。</p>
+        <div class="hero-actions"><a class="button button-light" href="#free">声核内免费使用</a>
+          <a class="button button-accent" href="#buy">购买 VST3 · ¥9.90</a></div>
+      </div>
+      <img src="/assets/aud-eqp1a-panel.svg" width="1333" height="500"
+        class="eqp-panel" alt="AudEQP1A 蓝色面板，包含低频提升与衰减、高频提升与衰减、带宽、频率档位和输出增益旋钮">
+    </section>
+    <section class="free" id="free">
+      <div><h2>在声核内免费使用</h2>
+        <p>打开声核的「在线效果器」，下载 AudEQP1A，即可添加到通道效果链。</p></div>
+      <a class="button button-light" href="/#download">下载声核</a>
+    </section>
+    <section class="details">
+      <h2>从低频厚度到高频细节</h2>
+      <div class="features">
+        <article><h3>低频提升与衰减联动</h3><p>20、30、60、100 Hz 四档可选，同时提升和衰减，塑造低频抬升与低中频凹陷。</p></article>
+        <article><h3>高频宽窄可调</h3><p>七档高频提升与独立高频衰减，带宽从集中到宽展，可细调人声和乐器的明亮度。</p></article>
+        <article><h3>输出电平独立调整</h3><p>GAIN 提供 −12 至 +12 dB 调节，方便在均衡后匹配响度。旋钮单击输入、双击复位，拖动调节。</p></article>
+        <article><h3>Windows 64 位 VST3</h3><p>独立 VST3 可在支持的音频宿主中使用，面板随窗口等比缩放。零额外延迟。</p></article>
+      </div>
+    </section>
+    <section class="purchase" id="buy" data-vst3-store="aud-eqp1a" aria-labelledby="buy-title">
+      <div>
+        <h2 id="buy-title">购买独立 VST3</h2>
+        <p class="compatibility">适用于 Windows 64 位 VST3 宿主</p>
+        <p class="installation">付款确认后直接下载单个 <code>.vst3</code> 文件。将文件放入宿主的 VST3 扫描目录后重新扫描。</p>
+      </div>
+      <div class="checkout">
+        <p class="price" id="price">¥9.90</p>
+        <div class="order-actions">
+          <button class="button button-accent" id="checkout" type="button" disabled>支付宝购买</button>
+          <button class="button button-secondary" id="check-order" type="button" hidden>确认到账</button>
+          <button class="button button-secondary" id="copy-order" type="button" hidden>复制订单链接</button>
+        </div>
+        <p id="order-status" role="status">付款后即可下载。</p>
+        <noscript><p>请启用 JavaScript 后购买或查询订单。</p></noscript>
+      </div>
+    </section>
+
+    <section class="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">购买隐私说明</h2>
+      <p>付款由支付宝处理。声核用订单号、商品版本、金额、付款状态及支付宝交易号核对交易和提供下载。浏览器保留下载凭据，服务端保存凭据的校验值。请妥善保存订单链接，以便再次下载。</p>
+    </section>
+  </main>
+  <footer class="site-foot wrap">
+    <a href="/">声核 Audcore</a>
+    <a href="/plugin-guide/">效果器安装说明</a>
+  </footer>
+</body>
+</html>
