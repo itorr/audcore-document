@@ -1,0 +1,8 @@
+.aud550-page .hero h1 { font-size: clamp(48px, 7vw, 90px); line-height: 1.02; letter-spacing: -.045em; }
+.aud550-page .format { font-size: 14px; }
+.aud550-page .tagline { font-size: clamp(25px, 3.2vw, 43px); }
+.aud550-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); align-items: start; }
+.aud550-panels figure { min-width: 0; }
+.aud550-panels img { display: block; width: 100%; height: auto; }
+.aud550-panels figcaption { margin-top: 12px; font-size: 14px; line-height: 1.6; text-align: center; color: var(--muted); }
+.aud550-page #order-status { font-size: 14px; }

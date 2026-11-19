@@ -273,3 +273,60 @@ test('面向用户的金额保留必要小数，不改变原始分值', async ()
     assert.equal(formatMoney(fen),label);
   }
 });
+
+test('Aud550 组合页明确两款 ¥9.9，首次打开及恢复时零请求', async t => {
+  const html = readFileSync(new URL('../dist/aud-550/index.html', import.meta.url), 'utf8');
+  assert.ok(html.includes('一次购买包含 Aud550A 和 Aud550B'));
+  assert.ok(html.includes('¥9.9') && !html.includes('¥9.90'));
+  assert.ok(html.includes('/assets/aud550a-panel.png') && html.includes('/assets/aud550b-panel.png'));
+  const browser = sharedStore(t, 'aud-550');
+  browser.document.querySelector('#checkout').disabled = true;
+  await import('../dist/assets/vst3-store.mjs?aud550-first');
+  browser.window.pageshow?.({persisted:true});
+  browser.document.visibilitychange?.();
+  assert.equal(browser.elements.get('#checkout').disabled,false);
+  assert.equal(browser.elements.get('#checkout').textContent,'支付宝购买');
+  assert.deepEqual(browser.calls,[]);
+});
+
+test('Aud550 已购订单回跳只恢复本地状态，不请求商品配置', async t => {
+  const paidVersion = '1.4.0';
+  const browser = sharedStore(t, 'aud-550', {
+    records:[
+      ['audcore-aud-550-order', JSON.stringify({...order,status:'paid',version:paidVersion})],
+      ['audcore-aud-550-order-'+id, JSON.stringify({...order,status:'paid',version:paidVersion})],
+    ],
+    query:'?order='+id,
+  });
+  await import('../dist/assets/vst3-store.mjs?aud550-paid-return');
+  assert.equal(browser.elements.get('#checkout').textContent,'下载 VST3');
+  assert.deepEqual(browser.calls,[]);
+});
+
+test('Aud550 确认到账后手动下载订单版本的 ZIP，不重复下单', async t => {
+  const paidVersion = '1.4.0';
+  const links = [];
+  const browser = sharedStore(t, 'aud-550', {
+    records:[['audcore-aud-550-order', JSON.stringify({...order,status:'pending',version:paidVersion})]],
+    request:async url => {
+      if (url.endsWith('/reconcile')) return Response.json({id,status:'paid',version:paidVersion});
+      assert.ok(url.endsWith('/orders/'+id+'/download'));
+      return new Response('Aud550A + Aud550B ZIP bytes', {headers:{'Content-Type':'application/zip'}});
+    },
+  });
+  browser.document.createElement = name => {
+    assert.equal(name,'a');
+    return {click() { links.push(this.download); }, remove() {}};
+  };
+  t.mock.method(globalThis,'setTimeout',callback => { callback(); return 0; });
+  await import('../dist/assets/vst3-store.mjs?aud550-zip');
+  assert.deepEqual(browser.calls,[]);
+  await browser.elements.get('#check-order').click();
+  assert.deepEqual(links,[]);
+  assert.deepEqual(browser.calls.map(call => call.url.split('/').at(-1)),['reconcile']);
+  assert.equal(browser.elements.get('#checkout').textContent,'下载 VST3');
+  await browser.elements.get('#checkout').click();
+  assert.deepEqual(links,['Aud550-v1.4.0-vst3-win-x64.zip']);
+  assert.deepEqual(browser.calls.map(call => call.url.split('/').at(-1)),['reconcile','download']);
+  assert.ok(browser.calls.every(call => new URL(call.url).pathname.startsWith('/v1/store/aud-550/')));
+});
