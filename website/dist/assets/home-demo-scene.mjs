@@ -6,7 +6,7 @@ import {presets,roleNames,effectNames} from './home-demo-presets.mjs';
 // Port of the default console's shared geometry, not an alternate mixer skin.
 export const STRIP = 74, STEP = 76, HEAD = 40, WIDTH = 422;
 export const scenes = [
-  {title:'从一个预设，开始好声音。', text:'新建预设，选择「唱歌直播」，从人声、伴奏到监听，把常用通道一次准备好。', label:'新建预设', duration:9000},
+  {title:'从一个预设，开始好声音。', text:'选择「新建简单唱歌直播预设」，一次准备好人声、伴奏和监听通道。', label:'新建预设', duration:9000},
   {title:'小体积，超低占用。', text:'免费、轻巧。原生调音台搭配 ASIO 与 WASAPI，把更多算力留给声音。', label:'轻装上阵', duration:7000},
   {title:'大小随你，收放自如。', text:'自由调整界面尺寸；缩成迷你调音台，推子和通道开关依然随手可控。', label:'自由尺寸', duration:9000},
   {title:'直播常用，开箱就有。', text:'降噪、去齿音、压缩、均衡、混响和限制，自带常用效果器，也支持 VST3。', label:'自带效果器', duration:9000},
@@ -41,7 +41,8 @@ export function toggleChannel(state,index) {
 }
 export function applyScene(state,index,elapsed) {
   const base=createState();
-  state.phase=index===0?(elapsed<2000?'menu':elapsed<4200?'empty':elapsed<5700?'creating':'ready'):'ready';
+  state.phase=index===0?(elapsed<1800?'menu':elapsed<5000?'preset-menu':'ready'):'ready';
+  state.previewingPreset=state.phase==='preset-menu';
   state.language=index===7?(elapsed<3000?'zh':elapsed<6000?'en':'ja'):'zh';
   index-=1;
   state.height=index===1 ? (elapsed<2800?574:elapsed<6400?220:414) :494;
@@ -91,29 +92,63 @@ export function frame(state,time=0) {
   const icon=(name,x,y,size,color=p.text_control)=>commands.push({kind:'icon',name,x,y,w:size,h:size,color});
   const hit=(kind,index,x,y,w,h,extra={})=>hits.push({kind,index,x,y,w,h,...extra});
   rect(0,0,width,state.height,p.surface_canvas,8);
-  // Original logo proportions, in the default sidebar's 22px icon box.
-  for(const [i,color] of ['#38b9ec','#f3ad50','#ff635b'].entries()) {
-    rect(10+i*7.7,10,2,19,['#286781','#8a663b','#843e3c'][i],1);
-    rect(8.3+i*7.7,[16,21,12][i],5.7,5.7,color,3);
+  function paintLogo() {
+    for(const [i,color] of ['#38b9ec','#f3ad50','#ff635b'].entries()) {
+      rect(10+i*7.7,10,2,19,['#286781','#8a663b','#843e3c'][i],1);
+      rect(8.3+i*7.7,[16,21,12][i],5.7,5.7,color,3);
+    }
   }
+  if(state.phase==='menu'||state.phase==='preset-menu') {
+    // Native system workspace: menu_layout.rs, menu_paint.rs and project_menu.rs.
+    const menuWidth=124, rowHeight=28.1875;
+    const presetsOpen=state.phase==='preset-menu';
+    const rows=[
+      ['新建预设','Ctrl+N'],['打开文件','Ctrl+O'],['保存预设','Ctrl+S'],
+      ['撤销','Ctrl+Z'],['重做','Ctrl+Y'],['系统设置'],['输入输出'],['显示'],
+      ['皮肤'],['性能'],['API'],['录制'],['效果器'],['关于声核'],
+    ];
+    rect(0,0,width,state.height,p.surface_popup,8);
+    paintLogo();
+    text('返回控制台',40,0,menuWidth-48,40,12,p.text_primary,'left');
+    hit('close-project',-1,0,0,menuWidth,40);
+    for(const [i,[label,shortcut]] of rows.entries()) {
+      const y=44+i*rowHeight+(i>=3?7:0)+(i>=5?7:0)+(i>=13?7:0);
+      if(y+rowHeight>state.height-4)break;
+      const active=i===0&&presetsOpen;
+      if(active)rect(0,y,menuWidth,rowHeight,p.surface_field_inset);
+      text(label,12,y,shortcut?52:100,rowHeight,12,active?p.text_primary:p.text_sidebar,'left');
+      if(shortcut)text(shortcut,65,y,47,rowHeight,12,p.text_scrollbar,'right');
+      if(i===0)hit('new',-1,0,y,menuWidth,rowHeight);
+    }
+    if(presetsOpen) {
+      const labels=['新建空白预设','新建单通道监听预设','新建简单唱歌直播预设','新建聊天和唱歌直播预设'];
+      for(const [i,label] of labels.entries()) {
+        const y=44+i*rowHeight;
+        if(i===2&&state.previewingPreset)rect(menuWidth+1,y,width-menuWidth-1,rowHeight,p.surface_button_hover);
+        text(label,menuWidth+13,y,width-menuWidth-25,rowHeight,12,p.text_primary,'left');
+        hit(i===0?'empty-project':'preset',i-1,menuWidth+1,y,width-menuWidth-1,rowHeight,{value:label});
+      }
+    }
+    return {commands,hits,width,height:state.height};
+  }
+  paintLogo();
   if(state.height>241) {icon('plus',9,47,22,p.text_sidebar);icon('play',9,83,22,p.text_sidebar);}
   if(state.height>360) ['48k','128','ASIO'].forEach((v,i)=>text(v,0,120+i*16,40,16,9,p.text_format));
   icon('settings',9,state.height-65,22,p.text_sidebar);
   icon('hide',9,state.height-29,22,p.text_sidebar);
   hit('project',-1,0,0,40,40);
-  if(state.phase==='empty'||state.phase==='creating') {
+  if(state.phase==='empty') {
+    const rowWidth=Math.min(160,width-HEAD-24);
+    const x=HEAD+(width-HEAD-rowWidth)/2;
+    const rowHeight=Math.max(24,Math.min(40,(state.height-32)/3));
+    const top=Math.max(4,(state.height-16-3*rowHeight)/2);
     for(const [i,label] of ['单通道监听','唱歌直播','聊天和唱歌'].entries()) {
-      const y=(state.height-136)/2+i*48;
-      rect(151,y,160,40,i===1?p.surface_button_hover:p.surface_button,6);
-      text(label,159,y,144,40,12);hit('preset',i,151,y,160,40);
+      const y=top+i*(rowHeight+8);
+      rect(x,y,rowWidth,rowHeight,p.surface_button,6);
+      text(label,x+8,y,rowWidth-16,rowHeight,12);
+      hit('preset',i,x,y,rowWidth,rowHeight,{value:label});
     }
-    if(state.phase==='creating') {
-      rect(40,2,382,state.height-4,p.surface_canvas,0,.94);
-      text('正在建立预设…',80,220,300,32,14);
-      rect(131,263,200,6,p.surface_button,3);
-      rect(131,263,130,6,p.text_sidebar,3);
-    }
-    return {commands,hits,width:WIDTH,height:state.height};
+    return {commands,hits,width,height:state.height};
   }
   const boxes=geometry(state.height,state.channels.length);
   for(const b of boxes) {
@@ -166,11 +201,6 @@ export function frame(state,time=0) {
     rect(x,b.bottom-8,STRIP,4,p.surface_controls);
     text(c.name,x+3,b.bottom-20,68,12,11,p.text_bright);
     if(c.mute || state.solo!=null && state.solo!==b.id) rect(x,2,STRIP,b.h,p.surface_canvas,3,.75);
-  }
-  if(state.phase==='menu') {
-    rect(7,7,204,210,p.surface_popup,8);rect(13,45,192,34,p.surface_button_hover,5);
-    for(const [i,label] of ['返回控制台','新建预设','打开文件','保存预设','设置'].entries())text(label,24,11+i*38,172,34,13,p.text_primary,'left');
-    hits.length=0;hit('new',-1,13,45,192,34);
   }
   return {commands,hits,width,height:state.height};
 }

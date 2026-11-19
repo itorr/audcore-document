@@ -4,6 +4,34 @@ import {translate} from './home-demo-i18n.mjs';
 
 const root=document.querySelector('[data-home-demo]');
 if(root) start(root);
+const featureGrid=document.querySelector('.feature-tiles');
+if(featureGrid) startFeatureTiles(featureGrid);
+
+function startFeatureTiles(grid) {
+  const tiles=[...grid.children];
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  let current=-1,timer=0,visible=false;
+  function updateTimer() {
+    clearInterval(timer);
+    if(!visible||document.hidden||reduced.matches) {
+      tiles[current]?.removeAttribute('data-active');
+      return;
+    }
+    timer=setInterval(()=>{
+      if(grid.matches(':hover,:focus-within'))return;
+      tiles[current]?.removeAttribute('data-active');
+      current=(current+1)%tiles.length;
+      tiles[current].setAttribute('data-active','');
+    },3500);
+  }
+  new IntersectionObserver(([entry])=>{
+    visible=entry.isIntersecting;
+    updateTimer();
+  },{threshold:.15}).observe(grid);
+  document.addEventListener('visibilitychange',updateTimer);
+  reduced.addEventListener('change',updateTimer);
+}
+
 export function start(root) {
   const canvas=root.querySelector('canvas'), layer=root.querySelector('.demo-hit-layer'), windowBox=root.querySelector('.demo-window');
   const status=root.querySelector('.demo-status'), dialog=root.querySelector('.demo-options');
@@ -42,7 +70,9 @@ export function start(root) {
   function action(hit) {
     interact();const c=state.channels[hit.index];
     if(hit.kind==='project')state.phase='menu';
-    if(hit.kind==='new')state.phase='empty';
+    if(hit.kind==='close-project')state.phase='ready';
+    if(hit.kind==='new') {state.phase='preset-menu';state.previewingPreset=false;}
+    if(hit.kind==='empty-project') {state.phase='empty';state.channels=[];}
     if(hit.kind==='preset') {Object.assign(state,createState(['monitor','singing','chat_singing'][hit.index]));state.phase='ready';announce('已建立演示预设，可以添加效果器、调推子和开关通道。');}
     if(hit.kind==='mute') {toggleChannel(state,hit.index);announce(`${translate(c.name,state.language)}：${c.mute?'已静音':'已接通'}${c.group?' · 编组 '+c.group:''}`);}
     if(hit.kind==='record') {c.record=!c.record;announce(`${translate(c.name,state.language)}：${c.record?'录音演示开始':'录音演示停止'}，不会生成真实音频文件。`);}
@@ -58,15 +88,20 @@ export function start(root) {
       closeOptions();announce('演示发送已更新。');
     });
     draw();
+    if(hit.kind==='project')layer.querySelector('[data-key="new--1"]')?.focus();
+    if(hit.kind==='new')layer.querySelector('[data-key="empty-project--1"]')?.focus();
+    if(hit.kind==='close-project'||hit.kind==='preset')layer.querySelector('[data-key="project--1"]')?.focus();
   }
-  const labels={project:'工程菜单',new:'新建预设',preset:'选择预设',settings:'语言设置',mute:'通道接通',record:'录音',fx:'效果器旁通',solo:'独听',polarity:'极性反转',link:'设置编组',add:'添加效果器',effect:'效果器旁通',send:'设置发送',sendAdd:'添加发送',gain:'增益'};
+  const labels={project:'工程菜单','close-project':'返回控制台',new:'新建预设',mute:'通道接通',record:'录音',fx:'效果器旁通',solo:'独听',polarity:'极性反转',link:'设置编组',add:'添加效果器',effect:'效果器旁通',send:'设置发送',sendAdd:'添加发送',gain:'增益'};
   function updateHits(scene) {
     const key=[scene.height,state.phase,state.language,...state.channels.map(c=>c.fx.join()+c.sends.join())].join('|');
     if(key!==signature) {
       signature=key;layer.replaceChildren();
       for(const hit of scene.hits) {
         if(hit.kind==='keyboard')continue;
-        const name=(state.channels[hit.index]?translate(state.channels[hit.index].name,state.language)+' · ':'')+(labels[hit.kind]||hit.kind)+(hit.value?' · '+translate(hit.value,state.language):'');
+        const name=['preset','empty-project'].includes(hit.kind)
+          ? translate(hit.value,state.language)
+          : (state.channels[hit.index]?translate(state.channels[hit.index].name,state.language)+' · ':'')+(labels[hit.kind]||hit.kind)+(hit.value?' · '+translate(hit.value,state.language):'');
         let control;
         if(['mute','record'].includes(hit.kind)) {
           control=document.createElement('label');control.title=name;
@@ -140,7 +175,13 @@ export function start(root) {
     event.preventDefault();
     stepStory(event.key==='ArrowLeft'?-1:1);
   });
-  root.addEventListener('keydown',e=>{if(e.key==='Escape')closeOptions();});
+  root.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    if(!dialog.hidden)closeOptions();
+    else if(state.phase==='preset-menu') {
+      interact();state.phase='menu';draw();layer.querySelector('[data-key="new--1"]')?.focus();
+    } else if(state.phase==='menu')action({kind:'close-project',index:-1});
+  });
   root.addEventListener('focusin',interact);
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;last=0;if(visible)draw();schedule();},{threshold:.05});observer.observe(root);
   const visibility=()=>schedule();document.addEventListener('visibilitychange',visibility);

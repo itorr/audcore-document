@@ -40,7 +40,7 @@
 <section class="home-story" aria-label="演示片段">
   <div class="story-content" id="demo-story-content" aria-live="off">
     <h2 id="demo-story-title">从一个预设，开始好声音。</h2>
-    <p id="demo-story-copy">新建预设，选择「唱歌直播」，从人声、伴奏到监听，把常用通道一次准备好。</p>
+    <p id="demo-story-copy">选择「新建简单唱歌直播预设」，一次准备好人声、伴奏和监听通道。</p>
   </div>
   <div class="story-selector" role="group" aria-label="切换演示片段">
     <button type="button" data-story-step="-1" aria-controls="demo-story-content" aria-label="上一段">‹</button>
@@ -53,7 +53,36 @@
 <p class="demo-status" role="status"></p>
 <noscript><p>启用 JavaScript 可体验界面演示。声核支持 ASIO、WASAPI、VST3、自带效果器、自由路由、编组及通道录音。</p></noscript>
 </figure></section>
-<section class="home-products wrap" id="features" aria-labelledby="products-title">
+<section class="home-features wrap" id="features" aria-labelledby="features-title">
+  <h2 id="features-title">声核新特性</h2>
+  <div class="feature-tiles">
+    <a class="feature-tile" href="/sends-sidechain/">
+      <h3>拖拽建立发送</h3>
+      <div class="feature-tile-copy"><p>把同一路声音分给监听、混音和效果器。</p><p>拖到目标通道添加发送，也可把人声送入伴奏效果器的侧链。</p></div>
+    </a>
+    <a class="feature-tile" href="/recording/">
+      <h3>按通道选择录音取点</h3>
+      <div class="feature-tile-copy"><p>人声和混音分别录制，按用途保存。</p><p>选择效果前或效果后录制，给后期留一份干声。</p></div>
+    </a>
+    <a class="feature-tile" href="/channel-switching/">
+      <h3>通道编组切换</h3>
+      <div class="feature-tile-copy"><p>用联动和互斥，一次切换说话或唱歌的效果链。</p><p>同组一起开关，同字母的不同组可以互斥切换。</p></div>
+    </a>
+    <a class="feature-tile" href="/player-capture/">
+      <h3>直接截获播放器声音</h3>
+      <div class="feature-tile-copy"><p>把播放器的伴奏直接送进调音台。</p><p>在输入里选择「截获播放器」，省去声卡回环和虚拟跳线。</p></div>
+    </a>
+    <a class="feature-tile" href="/mic-takeover/">
+      <h3>麦克风接管</h3>
+      <div class="feature-tile-copy"><p>让直播或通话软件通过原麦克风收到处理后的声音。</p><p>在声核中主动启用接管。此功能仍在测试。</p></div>
+    </a>
+    <a class="feature-tile" href="/project-import/">
+      <h3>导入调音台预设</h3>
+      <div class="feature-tile-copy"><p>把已有的小怪兽调音台预设带到声核。</p><p>导入后核对设备和效果器，接着调整你的通道。</p></div>
+    </a>
+  </div>
+</section>
+<section class="home-products wrap" aria-labelledby="products-title">
 <header class="home-products-intro"><h2 id="products-title">为你的声音，再添一块。</h2><p>声核里的常用能力，也能作为独立 VST3，在熟悉的宿主中使用。</p></header>
 <article class="home-product" data-product="aud-r"><div><p class="product-type">Aud-R · 组合混响</p><h3>空间感，<br>为人声让位。</h3><p>早期反射、双声、尾音与节拍回声独立调节。开口时混响收住，停下时余韵回来。</p><div class="actions"><a class="pill" href="/aud-r/">了解 Aud-R</a></div><p class="home-price">声核内免费 · 独立 VST3 ¥9.9</p></div><img src="/assets/aud-r-panel.png" width="1536" height="1024" loading="lazy" alt="Aud-R 组合混响效果器界面"></article>
 <article class="home-product" data-product="music-in"><div><p class="product-type">Music-in</p><h3>播放器的声音，<br>直接接进来。</h3><p>无需跳线，把播放器伴奏送进效果链。在声核里，通道输入选择「截获播放器」即可使用。</p><div class="actions"><a class="pill" href="/music-in/">播放器声音捕获</a></div><p class="home-price">声核内免费 · 独立 VST3 ¥9.9</p></div><img src="/assets/music-in-panel.png" width="960" height="500" loading="lazy" alt="Music-in 播放器声音捕获界面"></article>
@@ -61,6 +90,18 @@
 <article class="home-product" data-product="jing"><div><p class="product-type">JING</p><h3>静下来，<br>听清你的声音。</h3><p>免费、零额外延迟、低占用。记录底噪，再调强度；自带低切，让直播中的背景噪声安静下来。</p><div class="actions"><a class="pill" href="/effects/#jing-download">静音降噪与下载</a><a class="text-link" href="/effects/#jing">怎么调？</a></div><p class="home-price">声核内免费 · 独立 VST3 免费</p></div><div class="jing-visual"><strong>JING</strong><p>静音降噪 · 零额外延迟</p><svg class="jing-wave" viewBox="0 0 400 70" aria-label="降噪概念示意" role="img"><path d="M0 35L20 32 30 38 40 33 50 35 90 35 98 10 106 57 114 17 122 50 130 27 138 40 150 35 200 35 208 20 216 46 224 29 232 39 240 35 400 35"/></svg></div></article>
 <article class="home-product" data-product="compressors"><div><p class="product-type">Aud2A + Aud76</p><h3>两种经典，<br>一套压缩。</h3><p>光电压缩的柔和，FET 压缩的利落。为人声、演唱与实时监听，留下你喜欢的动态。</p><div class="actions"><a class="pill" href="https://audcore-compressors.utae.cn/">了解两款压缩器</a></div><p class="home-price">声核内免费 · 独立 VST3 两款 ¥19.8</p></div><div class="product-visual" data-pair><img src="/assets/aud2a-panel.svg" width="540" height="300" loading="lazy" alt="Aud2A 光电压缩器"><img src="/assets/aud76-panel.svg" width="640" height="300" loading="lazy" alt="Aud76 FET 压缩器"></div></article>
 <article class="home-product" data-product="modeling"><div><p class="product-type">建模效果器</p><h3>不止压缩，<br>还有更多经典声音。</h3><p>AudG、AudEQP1A、AudEQ6、Aud550A 与 Aud550B。查看界面、用途、参数和实测对比，挑选适合你的那一款。</p><div class="actions"><a class="pill" href="/modeling/">浏览建模效果器</a><a class="text-link" href="/effects/">所有效果器</a></div></div><img src="/assets/aud-eqp1a-panel.svg" width="1333" height="500" loading="lazy" alt="AudEQP1A 节目均衡器界面"></article>
+</section>
+<section class="home-developer wrap" aria-label="开发资源">
+  <article class="home-developer-card">
+    <h2>本地 API 开发</h2>
+    <p>用 JavaScript SDK 连接声核，读取通道、调整参数，并实时接收变化。</p>
+    <a class="pill" href="/api/">查看 API 文档</a>
+  </article>
+  <article class="home-developer-card">
+    <h2>皮肤开发</h2>
+    <p>用网页或原生接口制作调音台界面，从示例开始，了解如何测试、打包与发布。</p>
+    <a class="pill" href="/skin-dev/">查看皮肤开发指北</a>
+  </article>
 </section>
 <section class="feature-story story-sponsors" aria-labelledby="sponsor-heading"><div class="wrap story-copy">
 <h2 id="sponsor-heading">感谢，每一份支持。</h2>
