@@ -99,20 +99,19 @@ export function frame(state,time=0) {
     }
   }
   if(state.phase==='menu'||state.phase==='preset-menu') {
-    // Native system workspace: menu_layout.rs, menu_paint.rs and project_menu.rs.
+    // Project actions use the compact menu. Settings open in a separate window.
     const menuWidth=124, rowHeight=28.1875;
     const presetsOpen=state.phase==='preset-menu';
     const rows=[
       ['新建预设','Ctrl+N'],['打开文件','Ctrl+O'],['保存预设','Ctrl+S'],
-      ['撤销','Ctrl+Z'],['重做','Ctrl+Y'],['系统设置'],['输入输出'],['显示'],
-      ['皮肤'],['性能'],['API'],['录制'],['效果器'],['关于声核'],
+      ['撤销','Ctrl+Z'],['重做','Ctrl+Y'],
     ];
     rect(0,0,width,state.height,p.surface_popup,8);
     paintLogo();
     text('返回控制台',40,0,menuWidth-48,40,12,p.text_primary,'left');
     hit('close-project',-1,0,0,menuWidth,40);
     for(const [i,[label,shortcut]] of rows.entries()) {
-      const y=44+i*rowHeight+(i>=3?7:0)+(i>=5?7:0)+(i>=13?7:0);
+      const y=44+i*rowHeight+(i>=3?7:0);
       if(y+rowHeight>state.height-4)break;
       const active=i===0&&presetsOpen;
       if(active)rect(0,y,menuWidth,rowHeight,p.surface_field_inset);
