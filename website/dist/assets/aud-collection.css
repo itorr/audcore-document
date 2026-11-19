@@ -110,6 +110,7 @@ td:last-child strong { font-size: 18px; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
+
 .hero-performance { display: flex; flex-wrap: wrap; gap: 24px 40px; margin-top: 28px; }
 .hero-performance strong { font: 750 42px/1.1 'Segoe UI', sans-serif; color: var(--accent); }
 .hero-performance span { display: block; margin-top: 8px; font: 400 14px/1.6 'Microsoft YaHei', sans-serif; color: var(--muted); }
@@ -126,12 +127,5 @@ td:last-child strong { font-size: 18px; }
 .measurement-notes { margin-top: 24px; font-size: 14px; color: var(--muted); }
 .measurement-notes summary { cursor: pointer; width: fit-content; padding-block: 8px; color: var(--ink); }
 .measurement-notes p { margin-top: 12px; line-height: 1.9; max-width: 80em; }
-.product-performance { margin-top: 22px; padding: 16px 20px; border-radius: 12px; background: var(--chip); }
-.product-performance strong { display: block; font-size: 20px; }
-.product-performance span { display: block; margin-top: 4px; font-size: 16px; }
-.product-performance small { display: block; margin-top: 6px; font-size: 14px; color: var(--section-muted); }
-.comparison-performance { min-width: 220px; }
-.comparison-performance span, .comparison-performance small { display: block; margin-top: 6px; font-size: 14px; color: var(--muted); }
-.product[data-tone="program"] .product-performance { grid-column: 2; }
 @media (max-width: 900px) { .performance-grid { gap: 12px; } .performance-grid article { padding: 20px; } .performance-number { font-size: 36px; } }
 @media (max-width: 760px) { .performance-grid { grid-template-columns: 1fr; } .performance-grid article { padding: 24px; } .performance-number { font-size: 48px; } }
