@@ -37,10 +37,17 @@
 <p class="home-lead">免费、轻巧、超低占用。<br>ASIO 与 WASAPI，自带直播常用效果器。<br>每条通道，自由连接。</p>
 <div class="actions"><a class="pill" href="/download/">免费下载 Windows 版</a><a class="text-link" href="/guide/">使用指北</a></div>
 <p class="home-release"><span id="home-latest-version">查看最新版本</span> · Windows 64 位</p>
-<div class="home-story"><h2 id="demo-story-title">从一个预设，开始好声音。</h2><p id="demo-story-copy">新建预设，选择「唱歌直播」，从人声、伴奏到监听，把常用通道一次准备好。</p></div>
-<nav class="story-selector" aria-label="选择演示片段">
-<button type="button" data-scene="0" aria-pressed="true">新建预设</button><button type="button" data-scene="1" aria-pressed="false">轻装上阵</button><button type="button" data-scene="2" aria-pressed="false">自由尺寸</button><button type="button" data-scene="3" aria-pressed="false">自带效果器</button><button type="button" data-scene="4" aria-pressed="false">灵活路由</button><button type="button" data-scene="5" aria-pressed="false">编组联动</button><button type="button" data-scene="6" aria-pressed="false">通道录音</button><button type="button" data-scene="7" aria-pressed="false">多种语言</button>
-</nav></div>
+<section class="home-story" aria-label="演示片段">
+  <div class="story-content" id="demo-story-content" aria-live="off">
+    <h2 id="demo-story-title">从一个预设，开始好声音。</h2>
+    <p id="demo-story-copy">新建预设，选择「唱歌直播」，从人声、伴奏到监听，把常用通道一次准备好。</p>
+  </div>
+  <div class="story-selector" role="group" aria-label="切换演示片段">
+    <button type="button" data-story-step="-1" aria-controls="demo-story-content" aria-label="上一段">‹</button>
+    <button type="button" data-story-step="1" aria-controls="demo-story-content" aria-label="下一段">›</button>
+  </div>
+</section>
+</div>
 <figure class="home-demo" data-home-demo data-available="true" aria-label="默认界面互动演示，使用模拟电平">
 <div class="demo-toolbar">
   <label>界面大小

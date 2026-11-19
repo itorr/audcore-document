@@ -9,9 +9,12 @@ export function start(root) {
   const pause=document.querySelector('#demo-pause'), language=document.querySelector('#demo-language'), size=document.querySelector('#demo-size');
   const status=root.querySelector('.demo-status'), dialog=root.querySelector('.demo-options');
   const title=document.querySelector('#demo-story-title'), copy=document.querySelector('#demo-story-copy');
-  const selectors=[...document.querySelectorAll('[data-scene]')];
+  const selectors=document.querySelectorAll('[data-story-step]');
+  const story=document.querySelector('#demo-story-content');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const state=createState();
+  let displayHeight=state.height;
+  let resizeMotion=null;
   let renderer,raf=0,last=0,time=0,visible=false,playing=!reduced.matches,manual=false,signature='',current=-1,destroyed=false,contextLost=false;
   function unavailable() {
     playing=false;root.dataset.available='false';
@@ -19,9 +22,13 @@ export function start(root) {
     pause.disabled=true;size.disabled=true;language.disabled=true;
   }
   try {renderer=new MixerGL(canvas);}catch {unavailable();}
-  function setStory(index) {
+  function setStory(index, direction=1) {
+    if(current!==-1 && !reduced.matches) {
+      for(const animation of story.getAnimations()) animation.cancel();
+      story.animate([{opacity:0,transform:`translateX(${direction*12}px)`},{opacity:1,transform:'translateX(0)'}],
+        {duration:220,easing:'ease-out'});
+    }
     current=index;title.textContent=scenes[index].title;copy.textContent=scenes[index].text;
-    for(const el of selectors) {const selected=Number(el.dataset.scene)===index;el.setAttribute('aria-pressed',String(selected));}
   }
   function setPlaying(value) {
     playing=value;last=0;pause.textContent=playing?'暂停演示':'播放演示';pause.setAttribute('aria-pressed',String(!playing));schedule();
@@ -60,7 +67,7 @@ export function start(root) {
   }
   const labels={project:'工程菜单',new:'新建预设',preset:'选择预设',settings:'语言设置',mute:'通道接通',record:'录音',fx:'效果器旁通',solo:'独听',polarity:'极性反转',link:'设置编组',add:'添加效果器',effect:'效果器旁通',send:'设置发送',sendAdd:'添加发送',gain:'增益'};
   function updateHits(scene) {
-    const key=[state.height,state.phase,state.language,...state.channels.map(c=>c.fx.join()+c.sends.join())].join('|');
+    const key=[scene.height,state.phase,state.language,...state.channels.map(c=>c.fx.join()+c.sends.join())].join('|');
     if(key!==signature) {
       signature=key;layer.replaceChildren();
       for(const hit of scene.hits) {
@@ -90,34 +97,63 @@ export function start(root) {
   }
   function draw() {
     if(!renderer||contextLost||destroyed||document.hidden)return;
-    const scene=frame(state,time/1000);windowBox.style.aspectRatio=`${scene.width} / ${state.height}`;
+    if(reduced.matches || !visible) {
+      displayHeight=state.height;
+      resizeMotion=null;
+    } else if(state.height!==(resizeMotion?.to??displayHeight)) {
+      resizeMotion={from:displayHeight,to:state.height,start:null};
+      schedule();
+    }
+    const scene=frame({...state,height:displayHeight},time/1000);
+    windowBox.style.aspectRatio=`${scene.width} / ${scene.height}`;
     renderer.render(scene);updateHits(scene);
     language.value=state.language;size.value=String(state.height);
   }
   function tick(now) {
     raf=0;if(!canRun())return;
     if(last && now-last<1000/30) {schedule();return;}
-    if(last)time+=Math.min(now-last,80);last=now;
-    const at=sceneAt(time);
-    if(!manual) {applyScene(state,at.index,at.elapsed);if(current!==at.index){closeOptions();setStory(at.index);}}
+    if(playing && last)time+=Math.min(now-last,80);last=now;
+    if(playing && !manual) {
+      const at=sceneAt(time);
+      applyScene(state,at.index,at.elapsed);
+      if(current!==at.index){closeOptions();setStory(at.index);}
+    }
+    if(resizeMotion) {
+      resizeMotion.start??=now;
+      const progress=Math.min(1,(now-resizeMotion.start)/360);
+      const eased=progress*progress*(3-2*progress);
+      displayHeight=Math.round(resizeMotion.from+(resizeMotion.to-resizeMotion.from)*eased);
+      if(progress===1)resizeMotion=null;
+    }
     draw();schedule();
   }
-  function canRun() {return !destroyed&&!contextLost&&renderer&&playing&&visible&&!document.hidden;}
+  function canRun() {return !destroyed&&!contextLost&&renderer&&(playing||resizeMotion)&&visible&&!document.hidden;}
   function schedule() {if(canRun()&&!raf)raf=requestAnimationFrame(tick);else if(!canRun()){cancelAnimationFrame(raf);raf=0;last=0;}}
   pause.addEventListener('click',()=>{
     if(!playing&&manual) {manual=false;const at=sceneAt(time);applyScene(state,at.index,at.elapsed);closeOptions();}
-    setPlaying(!playing);draw();
+    setPlaying(!playing);draw();schedule();
   });
   language.addEventListener('change',()=>{interact();state.language=language.value;draw();announce('界面语言：'+language.selectedOptions[0].textContent);});
-  size.addEventListener('change',()=>{interact();state.height=Number(size.value);closeOptions();draw();});
-  for(const el of selectors)el.addEventListener('click',()=>{
-    const index=Number(el.dataset.scene);time=scenes.slice(0,index).reduce((n,s)=>n+s.duration,0);
-    manual=false;setStory(index);applyScene(state,index,0);closeOptions();draw();last=0;
+  size.addEventListener('change',()=>{interact();state.height=Number(size.value);closeOptions();draw();schedule();});
+  function stepStory(direction) {
+    const index=(current+direction+scenes.length)%scenes.length;
+    time=scenes.slice(0,index).reduce((n,s)=>n+s.duration,0);
+    manual=false;setStory(index,direction);applyScene(state,index,0);closeOptions();draw();last=0;schedule();
+  }
+  for(const el of selectors)el.addEventListener('click',()=>stepStory(Number(el.dataset.storyStep)));
+  document.querySelector('.story-selector').addEventListener('keydown',event=>{
+    if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight')return;
+    event.preventDefault();
+    stepStory(event.key==='ArrowLeft'?-1:1);
   });
   root.addEventListener('keydown',e=>{if(e.key==='Escape')closeOptions();});
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;last=0;if(visible)draw();schedule();},{threshold:.05});observer.observe(root);
   const visibility=()=>schedule();document.addEventListener('visibilitychange',visibility);
-  reduced.addEventListener('change',()=>{if(reduced.matches){manual=true;setPlaying(false);draw();}});
+  reduced.addEventListener('change',()=>{
+    if(!reduced.matches)return;
+    for(const animation of story.getAnimations()) animation.cancel();
+    manual=true;setPlaying(false);draw();schedule();
+  });
   const resize=new ResizeObserver(()=>{if(visible)draw();});resize.observe(windowBox);
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();contextLost=true;schedule();announce('演示画面暂时中断，等待图形上下文恢复。');});
   canvas.addEventListener('webglcontextrestored',()=>{try{renderer.destroy();renderer=new MixerGL(canvas);contextLost=false;draw();schedule();announce('演示画面已恢复。');}catch{unavailable();}});
