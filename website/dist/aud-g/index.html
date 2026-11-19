@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AudG 总线压缩器，提供三档压缩比、自动释放、侧链高通和并行混合。声核内免费，Windows 64 位 VST3 ¥9.9。">
+  <meta name="theme-color" content="#151716">
+  <link rel="canonical" href="https://audcore.utae.cn/aud-g/">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/music-in.css">
+  <link rel="stylesheet" href="/assets/aud-g.css">
+  <script type="module" src="/assets/vst3-store.mjs"></script>
+  <title>AudG · 总线压缩器 VST3 · 声核 Audcore</title>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-head wrap">
+    <a class="brand" href="/"><img src="/assets/logo.svg" width="28" height="28" alt="">Audcore 声核</a>
+    <nav aria-label="页面导航">
+      <a href="#free">声核内免费</a>
+      <a href="#buy">购买 VST3</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap audg-page">
+    <section class="hero">
+      <div>
+        <p class="format">BUS COMPRESSOR</p>
+        <h1>AudG</h1>
+        <p class="intro">给鼓组、编组和混音总线加一点压缩，让各声部更紧密，同时保留鼓点和节奏的冲击力。</p>
+        <div class="hero-actions"><a class="button button-light" href="#free">声核内免费使用</a>
+          <a class="button button-accent" href="#buy">购买 VST3 · ¥9.9</a></div>
+      </div>
+      <img src="/assets/aud-g-panel.png" width="400" height="1000"
+        class="audg-panel" alt="AudG 竖向面板，上方是指针式增益衰减表，下方是双列旋钮与居中的旁通指示灯">
+    </section>
+    <section class="free" id="free">
+      <div><h2>在声核内免费使用</h2>
+        <p>打开声核的「在线效果器」，下载 AudG，即可添加到通道效果链。</p></div>
+      <a class="button button-light" href="/#download">下载声核</a>
+    </section>
+    <section class="details">
+      <h2>总线压缩与并行混合</h2>
+      <div class="features">
+        <article><h3>默认轻压</h3><p>默认采用 2:1、10 ms 启动、自动释放和 80% 混合。用阈值控制压缩量，通过指针表查看增益衰减。</p></article>
+        <article><h3>三档压缩比</h3><p>在 2:1、4:1、10:1 间切换。启动时间可选 0.1～30 ms，释放可选 0.1～1.2 s 四档或 Auto。</p></article>
+        <article><h3>侧链高通</h3><p>将检测端的高通调至 0～300 Hz，减少底鼓和低频对整体压缩量的牵动。</p></article>
+        <article><h3>保留原声和动态</h3><p>用 MIX 调节干湿比例，用 MAKEUP 补偿音量。点击中央指示灯即可切换旁通，方便对照处理前后。</p></article>
+        <article><h3>紧凑竖向面板</h3><p>支持等比缩放。旋钮可单击输入、双击复位或拖动调节。</p></article>
+        <article><h3>零额外延迟</h3><p>支持单声道和立体声，可用于单个通道、编组或混音总线。</p></article>
+      </div>
+    </section>
+    <section class="purchase" id="buy" data-vst3-store="aud-g" aria-labelledby="buy-title">
+      <div>
+        <h2 id="buy-title">购买独立 VST3</h2>
+        <p class="compatibility">适用于 Windows 64 位 VST3 宿主</p>
+        <p class="installation">付款确认后直接下载单个 <code>.vst3</code> 文件。将文件放入宿主的 VST3 扫描目录后重新扫描。</p>
+      </div>
+      <div class="checkout">
+        <p class="price" id="price">¥9.9</p>
+        <div class="order-actions">
+          <button class="button button-accent" id="checkout" type="button" disabled>支付宝购买</button>
+          <button class="button button-secondary" id="check-order" type="button" hidden>确认到账</button>
+          <button class="button button-secondary" id="copy-order" type="button" hidden>复制订单链接</button>
+        </div>
+        <p id="order-status" role="status">付款后即可下载。</p>
+        <noscript><p>请启用 JavaScript 后购买或查询订单。</p></noscript>
+      </div>
+    </section>
+
+    <section class="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">购买隐私说明</h2>
+      <p>付款由支付宝处理。声核用订单号、商品版本、金额、付款状态及支付宝交易号核对交易和提供下载。浏览器保留下载凭据，服务端保存凭据的校验值。请妥善保存订单链接，以便再次下载。</p>
+    </section>
+  </main>
+  <footer class="site-foot wrap">
+    <a href="/">声核 Audcore</a>
+    <a href="/plugin-guide/">效果器安装说明</a>
+  </footer>
+</body>
+</html>

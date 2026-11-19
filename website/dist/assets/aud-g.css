@@ -1,0 +1,11 @@
+.audg-page .hero {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+  max-width: 960px;
+  margin-inline: auto;
+}
+.audg-page .hero h1 { letter-spacing: -.045em; }
+.audg-page .audg-panel { display: block; width: 100%; height: auto; }
+@media (max-width: 760px) {
+  .audg-page .hero { grid-template-columns: minmax(0, 1fr); }
+  .audg-page .audg-panel { width: min(62%, 240px); justify-self: center; }
+}

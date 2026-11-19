@@ -9,6 +9,11 @@ const products = new Map([
     name: 'Aud550A + Aud550B',
     file: 'Aud550-v{version}-vst3-win-x64.zip',
   }],
+  ['aud-g', {
+    page: '/aud-g/',
+    name: 'AudG',
+    file: 'AudG-v{version}.vst3',
+  }],
   ['aud-eq6', {
     page: '/aud-eq6/',
     name: 'AudEQ6',
