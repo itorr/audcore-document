@@ -130,7 +130,7 @@ export function frame(state,time=0) {
       icon('plus',x+31,y+2,12,p.text_dim);hit('add',b.id,x,y,74,17);
       let sy=sendTop+17;
       if(showSends) {icon('plus',x+31,sendTop+2,12,p.text_dim);hit('sendAdd',b.id,x,sendTop,74,17);}
-      for(const send of showSends?c.sends:[]) {rect(x,sy,74,16,p.surface_button);text(send,x+2,sy,70,16,11,p.text_secondary);hit('send',b.id,x,sy,74,16,{value:send});sy+=17;}
+      for(const send of showSends?c.sends:[]) {rect(x,sy,74,16,p.surface_button);text(send,x+2,sy,70,16,11,p.text_secondary,'left');hit('send',b.id,x,sy,74,16,{value:send});sy+=17;}
     }
     const mono=c.role==='microphone';
     rect(x+(mono?10:8.5),b.trackY,mono?6:9,b.trackH,p.surface_track,3);
