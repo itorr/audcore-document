@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核免费使用，专注 Windows 上的实时 VST3 效果处理。"><meta name="theme-color" content="#fafbfc"><title>下载 - 声核 audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"></head><body>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="声核免费使用，专注 Windows 上的实时 VST3 效果处理。"><meta name="theme-color" content="#fafbfc"><title>下载 - 声核 audcore</title><link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 256x256" type="image/x-icon"><link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/home.css"></head><body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="site-header wrap">
     <a class="brand" href="/" aria-label="声核首页"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
@@ -27,6 +27,91 @@
   </p>
   <p class="download-prep">开始前准备：连接音频设备与添加效果器，请先看<a href="/guide/">使用指北</a>。</p>
   <section id="download-changes" aria-label="本版更新"></section>
+</div><div class="wrap download-details"><h2>认识声核</h2><p>免费使用，连接设备、自带效果器与 VST3，为直播、唱歌和监听安排声音。</p>		<div class="feature-stories" id="product-details">
+			<section class="feature-story story-resources" aria-labelledby="resources-title">
+				<div class="wrap">
+					<div class="story-copy">
+						<h2 id="resources-title"><span>小体积，</span>高性能！</h2>
+						<p>专注实时音频处理，轻装常驻。</p>
+					</div>
+					<table class="resource-table">
+						<tbody>
+							<tr>
+								<th scope="row">启动速度</th>
+								<td>
+									<i>~</i>
+									87
+									<span>毫秒</span>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">平均 CPU 占用</th>
+								<td>
+									<i>~</i>
+									0.5
+									<span>%</span>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">核心内存占用</th>
+								<td>
+									<i>&lt;</i>
+									16
+									<span>MB</span>
+								</td>
+							</tr>
+							<!-- <tr>
+								<th scope="row">打开控制台</th>
+								<td>
+									<i>~</i>
+									120
+									<span>MB</span>
+								</td>
+							</tr> -->
+						</tbody>
+					</table>
+					<p class="resource-note">
+						历史样例：五条通道，十二个效果器
+						·
+						Intel Core i7-14690HX
+						平台下既有实测均值（不代表当前版本或所有电脑）
+						<br>
+						具体占用随设备、插件与参数而变化
+					</p>
+<aside class="plugin-memory-note"><p>声核当前默认采用原生 CPU 控制台，可在 ASIO 与 WASAPI 设备间安排输入、输出，并独立配置 WASAPI 设备。上方历史数据保留为场景参考，当前占用随版本、设备、效果器和参数变化。</p><p>第三方插件自带界面可能加载额外图形运行时；关闭界面后，其内存也可能继续保留。不同插件的开销不同，请以实际使用为准。</p></aside>
+				</div>
+			</section>
+			<section class="feature-story story-routing" aria-labelledby="routing-title">
+				<div class="wrap">
+					<div class="story-copy">
+						<h2 id="routing-title">
+							声音，<span>自由掌控。</span>
+						</h2>
+						<p>每条通道独立安排输入、效果链、发送、侧链与输出；支持播放器声音捕获、网页源输出，以及联动和互斥编组。</p>
+					</div>
+					<figure class="story-visual routing-visual">
+						<picture>
+							<source media="(max-width:600px)" srcset="/assets/routing-mobile.svg"><img
+								src="/assets/routing.svg" width="1000" height="370" loading="lazy"
+								alt="路由示意：麦克风和伴奏分别进入效果链，送往耳机监听或声卡回环。回环可供直播软件接收。">
+						</picture>
+						<figcaption>信号路径示意 · 直播接入取决于声卡回环或实际音频传输方案</figcaption>
+					</figure>
+				</div>
+			</section>
+			<section class="feature-story story-monitor" aria-labelledby="monitor-title">
+				<div class="wrap">
+					<div class="story-copy">
+						<h2 id="monitor-title">实时监听、<br><span>声音就在当下。</span></h2>
+						<p class="auto-line-wrapper">
+							<span class="auto-line-item">配合 ASIO 驱动，实现超低延迟监听。</span>
+							<span class="auto-line-item">设备和效果器延迟明确显示，可选并行延迟对齐，每条通道延迟可控。</span>
+							<span class="auto-line-item">收起控制台，声核在托盘处理声音，专注眼前的现场。</span>
+						</p>
+					</div>
+				</div>
+			</section>
+		</div>
 </div></main>  <footer class="site-footer wrap">
   <div class="footer-brand">
     <a class="brand" href="/"><img src="/assets/logo.svg" width="60" height="60" alt=""><span class="brand-name"><strong>声核</strong><span>audcore</span></span></a>
