@@ -15,8 +15,8 @@
 .story-selector button[aria-pressed="true"] { background:#dde9fa; color:#194a9b; font-weight:650; }
 .story-selector button:hover,.demo-toolbar button:hover { background:#e6eaf0; color:var(--ink); }
 .home-demo { min-width:0; }
-.demo-toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; min-height:40px; }
-.demo-toolbar label { font-size:14px; color:var(--muted); display:flex; gap:5px; align-items:center; }
+.demo-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end; justify-content:center; }
+.demo-toolbar label { display:grid; gap:4px; font-size:14px; color:var(--muted); }
 .demo-stage { height:602px; display:flex; align-items:center; justify-content:center; padding:14px 0; position:relative; }
 .demo-window { position:relative; width:min(422px,100%); aspect-ratio:422 / 494; flex:none; box-shadow:0 22px 54px #14243a22; border-radius:8px; overflow:hidden; background:#181818; }
 .demo-window canvas { width:100%; height:100%; display:block; }
@@ -31,11 +31,7 @@
 .demo-options label { display:flex; flex-direction:column; gap:8px; font-size:14px; }
 .demo-options select { width:100%; border:0; border-radius:6px; padding:8px; background:#414141; color:#eee; }
 .demo-options button { display:block; margin:12px 0 0 auto; border:0; padding:7px 18px; border-radius:6px; background:#414141; color:#eee; }
-.demo-meta { display:flex; align-items:center; justify-content:space-between; gap:14px; }
-.demo-meta p { font-size:13px; }
-.demo-wave { width:140px; height:32px; color:#6588a9; flex:none; }
-.demo-wave path { fill:none; stroke:currentColor; stroke-width:1.5; }
-.demo-status { height:3.4em; overflow:auto; margin-top:8px; font-size:13px; }
+.home-demo[data-available="true"] .demo-status { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
 .home-demo[data-available="false"] .demo-stage { display:none; }
 .home-demo[data-available="false"] .demo-status { padding:24px; background:var(--surface); border-radius:12px; font-size:16px; }
 .home-products { display:grid; gap:26px; padding-bottom:80px; }
@@ -92,9 +88,6 @@
   .home-hero .actions { gap:16px; }
   .demo-stage { height:calc((100vw - 36px)*1.36 + 28px); max-height:602px; }
   .home-story p { min-height:6.8em; }
-  .demo-meta { gap:8px; }
-  .demo-meta p { font-size:12px; }
-  .demo-wave { width:90px; }
   .home-products-intro h2 { font-size:30px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }

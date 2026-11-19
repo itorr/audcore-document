@@ -132,11 +132,13 @@ export function frame(state,time=0) {
       if(showSends) {icon('plus',x+31,sendTop+2,12,p.text_dim);hit('sendAdd',b.id,x,sendTop,74,17);}
       for(const send of showSends?c.sends:[]) {rect(x,sy,74,16,p.surface_button);text(send,x+2,sy,70,16,11,p.text_secondary);hit('send',b.id,x,sy,74,16,{value:send});sy+=17;}
     }
-    rect(x+8.5,b.trackY,9,b.trackH,p.surface_track,3);
+    const mono=c.role==='microphone';
+    rect(x+(mono?10:8.5),b.trackY,mono?6:9,b.trackH,p.surface_track,3);
     const level=c.mute?0:Math.max(0,Math.min(1,signal(time,b.id)+c.gain/72));
-    for(let side=0;side<2;side++) {
-      const ht=Math.max(3,(b.trackH-2)*(level-side*.035));
-      rect(x+9.5+side*4,b.trackY+b.trackH-1-ht,3,ht,col,1.5);
+    const meterWidth=mono?4:3;
+    for(let side=0;side<(mono?1:2);side++) {
+      const ht=Math.max(meterWidth,(b.trackH-2)*(level-side*.035));
+      rect(x+(mono?11:9.5+side*4),b.trackY+b.trackH-1-ht,meterWidth,ht,col,meterWidth/2);
     }
     for(const db of [0,-12,-24,-36,-48]) text(Math.abs(db),x+19,b.trackY+3+(b.trackH-6)*(1-(db+60)/72)-4,14,8,8,p.text_scale,'right');
     text('∞',x+19,b.trackY+b.trackH-8,14,8,8,p.text_scale,'right');
@@ -160,8 +162,10 @@ export function frame(state,time=0) {
     rect(x+45,b.bottom-53,22,22,p.surface_ring,11);
     if(!c.mute) rect(x+50,b.bottom-48,12,12,col,6);
     hit('mute',b.id,x+38,b.bottom-64,36,44);
+    // Match the native channel color band, including the rounded bottom corners.
+    rect(x,b.bottom-8,STRIP,8,col,3);
+    rect(x,b.bottom-8,STRIP,4,p.surface_controls);
     text(c.name,x+3,b.bottom-20,68,12,11,p.text_bright);
-    // Keep the entire name shape as the color identifier, without an accent line.
     if(c.mute || state.solo!=null && state.solo!==b.id) rect(x,2,STRIP,b.h,p.surface_canvas,3,.75);
   }
   if(state.phase==='menu') {

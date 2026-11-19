@@ -41,10 +41,18 @@
 <nav class="story-selector" aria-label="选择演示片段">
 <button type="button" data-scene="0" aria-pressed="true">新建预设</button><button type="button" data-scene="1" aria-pressed="false">轻装上阵</button><button type="button" data-scene="2" aria-pressed="false">自由尺寸</button><button type="button" data-scene="3" aria-pressed="false">自带效果器</button><button type="button" data-scene="4" aria-pressed="false">灵活路由</button><button type="button" data-scene="5" aria-pressed="false">编组联动</button><button type="button" data-scene="6" aria-pressed="false">通道录音</button><button type="button" data-scene="7" aria-pressed="false">多种语言</button>
 </nav></div>
-<figure class="home-demo" data-home-demo data-available="true" aria-label="默认界面互动演示">
-<div class="demo-toolbar"><label>尺寸<select id="demo-size" aria-label="演示界面尺寸"><option value="494">标准</option><option value="574">加高</option><option value="414">紧凑</option><option value="220">迷你</option></select></label><label>语言<select id="demo-language" aria-label="演示界面语言"><option value="zh">中文</option><option value="en">English</option><option value="ja">日本語</option></select></label><button type="button" id="demo-pause" aria-pressed="false">暂停演示</button></div>
+<figure class="home-demo" data-home-demo data-available="true" aria-label="默认界面互动演示，使用模拟电平">
+<div class="demo-toolbar">
+  <label>界面大小
+    <select id="demo-size"><option value="494">标准</option><option value="574">加高</option><option value="414">紧凑</option><option value="220">迷你</option></select>
+  </label>
+  <label>界面语言
+    <select id="demo-language"><option value="zh">中文</option><option value="en">English</option><option value="ja">日本語</option></select>
+  </label>
+  <button type="button" id="demo-pause" aria-pressed="false">暂停演示</button>
+</div>
 <div class="demo-stage"><div class="demo-window"><canvas width="844" height="988" aria-hidden="true"></canvas><div class="demo-hit-layer" role="group" aria-label="演示通道控件"></div><div class="demo-options" hidden></div></div></div>
-<figcaption><div class="demo-meta"><p>默认界面 · 模拟电平与波形<br>可调推子、开关通道、添加效果器</p><svg class="demo-wave" viewBox="0 0 422 32" aria-label="模拟声音波形" role="img"><path d="M0 16H422"/></svg></div><p class="demo-status" role="status">互动时自动暂停。演示不连接你的音频设备，不播放或录制声音。</p></figcaption>
+<p class="demo-status" role="status"></p>
 <noscript><p>启用 JavaScript 可体验界面演示。声核支持 ASIO、WASAPI、VST3、自带效果器、自由路由、编组及通道录音。</p></noscript>
 </figure></section>
 <section class="home-products wrap" id="features" aria-labelledby="products-title">

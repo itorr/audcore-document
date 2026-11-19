@@ -1,5 +1,5 @@
 import {MixerGL} from './home-demo-gl.mjs';
-import {createState,applyScene,frame,scenes,sceneAt,signal,toggleChannel} from './home-demo-scene.mjs';
+import {createState,applyScene,frame,scenes,sceneAt,toggleChannel} from './home-demo-scene.mjs';
 import {translate} from './home-demo-i18n.mjs';
 
 const root=document.querySelector('[data-home-demo]');
@@ -93,11 +93,6 @@ export function start(root) {
     const scene=frame(state,time/1000);windowBox.style.aspectRatio=`${scene.width} / ${state.height}`;
     renderer.render(scene);updateHits(scene);
     language.value=state.language;size.value=String(state.height);
-    const wave=root.querySelector('.demo-wave path');
-    if(wave)wave.setAttribute('d',Array.from({length:140},(_,i)=>{
-      const sample=Math.sin(i*1.8+time/85)*signal(time/1000-i/90,2)*12;
-      return `${i?'L':'M'}${i*3},${16+sample}`;
-    }).join(''));
   }
   function tick(now) {
     raf=0;if(!canRun())return;
