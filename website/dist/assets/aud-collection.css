@@ -129,3 +129,7 @@ td:last-child strong { font-size: 18px; }
 .measurement-notes p { margin-top: 12px; line-height: 1.9; max-width: 80em; }
 @media (max-width: 900px) { .performance-grid { gap: 12px; } .performance-grid article { padding: 20px; } .performance-number { font-size: 36px; } }
 @media (max-width: 760px) { .performance-grid { grid-template-columns: 1fr; } .performance-grid article { padding: 24px; } .performance-number { font-size: 48px; } }
+
+.comparison table { min-width: 1240px; }
+.comparison-latency, .comparison-gain { white-space: nowrap; font-weight: 700; font-variant-numeric: tabular-nums; }
+.comparison-gain { color: var(--accent); }
