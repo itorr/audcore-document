@@ -2,3 +2,16 @@
 .eq6-page .hero h1 { font-size: clamp(44px, 9vw, 116px); letter-spacing: -.045em; }
 .eq6-page .eq6-panel { display: block; width: 100%; max-width: 1100px; height: auto; margin-inline: auto; }
 .eq6-page .intro { max-width: 40em; }
+.eq6-page .performance-result { margin-top: 18px; font-size: clamp(20px, 3vw, 32px); line-height: 1.5; }
+.eq6-page .performance-result strong { color: var(--accent); white-space: nowrap; }
+.eq6-page .performance-note { margin-top: 14px; color: var(--muted); line-height: 1.8; max-width: 70em; }
+.eq6-page .performance-note a { color: var(--accent); }
+.eq6-page .performance-table { margin-block: 22px; overflow-x: auto; border-radius: 9px; }
+.eq6-page .performance-table table { width: 100%; min-width: 560px; border-spacing: 0 6px; text-align: left; font-variant-numeric: tabular-nums; }
+.eq6-page .performance-table caption { text-align: left; color: var(--muted); padding-bottom: 10px; font-size: 14px; }
+.eq6-page .performance-table th, .eq6-page .performance-table td { padding: 14px 16px; white-space: nowrap; }
+.eq6-page .performance-table tbody tr { background: #1f2320; }
+.eq6-page .performance-table tbody th { font-weight: 500; }
+.eq6-page .performance-table tbody td:last-child { color: var(--accent); font-weight: 700; }
+.eq6-page .performance-table tbody th:first-child { border-radius: 9px 0 0 9px; }
+.eq6-page .performance-table tbody td:last-child { border-radius: 0 9px 9px 0; }

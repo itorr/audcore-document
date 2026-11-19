@@ -50,6 +50,29 @@
         <article><h3>原生面板，零额外延迟</h3><p>Windows 64 位 VST3，原生界面支持自由调整窗口并保持等比缩放。音频处理不增加额外延迟。</p></article>
       </div>
     </section>
+    <section class="details performance" aria-labelledby="performance-title">
+      <h2 id="performance-title">多开时，留出更多处理余量</h2>
+      <p class="performance-result">音频处理线程开销实测降低 <strong>77%～80%</strong></p>
+      <p class="performance-note">与 Mäag EQ4 对比，在相同 VST3 测试程序中测试 1、8、32、64 个立体声实例。下面列出 64 实例的结果，数值为单个音频处理线程占实时处理预算的比例。</p>
+      <div class="performance-table" role="region" aria-label="64 实例性能对比" tabindex="0">
+        <table>
+          <caption>64 个立体声实例 · 两边均关闭界面</caption>
+          <thead><tr><th scope="col">采样率 / 缓冲 / 设置</th><th scope="col">Mäag EQ4</th><th scope="col">AudEQ6</th><th scope="col">开销降低</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">48 kHz / 128 帧 / 平直</th><td>14.54%</td><td>2.97%</td><td>79.6%</td></tr>
+            <tr><th scope="row">48 kHz / 128 帧 / 六段调节</th><td>14.54%</td><td>3.14%</td><td>78.4%</td></tr>
+            <tr><th scope="row">96 kHz / 64 帧 / 平直</th><td>29.75%</td><td>6.26%</td><td>78.9%</td></tr>
+            <tr><th scope="row">96 kHz / 64 帧 / 六段调节</th><td>30.90%</td><td>6.49%</td><td>79.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="performance-note">2026-11-19，Ryzen 7 9700X、Windows 11；AudEQ6 v0.1.35 对比 Mäag EQ4 v1.16.1.0。每项交替测试三轮，每轮至少 400 ms，取中位数。只计音频处理线程，不含界面及其他后台线程；实际占用随电脑、宿主与设置而变。</p>
+      <p class="performance-note">
+        <a href="/assets/aud-eq6-performance.md">测试方法与参数</a>
+        ·
+        <a href="/assets/aud-eq6-performance.csv">完整 16 组结果（CSV）</a>
+      </p>
+    </section>
     <section class="purchase" id="buy" data-vst3-store="aud-eq6" aria-labelledby="buy-title">
       <div>
         <h2 id="buy-title">购买独立 VST3</h2>
