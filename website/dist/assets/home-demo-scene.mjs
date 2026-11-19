@@ -101,7 +101,6 @@ export function frame(state,time=0) {
   icon('settings',9,state.height-65,22,p.text_sidebar);
   icon('hide',9,state.height-29,22,p.text_sidebar);
   hit('project',-1,0,0,40,40);
-  hit('settings',-1,0,state.height-76,40,36);
   if(state.phase==='empty'||state.phase==='creating') {
     for(const [i,label] of ['单通道监听','唱歌直播','聊天和唱歌'].entries()) {
       const y=(state.height-136)/2+i*48;

@@ -1,12 +1,11 @@
 import {MixerGL} from './home-demo-gl.mjs';
-import {createState,applyScene,frame,scenes,sceneAt,toggleChannel} from './home-demo-scene.mjs';
+import {createState,applyScene,frame,scenes,toggleChannel} from './home-demo-scene.mjs';
 import {translate} from './home-demo-i18n.mjs';
 
 const root=document.querySelector('[data-home-demo]');
 if(root) start(root);
 export function start(root) {
   const canvas=root.querySelector('canvas'), layer=root.querySelector('.demo-hit-layer'), windowBox=root.querySelector('.demo-window');
-  const pause=document.querySelector('#demo-pause'), language=document.querySelector('#demo-language'), size=document.querySelector('#demo-size');
   const status=root.querySelector('.demo-status'), dialog=root.querySelector('.demo-options');
   const title=document.querySelector('#demo-story-title'), copy=document.querySelector('#demo-story-copy');
   const selectors=document.querySelectorAll('[data-story-step]');
@@ -15,11 +14,10 @@ export function start(root) {
   const state=createState();
   let displayHeight=state.height;
   let resizeMotion=null;
-  let renderer,raf=0,last=0,time=0,visible=false,playing=!reduced.matches,manual=false,signature='',current=-1,destroyed=false,contextLost=false;
+  let renderer,raf=0,last=0,time=0,elapsed=0,visible=false,playing=!reduced.matches,signature='',current=-1,destroyed=false,contextLost=false;
   function unavailable() {
     playing=false;root.dataset.available='false';
     status.textContent='此设备暂不能运行 WebGL2 演示。仍可阅读功能介绍并下载声核。';
-    pause.disabled=true;size.disabled=true;language.disabled=true;
   }
   try {renderer=new MixerGL(canvas);}catch {unavailable();}
   function setStory(index, direction=1) {
@@ -30,10 +28,7 @@ export function start(root) {
     }
     current=index;title.textContent=scenes[index].title;copy.textContent=scenes[index].text;
   }
-  function setPlaying(value) {
-    playing=value;last=0;pause.textContent=playing?'暂停演示':'播放演示';pause.setAttribute('aria-pressed',String(!playing));schedule();
-  }
-  function interact() {manual=true;setPlaying(false);}
+  function interact() {playing=false;last=0;schedule();}
   function announce(message) {status.textContent=message;}
   function closeOptions() {dialog.hidden=true;dialog.replaceChildren();}
   function choose(hit,options,onchange) {
@@ -55,7 +50,6 @@ export function start(root) {
     if(hit.kind==='effect') {c.bypassed=c.bypassed.includes(hit.value)?c.bypassed.filter(v=>v!==hit.value):[...c.bypassed,hit.value];announce(`${translate(hit.value,state.language)}：${c.bypassed.includes(hit.value)?'旁通':'启用'}`);}
     if(hit.kind==='solo')state.solo=state.solo===hit.index?null:hit.index;
     if(hit.kind==='polarity') {c.phase=!c.phase;announce(`${c.name}极性${c.phase?'反转':'恢复'}`);}
-    if(hit.kind==='settings') {language.focus();announce('用上方语言选择切换中文、English 或日本語。');}
     if(hit.kind==='link') choose(hit,{title:'通道编组',value:c.group||'',values:[['','不编组'],['A1','A1 · 联动组 1'],['A2','A2 · 与 A1 互斥'],['B1','B1 · 联动组 2']]},value=>{c.group=value||null;announce('同组联动，同字母不同组互斥。点击通道圆形开关试试。');});
     if(hit.kind==='add') choose(hit,{title:'添加效果器',values:[['','选择效果器'],...['静音降噪','去齿音','抬升压缩','组合混响','动态均衡','输出限制','Aud2A'].map(v=>[v,translate(v,state.language)])]},value=>{if(value&&!c.fx.includes(value)&&c.fx.length<6)c.fx.push(value);closeOptions();announce('已添加 '+translate(value,state.language));});
     if(hit.kind==='send'||hit.kind==='sendAdd') choose(hit,{title:'通道发送',value:hit.value||'',values:[['','不发送'],...state.channels.filter(peer=>peer.id>c.id).map(peer=>[peer.name,translate(peer.name,state.language)]),['输出 1/2',translate('输出 1/2',state.language)],['网页源',translate('网页源',state.language)]]},value=>{
@@ -107,16 +101,21 @@ export function start(root) {
     const scene=frame({...state,height:displayHeight},time/1000);
     windowBox.style.aspectRatio=`${scene.width} / ${scene.height}`;
     renderer.render(scene);updateHits(scene);
-    language.value=state.language;size.value=String(state.height);
   }
   function tick(now) {
     raf=0;if(!canRun())return;
     if(last && now-last<1000/30) {schedule();return;}
-    if(playing && last)time+=Math.min(now-last,80);last=now;
-    if(playing && !manual) {
-      const at=sceneAt(time);
-      applyScene(state,at.index,at.elapsed);
-      if(current!==at.index){closeOptions();setStory(at.index);}
+    const delta=last?Math.min(now-last,80):0;
+    last=now;
+    if(playing) {
+      time+=delta;elapsed+=delta;
+      if(elapsed>=scenes[current].duration) {
+        // Select any other scene so adjacent automatic turns always differ.
+        const choice=Math.floor(Math.random()*(scenes.length-1));
+        setStory(choice>=current?choice+1:choice);
+        elapsed=0;
+      }
+      applyScene(state,current,elapsed);
     }
     if(resizeMotion) {
       resizeMotion.start??=now;
@@ -129,16 +128,11 @@ export function start(root) {
   }
   function canRun() {return !destroyed&&!contextLost&&renderer&&(playing||resizeMotion)&&visible&&!document.hidden;}
   function schedule() {if(canRun()&&!raf)raf=requestAnimationFrame(tick);else if(!canRun()){cancelAnimationFrame(raf);raf=0;last=0;}}
-  pause.addEventListener('click',()=>{
-    if(!playing&&manual) {manual=false;const at=sceneAt(time);applyScene(state,at.index,at.elapsed);closeOptions();}
-    setPlaying(!playing);draw();schedule();
-  });
-  language.addEventListener('change',()=>{interact();state.language=language.value;draw();announce('界面语言：'+language.selectedOptions[0].textContent);});
-  size.addEventListener('change',()=>{interact();state.height=Number(size.value);closeOptions();draw();schedule();});
   function stepStory(direction) {
     const index=(current+direction+scenes.length)%scenes.length;
-    time=scenes.slice(0,index).reduce((n,s)=>n+s.duration,0);
-    manual=false;setStory(index,direction);applyScene(state,index,0);closeOptions();draw();last=0;schedule();
+    elapsed=0;
+    playing=!reduced.matches;
+    setStory(index,direction);applyScene(state,index,0);closeOptions();draw();last=0;schedule();
   }
   for(const el of selectors)el.addEventListener('click',()=>stepStory(Number(el.dataset.storyStep)));
   document.querySelector('.story-selector').addEventListener('keydown',event=>{
@@ -147,12 +141,13 @@ export function start(root) {
     stepStory(event.key==='ArrowLeft'?-1:1);
   });
   root.addEventListener('keydown',e=>{if(e.key==='Escape')closeOptions();});
+  root.addEventListener('focusin',interact);
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;last=0;if(visible)draw();schedule();},{threshold:.05});observer.observe(root);
   const visibility=()=>schedule();document.addEventListener('visibilitychange',visibility);
   reduced.addEventListener('change',()=>{
     if(!reduced.matches)return;
     for(const animation of story.getAnimations()) animation.cancel();
-    manual=true;setPlaying(false);draw();schedule();
+    interact();draw();schedule();
   });
   const resize=new ResizeObserver(()=>{if(visible)draw();});resize.observe(windowBox);
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();contextLost=true;schedule();announce('演示画面暂时中断，等待图形上下文恢复。');});
@@ -161,6 +156,7 @@ export function start(root) {
   // bfcache pages are suspended, not destroyed, so Back restores working controls.
   window.addEventListener('pagehide',event=>{if(!event.persisted)teardown();else{cancelAnimationFrame(raf);raf=0;last=0;}});
   window.addEventListener('pageshow',()=>{last=0;schedule();});
-  setStory(0);if(!reduced.matches)applyScene(state,0,0);else {state.phase='ready';manual=true;}
-  setPlaying(playing);draw();return {state,teardown};
+  setStory(0);
+  if(playing)applyScene(state,0,0);
+  draw();return {state,teardown};
 }

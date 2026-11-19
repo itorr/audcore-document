@@ -1,21 +1,20 @@
-/* Homepage edition 1. Shared site typography, actions and footer stay in site.css. */
-.home-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(30px,5vw,80px); align-items:center; padding-block:34px 72px; min-height:760px; }
+/* Shared site typography, actions and footer stay in site.css. */
+.home-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(30px,5vw,80px); align-items:center; padding-block:24px 54px; }
+.home-copy { container-type:inline-size; }
 .home-eyebrow { font-size:15px; font-weight:650; color:var(--muted); letter-spacing:.04em; }
-.home-hero h1 { font-size:clamp(48px,5.5vw,76px); line-height:1.15; letter-spacing:-.05em; margin:18px 0 22px; }
+.home-hero h1 { font-size:min(76px,12.25cqi); line-height:1.15; letter-spacing:-.05em; margin:14px 0 18px; }
 .home-lead { font-size:20px; max-width:29em; }
 .home-hero .actions { gap:20px; margin-block:28px 12px; }
 .home-hero .pill { font-size:18px; min-height:54px; padding:13px 24px; }
 .home-release { font-size:14px; min-height:24px; }
-.home-story { margin-top:36px; padding:20px 24px; border-radius:16px; background:var(--surface); }
-.home-story h2 { font-size:clamp(24px,2.5vw,32px); min-height:2.5em; line-height:1.25; letter-spacing:-.035em; }
-.home-story p { margin-top:8px; max-width:29em; min-height:4.8em; font-size:14px; line-height:1.6; }
-.story-selector { display:flex; gap:8px; justify-content:flex-end; margin-top:8px; }
-.story-selector button,.demo-toolbar button,.demo-toolbar select { border:0; background:var(--surface); color:var(--muted); border-radius:8px; font:inherit; font-size:14px; line-height:1.5; padding:7px 10px; }
-.story-selector button { display:grid; place-items:center; width:36px; height:36px; padding:0; font-size:26px; line-height:1; background:#fff; color:var(--ink); }
-.story-selector button:hover,.demo-toolbar button:hover { background:#e6eaf0; color:var(--ink); }
+.home-story { position:relative; margin-top:24px; padding:16px; border-radius:14px; background:var(--surface); }
+.story-content { min-height:90px; }
+.home-story h2 { padding-inline-end:80px; font-size:clamp(20px,5cqi,27px); line-height:1.25; letter-spacing:-.035em; }
+.home-story p { margin:6px 0 0; font-size:14px; line-height:1.5; }
+.story-selector { position:absolute; inset-block-start:16px; inset-inline-end:16px; display:flex; gap:4px; }
+.story-selector button { display:grid; place-items:center; width:32px; height:32px; padding:0; border:0; border-radius:8px; font:inherit; font-size:24px; line-height:1; background:#fff; color:var(--ink); }
+.story-selector button:hover { background:#e6eaf0; }
 .home-demo { min-width:0; }
-.demo-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end; justify-content:center; }
-.demo-toolbar label { display:grid; gap:4px; font-size:14px; color:var(--muted); }
 .demo-stage { height:602px; display:flex; align-items:center; justify-content:center; padding:14px 0; position:relative; }
 .demo-window { position:relative; width:min(422px,100%); aspect-ratio:422 / 494; flex:none; box-shadow:0 22px 54px #14243a22; border-radius:8px; overflow:hidden; background:#181818; }
 .demo-window canvas { width:100%; height:100%; display:block; }
@@ -65,26 +64,21 @@
 .download-details .plugin-memory-note { max-width:58em; margin-top:24px; }
 @media(max-width:900px) {
   .home-hero { gap:28px; }
-  .home-hero h1 { font-size:50px; }
   .home-lead { font-size:18px; }
-  .demo-toolbar { gap:5px; }
-  .demo-toolbar label { font-size:13px; }
-  .demo-toolbar select,.demo-toolbar button { font-size:13px; padding:7px; }
-  .home-story { margin-top:26px; }
   .demo-stage { height:574px; }
 }
 @media(max-width:760px) {
   .home-hero { grid-template-columns:minmax(0,1fr); padding-block:28px 48px; min-height:0; gap:28px; }
-  .home-hero h1 { font-size:clamp(46px,10vw,68px); }
   .home-product { grid-template-columns:minmax(0,1fr); gap:28px; }
   .demo-stage { height:602px; }
   .home-products { gap:20px; }
 }
 @media(max-width:480px) {
-  .home-hero h1 { font-size:46px; }
   .home-hero .actions { gap:16px; }
   .demo-stage { height:calc((100vw - 36px)*1.36 + 28px); max-height:602px; }
-  .home-story { padding:16px; }
   .home-products-intro h2 { font-size:30px; }
+}
+@container (max-width:420px) {
+  .story-content { min-height:102px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
