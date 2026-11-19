@@ -33,16 +33,18 @@
 .home-demo[data-available="false"] .demo-stage { display:none; }
 .home-demo[data-available="false"] .demo-status { padding:24px; background:var(--surface); border-radius:12px; font-size:16px; }
 .home-features { padding-bottom:48px; }
-.home-features > h2 { margin:0 0 18px; font-size:clamp(26px,4vw,36px); }
-.feature-tiles { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.feature-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px; }
+.feature-heading h2 { margin:0; font-size:clamp(26px,4vw,36px); }
+.feature-controls { display:flex; gap:6px; }
+.feature-controls[hidden] { display:none; }
+.feature-controls button { padding:6px 10px; border:0; border-radius:8px; background:var(--surface); color:var(--ink); font:inherit; font-size:14px; cursor:pointer; }
+.feature-controls button:hover { background:#e6eaf0; }
+.feature-tiles { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-auto-rows:1fr; gap:14px; }
 .feature-tile { display:block; min-width:0; padding:clamp(16px,2vw,24px); border-radius:16px; background:var(--surface); color:var(--ink); text-decoration:none; transition:background-color 380ms ease; }
 .feature-tile h3 { margin:0 0 8px; font-size:clamp(17px,2vw,22px); line-height:1.3; }
-.feature-tile-copy { display:grid; align-items:start; overflow:hidden; font-size:14px; line-height:1.55; }
-.feature-tile-copy p { grid-area:1 / 1; margin:0; transition:opacity 300ms ease,transform 380ms ease; }
-.feature-tile-copy p + p { opacity:0; transform:translateY(8px); }
+.feature-tile-copy { min-block-size:120px; font-size:14px; line-height:1.55; overflow-wrap:anywhere; }
+.feature-tile-copy p { margin:0; }
 .feature-tile:is([data-active],:hover,:focus-visible) { background:#e9eff9; }
-.feature-tile:is([data-active],:hover,:focus-visible) p:first-child { opacity:0; transform:translateY(-8px); }
-.feature-tile:is([data-active],:hover,:focus-visible) p + p { opacity:1; transform:none; }
 .home-products { display:grid; gap:26px; padding-bottom:48px; }
 .home-developer { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; padding-bottom:72px; }
 .home-developer-card { display:grid; grid-template-rows:auto 1fr auto; justify-items:start; gap:12px; padding:clamp(20px,3vw,36px); border-radius:16px; background:var(--surface); }
@@ -101,5 +103,5 @@
 }
 @media(prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
-  .feature-tile,.feature-tile-copy p { transition:none; }
+  .feature-tile { transition:none; }
 }

@@ -1,35 +1,69 @@
 import {MixerGL} from './home-demo-gl.mjs';
 import {createState,applyScene,frame,scenes,toggleChannel} from './home-demo-scene.mjs';
 import {translate} from './home-demo-i18n.mjs';
+import {extraFeatures} from './home-feature-catalog.mjs';
 
 const root=document.querySelector('[data-home-demo]');
 if(root) start(root);
 const featureGrid=document.querySelector('.feature-tiles');
 if(featureGrid) startFeatureTiles(featureGrid);
 
-function startFeatureTiles(grid) {
-  const tiles=[...grid.children];
+export function startFeatureTiles(grid) {
+  const tiles=[...grid.children].map(link=>({
+    link,
+    copy:link.querySelector('.feature-tile-copy'),
+    title:link.querySelector('h3'),
+    description:link.querySelector('p'),
+  }));
+  const controls=grid.closest('.home-features').querySelector('.feature-controls');
+  const nextButton=controls.querySelector('[data-feature-next]');
+  const pauseButton=controls.querySelector('[data-feature-pause]');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  let current=-1,timer=0,visible=false;
+  const catalog=[
+    ...tiles.map(({link,title,description})=>[title.textContent,description.textContent,link.getAttribute('href')]),
+    ...extraFeatures,
+  ];
+  let nextSlot=0,nextFeature=tiles.length,active=null,timer=0,visible=false,paused=false;
+  function advance() {
+    const tile=tiles[nextSlot];
+    const [title,description,href]=catalog[nextFeature];
+    nextSlot=(nextSlot+1)%tiles.length;
+    nextFeature=(nextFeature+1)%catalog.length;
+    active?.link.removeAttribute('data-active');
+    tile.link.setAttribute('href',href);
+    tile.title.textContent=title;
+    tile.description.textContent=description;
+    tile.link.setAttribute('data-active','');
+    active=tile;
+    if(!reduced.matches) {
+      for(const animation of tile.copy.getAnimations()) animation.cancel();
+      tile.copy.animate([{opacity:0,transform:'translateY(7px)'},{opacity:1,transform:'translateY(0)'}],
+        {duration:380,easing:'cubic-bezier(.2,.7,.25,1)'});
+    }
+  }
   function updateTimer() {
     clearInterval(timer);
-    if(!visible||document.hidden||reduced.matches) {
-      tiles[current]?.removeAttribute('data-active');
-      return;
-    }
+    pauseButton.hidden=reduced.matches;
+    if(!visible||document.hidden||reduced.matches||paused)return;
     timer=setInterval(()=>{
       if(grid.matches(':hover,:focus-within'))return;
-      tiles[current]?.removeAttribute('data-active');
-      current=(current+1)%tiles.length;
-      tiles[current].setAttribute('data-active','');
-    },3500);
+      advance();
+    },3000);
   }
+  nextButton.addEventListener('click',()=>{advance();updateTimer();});
+  pauseButton.addEventListener('click',()=>{
+    paused=!paused;
+    pauseButton.textContent=paused?'继续轮播':'暂停轮播';
+    updateTimer();
+  });
   new IntersectionObserver(([entry])=>{
-    visible=entry.isIntersecting;
+    visible=entry.isIntersecting&&entry.intersectionRatio>=.15;
     updateTimer();
   },{threshold:.15}).observe(grid);
   document.addEventListener('visibilitychange',updateTimer);
   reduced.addEventListener('change',updateTimer);
+  controls.hidden=false;
+  updateTimer();
 }
 
 export function start(root) {
