@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AudG 总线压缩器，提供三档压缩比、自动释放、侧链高通和并行混合。声核内免费，Windows 64 位 VST3 ¥9.9。">
+  <meta name="description" content="AudG 总线压缩器，提供三档压缩比、自动释放、侧链高通、并行混合和独立音染。声核内免费，Windows 64 位 VST3 ¥9.9。">
   <meta name="theme-color" content="#151716">
   <link rel="canonical" href="https://audcore.utae.cn/aud-g/">
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
@@ -33,7 +33,7 @@
           <a class="button button-accent" href="#buy">购买 VST3 · ¥9.9</a></div>
       </div>
       <img src="/assets/aud-g-panel.png" width="400" height="1000"
-        class="audg-panel" alt="AudG 竖向面板，上方是指针式增益衰减表，下方是双列旋钮与居中的旁通指示灯">
+        class="audg-panel" alt="AudG 竖向面板，上方是指针式增益衰减表，下方是双列旋钮，底部为 MIX、IN 旁通灯和 COLOR">
     </section>
     <section class="free" id="free">
       <div><h2>在声核内免费使用</h2>
@@ -46,7 +46,7 @@
         <article><h3>默认轻压</h3><p>默认采用 2:1、10 ms 启动、自动释放和 80% 混合。用阈值控制压缩量，通过指针表查看增益衰减。</p></article>
         <article><h3>三档压缩比</h3><p>在 2:1、4:1、10:1 间切换。启动时间可选 0.1～30 ms，释放可选 0.1～1.2 s 四档或 Auto。</p></article>
         <article><h3>侧链高通</h3><p>将检测端的高通调至 0～300 Hz，减少底鼓和低频对整体压缩量的牵动。</p></article>
-        <article><h3>保留原声和动态</h3><p>用 MIX 调节干湿比例，用 MAKEUP 补偿音量。点击中央指示灯即可切换旁通，方便对照处理前后。</p></article>
+        <article><h3>独立调节音染</h3><p>COLOR 只调偶次谐波，默认 35%，高档带来更明显的饱和感。MIX 调节干湿比例，点击 IN 灯即可切换旁通。</p></article>
         <article><h3>紧凑竖向面板</h3><p>支持等比缩放。旋钮可单击输入、双击复位或拖动调节。</p></article>
         <article><h3>零额外延迟</h3><p>支持单声道和立体声，可用于单个通道、编组或混音总线。</p></article>
       </div>
@@ -54,7 +54,7 @@
     <section class="purchase" id="buy" data-vst3-store="aud-g" aria-labelledby="buy-title">
       <div>
         <h2 id="buy-title">购买独立 VST3</h2>
-        <p class="compatibility">适用于 Windows 64 位 VST3 宿主</p>
+        <p class="compatibility">v1.12.0 · 适用于 Windows 64 位 VST3 宿主</p>
         <p class="installation">付款确认后直接下载单个 <code>.vst3</code> 文件。将文件放入宿主的 VST3 扫描目录后重新扫描。</p>
       </div>
       <div class="checkout">
